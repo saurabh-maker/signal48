@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 
+    ═══════════════════════════════════════════════════════════
+    CONFIG BLOCK - Edit these values to customize the site
+    ═══════════════════════════════════════════════════════════
+    -->
+    <script>
+        window.SITE_CONFIG = {
+            productName: 'Signal48',
+            tagline: 'Market intelligence on demand — delivered in 48 hours.',
+            adminEmail: 'hello@signal48.io',
+            tallyFormUrl: 'https://tally.so/r/YOUR_FORM_ID',
+            domain: 'signal48.io'
+        };
+    </script>
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    
+    <title>Signal48 - Market Intelligence on Demand</title>
+    <meta name="description" content="Get executive-ready market intelligence reports delivered in 48 hours. Talent insights, competitor analysis, and workforce intelligence.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Signal48 - Market Intelligence on Demand">
+    <meta property="og:description" content="Get executive-ready market intelligence reports delivered in 48 hours.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://signal48.io">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E📊%3C/text%3E%3C/svg%3E">
+    
+    <style>
+        /* CSS Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* Light mode colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a5568;
+            --text-tertiary: #718096;
+            --border-color: #e2e8f0;
+            --accent-primary: #2563eb;
+            --accent-primary-hover: #1d4ed8;
+            --accent-secondary: #10b981;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --nav-bg: rgba(255, 255, 255, 0.8);
+            --card-bg: #ffffff;
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-tertiary: #94a3b8;
+            --border-color: #334155;
+            --accent-primary: #3b82f6;
+            --accent-primary-hover: #2563eb;
+            --accent-secondary: #10b981;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            --nav-bg: rgba(15, 23, 42, 0.9);
+            --card-bg: #1e293b;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+        
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.25rem; }
+        h3 { font-size: 1.875rem; }
+        h4 { font-size: 1.5rem; }
+        h5 { font-size: 1.25rem; }
+        h6 { font-size: 1rem; }
+        
+        p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        a:hover {
+            color: var(--accent-primary-hover);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: color 0.2s ease;
+        }
+        
+        .theme-toggle:hover {
+            color: var(--text-primary);
+        }
+        
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero .subheadline {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .trust-bullets {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+        
+        .trust-bullet {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .trust-bullet svg {
+            color: var(--accent-secondary);
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        section:nth-child(even) {
+            background: var(--bg-secondary);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .step-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .step-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.375rem;
+        }
+        
+        .step-card p {
+            font-size: 1rem;
+        }
+        
+        /* Use Cases */
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .use-case-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+        
+        .use-case-card:hover {
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .use-case-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            color: var(--accent-primary);
+        }
+        
+        .use-case-examples {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .use-case-examples li {
+            padding: 0.5rem 0;
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .use-case-examples li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-secondary);
+        }
+        
+        /* Deliverables */
+        .deliverable-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .deliverable-list {
+            list-style: none;
+        }
+        
+        .deliverable-list li {
+            padding: 1rem 0;
+            display: flex;
+            gap: 1rem;
+            align-items: start;
+        }
+        
+        .deliverable-list li svg {
+            color: var(--accent-secondary);
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+        
+        .sample-preview {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .sample-preview h4 {
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+        
+        .sample-content {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            line-height: 1.8;
+        }
+        
+        .metric-pills {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .pill {
+            padding: 0.5rem 1rem;
+            background: var(--accent-primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .pill.high {
+            background: #ef4444;
+        }
+        
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--accent-primary);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: translateY(-4px) scale(1.05);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin: 1.5rem 0;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 0.75rem 0;
+            display: flex;
+            gap: 0.75rem;
+            align-items: start;
+            color: var(--text-secondary);
+        }
+        
+        .pricing-features li svg {
+            color: var(--accent-secondary);
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+        
+        .pricing-note {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+        }
+        
+        /* FAQ */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            transition: background 0.2s ease;
+        }
+        
+        .faq-question:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+            color: var(--accent-primary);
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        /* Request Section */
+        .request-note {
+            background: linear-gradient(135deg, var(--accent-primary), #3b82f6);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        
+        .tally-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .tally-container iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        
+        .mailto-fallback {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 3rem 0 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        /* Legal Sections */
+        .legal-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+        
+        .legal-section h2 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .legal-section p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent-primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            border: none;
+            z-index: 999;
+        }
+        
+        .back-to-top:hover {
+            background: var(--accent-primary-hover);
+            transform: translateY(-4px);
+        }
+        
+        .back-to-top.visible {
+            display: flex;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.75rem; }
+            h3 { font-size: 1.375rem; }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .nav-links.mobile-active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px);
+                padding: 1rem;
+                border-bottom: 1px solid var(--border-color);
+                gap: 0.5rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 4rem 0 3rem;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .trust-bullets {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .deliverable-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-4px);
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="main-nav">
+        <div class="nav-container">
+            <a href="#" class="logo" aria-label="Signal48 Home">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 21H3L3 3"></path>
+                    <path d="M8 16L8 11"></path>
+                    <path d="M12 16L12 6"></path>
+                    <path d="M16 16L16 9"></path>
+                </svg>
+                <span id="logo-text">Signal48</span>
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#how-it-works">How it Works</a></li>
+                <li><a href="#use-cases">Use Cases</a></li>
+                <li><a href="#deliverables">Deliverables</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#request" class="btn btn-primary" style="padding: 0.625rem 1.25rem;">Request</a></li>
+                <li>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 id="main-headline">Market intelligence on demand — delivered in 48 hours.</h1>
+            <p class="subheadline">Executive-ready talent market insights, competitive intelligence, and workforce analytics. No subscriptions, no software—just answers.</p>
+            <div class="hero-cta">
+                <a href="#request" class="btn btn-primary">Request a Report</a>
+                <a href="#deliverables" class="btn btn-secondary">See Example Deliverable</a>
+            </div>
+            <div class="trust-bullets">
+                <div class="trust-bullet">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>48-hour SLA</span>
+                </div>
+                <div class="trust-bullet">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Executive-ready PDF</span>
+                </div>
+                <div class="trust-bullet">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Confidential by default</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How it Works</h2>
+                <p>Three simple steps from question to insight</p>
+            </div>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Submit Your Request</h3>
+                    <p>Tell us what you need to know—talent market trends, competitor hiring, salary benchmarks, or workforce intelligence. Be as specific or broad as you'd like.</p>
+                </div>
+                <div class="step-card">
+                    <step-number">2</div>
+                    <h3>Review & Quote</h3>
+                    <p>We'll reply within 2–6 business hours with scope confirmation, pricing, and timeline. Once you approve, we get to work immediately.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Receive Your Report</h3>
+                    <p>Your executive-ready PDF report arrives within 48 hours (or 24–36 hours for priority requests), complete with insights, data visualizations, and actionable recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section id="use-cases">
+        <div class="container">
+            <div class="section-header">
+                <h2>Use Cases</h2>
+                <p>Explore how Signal48 delivers insights across diverse talent and market intelligence needs</p>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card">
+                    <h3>Talent Market Intelligence</h3>
+                    <p>Understand supply, demand, and movement in your talent markets.</p>
+                    <ul class="use-case-examples">
+                        <li>How competitive is hiring for ML engineers in Austin?</li>
+                        <li>What are the emerging skill gaps in cybersecurity?</li>
+                        <li>Which cities have the fastest-growing product design talent pools?</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <h3>Workforce Risk & Layoff Signals</h3>
+                    <p>Detect early signals of organizational change and talent availability.</p>
+                    <ul class="use-case-examples">
+                        <li>Which tech companies are reducing headcount in sales?</li>
+                        <li>Are there layoff patterns in fintech engineering teams?</li>
+                        <li>What roles are seeing the most displacement?</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <h3>Competitor & Hiring Intelligence</h3>
+                    <p>Track competitor hiring strategies, team growth, and market positioning.</p>
+                    <ul class="use-case-examples">
+                        <li>What roles is [Company X] hiring for in Q4?</li>
+                        <li>How fast is our competitor's engineering team growing?</li>
+                        <li>Where are they opening new offices or hubs?</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <h3>Location Strategy & Hiring Hubs</h3>
+                    <p>Identify optimal locations for expansion, remote hiring, or new offices.</p>
+                    <ul class="use-case-examples">
+                        <li>Where should we open our next engineering hub?</li>
+                        <li>Which cities have the best cost-to-talent ratio for data roles?</li>
+                        <li>What's the talent density in emerging tech hubs?</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <h3>Salary & Skill Benchmarks</h3>
+                    <p>Get market-rate compensation data and emerging skill trends.</p>
+                    <ul class="use-case-examples">
+                        <li>What's the market rate for senior DevOps in Seattle?</li>
+                        <li>How do salaries for AI researchers compare across regions?</li>
+                        <li>What skills are commanding premium compensation?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deliverables -->
+    <section id="deliverables">
+        <div class="container">
+            <div class="section-header">
+                <h2>What You'll Receive</h2>
+                <p>Every report is designed for executive consumption—clear, actionable, and backed by data</p>
+            </div>
+            <div class="deliverable-content">
+                <div>
+                    <ul class="deliverable-list">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <div>
+                                <strong>1-Page Executive Summary</strong><br>
+                                Key findings and recommendations at a glance
+                            </div>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <div>
+                                <strong>Data-Driven Insights</strong><br>
+                                Analysis backed by proprietary and public market signals
+                            </div>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <div>
+                                <strong>Charts & Visualizations</strong><br>
+                                Clear, professional graphics that tell the story
+                            </div>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <div>
+                                <strong>Actionable Recommendations</strong><br>
+                                Specific next steps tailored to your context
+                            </div>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <div>
+                                <strong>Confidence Levels</strong><br>
+                                Transparent assessment of data quality and certainty
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sample-preview">
+                    <h4>Sample Report Snapshot</h4>
+                    <div class="sample-content">
+                        <strong>Executive Summary: ML Engineer Hiring — Austin, TX</strong><br><br>
+                        Demand for ML engineers in Austin increased 34% QoQ, driven primarily by enterprise AI adoption and new office expansions from major tech companies. Average time-to-fill is 52 days (vs. 38 nationally). Compensation premiums have risen 12% to attract talent from SF/NYC.<br><br>
+                        <em>Recommendation:</em> Prioritize employer branding and consider remote-first roles to expand talent pool beyond Austin metro.
+                    </div>
+                    <div class="metric-pills">
+                        <span class="pill high">Hiring Pressure: High</span>
+                        <span class="pill">Avg. Time-to-Fill: 52 days</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Transparent Pricing</h2>
+                <p>Choose the scope that fits your needs—no subscriptions, no hidden fees</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Sprint</h3>
+                    <div class="price">$399</div>
+                    <p style="color: var(--text-tertiary); margin-bottom: 1.5rem;">Ideal for single, focused questions</p>
+                    <ul class="pricing-features">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            48-hour delivery
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            5–8 page report
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            1 round of revisions
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Executive summary + insights
+                        </li>
+                    </ul>
+                    <a href="#request" class="btn btn-primary" data-tier="Sprint">Request Sprint</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Deep Dive</h3>
+                    <div class="price">$1,199</div>
+                    <p style="color: var(--text-tertiary); margin-bottom: 1.5rem;">Comprehensive analysis with multiple angles</p>
+                    <ul class="pricing-features">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            48-hour delivery (or 24–36h priority)
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            15–20 page report
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            2 rounds of revisions
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Advanced charts & benchmarks
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            30-min debrief call (optional)
+                        </li>
+                    </ul>
+                    <a href="#request" class="btn btn-primary" data-tier="Deep Dive">Request Deep Dive</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Retainer</h3>
+                    <div class="price" style="font-size: 2rem;">Contact</div>
+                    <p style="color: var(--text-tertiary); margin-bottom: 1.5rem;">Ongoing intelligence for strategic planning</p>
+                    <ul class="pricing-features">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Multiple reports per month
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Priority delivery
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Dedicated analyst
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Unlimited revisions
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Monthly strategy session
+                        </li>
+                    </ul>
+                    <a href="#request" class="btn btn-primary" data-tier="Retainer">Contact for Retainer</a>
+                </div>
+            </div>
+            <div class="pricing-note">
+                <strong>Note:</strong> Payment is handled manually via invoice or payment link after scope confirmation. No credit card required to submit your request.
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What's your 48-hour SLA?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Once you approve the quote and scope, we deliver your report within 48 business hours. For Deep Dive clients, we offer a priority 24–36 hour option. We've maintained a 98% on-time delivery rate since launch.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>How is my information kept confidential?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            All client requests and reports are confidential by default. We're happy to sign NDAs before engagement. Your data and the insights we provide are never shared with third parties or used for any other purpose.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What data sources do you use?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We combine proprietary datasets, public labor market signals, job posting data, company disclosures, and industry benchmarks. All sources are cited in your report, and we're transparent about confidence levels for each insight.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Can I request revisions?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes. Sprint includes 1 round of revisions, Deep Dive includes 2 rounds, and Retainer clients get unlimited revisions. We want you to be completely satisfied with the final deliverable.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What if I need the report faster than 48 hours?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We offer priority 24–36 hour delivery for Deep Dive and Retainer clients. For truly urgent requests (same-day or next-day), contact us directly and we'll assess feasibility based on scope and team availability.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Do you offer refunds?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            If we can't deliver a report that meets the agreed-upon scope and quality standards, we'll issue a full refund. We stand behind our work and want every client to find value in what we deliver.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Can I share the report with my team?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Absolutely. The report is yours to use internally. We only ask that you don't publicly redistribute or resell the content. If you need a version for external stakeholders or investors, let us know and we can adjust accordingly.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What if my question is too complex or broad?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We'll work with you to scope it appropriately. If your request is too broad for a Sprint, we'll recommend a Deep Dive or suggest breaking it into multiple focused reports. Our goal is to deliver actionable insights, not just volume.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>How do I get started?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Simply submit your request below. We'll review it and reply within 2–6 business hours with a quote, scope confirmation, and next steps. No commitment required until you approve the quote.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Do you work with startups or only enterprises?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We work with companies of all sizes—from seed-stage startups to Fortune 500 enterprises. Our pricing tiers are designed to be accessible whether you're a founder making your first hire or a CHRO planning workforce strategy.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Request Section -->
+    <section id="request">
+        <div class="container">
+            <div class="section-header">
+                <h2>Request Your Report</h2>
+            </div>
+            <div class="request-note">
+                Submit your request — we reply within 2–6 business hours with pricing & next steps.
+            </div>
+            <div class="tally-container">
+                <iframe id="tally-iframe" src="" title="Signal48 Request Form" allow="geolocation"></iframe>
+            </div>
+            <div class="mailto-fallback">
+                <p style="margin-bottom: 1rem; color: var(--text-secondary);">Prefer email? No problem.</p>
+                <a href="" id="mailto-link" class="btn btn-secondary">Email Your Request</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 21H3L3 3"></path>
+                        <path d="M8 16L8 11"></path>
+                        <path d="M12 16L12 6"></path>
+                        <path d="M16 16L16 9"></path>
+                    </svg>
+                    <span id="footer-logo-text">Signal48</span>
+                </div>
+                <ul class="footer-links">
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="#terms">Terms</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                © 2026 <span id="footer-product-name">Signal48</span>. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Privacy Section -->
+    <div id="privacy" class="legal-section">
+        <h2>Privacy Policy</h2>
+        <p>Your privacy is important to us. Signal48 collects only the information necessary to deliver market intelligence reports. We do not sell, share, or distribute your data to third parties.</p>
+        <p>All client requests, communications, and deliverables are treated as confidential. We're happy to sign NDAs before engagement if required.</p>
+        <p>For questions about our privacy practices, contact us at <span id="privacy-email"></span>.</p>
+    </div>
+
+    <!-- Terms Section -->
+    <div id="terms" class="legal-section">
+        <h2>Terms of Service</h2>
+        <p>By submitting a request to Signal48, you agree to our terms of service. All reports are delivered "as-is" for informational purposes. While we strive for accuracy, we cannot guarantee the completeness or timeliness of all data sources.</p>
+        <p>Payment is due upon scope confirmation. Refunds are available if we fail to meet agreed-upon deliverables or quality standards.</p>
+        <p>Reports are licensed for internal use only. Public redistribution or resale is prohibited without written permission.</p>
+        <p>For full terms, contact us at <span id="terms-email"></span>.</p>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
+
+    <script>
+        // Initialize from config
+        (function() {
+            const config = window.SITE_CONFIG;
+            
+            // Update all product name references
+            document.getElementById('logo-text').textContent = config.productName;
+            document.getElementById('footer-logo-text').textContent = config.productName;
+            document.getElementById('footer-product-name').textContent = config.productName;
+            document.getElementById('main-headline').textContent = config.tagline;
+            
+            // Update Tally iframe
+            const iframe = document.getElementById('tally-iframe');
+            iframe.src = config.tallyFormUrl;
+            
+            // Update mailto link
+            const mailtoSubject = encodeURIComponent(config.productName + ' Request');
+            const mailtoBody = encodeURIComponent(`Hi ${config.productName} team,\n\nI'd like to request a market intelligence report.\n\nMy question/need:\n[Describe what you need to know]\n\nPreferred tier: [Sprint / Deep Dive / Retainer]\n\nBest,\n[Your name]`);
+            const mailtoLink = document.getElementById('mailto-link');
+            mailtoLink.href = `mailto:${config.adminEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
+            
+            // Update email addresses in legal sections
+            document.getElementById('privacy-email').textContent = config.adminEmail;
+            document.getElementById('terms-email').textContent = config.adminEmail;
+        })();
+        
+        // Dark mode toggle
+        (function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            
+            // Check for saved theme preference or default to OS preference
+            const getPreferredTheme = () => {
+                const saved = localStorage.getItem('theme');
+                if (saved) return saved;
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            };
+            
+            const setTheme = (theme) => {
+                html.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+            };
+            
+            // Set initial theme
+            setTheme(getPreferredTheme());
+            
+            // Toggle theme
+            themeToggle.addEventListener('click', () => {
+                const current = html.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                setTheme(next);
+            });
+        })();
+        
+        // Sticky nav scroll effect
+        (function() {
+            const nav = document.getElementById('main-nav');
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+                
+                lastScroll = currentScroll;
+            });
+        })();
+        
+        // Mobile menu toggle
+        (function() {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const navLinks = document.getElementById('nav-links');
+            
+            menuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('mobile-active');
+            });
+            
+            // Close mobile menu when clicking a link
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('mobile-active');
+                });
+            });
+        })();
+        
+        // FAQ accordion
+        (function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all items
+                    faqItems.forEach(i => {
+                        i.classList.remove('active');
+                        i.querySelector('.faq-answer').style.maxHeight = null;
+                        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                    });
+                    
+                    // Open clicked item if it wasn't active
+                    if (!isActive) {
+                        item.classList.add('active');
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        question.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+        })();
+        
+        // Back to top button
+        (function() {
+            const backToTop = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 600) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+        
+        // Pricing tier pre-fill functionality
+        (function() {
+            const pricingButtons = document.querySelectorAll('[data-tier]');
+            
+            pricingButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const tier = button.getAttribute('data-tier');
+                    // Store tier in sessionStorage so it can be accessed if needed
+                    sessionStorage.setItem('selectedTier', tier);
+                    
+                    // Update iframe URL with tier parameter if using Tally
+                    const iframe = document.getElementById('tally-iframe');
+                    const baseUrl = window.SITE_CONFIG.tallyFormUrl;
+                    // Tally supports pre-filling via URL parameters
+                    if (baseUrl.includes('tally.so')) {
+                        iframe.src = baseUrl + '?tier=' + encodeURIComponent(tier);
+                    }
+                });
+            });
+        })();
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
