@@ -513,7 +513,7 @@
         /* Use Cases */
         .use-cases-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 2rem;
         }
         
@@ -774,6 +774,66 @@
             border: 1px solid var(--border-color);
         }
         
+        /* Report Type Selector */
+        .report-type-selector {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .report-type-selector h4 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.25rem;
+        }
+        
+        .report-types {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        
+        .report-type-btn {
+            padding: 1.25rem 1rem;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+        
+        .report-type-btn:hover {
+            border-color: var(--accent-primary);
+            background: var(--bg-tertiary);
+            transform: translateY(-2px);
+        }
+        
+        .report-type-btn.selected {
+            background: var(--gradient-hero);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 6px 20px -5px rgba(102, 126, 234, 0.4);
+        }
+        
+        .report-type-btn .type-name {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        
+        .report-type-btn .type-price {
+            display: block;
+            font-size: 1.125rem;
+            opacity: 0.9;
+        }
+        
         /* FAQ */
         .faq-list {
             max-width: 900px;
@@ -967,6 +1027,10 @@
             
             h1 { font-size: 3.5rem; }
             h2 { font-size: 2.75rem; }
+            
+            .use-cases-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
         }
         
         @media (max-width: 968px) {
@@ -1003,6 +1067,10 @@
             
             .sample-preview {
                 position: static;
+            }
+            
+            .report-types {
+                grid-template-columns: 1fr;
             }
             
             section {
@@ -1211,6 +1279,15 @@
                         <li>What's the market rate for senior DevOps in Seattle?</li>
                         <li>How do salaries for AI researchers compare across regions?</li>
                         <li>What skills are commanding premium compensation?</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <h3>Brand & Sentiment Analysis</h3>
+                    <p>Monitor your employer brand reputation and external sentiment.</p>
+                    <ul class="use-case-examples">
+                        <li>How is our company perceived as an employer on social media?</li>
+                        <li>What are candidates saying about our interview process?</li>
+                        <li>How does our employer brand compare to competitors?</li>
                     </ul>
                 </div>
             </div>
@@ -1559,6 +1636,26 @@
             <div class="section-header">
                 <h2>Request Your Report</h2>
             </div>
+            
+            <!-- Report Type Selector -->
+            <div class="report-type-selector">
+                <h4>Choose Your Report Type</h4>
+                <div class="report-types">
+                    <button class="report-type-btn" data-tier="Sprint">
+                        <span class="type-name">Sprint</span>
+                        <span class="type-price">$399</span>
+                    </button>
+                    <button class="report-type-btn selected" data-tier="Deep Dive">
+                        <span class="type-name">Deep Dive</span>
+                        <span class="type-price">$1,199</span>
+                    </button>
+                    <button class="report-type-btn" data-tier="Retainer">
+                        <span class="type-name">Retainer</span>
+                        <span class="type-price">Custom</span>
+                    </button>
+                </div>
+            </div>
+            
             <div class="request-note">
                 Submit your request — we reply within 2–6 business hours with pricing & next steps.
             </div>
@@ -1722,11 +1819,47 @@
             });
         })();
         
+        // Report Type Selector
         (function() {
-            const pricingButtons = document.querySelectorAll('[data-tier]');
+            const reportTypeBtns = document.querySelectorAll('.report-type-btn');
+            const iframe = document.getElementById('tally-iframe');
+            const baseUrl = window.SITE_CONFIG.tallyFormUrl;
+            
+            reportTypeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove selected class from all buttons
+                    reportTypeBtns.forEach(b => b.classList.remove('selected'));
+                    // Add selected class to clicked button
+                    btn.classList.add('selected');
+                    
+                    const tier = btn.getAttribute('data-tier');
+                    sessionStorage.setItem('selectedTier', tier);
+                    
+                    // Update iframe with tier parameter
+                    if (baseUrl.includes('tally.so')) {
+                        iframe.src = baseUrl + '?tier=' + encodeURIComponent(tier);
+                    }
+                });
+            });
+        })();
+        
+        // Pricing card buttons
+        (function() {
+            const pricingButtons = document.querySelectorAll('.pricing-card [data-tier]');
+            const reportTypeBtns = document.querySelectorAll('.report-type-btn');
+            
             pricingButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
                     const tier = button.getAttribute('data-tier');
+                    
+                    // Update report type selector
+                    reportTypeBtns.forEach(btn => {
+                        btn.classList.remove('selected');
+                        if (btn.getAttribute('data-tier') === tier) {
+                            btn.classList.add('selected');
+                        }
+                    });
+                    
                     sessionStorage.setItem('selectedTier', tier);
                     const iframe = document.getElementById('tally-iframe');
                     const baseUrl = window.SITE_CONFIG.tallyFormUrl;
