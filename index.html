@@ -934,19 +934,34 @@
             border-top: 1px solid var(--border-color);
         }
         
-        /* Legal Sections */
-        .legal-section {
-            max-width: 950px;
+        /* Legal Sections - Horizontal Layout */
+        .legal-container {
+            background: var(--bg-secondary);
+            padding: 4rem 0 3rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .legal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 5rem 3rem;
         }
-        
+
+        .legal-section {
+            padding: 0;
+        }
+
         .legal-section h2 {
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.875rem;
         }
-        
+
         .legal-section p {
-            margin-bottom: 2rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.8;
+            font-size: 1rem;
         }
         
         /* Back to Top Button */
@@ -1029,6 +1044,11 @@
             
             .price {
                 font-size: 4.5rem;
+            }
+            
+            .legal-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
             }
         }
         
@@ -1530,21 +1550,26 @@
         </div>
     </footer>
 
-    <!-- Privacy Section -->
-    <div id="privacy" class="legal-section">
-        <h2>Privacy Policy</h2>
-        <p>Your privacy is important to us. Signal48 collects only the information necessary to deliver market intelligence reports. We do not sell, share, or distribute your data to third parties.</p>
-        <p>All client requests, communications, and deliverables are treated as confidential. We're happy to sign NDAs before engagement if required.</p>
-        <p>For questions about our privacy practices, contact us at <span id="privacy-email"></span>.</p>
-    </div>
+    <!-- Legal Sections (Horizontal) -->
+    <div class="legal-container">
+        <div class="container">
+            <div class="legal-grid">
+                <div id="privacy" class="legal-section">
+                    <h2>Privacy Policy</h2>
+                    <p>Your privacy is important to us. Signal48 collects only the information necessary to deliver market intelligence reports. We do not sell, share, or distribute your data to third parties.</p>
+                    <p>All client requests, communications, and deliverables are treated as confidential. We're happy to sign NDAs before engagement if required.</p>
+                    <p>For questions about our privacy practices, contact us at <span id="privacy-email"></span>.</p>
+                </div>
 
-    <!-- Terms Section -->
-    <div id="terms" class="legal-section">
-        <h2>Terms of Service</h2>
-        <p>By submitting a request to Signal48, you agree to our terms of service. All reports are delivered "as-is" for informational purposes. While we strive for accuracy, we cannot guarantee the completeness or timeliness of all data sources.</p>
-        <p>Payment is due upon scope confirmation. All sales are final.</p>
-        <p>Reports are licensed for internal use only. Public redistribution or resale is prohibited without written permission.</p>
-        <p>For full terms, contact us at <span id="terms-email"></span>.</p>
+                <div id="terms" class="legal-section">
+                    <h2>Terms of Service</h2>
+                    <p>By submitting a request to Signal48, you agree to our terms of service. All reports are delivered "as-is" for informational purposes. While we strive for accuracy, we cannot guarantee the completeness or timeliness of all data sources.</p>
+                    <p>Payment is due upon scope confirmation. All sales are final.</p>
+                    <p>Reports are licensed for internal use only. Public redistribution or resale is prohibited without written permission.</p>
+                    <p>For full terms, contact us at <span id="terms-email"></span>.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Back to Top Button -->
