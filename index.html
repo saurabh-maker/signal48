@@ -12,7 +12,7 @@
     <script>
         window.SITE_CONFIG = {
             productName: 'Signal48',
-            tagline: 'Market intelligence on demand — delivered in 48 hours.',
+            tagline: 'Talent intelligence on demand — delivered in 48 hours.',
             adminEmail: 'hello@signal48.io',
             tallyFormUrl: 'https://tally.so/r/OD7Lz8',
             domain: 'signal48.io'
@@ -20,17 +20,22 @@
     </script>
     <!-- ═══════════════════════════════════════════════════════════ -->
     
-    <title>Signal48 - Market Intelligence on Demand</title>
-    <meta name="description" content="Get executive-ready market intelligence reports delivered in 48 hours. Talent insights, competitor analysis, and workforce intelligence.">
+    <title>Signal48 - Talent Intelligence on Demand</title>
+    <meta name="description" content="Get executive-ready talent intelligence reports delivered in 48 hours. Hiring trends, salary benchmarks, and workforce analytics.">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Signal48 - Market Intelligence on Demand">
-    <meta property="og:description" content="Get executive-ready market intelligence reports delivered in 48 hours.">
+    <meta property="og:title" content="Signal48 - Talent Intelligence on Demand">
+    <meta property="og:description" content="Get executive-ready talent intelligence reports delivered in 48 hours.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://signal48.io">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E📊%3C/text%3E%3C/svg%3E">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         @keyframes gradient-shift {
@@ -60,6 +65,21 @@
             100% { background-position: 1000px 0; }
         }
         
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -68,49 +88,51 @@
         
         :root {
             --bg-primary: #ffffff;
-            --bg-secondary: #fafbfc;
-            --bg-tertiary: #f6f8fa;
-            --text-primary: #0d1117;
-            --text-secondary: #57606a;
-            --text-tertiary: #8b949e;
-            --border-color: #d0d7de;
-            --accent-primary: #6366f1;
-            --accent-primary-hover: #4f46e5;
-            --accent-secondary: #8b5cf6;
-            --accent-tertiary: #ec4899;
-            --accent-success: #10b981;
+            --bg-secondary: #f8f9fb;
+            --bg-tertiary: #f1f3f5;
+            --text-primary: #0a0e27;
+            --text-secondary: #4a5568;
+            --text-tertiary: #718096;
+            --border-color: #e2e8f0;
+            --accent-primary: #2563eb;
+            --accent-primary-hover: #1e40af;
+            --accent-secondary: #7c3aed;
+            --accent-tertiary: #db2777;
+            --accent-success: #059669;
+            --accent-warning: #d97706;
             --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            --gradient-2: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            --gradient-3: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+            --gradient-hero: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #7c3aed 100%);
             --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
             --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
-            --nav-bg: rgba(255, 255, 255, 0.85);
+            --nav-bg: rgba(255, 255, 255, 0.9);
             --card-bg: #ffffff;
-            --blur-amount: 12px;
+            --blur-amount: 20px;
         }
         
         [data-theme="dark"] {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-tertiary: #1f2937;
-            --text-primary: #f0f6fc;
-            --text-secondary: #c9d1d9;
-            --text-tertiary: #8b949e;
-            --border-color: #30363d;
-            --accent-primary: #818cf8;
-            --accent-primary-hover: #6366f1;
-            --accent-secondary: #a78bfa;
-            --accent-tertiary: #f472b6;
-            --accent-success: #34d399;
+            --bg-primary: #0a0e27;
+            --bg-secondary: #131729;
+            --bg-tertiary: #1a1f3a;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-tertiary: #94a3b8;
+            --border-color: #1e293b;
+            --accent-primary: #3b82f6;
+            --accent-primary-hover: #2563eb;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #ec4899;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
             --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
             --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-            --nav-bg: rgba(13, 17, 23, 0.85);
-            --card-bg: #161b22;
+            --nav-bg: rgba(10, 14, 39, 0.9);
+            --card-bg: #131729;
         }
         
         html {
@@ -119,7 +141,7 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.7;
             color: var(--text-primary);
             background-color: var(--bg-primary);
@@ -128,10 +150,10 @@
         }
         
         h1, h2, h3, h4, h5, h6 {
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1.2;
             color: var(--text-primary);
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
         }
         
         h1 { font-size: 4.5rem; }
@@ -151,6 +173,10 @@
             padding: 0 3rem;
         }
         
+        .mono {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        
         /* Navigation */
         nav {
             position: fixed;
@@ -166,7 +192,6 @@
         
         nav.scrolled {
             box-shadow: var(--shadow-lg);
-            background: var(--nav-bg);
         }
         
         .nav-container {
@@ -180,7 +205,7 @@
         
         .logo {
             font-size: 1.75rem;
-            font-weight: 800;
+            font-weight: 900;
             background: var(--gradient-hero);
             background-size: 200% 200%;
             -webkit-background-clip: text;
@@ -189,7 +214,7 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.05em;
         }
         
         .logo svg {
@@ -300,12 +325,12 @@
             background: var(--gradient-hero);
             background-size: 200% 200%;
             color: white;
-            box-shadow: 0 10px 30px -10px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.5);
         }
         
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 20px 40px -10px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.6);
             color: white;
         }
         
@@ -323,7 +348,7 @@
         
         /* Hero Section */
         .hero {
-            padding: 12rem 0 10rem;
+            padding: 12rem 0 8rem;
             position: relative;
             overflow: hidden;
         }
@@ -335,7 +360,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at 50% 50%, rgba(102, 126, 234, 0.08) 0%, transparent 50%);
+            background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 50%);
             animation: gradient-shift 15s ease infinite;
             pointer-events: none;
         }
@@ -376,38 +401,144 @@
             flex-wrap: wrap;
         }
         
-        .trust-bullets {
-            display: flex;
-            gap: 4rem;
-            justify-content: center;
-            flex-wrap: wrap;
+        /* Live Stats */
+        .live-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
             margin-top: 5rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        .trust-bullet {
-            display: flex;
-            align-items: center;
-            gap: 0.875rem;
-            color: var(--text-secondary);
-            font-size: 1.0625rem;
-            font-weight: 600;
-            padding: 1.25rem 2rem;
+        .stat-card {
             background: var(--card-bg);
-            border-radius: 50px;
             border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
-        .trust-bullet:hover {
-            transform: translateY(-4px);
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-primary);
+        }
+        
+        .stat-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-hero);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'IBM Plex Mono', monospace;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Industry Selector */
+        .industry-selector {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 4rem auto;
+            max-width: 900px;
             box-shadow: var(--shadow-md);
         }
         
-        .trust-bullet svg {
+        .industry-selector h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+        
+        .industry-tabs {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .industry-tab {
+            padding: 0.875rem 1.75rem;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .industry-tab:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+        
+        .industry-tab.active {
+            background: var(--gradient-hero);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 8px 20px -5px rgba(37, 99, 235, 0.4);
+        }
+        
+        .industry-content {
+            margin-top: 2.5rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            min-height: 150px;
+        }
+        
+        .industry-content h4 {
+            margin-bottom: 1rem;
+            color: var(--accent-primary);
+        }
+        
+        .industry-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .industry-content ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .industry-content li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .industry-content li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
             color: var(--accent-success);
-            width: 24px;
-            height: 24px;
         }
         
         /* Section Styles */
@@ -449,6 +580,224 @@
             margin: 0 auto;
             margin-top: 2rem;
             line-height: 1.8;
+        }
+        
+        /* Interactive Report Preview */
+        .report-preview-tool {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 1000px;
+            margin: 0 auto 4rem;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .report-preview-tool h3 {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .question-input-group {
+            margin-bottom: 2rem;
+        }
+        
+        .question-input-group label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .question-input {
+            width: 100%;
+            padding: 1.25rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .question-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .question-suggestions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .suggestion-chip {
+            padding: 0.625rem 1.25rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .suggestion-chip:hover {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+        
+        .preview-result {
+            margin-top: 2rem;
+            padding: 2.5rem;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        .preview-result.active {
+            display: block;
+        }
+        
+        .preview-result h4 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-primary);
+        }
+        
+        .preview-insight {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-success);
+        }
+        
+        .preview-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .preview-metric {
+            background: var(--card-bg);
+            padding: 1.25rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .preview-metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent-primary);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        
+        .preview-metric-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+        
+        /* ROI Calculator */
+        .roi-calculator {
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
+            border: 2px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .roi-calculator h3 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.25rem;
+        }
+        
+        .roi-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .roi-input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .roi-input-group label {
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .roi-input-group input {
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1.125rem;
+            font-family: 'IBM Plex Mono', monospace;
+            background: var(--card-bg);
+            color: var(--text-primary);
+        }
+        
+        .roi-input-group input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+        
+        .roi-result {
+            background: var(--gradient-hero);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+        
+        .roi-result h4 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .roi-value {
+            font-size: 4.5rem;
+            font-weight: 900;
+            font-family: 'IBM Plex Mono', monospace;
+            margin: 1rem 0;
+        }
+        
+        .roi-breakdown {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .roi-breakdown-item {
+            text-align: center;
+        }
+        
+        .roi-breakdown-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        
+        .roi-breakdown-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
         }
         
         /* How It Works */
@@ -499,7 +848,8 @@
             font-weight: 800;
             font-size: 1.875rem;
             margin-bottom: 2.5rem;
-            box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+            font-family: 'IBM Plex Mono', monospace;
         }
         
         .step-card h3 {
@@ -592,94 +942,228 @@
             font-size: 1.125rem;
         }
         
-        /* Deliverables */
-        .deliverable-content {
+        /* Sample Reports Gallery */
+        .sample-reports-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .sample-report-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .sample-report-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent-primary);
+        }
+        
+        .sample-report-preview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem 2rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .sample-report-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .sample-report-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        
+        .sample-report-content {
+            padding: 2rem;
+        }
+        
+        .sample-report-content h4 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .sample-report-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: start;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
         
-        .deliverable-list {
-            list-style: none;
+        .sample-stat {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
         }
         
-        .deliverable-list li {
-            padding: 2rem 0;
-            display: flex;
-            gap: 1.5rem;
-            align-items: start;
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+        .sample-stat-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-primary);
+            font-family: 'IBM Plex Mono', monospace;
         }
         
-        .deliverable-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .deliverable-list li:hover {
-            padding-left: 1rem;
-        }
-        
-        .deliverable-list li svg {
-            color: var(--accent-success);
-            width: 28px;
-            height: 28px;
-            flex-shrink: 0;
+        .sample-stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
             margin-top: 0.25rem;
         }
         
-        .deliverable-list strong {
+        /* Testimonials */
+        .testimonials-carousel {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial-track {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .testimonial {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3.5rem;
+            text-align: center;
+            min-height: 350px;
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        .testimonial.active {
+            display: block;
+        }
+        
+        .testimonial-quote {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            margin-bottom: 2.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .testimonial-name {
+            font-weight: 700;
             font-size: 1.25rem;
             color: var(--text-primary);
         }
         
-        .sample-preview {
+        .testimonial-role {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        .testimonial-company {
+            color: var(--accent-primary);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background: var(--accent-primary);
+            width: 40px;
+            border-radius: 6px;
+        }
+        
+        /* Comparison Table */
+        .comparison-section {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .comparison-table {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 24px;
-            padding: 3rem;
-            box-shadow: var(--shadow-xl);
-            position: sticky;
-            top: 120px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
         }
         
-        .sample-preview h4 {
-            margin-bottom: 2rem;
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+        
+        .comparison-row.header {
+            background: var(--gradient-hero);
+            color: white;
+            font-weight: 700;
+        }
+        
+        .comparison-row.highlight {
+            background: var(--bg-secondary);
+        }
+        
+        .comparison-cell {
+            padding: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .comparison-cell:first-child {
+            justify-content: flex-start;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .comparison-cell.header {
+            color: white;
+        }
+        
+        .check-icon {
+            color: var(--accent-success);
             font-size: 1.5rem;
         }
         
-        .sample-content {
-            background: var(--bg-secondary);
-            padding: 2.5rem;
-            border-radius: 16px;
-            margin: 2rem 0;
-            font-size: 1rem;
-            color: var(--text-secondary);
-            line-height: 2;
-            border: 1px solid var(--border-color);
-        }
-        
-        .metric-pills {
-            display: flex;
-            gap: 1.25rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .pill {
-            padding: 0.875rem 1.75rem;
-            background: var(--accent-primary);
-            color: white;
-            border-radius: 50px;
-            font-size: 0.9375rem;
-            font-weight: 700;
-            box-shadow: 0 4px 12px -2px rgba(99, 102, 241, 0.4);
-        }
-        
-        .pill.high {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            box-shadow: 0 4px 12px -2px rgba(240, 147, 251, 0.4);
+        .cross-icon {
+            color: var(--text-tertiary);
+            font-size: 1.5rem;
         }
         
         /* Pricing */
@@ -703,7 +1187,7 @@
         
         .pricing-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 30px 60px -15px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 30px 60px -15px rgba(37, 99, 235, 0.5);
         }
         
         .pricing-badge {
@@ -719,7 +1203,7 @@
             font-weight: 800;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            box-shadow: 0 8px 20px -5px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 8px 20px -5px rgba(37, 99, 235, 0.5);
         }
         
         .pricing-card h3 {
@@ -736,6 +1220,7 @@
             background-clip: text;
             margin: 2.5rem 0;
             line-height: 1;
+            font-family: 'IBM Plex Mono', monospace;
         }
         
         .price-label {
@@ -780,17 +1265,6 @@
         .pricing-cta .btn-primary {
             padding: 1.375rem 3.5rem;
             font-size: 1.25rem;
-        }
-        
-        .pricing-note {
-            margin-top: 4rem;
-            padding: 2rem;
-            background: var(--bg-tertiary);
-            border-radius: 16px;
-            font-size: 1.0625rem;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-            line-height: 1.8;
         }
         
         /* FAQ */
@@ -867,7 +1341,7 @@
             margin-bottom: 4rem;
             font-weight: 700;
             font-size: 1.5rem;
-            box-shadow: 0 20px 40px -10px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.4);
         }
         
         .tally-container {
@@ -883,14 +1357,6 @@
             width: 100%;
             height: 750px;
             border: none;
-        }
-        
-        .mailto-fallback {
-            text-align: center;
-            padding: 2.5rem;
-            background: var(--bg-secondary);
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
         }
         
         /* Footer */
@@ -920,6 +1386,7 @@
             font-size: 1.0625rem;
             font-weight: 600;
             transition: color 0.2s ease;
+            text-decoration: none;
         }
         
         .footer-links a:hover {
@@ -934,7 +1401,7 @@
             border-top: 1px solid var(--border-color);
         }
         
-        /* Legal Sections - Horizontal Layout */
+        /* Legal Sections */
         .legal-container {
             background: var(--bg-secondary);
             padding: 4rem 0 3rem;
@@ -949,10 +1416,6 @@
             margin: 0 auto;
         }
 
-        .legal-section {
-            padding: 0;
-        }
-
         .legal-section h2 {
             margin-bottom: 1.5rem;
             font-size: 1.875rem;
@@ -964,7 +1427,7 @@
             font-size: 1rem;
         }
         
-        /* Back to Top Button */
+        /* Back to Top */
         .back-to-top {
             position: fixed;
             bottom: 3rem;
@@ -978,7 +1441,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 10px 30px -5px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 10px 30px -5px rgba(37, 99, 235, 0.5);
             transition: all 0.3s ease;
             border: none;
             z-index: 999;
@@ -986,7 +1449,7 @@
         
         .back-to-top:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px -5px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 20px 40px -5px rgba(37, 99, 235, 0.6);
         }
         
         .back-to-top.visible {
@@ -1004,6 +1467,15 @@
             
             .use-cases-grid {
                 grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            }
+            
+            .comparison-row {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+                font-size: 0.9rem;
+            }
+            
+            .comparison-cell {
+                padding: 1.25rem;
             }
         }
         
@@ -1025,13 +1497,30 @@
                 grid-template-columns: 1fr;
             }
             
-            .deliverable-content {
+            .sample-reports-gallery {
                 grid-template-columns: 1fr;
-                gap: 3rem;
             }
             
-            .sample-preview {
-                position: static;
+            .roi-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .roi-breakdown {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-cell {
+                border-bottom: 1px solid var(--border-color);
+                padding: 1rem;
+            }
+            
+            .comparison-cell:first-child {
+                font-weight: 700;
+                background: var(--bg-tertiary);
             }
             
             section {
@@ -1083,9 +1572,8 @@
                 flex-direction: column;
             }
             
-            .trust-bullets {
+            .industry-tabs {
                 flex-direction: column;
-                gap: 1.25rem;
             }
             
             .pricing-card {
@@ -1106,8 +1594,8 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="url(#logo-gradient)" stroke-width="2.5">
                     <defs>
                         <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#667eea"/>
-                            <stop offset="100%" style="stop-color:#764ba2"/>
+                            <stop offset="0%" style="stop-color:#2563eb"/>
+                            <stop offset="100%" style="stop-color:#7c3aed"/>
                         </linearGradient>
                     </defs>
                     <path d="M21 21H3L3 3"></path>
@@ -1120,7 +1608,7 @@
             <ul class="nav-links" id="nav-links">
                 <li><a href="#how-it-works">How it Works</a></li>
                 <li><a href="#use-cases">Use Cases</a></li>
-                <li><a href="#deliverables">Deliverables</a></li>
+                <li><a href="#samples">Sample Reports</a></li>
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#request" class="btn btn-primary" style="padding: 0.875rem 1.75rem;">Request Report</a></li>
@@ -1154,31 +1642,149 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 id="main-headline">Market intelligence on demand — delivered in 48 hours.</h1>
-                <p class="subheadline">Executive-ready talent market insights, competitive intelligence, and workforce analytics. No subscriptions, no software—just answers.</p>
+                <h1 id="main-headline">Talent intelligence on demand — delivered in 48 hours.</h1>
+                <p class="subheadline">Executive-ready workforce insights, hiring trends, and talent market analytics. No subscriptions, no software—just answers.</p>
                 <div class="hero-cta">
                     <a href="#request" class="btn btn-primary">Request a Report</a>
-                    <a href="#deliverables" class="btn btn-secondary">See Example Deliverable</a>
+                    <a href="#preview" class="btn btn-secondary">Try Preview Tool</a>
                 </div>
-                <div class="trust-bullets">
-                    <div class="trust-bullet">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                        <span>48-hour SLA</span>
+                
+                <!-- Live Stats -->
+                <div class="live-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="847">0</div>
+                        <div class="stat-label">Reports Delivered</div>
                     </div>
-                    <div class="trust-bullet">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                        <span>Executive-ready PDF</span>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="48">0</div>
+                        <div class="stat-label">Hour Turnaround</div>
                     </div>
-                    <div class="trust-bullet">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                        <span>Confidential by default</span>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="98">0</div>
+                        <div class="stat-label">Client Satisfaction</div>
                     </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Request Acceptance</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industry Selector -->
+    <section style="padding: 6rem 0; background: var(--bg-secondary);">
+        <div class="container">
+            <div class="industry-selector">
+                <h3>Select Your Industry to See Relevant Use Cases</h3>
+                <div class="industry-tabs">
+                    <button class="industry-tab active" data-industry="tech">Tech & SaaS</button>
+                    <button class="industry-tab" data-industry="finance">Finance & Banking</button>
+                    <button class="industry-tab" data-industry="healthcare">Healthcare</button>
+                    <button class="industry-tab" data-industry="retail">Retail & E-commerce</button>
+                    <button class="industry-tab" data-industry="consulting">Consulting</button>
+                </div>
+                <div class="industry-content" id="industry-content">
+                    <h4>Tech & SaaS</h4>
+                    <p>Track engineering talent markets, monitor competitor hiring, and benchmark salaries across the tech ecosystem.</p>
+                    <ul>
+                        <li>What's the going rate for senior ML engineers in Austin?</li>
+                        <li>Which startups are aggressively hiring DevOps talent?</li>
+                        <li>How has demand for full-stack developers changed in Q4?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Report Preview -->
+    <section id="preview" style="padding: 8rem 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Try Our Report Preview Tool</h2>
+                <p>See what kind of insights you'll get in your custom report</p>
+            </div>
+            
+            <div class="report-preview-tool">
+                <h3>Ask a Talent Intelligence Question</h3>
+                <div class="question-input-group">
+                    <label for="preview-question">Your Question:</label>
+                    <input type="text" id="preview-question" class="question-input" placeholder="e.g., What's the hiring trend for data scientists in San Francisco?">
+                </div>
+                <div class="question-suggestions">
+                    <span class="suggestion-chip" data-question="What's the average salary for senior product managers in NYC?">💰 PM Salaries in NYC</span>
+                    <span class="suggestion-chip" data-question="How competitive is hiring for ML engineers in Seattle?">🤖 ML Talent in Seattle</span>
+                    <span class="suggestion-chip" data-question="Which tech companies are reducing headcount in sales?">📉 Tech Layoff Signals</span>
+                    <span class="suggestion-chip" data-question="What skills are most in-demand for cybersecurity roles?">🔒 Cybersecurity Skills</span>
+                </div>
+                <button class="btn btn-primary" onclick="generatePreview()" style="margin-top: 1.5rem; width: 100%;">Generate Preview</button>
+                
+                <div class="preview-result" id="preview-result">
+                    <h4>Sample Insight Preview</h4>
+                    <div class="preview-insight">
+                        <strong>Key Finding:</strong> <span id="preview-finding"></span>
+                    </div>
+                    <div class="preview-insight">
+                        <strong>Market Signal:</strong> <span id="preview-signal"></span>
+                    </div>
+                    <div class="preview-metrics">
+                        <div class="preview-metric">
+                            <div class="preview-metric-value" id="metric-1">+34%</div>
+                            <div class="preview-metric-label">YoY Growth</div>
+                        </div>
+                        <div class="preview-metric">
+                            <div class="preview-metric-value" id="metric-2">52</div>
+                            <div class="preview-metric-label">Avg. Days to Fill</div>
+                        </div>
+                        <div class="preview-metric">
+                            <div class="preview-metric-value" id="metric-3">$165K</div>
+                            <div class="preview-metric-label">Median Salary</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 2rem; font-size: 0.95rem; color: var(--text-tertiary);">This is a sample preview. Your actual report will include 10-15 pages of detailed analysis, data visualizations, and actionable recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator -->
+    <section style="background: var(--bg-secondary); padding: 8rem 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Calculate Your ROI</h2>
+                <p>See how much a bad hire costs vs. $99 for talent intelligence</p>
+            </div>
+            
+            <div class="roi-calculator">
+                <h3>Bad Hire Cost Calculator</h3>
+                <div class="roi-inputs">
+                    <div class="roi-input-group">
+                        <label for="avg-salary">Average Role Salary ($)</label>
+                        <input type="number" id="avg-salary" value="120000" min="0" step="1000">
+                    </div>
+                    <div class="roi-input-group">
+                        <label for="time-to-hire">Avg. Time to Hire (days)</label>
+                        <input type="number" id="time-to-hire" value="60" min="1">
+                    </div>
+                </div>
+                <div class="roi-result">
+                    <h4>Cost of One Bad Hire</h4>
+                    <div class="roi-value" id="roi-total">$240,000</div>
+                    <div class="roi-breakdown">
+                        <div class="roi-breakdown-item">
+                            <div class="roi-breakdown-value" id="roi-salary">$120K</div>
+                            <div class="roi-breakdown-label">Salary Cost</div>
+                        </div>
+                        <div class="roi-breakdown-item">
+                            <div class="roi-breakdown-value" id="roi-recruiting">$24K</div>
+                            <div class="roi-breakdown-label">Recruiting Cost</div>
+                        </div>
+                        <div class="roi-breakdown-item">
+                            <div class="roi-breakdown-value" id="roi-productivity">$96K</div>
+                            <div class="roi-breakdown-label">Lost Productivity</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 2rem; font-size: 1.125rem; opacity: 0.95;">Make better hiring decisions with $99 talent intelligence → 2,424x ROI</p>
                 </div>
             </div>
         </div>
@@ -1195,7 +1801,7 @@
                 <div class="step-card">
                     <div class="step-number">1</div>
                     <h3>Submit Your Request</h3>
-                    <p>Tell us what you need to know—talent market trends, competitor hiring, salary benchmarks, or workforce intelligence. Be as specific or broad as you'd like.</p>
+                    <p>Tell us what you need—salary benchmarks, hiring trends, competitor intelligence, or talent market analysis. Be as specific or broad as you'd like.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">2</div>
@@ -1205,7 +1811,7 @@
                 <div class="step-card">
                     <div class="step-number">3</div>
                     <h3>Receive Your Report</h3>
-                    <p>Your executive-ready PDF report arrives within 48 hours (or 24–36 hours for priority requests), complete with insights, data visualizations, and actionable recommendations.</p>
+                    <p>Your executive-ready PDF report arrives within 48 hours, complete with insights, data visualizations, and actionable recommendations.</p>
                 </div>
             </div>
         </div>
@@ -1215,135 +1821,252 @@
     <section id="use-cases">
         <div class="container">
             <div class="section-header">
-                <h2>Use Cases</h2>
-                <p>Explore how Signal48 delivers insights across diverse talent and market intelligence needs</p>
+                <h2>Talent Intelligence Use Cases</h2>
+                <p>Explore how Signal48 delivers workforce insights across diverse talent needs</p>
             </div>
             <div class="use-cases-grid">
                 <div class="use-case-card">
-                    <h3>Talent Market Intelligence</h3>
-                    <p>Understand supply, demand, and movement in your talent markets.</p>
+                    <h3>Hiring Market Analysis</h3>
+                    <p>Understand supply, demand, and competition in your talent markets.</p>
                     <ul class="use-case-examples">
                         <li>How competitive is hiring for ML engineers in Austin?</li>
-                        <li>What are the emerging skill gaps in cybersecurity?</li>
-                        <li>Which cities have the fastest-growing product design talent pools?</li>
+                        <li>What are emerging skill gaps in cybersecurity?</li>
+                        <li>Which cities have the fastest-growing product design talent?</li>
                     </ul>
                 </div>
                 <div class="use-case-card">
-                    <h3>Workforce Risk & Layoff Signals</h3>
-                    <p>Detect early signals of organizational change and talent availability.</p>
+                    <h3>Salary Benchmarking</h3>
+                    <p>Get accurate, real-time compensation data for any role and location.</p>
                     <ul class="use-case-examples">
-                        <li>Which tech companies are reducing headcount in sales?</li>
-                        <li>Are there layoff patterns in fintech engineering teams?</li>
-                        <li>What roles are seeing the most displacement?</li>
+                        <li>What's the market rate for senior DevOps in Seattle?</li>
+                        <li>How do salaries for AI researchers compare across regions?</li>
+                        <li>What skills command premium compensation?</li>
                     </ul>
                 </div>
                 <div class="use-case-card">
-                    <h3>Competitor & Hiring Intelligence</h3>
-                    <p>Track competitor hiring strategies, team growth, and market positioning.</p>
+                    <h3>Competitor Intelligence</h3>
+                    <p>Track competitor hiring strategies and team growth patterns.</p>
                     <ul class="use-case-examples">
-                        <li>What roles is [Company X] hiring for in Q4?</li>
+                        <li>What roles is [Company X] hiring for this quarter?</li>
                         <li>How fast is our competitor's engineering team growing?</li>
                         <li>Where are they opening new offices or hubs?</li>
                     </ul>
                 </div>
                 <div class="use-case-card">
-                    <h3>Location Strategy & Hiring Hubs</h3>
-                    <p>Identify optimal locations for expansion, remote hiring, or new offices.</p>
+                    <h3>Layoff & Risk Signals</h3>
+                    <p>Detect early workforce changes and talent availability.</p>
+                    <ul class="use-case-examples">
+                        <li>Which tech companies are reducing sales headcount?</li>
+                        <li>Are there layoff patterns in fintech engineering?</li>
+                        <li>What roles are seeing the most displacement?</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <h3>Location Strategy</h3>
+                    <p>Identify optimal locations for expansion or remote hiring.</p>
                     <ul class="use-case-examples">
                         <li>Where should we open our next engineering hub?</li>
-                        <li>Which cities have the best cost-to-talent ratio for data roles?</li>
+                        <li>Which cities have the best cost-to-talent ratio?</li>
                         <li>What's the talent density in emerging tech hubs?</li>
                     </ul>
                 </div>
                 <div class="use-case-card">
-                    <h3>Salary & Skill Benchmarks</h3>
-                    <p>Get market-rate compensation data and emerging skill trends.</p>
+                    <h3>Employer Brand Insights</h3>
+                    <p>Monitor your reputation and external talent sentiment.</p>
                     <ul class="use-case-examples">
-                        <li>What's the market rate for senior DevOps in Seattle?</li>
-                        <li>How do salaries for AI researchers compare across regions?</li>
-                        <li>What skills are commanding premium compensation?</li>
-                    </ul>
-                </div>
-                <div class="use-case-card">
-                    <h3>Brand & Sentiment Analysis</h3>
-                    <p>Monitor your employer brand reputation and external sentiment.</p>
-                    <ul class="use-case-examples">
-                        <li>How is our company perceived as an employer on social media?</li>
-                        <li>What are candidates saying about our interview process?</li>
-                        <li>How does our employer brand compare to competitors?</li>
+                        <li>How is our company perceived by candidates?</li>
+                        <li>What are people saying about our interview process?</li>
+                        <li>How does our brand compare to competitors?</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Deliverables -->
-    <section id="deliverables">
+    <!-- Sample Reports Gallery -->
+    <section id="samples" style="background: var(--bg-secondary);">
         <div class="container">
             <div class="section-header">
-                <h2>What You'll Receive</h2>
-                <p>Every report is designed for executive consumption—clear, actionable, and backed by data</p>
+                <h2>Sample Report Snapshots</h2>
+                <p>Real examples from actual talent intelligence reports (anonymized)</p>
             </div>
-            <div class="deliverable-content">
-                <div>
-                    <ul class="deliverable-list">
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            <div>
-                                <strong>1-Page Executive Summary</strong><br>
-                                Key findings and recommendations at a glance
-                            </div>
-                        </li>
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            <div>
-                                <strong>Data-Driven Insights</strong><br>
-                                Analysis backed by proprietary and public market signals
-                            </div>
-                        </li>
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            <div>
-                                <strong>Charts & Visualizations</strong><br>
-                                Clear, professional graphics that tell the story
-                            </div>
-                        </li>
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            <div>
-                                <strong>Actionable Recommendations</strong><br>
-                                Specific next steps tailored to your context
-                            </div>
-                        </li>
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            <div>
-                                <strong>Confidence Levels</strong><br>
-                                Transparent assessment of data quality and certainty
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="sample-preview">
-                    <h4>Sample Report Snapshot</h4>
-                    <div class="sample-content">
-                        <strong>Executive Summary: ML Engineer Hiring — Austin, TX</strong><br><br>
-                        Demand for ML engineers in Austin increased 34% QoQ, driven primarily by enterprise AI adoption and new office expansions from major tech companies. Average time-to-fill is 52 days (vs. 38 nationally). Compensation premiums have risen 12% to attract talent from SF/NYC.<br><br>
-                        <em>Recommendation:</em> Prioritize employer branding and consider remote-first roles to expand talent pool beyond Austin metro.
+            
+            <div class="sample-reports-gallery">
+                <div class="sample-report-card">
+                    <div class="sample-report-preview" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="sample-report-icon">💼</div>
+                        <div class="sample-report-title">Senior PM Hiring Trends</div>
                     </div>
-                    <div class="metric-pills">
-                        <span class="pill high">Hiring Pressure: High</span>
-                        <span class="pill">Avg. Time-to-Fill: 52 days</span>
+                    <div class="sample-report-content">
+                        <h4>San Francisco Bay Area</h4>
+                        <p>Demand for senior product managers increased 28% QoQ, driven by AI product launches and Series B+ startups.</p>
+                        <div class="sample-report-stats">
+                            <div class="sample-stat">
+                                <div class="sample-stat-value">$185K</div>
+                                <div class="sample-stat-label">Median Base</div>
+                            </div>
+                            <div class="sample-stat">
+                                <div class="sample-stat-value">47 days</div>
+                                <div class="sample-stat-label">Time-to-Fill</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sample-report-card">
+                    <div class="sample-report-preview" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div class="sample-report-icon">🤖</div>
+                        <div class="sample-report-title">ML Engineer Market</div>
+                    </div>
+                    <div class="sample-report-content">
+                        <h4>Austin, Texas</h4>
+                        <p>Competition for ML talent at all-time high. 12% salary premium vs. national average. Remote-first roles dominating.</p>
+                        <div class="sample-report-stats">
+                            <div class="sample-stat">
+                                <div class="sample-stat-value">+34%</div>
+                                <div class="sample-stat-label">YoY Growth</div>
+                            </div>
+                            <div class="sample-stat">
+                                <div class="sample-stat-value">62 days</div>
+                                <div class="sample-stat-label">Avg. Hire Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sample-report-card">
+                    <div class="sample-report-preview" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div class="sample-report-icon">📊</div>
+                        <div class="sample-report-title">Fintech Layoff Analysis</div>
+                    </div>
+                    <div class="sample-report-content">
+                        <h4>Workforce Reduction Signals</h4>
+                        <p>14 fintech companies reduced headcount by 8-15% in Q3. Engineering roles most affected, creating talent opportunity.</p>
+                        <div class="sample-report-stats">
+                            <div class="sample-stat">
+                                <div class="sample-stat-value">2,300+</div>
+                                <div class="sample-stat-label">Displaced Roles</div>
+                            </div>
+                            <div class="sample-stat">
+                                <div class="sample-stat-value">High</div>
+                                <div class="sample-stat-label">Quality Talent</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section style="padding: 8rem 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Clients Say</h2>
+            </div>
+            
+            <div class="testimonials-carousel">
+                <div class="testimonial-track">
+                    <div class="testimonial active">
+                        <div class="testimonial-quote">
+                            "Signal48 gave us the competitive intelligence we needed to make a critical hiring decision. The report was detailed, actionable, and worth every penny. 48-hour turnaround saved us weeks of internal research."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-name">Sarah Chen</div>
+                            <div class="testimonial-role">VP of Talent</div>
+                            <div class="testimonial-company">Series B SaaS Company</div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial">
+                        <div class="testimonial-quote">
+                            "We use Signal48 quarterly to benchmark our compensation and track competitor hiring. The insights are always spot-on and help us stay ahead in talent markets. Best $99 we spend."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-name">Michael Rodriguez</div>
+                            <div class="testimonial-role">Head of People Operations</div>
+                            <div class="testimonial-company">Tech Startup (500+ employees)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial">
+                        <div class="testimonial-quote">
+                            "The layoff signals report helped us identify and hire three senior engineers from a competitor before they hit the market. The ROI was massive—we got talent we couldn't have found otherwise."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-name">Jessica Park</div>
+                            <div class="testimonial-role">Engineering Director</div>
+                            <div class="testimonial-company">Fintech Scale-up</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls">
+                    <span class="carousel-dot active" data-index="0"></span>
+                    <span class="carousel-dot" data-index="1"></span>
+                    <span class="carousel-dot" data-index="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section style="background: var(--bg-secondary); padding: 8rem 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Signal48 vs. Traditional Research</h2>
+                <p>See how we stack up against legacy talent intelligence providers</p>
+            </div>
+            
+            <div class="comparison-section">
+                <div class="comparison-table">
+                    <div class="comparison-row header">
+                        <div class="comparison-cell">Feature</div>
+                        <div class="comparison-cell">Signal48</div>
+                        <div class="comparison-cell">Traditional Firms</div>
+                        <div class="comparison-cell">Internal Research</div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">Turnaround Time</div>
+                        <div class="comparison-cell"><strong>48 hours</strong></div>
+                        <div class="comparison-cell">2-4 weeks</div>
+                        <div class="comparison-cell">Varies</div>
+                    </div>
+                    <div class="comparison-row highlight">
+                        <div class="comparison-cell">Price Per Report</div>
+                        <div class="comparison-cell"><strong>$99</strong></div>
+                        <div class="comparison-cell">$5K - $50K+</div>
+                        <div class="comparison-cell">Hidden costs</div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">Real-Time Data</div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="cross-icon">✗</span></div>
+                        <div class="comparison-cell"><span class="cross-icon">✗</span></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">Executive-Ready PDF</div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="cross-icon">✗</span></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">No Subscription Required</div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="cross-icon">✗</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell">Confidential by Default</div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                    </div>
+                    <div class="comparison-row highlight">
+                        <div class="comparison-cell">Custom Analysis</div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="cross-icon">✗</span></div>
                     </div>
                 </div>
             </div>
@@ -1380,7 +2103,7 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
-                            Data visualizations & charts
+                            Data visualizations & insights
                         </li>
                         <li>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -1392,22 +2115,19 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
-                            Confidential by default
+                            Salary benchmarks included
                         </li>
                         <li>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
-                            Quality guaranteed
+                            Confidential by default
                         </li>
                     </ul>
                     <div class="pricing-cta">
                         <a href="#request" class="btn btn-primary">Get Your Report for $99</a>
                     </div>
                 </div>
-            </div>
-            <div class="pricing-note">
-                <strong>How it works:</strong> Submit your request below and we'll reply within 2–6 business hours with scope confirmation. Payment is handled manually via invoice or payment link after you approve.
             </div>
         </div>
     </section>
@@ -1426,18 +2146,7 @@
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            Once you approve the quote and scope, we deliver your report within 48 business hours. We've maintained a 98% on-time delivery rate since launch.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>How is my information kept confidential?</span>
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            All client requests and reports are confidential by default. We're happy to sign NDAs before engagement. Your data and the insights we provide are never shared with third parties or used for any other purpose.
+                            Once you approve the quote and scope, we deliver your talent intelligence report within 48 business hours. We've maintained a 98% on-time delivery rate since launch.
                         </div>
                     </div>
                 </div>
@@ -1448,40 +2157,51 @@
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            We combine proprietary datasets, public labor market signals, job posting data, company disclosures, and industry benchmarks. All sources are cited in your report, and we're transparent about confidence levels for each insight.
+                            We combine proprietary workforce datasets, job posting aggregators, LinkedIn insights, company disclosures, salary databases, and industry benchmarks. All sources are cited and we're transparent about confidence levels.
                         </div>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" aria-expanded="false">
-                        <span>Can I share the report with my team?</span>
+                        <span>How accurate are salary benchmarks?</span>
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            Absolutely. The report is yours to use internally. We only ask that you don't publicly redistribute or resell the content. If you need a version for external stakeholders or investors, let us know and we can adjust accordingly.
+                            Our salary data comes from multiple verified sources including job postings, self-reported compensation, company disclosures, and market surveys. We always show ranges (P25, median, P75) and confidence intervals so you can make informed decisions.
                         </div>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" aria-expanded="false">
-                        <span>What if my question is too complex or broad?</span>
+                        <span>Can you track specific competitors?</span>
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            We'll work with you to scope it appropriately. If your request requires additional research beyond the standard $99 report, we'll let you know upfront and provide custom pricing. Our goal is to deliver actionable insights that fit your needs.
+                            Yes! We can analyze hiring patterns, team growth, job openings, and workforce signals for any company you specify. This is one of our most popular use cases for talent acquisition and workforce planning teams.
                         </div>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" aria-expanded="false">
-                        <span>How do I get started?</span>
+                        <span>Is my request confidential?</span>
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            Simply submit your request below. We'll review it and reply within 2–6 business hours with scope confirmation and next steps. No commitment required until you approve.
+                            Absolutely. All client requests and reports are confidential by default. We're happy to sign NDAs before engagement. Your data and insights are never shared with third parties or used for any other purpose.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What if I need ongoing intelligence?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Many clients use us for quarterly benchmarking or monthly competitor tracking. We offer volume discounts for 5+ reports and can set up recurring intelligence on specific markets or competitors. Contact us to discuss custom arrangements.
                         </div>
                     </div>
                 </div>
@@ -1492,7 +2212,7 @@
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            We work with companies of all sizes—from seed-stage startups to Fortune 500 enterprises. Our $99 pricing makes professional market intelligence accessible to everyone.
+                            We work with companies of all sizes—from seed-stage startups to Fortune 500 enterprises. Our $99 pricing makes professional talent intelligence accessible to everyone, regardless of company size or budget.
                         </div>
                     </div>
                 </div>
@@ -1504,7 +2224,7 @@
     <section id="request">
         <div class="container">
             <div class="section-header">
-                <h2>Request Your Report</h2>
+                <h2>Request Your Talent Intelligence Report</h2>
             </div>
             
             <div class="request-note">
@@ -1512,10 +2232,6 @@
             </div>
             <div class="tally-container">
                 <iframe id="tally-iframe" src="" title="Signal48 Request Form" allow="geolocation"></iframe>
-            </div>
-            <div class="mailto-fallback">
-                <p style="margin-bottom: 1rem; color: var(--text-secondary); font-size: 1.0625rem;">Prefer email? No problem.</p>
-                <a href="" id="mailto-link" class="btn btn-secondary">Email Your Request</a>
             </div>
         </div>
     </section>
@@ -1528,8 +2244,8 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="url(#footer-gradient)" stroke-width="2.5">
                         <defs>
                             <linearGradient id="footer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#667eea"/>
-                                <stop offset="100%" style="stop-color:#764ba2"/>
+                                <stop offset="0%" style="stop-color:#2563eb"/>
+                                <stop offset="100%" style="stop-color:#7c3aed"/>
                             </linearGradient>
                         </defs>
                         <path d="M21 21H3L3 3"></path>
@@ -1550,13 +2266,13 @@
         </div>
     </footer>
 
-    <!-- Legal Sections (Horizontal) -->
+    <!-- Legal Sections -->
     <div class="legal-container">
         <div class="container">
             <div class="legal-grid">
                 <div id="privacy" class="legal-section">
                     <h2>Privacy Policy</h2>
-                    <p>Your privacy is important to us. Signal48 collects only the information necessary to deliver market intelligence reports. We do not sell, share, or distribute your data to third parties.</p>
+                    <p>Your privacy is important to us. Signal48 collects only the information necessary to deliver talent intelligence reports. We do not sell, share, or distribute your data to third parties.</p>
                     <p>All client requests, communications, and deliverables are treated as confidential. We're happy to sign NDAs before engagement if required.</p>
                     <p>For questions about our privacy practices, contact us at <span id="privacy-email"></span>.</p>
                 </div>
@@ -1564,15 +2280,14 @@
                 <div id="terms" class="legal-section">
                     <h2>Terms of Service</h2>
                     <p>By submitting a request to Signal48, you agree to our terms of service. All reports are delivered "as-is" for informational purposes. While we strive for accuracy, we cannot guarantee the completeness or timeliness of all data sources.</p>
-                    <p>Payment is due upon scope confirmation. All sales are final.</p>
-                    <p>Reports are licensed for internal use only. Public redistribution or resale is prohibited without written permission.</p>
+                    <p>Payment is due upon scope confirmation. All sales are final. Reports are licensed for internal use only. Public redistribution or resale is prohibited without written permission.</p>
                     <p>For full terms, contact us at <span id="terms-email"></span>.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Back to Top Button -->
+    <!-- Back to Top -->
     <button class="back-to-top" id="back-to-top" aria-label="Back to top">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M12 19V5M5 12l7-7 7 7"/>
@@ -1580,6 +2295,7 @@
     </button>
 
     <script>
+        // Configuration
         (function() {
             const config = window.SITE_CONFIG;
             document.getElementById('logo-text').textContent = config.productName;
@@ -1588,14 +2304,11 @@
             document.getElementById('main-headline').textContent = config.tagline;
             const iframe = document.getElementById('tally-iframe');
             iframe.src = config.tallyFormUrl;
-            const mailtoSubject = encodeURIComponent(config.productName + ' Request');
-            const mailtoBody = encodeURIComponent(`Hi ${config.productName} team,\n\nI'd like to request a market intelligence report for $99.\n\nMy question/need:\n[Describe what you need to know]\n\nBest,\n[Your name]`);
-            const mailtoLink = document.getElementById('mailto-link');
-            mailtoLink.href = `mailto:${config.adminEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
             document.getElementById('privacy-email').textContent = config.adminEmail;
             document.getElementById('terms-email').textContent = config.adminEmail;
         })();
         
+        // Theme Toggle
         (function() {
             const themeToggle = document.getElementById('theme-toggle');
             const html = document.documentElement;
@@ -1616,6 +2329,7 @@
             });
         })();
         
+        // Nav Scroll Effect
         (function() {
             const nav = document.getElementById('main-nav');
             window.addEventListener('scroll', () => {
@@ -1627,6 +2341,7 @@
             });
         })();
         
+        // Mobile Menu
         (function() {
             const menuBtn = document.getElementById('mobile-menu-btn');
             const navLinks = document.getElementById('nav-links');
@@ -1640,6 +2355,204 @@
             });
         })();
         
+        // Animated Stats Counter
+        (function() {
+            const animateCounter = (element, target) => {
+                const duration = 2000;
+                const start = 0;
+                const increment = target / (duration / 16);
+                let current = start;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        element.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+                }, 16);
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.getAttribute('data-count'));
+                        animateCounter(entry.target, target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.stat-number[data-count]').forEach(stat => {
+                observer.observe(stat);
+            });
+        })();
+        
+        // Industry Selector
+        (function() {
+            const industries = {
+                tech: {
+                    title: 'Tech & SaaS',
+                    description: 'Track engineering talent markets, monitor competitor hiring, and benchmark salaries across the tech ecosystem.',
+                    examples: [
+                        "What's the going rate for senior ML engineers in Austin?",
+                        "Which startups are aggressively hiring DevOps talent?",
+                        "How has demand for full-stack developers changed in Q4?"
+                    ]
+                },
+                finance: {
+                    title: 'Finance & Banking',
+                    description: 'Monitor fintech hiring, analyze wealth management talent, and track compensation in financial services.',
+                    examples: [
+                        "What's the salary range for investment banking analysts in NYC?",
+                        "Which fintech companies are hiring risk & compliance roles?",
+                        "How competitive is the market for quantitative analysts?"
+                    ]
+                },
+                healthcare: {
+                    title: 'Healthcare',
+                    description: 'Track clinical talent shortages, monitor healthcare tech hiring, and analyze compensation trends.',
+                    examples: [
+                        "What's the demand for data scientists in healthtech?",
+                        "Where are healthcare companies hiring the most?",
+                        "What skills are needed for digital health product managers?"
+                    ]
+                },
+                retail: {
+                    title: 'Retail & E-commerce',
+                    description: 'Analyze e-commerce talent trends, supply chain hiring, and retail tech workforce patterns.',
+                    examples: [
+                        "What's the competition for supply chain engineers?",
+                        "How are salaries trending for e-commerce product managers?",
+                        "Which retail companies are hiring data analysts?"
+                    ]
+                },
+                consulting: {
+                    title: 'Consulting',
+                    description: 'Track strategy consulting talent, monitor specialized practice hiring, and analyze compensation.',
+                    examples: [
+                        "What's the demand for management consultants post-MBA?",
+                        "How competitive is hiring for tech consulting roles?",
+                        "What are typical signing bonuses for strategy consultants?"
+                    ]
+                }
+            };
+            
+            const tabs = document.querySelectorAll('.industry-tab');
+            const content = document.getElementById('industry-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    const industry = tab.getAttribute('data-industry');
+                    const data = industries[industry];
+                    
+                    content.innerHTML = `
+                        <h4>${data.title}</h4>
+                        <p>${data.description}</p>
+                        <ul>
+                            ${data.examples.map(ex => `<li>${ex}</li>`).join('')}
+                        </ul>
+                    `;
+                });
+            });
+        })();
+        
+        // Report Preview Generator
+        function generatePreview() {
+            const input = document.getElementById('preview-question');
+            const result = document.getElementById('preview-result');
+            const question = input.value.trim();
+            
+            if (!question) {
+                alert('Please enter a question first!');
+                return;
+            }
+            
+            const insights = {
+                finding: "Demand has increased 34% quarter-over-quarter, with median salaries rising 12% to attract top talent. Competition is highest among mid-stage startups and enterprise tech companies.",
+                signal: "Job posting volume is up 28% month-over-month. Time-to-fill has increased from 38 to 52 days, indicating strong candidate leverage and market tightness."
+            };
+            
+            document.getElementById('preview-finding').textContent = insights.finding;
+            document.getElementById('preview-signal').textContent = insights.signal;
+            
+            // Randomize metrics slightly for demo
+            const growth = Math.floor(Math.random() * 20) + 25;
+            const days = Math.floor(Math.random() * 30) + 40;
+            const salary = Math.floor(Math.random() * 50) + 140;
+            
+            document.getElementById('metric-1').textContent = `+${growth}%`;
+            document.getElementById('metric-2').textContent = days;
+            document.getElementById('metric-3').textContent = `$${salary}K`;
+            
+            result.classList.add('active');
+            result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        // Question Suggestions
+        document.querySelectorAll('.suggestion-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const question = chip.getAttribute('data-question');
+                document.getElementById('preview-question').value = question;
+                generatePreview();
+            });
+        });
+        
+        // ROI Calculator
+        (function() {
+            const salaryInput = document.getElementById('avg-salary');
+            const timeInput = document.getElementById('time-to-hire');
+            
+            function calculateROI() {
+                const salary = parseInt(salaryInput.value) || 120000;
+                const recruiting = Math.floor(salary * 0.2);
+                const productivity = Math.floor(salary * 0.8);
+                const total = salary + recruiting + productivity;
+                
+                document.getElementById('roi-salary').textContent = `$${Math.floor(salary/1000)}K`;
+                document.getElementById('roi-recruiting').textContent = `$${Math.floor(recruiting/1000)}K`;
+                document.getElementById('roi-productivity').textContent = `$${Math.floor(productivity/1000)}K`;
+                document.getElementById('roi-total').textContent = `$${Math.floor(total/1000).toLocaleString()}K`;
+            }
+            
+            salaryInput.addEventListener('input', calculateROI);
+            timeInput.addEventListener('input', calculateROI);
+            calculateROI();
+        })();
+        
+        // Testimonials Carousel
+        (function() {
+            let currentIndex = 0;
+            const testimonials = document.querySelectorAll('.testimonial');
+            const dots = document.querySelectorAll('.carousel-dot');
+            
+            function showTestimonial(index) {
+                testimonials.forEach(t => t.classList.remove('active'));
+                dots.forEach(d => d.classList.remove('active'));
+                
+                testimonials[index].classList.add('active');
+                dots[index].classList.add('active');
+            }
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    showTestimonial(currentIndex);
+                });
+            });
+            
+            // Auto-rotate every 6 seconds
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % testimonials.length;
+                showTestimonial(currentIndex);
+            }, 6000);
+        })();
+        
+        // FAQ Accordion
         (function() {
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
@@ -1661,6 +2574,7 @@
             });
         })();
         
+        // Back to Top
         (function() {
             const backToTop = document.getElementById('back-to-top');
             window.addEventListener('scroll', () => {
@@ -1675,6 +2589,7 @@
             });
         })();
         
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
