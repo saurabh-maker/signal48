@@ -1707,10 +1707,30 @@
             
             <div class="report-preview-tool">
                 <h3>Ask a Talent Intelligence Question</h3>
-                <div class="question-input-group">
-                    <label for="preview-question">Your Question:</label>
-                    <input type="text" id="preview-question" class="question-input" placeholder="e.g., What's the hiring trend for data scientists in San Francisco?">
-                </div>
+               <div class="question-input-group">
+  <label for="predefined-question">Ask a Talent Intelligence Question</label>
+
+  <select id="predefined-question" class="question-input" onchange="applyPredefinedQuestion()">
+    <option value="">Select a predefined question…</option>
+    <option value="Which locations have the highest talent supply for this role?">🌍 Talent supply by location</option>
+    <option value="Which companies are hiring aggressively for this role?">🏢 Companies hiring aggressively</option>
+    <option value="What is the average salary range for this role by location?">💰 Salary range by location</option>
+    <option value="What skills are most common among top candidates for this role?">🧠 Most common skills</option>
+    <option value="How competitive is hiring for this role in this market?">🔥 Market competitiveness</option>
+    <option value="Which competitors are losing talent for this role?">📉 Competitor talent movement</option>
+    <option value="Are there layoff signals creating talent availability in this role?">🚨 Layoff / availability signals</option>
+    <option value="What is the demand vs supply ratio for this role?">⚖️ Demand vs supply ratio</option>
+  </select>
+
+  <div style="margin-top: 1rem;">
+    <label for="preview-question" style="display:block; margin-bottom:0.75rem; font-weight:700; color: var(--text-primary);">
+      Or write a custom question:
+    </label>
+    <input type="text" id="preview-question" class="question-input"
+      placeholder="e.g., What's the hiring trend for data scientists in San Francisco?">
+  </div>
+</div>
+
                 <div class="question-suggestions">
                     <span class="suggestion-chip" data-question="What's the average salary for senior product managers in NYC?">💰 PM Salaries in NYC</span>
                     <span class="suggestion-chip" data-question="How competitive is hiring for ML engineers in Seattle?">🤖 ML Talent in Seattle</span>
