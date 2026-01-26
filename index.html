@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en" data-theme="">
 <head>
@@ -121,6 +122,8 @@
             --gradient-2: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
             --gradient-3: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
             --gradient-hero: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #7c3aed 100%);
+            --text-gradient: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #7c3aed 100%);
+            --hero-bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
             --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
@@ -150,6 +153,8 @@
             --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
             --nav-bg: rgba(10, 14, 39, 0.9);
             --card-bg: #131729;
+            --text-gradient: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+            --hero-bg-gradient: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #7c3aed 100%);
         }
        
         html {
@@ -371,7 +376,7 @@
             padding: 12rem 0 8rem;
             position: relative;
             overflow: hidden;
-            background: var(--gradient-hero);
+            background: var(--hero-bg-gradient);
             background-size: 400% 400%;
             animation: parallax 20s ease infinite;
         }
@@ -401,7 +406,7 @@
             position: absolute;
             width: 8px;
             height: 8px;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(37, 99, 235, 0.3);
             border-radius: 50%;
             animation: particleFloat 10s ease-in-out infinite;
         }
@@ -414,7 +419,7 @@
        
         .hero h1 {
             margin-bottom: 2.5rem;
-            background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+            background: var(--text-gradient);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -2612,3 +2617,4 @@ nav .btn-primary:hover {
     </script>
 </body>
 </html>
+```
