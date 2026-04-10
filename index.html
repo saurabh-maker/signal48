@@ -916,31 +916,69 @@ function toggleFAQ(i,btn){
 }
 
 /* ════════ AUTH ════════ */
-function initGoogleAuth(){
+const GOOGLE_READY=new Promise(res=>{
+  // Wait for GSI script to load
+  if(window.google){res();return;}
+  const t=setInterval(()=>{if(window.google){clearInterval(t);res();}},100);
+  setTimeout(()=>{clearInterval(t);res();},5000);
+});
+
+async function initGoogleAuth(){
   if(CONFIG.GOOGLE_CLIENT_ID==='YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com')return;
-  if(!window.google)return;
-  google.accounts.id.initialize({client_id:CONFIG.GOOGLE_CLIENT_ID,callback:onGoogleCred});
+  await GOOGLE_READY;
+  if(!window.google?.accounts)return;
+  google.accounts.id.initialize({
+    client_id:CONFIG.GOOGLE_CLIENT_ID,
+    callback:onGoogleCred,
+    auto_select:false,
+    cancel_on_tap_outside:true,
+  });
+  // Render actual button (reliable, not One Tap popup)
+  const btn=document.getElementById('google-signin-btn');
+  if(btn){
+    btn.innerHTML='';
+    google.accounts.id.renderButton(btn,{
+      theme:'outline',size:'large',width:360,
+      text:'continue_with',shape:'rectangular',
+    });
+  }
 }
+
 function onGoogleCred(resp){
   try{
     const payload=JSON.parse(atob(resp.credential.split('.')[1]));
-    const u={name:payload.name,email:payload.email,avatar:payload.given_name[0].toUpperCase(),provider:'google',plan:'free'};
+    const u={
+      name:payload.name,
+      email:payload.email,
+      avatar:(payload.given_name||payload.name)[0].toUpperCase(),
+      provider:'google',
+      plan:'free',
+    };
     const users=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
     const isNew=!users[u.email];
     if(isNew){
       users[u.email]={name:u.name,provider:'google',plan:'free',created:new Date().toISOString()};
       localStorage.setItem(USERS_KEY,JSON.stringify(users));
-      saveToSheet({type:'new_user',email:u.email,name:u.name,provider:'google',plan:'free',ts:new Date().toISOString()});
+      saveUserToSheet(u.email,u.name,'google','free');
     }
     loginUser(u);
     cm(3);
-    // Show toast so user knows what happened
     showAuthToast(isNew
-      ? `✅ Account created — welcome to Signal48, ${payload.given_name}!`
-      : `👋 Welcome back, ${payload.given_name}!`
+      ? `✅ Account created — welcome, ${(payload.given_name||u.name).split(' ')[0]}!`
+      : `👋 Welcome back, ${(payload.given_name||u.name).split(' ')[0]}!`
     );
   }catch(e){console.error('Google auth error',e);}
 }
+
+function saveUserToSheet(email,name,provider,plan){
+  saveToSheet({
+    type:'users',
+    email,name,provider,plan,
+    signup_date:new Date().toISOString().slice(0,10),
+    ts:new Date().toISOString(),
+  });
+}
+
 function showAuthToast(msg){
   let t=document.getElementById('auth-toast');
   if(!t){
@@ -951,29 +989,39 @@ function showAuthToast(msg){
   t.textContent=msg;t.style.opacity='1';t.style.display='block';
   clearTimeout(t._t);t._t=setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.style.display='none',300);},3500);
 }
-function openAuth(){
+
+function openAuth(defaultTab){
+  const tab=defaultTab||'up';
   document.getElementById('mb3').innerHTML=`
     <div class="auth-modal">
       <div class="am-logo">Signal<em>48</em></div>
-      <div class="am-sub">Sign in to track alerts, save filters, and access all free features.</div>
-      <button class="btn-google-auth" onclick="triggerGoogle()">
-        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        Continue with Google
-      </button>
-      <div class="am-divider">or email</div>
-      <div class="am-tabs">
-        <div class="am-tab" id="am-t1" onclick="switchAM('in')">Sign in</div>
-        <div class="am-tab act" id="am-t2" onclick="switchAM('up')">Sign up</div>
+      <div class="am-sub" id="am-headline">${tab==='up'?'Create your free account':'Welcome back'}</div>
+
+      <!-- Google button rendered here by GSI renderButton -->
+      <div id="google-signin-btn" style="display:flex;justify-content:center;margin-bottom:14px;min-height:44px">
+        ${CONFIG.GOOGLE_CLIENT_ID==='YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com'
+          ? `<div style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg2);font-size:12px;color:var(--text3);text-align:center">Google Sign-In: add your Client ID to CONFIG</div>`
+          : `<div style="font-size:12px;color:var(--text3);padding:10px">Loading Google Sign-In…</div>`
+        }
       </div>
-      <div id="am-name-row"><input class="am-inp" id="am-name" type="text" placeholder="Full name"></div>
+
+      <div class="am-divider">or use email</div>
+      <div class="am-tabs">
+        <div class="am-tab ${tab==='up'?'':'act'}" id="am-t1" onclick="switchAM('in')">Sign in</div>
+        <div class="am-tab ${tab==='up'?'act':''}" id="am-t2" onclick="switchAM('up')">Sign up</div>
+      </div>
+      <div id="am-name-row" style="display:${tab==='up'?'block':'none'}">
+        <input class="am-inp" id="am-name" type="text" placeholder="Full name">
+      </div>
       <input class="am-inp" id="am-email" type="email" placeholder="Email address">
-      <input class="am-inp" id="am-pass" type="password" placeholder="Password">
-      <button class="btn-am" id="am-submit" onclick="doEmailAuth()">Create account</button>
-      <div class="am-note" id="am-msg">By signing in you agree to our terms. Your data is stored securely.</div>
+      <input class="am-inp" id="am-pass" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doEmailAuth()">
+      <button class="btn-am" id="am-submit" onclick="doEmailAuth()">${tab==='up'?'Create account':'Sign in'}</button>
+      <div class="am-note" id="am-msg">Your data is stored securely. No spam, ever.</div>
     </div>`;
   document.getElementById('ov3').style.display='flex';
-  initGoogleAuth();
+  initGoogleAuth(); // renders the real Google button
 }
+
 let amMode='up';
 function switchAM(m){
   amMode=m;
@@ -981,12 +1029,9 @@ function switchAM(m){
   document.getElementById('am-t2').classList.toggle('act',m==='up');
   document.getElementById('am-name-row').style.display=m==='up'?'block':'none';
   document.getElementById('am-submit').textContent=m==='up'?'Create account':'Sign in';
-}
-function triggerGoogle(){
-  if(CONFIG.GOOGLE_CLIENT_ID==='YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com'){
-    showNote('am-msg','Google Sign-In not configured yet. Use email below.','orange');return;
-  }
-  google.accounts.id.prompt();
+  document.getElementById('am-headline').textContent=m==='up'?'Create your free account':'Welcome back';
+  document.getElementById('am-msg').textContent='Your data is stored securely. No spam, ever.';
+  document.getElementById('am-msg').style.color='';
 }
 function doEmailAuth(){
   const email=(document.getElementById('am-email').value||'').trim();
@@ -995,15 +1040,15 @@ function doEmailAuth(){
   if(!email.includes('@')||!pass){showNote('am-msg','Please enter email and password.','red');return;}
   const users=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
   if(amMode==='up'){
-    if(users[email]){showNote('am-msg','Account already exists — use Sign in instead.','red');return;}
+    if(users[email]){showNote('am-msg','Account already exists — click Sign in instead.','red');return;}
     users[email]={name,pass,plan:'free',created:new Date().toISOString()};
     localStorage.setItem(USERS_KEY,JSON.stringify(users));
-    saveToSheet({type:'new_user',email,name,provider:'email',plan:'free',ts:new Date().toISOString()});
+    saveUserToSheet(email,name,'email','free');
     loginUser({name,email,avatar:name[0].toUpperCase(),provider:'email',plan:'free'});
     cm(3);
-    showAuthToast(`✅ Account created — welcome to Signal48, ${name.split(' ')[0]}!`);
+    showAuthToast(`✅ Account created — welcome, ${name.split(' ')[0]}!`);
   }else{
-    if(!users[email]){showNote('am-msg','No account found. Please Sign up first.','red');return;}
+    if(!users[email]){showNote('am-msg','No account found — please Sign up first.','red');return;}
     if(users[email].pass!==pass){showNote('am-msg','Incorrect password.','red');return;}
     loginUser({name:users[email].name,email,avatar:users[email].name[0].toUpperCase(),provider:'email',plan:users[email].plan||'free'});
     cm(3);
