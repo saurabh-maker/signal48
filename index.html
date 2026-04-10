@@ -541,7 +541,7 @@ a{color:var(--accent)}
     <span class="ctx-pill">🏭 Facility Openings</span>
     <span class="ctx-pill">💰 Investment Flows</span>
     <span class="ctx-pill">🌍 Market Entries</span>
-    <span class="ctx-pill">📡 Updated 48 Hours</span>
+    <span class="ctx-pill">📡 Updated Weekly</span>
   </div>
 </div>
 
@@ -673,11 +673,11 @@ a{color:var(--accent)}
           <div class="pf"><div class="pf-check">✓</div>Company + country + sector filters</div>
           <div class="pf"><div class="pf-check">✓</div>Signal detail modals</div>
           <div class="pf"><div class="pf-check">✓</div>Right-panel insights</div>
-          <div class="pf"><div class="pf-check">✓</div>48 Hours alert sign-up</div>
+          <div class="pf"><div class="pf-check">✓</div>Weekly alert sign-up</div>
           <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">Period & deal size filters</span></div>
           <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">Export to CSV / Excel</span></div>
           <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">KPI bar: Key industry, destination, type</span></div>
-          <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">Agent-powered alerts (48 Hours report)</span></div>
+          <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">Agent-powered alerts (weekly report)</span></div>
         </div>
         <button class="btn-price free-btn" onclick="openAuth()">Get started free →</button>
       </div>
@@ -692,7 +692,7 @@ a{color:var(--accent)}
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Deal size filter ($100M to $5B+)</div>
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Export to CSV — all filtered signals</div>
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Key industry, destination & type KPIs</div>
-          <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Agent alerts — 48 Hours report, by sector/country</div>
+          <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Agent alerts — weekly report, by sector/country</div>
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Priority support via email</div>
         </div>
         <button class="btn-price pro-btn" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $20/month →</button>
@@ -727,7 +727,7 @@ a{color:var(--accent)}
       <h3>Confidence score</h3>
       <p>Every signal carries a <strong>confidence score (0–100%)</strong> reflecting how well-sourced and independently verified the announcement is. Scores above 90% indicate multiple corroborating sources with official confirmation. Scores below 70% indicate single-source announcements that are plausible but unconfirmed.</p>
       <h3>How often is data updated?</h3>
-      <p>The dataset is reviewed and updated <strong>48 Hours</strong>. New signals are added every Monday morning (UTC). The "Synced" timestamp in the top filter bar shows when your browser last fetched the live sheet.</p>
+      <p>The dataset is reviewed and updated <strong>weekly</strong>. New signals are added every Monday morning (UTC). The "Synced" timestamp in the top filter bar shows when your browser last fetched the live sheet.</p>
       <h3>Map display logic</h3>
       <p>The map defaults to showing the <strong>latest available data</strong>. Signals are grouped by country — clicking a country dot with multiple signals shows a ranked list sorted by investment size. The most recent deal per company is shown first. Historical signals remain searchable via the Period filter (Pro).</p>
       <h3>Investment amounts</h3>
@@ -931,10 +931,10 @@ function showTab(name, btn){
 
 /* ════════ FAQ DATA ════════ */
 const FAQS=[
-  {q:"Is the data real-time?",a:"The dataset is updated 48 Hours, every Monday. Your browser fetches the latest version on each page load. The 'Synced' badge in the filter bar shows the exact fetch time."},
+  {q:"Is the data real-time?",a:"The dataset is updated weekly, every Monday. Your browser fetches the latest version on each page load. The 'Synced' badge in the filter bar shows the exact fetch time."},
   {q:"What does the confidence score mean?",a:"Each signal is scored 0–100% based on how many independent sources corroborate it. 90%+ = officially confirmed by the company or government. Below 70% = plausible but single-source. We include lower-confidence signals but always display the score so you can judge the risk."},
   {q:"Why does the map sometimes show fewer signals than expected?",a:"The map shows all signals matching your active filters. If the company filter or search bar is active, only matching signals are plotted. Use the 'Clear' button to reset all filters and see the full dataset."},
-  {q:"How do I get alerts for specific sectors or countries?",a:"Click 'Set up alerts' in the filter bar or your user menu. You can select industries, companies, and countries — our system emails you a 48 Hours digest whenever new matching signals are added. Free for all users."},
+  {q:"How do I get alerts for specific sectors or countries?",a:"Click 'Set up alerts' in the filter bar or your user menu. You can select industries, companies, and countries — our system emails you a weekly digest whenever new matching signals are added. Free for all users."},
   {q:"Can I export the data?",a:"CSV export is a Pro feature ($20/mo). It exports all currently filtered signals with every data column including investment amounts, source URLs, confidence scores, and timelines."},
   {q:"How do you handle currency conversion?",a:"Investment amounts are converted to USD at the exchange rate prevailing at announcement date. The original amount and currency are always preserved and visible in the signal detail view."},
   {q:"Can I get a team plan?",a:"Yes — email contact@signal48.com for team pricing. We offer discounts for teams of 3+."},
@@ -1787,8 +1787,10 @@ function openGroup(country,rows){
   const sorted=[...rows].sort((a,b)=>(parseFloat(b.Investment_Amount_USD_Billion)||0)-(parseFloat(a.Investment_Amount_USD_Billion)||0));
   const cap=rows.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
   document.getElementById('mb1').innerHTML=`
-    <div class="m-co">${FLAGS[country]||'🌐'} ${esc(country)}</div>
-    <div class="m-sum">${rows.length} expansion signals · $${bigFmt(cap)} total</div>
+    <div style="position:sticky;top:-28px;background:var(--bg);z-index:10;padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid var(--border)">
+      <div class="m-co">${FLAGS[country]||'🌐'} ${esc(country)}</div>
+      <div class="m-sum" style="margin-bottom:0;padding-bottom:0;border-bottom:none">${rows.length} expansion signals · $${bigFmt(cap)} total</div>
+    </div>
     ${sorted.map(r=>{const inv=fmtI(r);return`
       <div class="m-row" style="cursor:pointer" onclick='openModal(${JSON.stringify(r).replace(/'/g,"&#39;")})'>
         <div class="mk" style="width:auto;flex:1;font-family:var(--font);font-size:12.5px;font-weight:600;text-transform:none;letter-spacing:0;color:var(--text)">
@@ -1809,7 +1811,7 @@ function openAlerts(){
   document.getElementById('mb2').innerHTML=`
     <div class="agent-modal">
       <h3>⚡ Set up your alert agent</h3>
-      <p>Select what you want to track. We'll email you a 48 Hours digest every Monday with new matching expansion signals.</p>
+      <p>Select what you want to track. We'll email you a weekly digest every Monday with new matching expansion signals.</p>
 
       <div class="ag-section">
         <div class="ag-label">🏭 Industries — search &amp; select</div>
@@ -1878,7 +1880,7 @@ function submitAgent(){
       <div style="font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:18px">
         ${sectors.length?`Tracking: <strong>${sectors.slice(0,3).join(', ')}</strong><br>`:''}
         ${countries.length?`In: <strong>${countries.slice(0,3).join(', ')}</strong><br>`:''}
-        48 Hours digest every Monday to <strong>${esc(email)}</strong>
+        Weekly digest every Monday to <strong>${esc(email)}</strong>
       </div>
       <button onclick="cm(2)" style="background:var(--accent);color:#fff;padding:8px 24px;border-radius:8px;font-size:13px;font-weight:500;border:none;cursor:pointer">Done</button>
     </div>`;
@@ -1894,7 +1896,7 @@ function openProGate(){
       <div class="pm-features">
         <div class="pmf">📥 Export filtered signals to CSV</div>
         <div class="pmf">📅 Period &amp; deal size filters</div>
-        <div class="pmf">⚡ Agent-powered 48 Hours reports</div>
+        <div class="pmf">⚡ Agent-powered weekly reports</div>
         <div class="pmf">📊 Key industry, destination &amp; type KPIs</div>
         <div class="pmf">🎯 Priority email support</div>
       </div>
