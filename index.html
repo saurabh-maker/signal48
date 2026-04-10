@@ -1,2625 +1,395 @@
-
 <!DOCTYPE html>
-<html lang="en" data-theme="">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
-    <!--
-    ═══════════════════════════════════════════════════════════
-    CONFIG BLOCK - Edit these values to customize the site
-    ═══════════════════════════════════════════════════════════
-    -->
-    <script>
-        window.SITE_CONFIG = {
-            productName: 'Signal48',
-            tagline: 'Talent intelligence on demand — delivered in 48 hours.',
-            adminEmail: 'contact@signal48.com',
-            tallyFormUrl: 'https://tally.so/r/OD7Lz8',
-            domain: 'signal48.com'
-        };
-    </script>
-    <!-- ═══════════════════════════════════════════════════════════ -->
-   
-    <title>Signal48 - Talent Intelligence on Demand</title>
-    <meta name="description" content="Get executive-ready talent intelligence reports delivered in 48 hours. Hiring trends, salary benchmarks, and workforce analytics.">
-   <link rel="canonical" href="https://signal48.com/">
-<meta name="robots" content="index,follow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signal48 — Expansion Intelligence</title>
 
- <!-- Open Graph -->
-<meta property="og:title" content="Signal48 | Talent & Market Intelligence in 48 Hours">
-<meta property="og:description" content="Executive-ready talent and market intelligence delivered in 48 hours. No subscriptions — just answers.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://signal48.com/">
-<meta property="og:site_name" content="Signal48">
+<script>
+  const CONFIG = {
+    SHEET_ID: "1h9aSAVaZerfgdjeFWYfdmy_d2mwH2NxxA828ihCSSxI",
+    SHEET_GID: "875272317",
+  };
+</script>
 
-   
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E📊%3C/text%3E%3C/svg%3E">
-   
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-   
-    <style>
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-       
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-       
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-       
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-       
-        @keyframes countUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-       
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-        }
-       
-        @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
-        @keyframes rotateGlow {
-            0% { transform: rotate(0deg); box-shadow: 0 0 20px rgba(37, 99, 235, 0.3); }
-            100% { transform: rotate(360deg); box-shadow: 0 0 40px rgba(37, 99, 235, 0.6); }
-        }
-
-        @keyframes particleFloat {
-            0% { transform: translate(0, 0); opacity: 0.8; }
-            50% { transform: translate(var(--tx), var(--ty)); opacity: 1; }
-            100% { transform: translate(0, 0); opacity: 0.8; }
-        }
-
-        @keyframes parallax {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-       
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-       
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fb;
-            --bg-tertiary: #f1f3f5;
-            --text-primary: #0a0e27;
-            --text-secondary: #4a5568;
-            --text-tertiary: #718096;
-            --border-color: #e2e8f0;
-            --accent-primary: #2563eb;
-            --accent-primary-hover: #1e40af;
-            --accent-secondary: #7c3aed;
-            --accent-tertiary: #db2777;
-            --accent-success: #059669;
-            --accent-warning: #d97706;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-            --gradient-3: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
-            --gradient-hero: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #7c3aed 100%);
-            --text-gradient: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #7c3aed 100%);
-            --hero-bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
-            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
-            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
-            --nav-bg: rgba(255, 255, 255, 0.9);
-            --card-bg: #ffffff;
-            --blur-amount: 20px;
-        }
-       
-        [data-theme="dark"] {
-            --bg-primary: #0a0e27;
-            --bg-secondary: #131729;
-            --bg-tertiary: #1a1f3a;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --text-tertiary: #94a3b8;
-            --border-color: #1e293b;
-            --accent-primary: #3b82f6;
-            --accent-primary-hover: #2563eb;
-            --accent-secondary: #8b5cf6;
-            --accent-tertiary: #ec4899;
-            --accent-success: #10b981;
-            --accent-warning: #f59e0b;
-            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
-            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-            --nav-bg: rgba(10, 14, 39, 0.9);
-            --card-bg: #131729;
-            --text-gradient: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
-            --hero-bg-gradient: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #7c3aed 100%);
-        }
-       
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-       
-        body {
-            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.7;
-            color: var(--text-primary);
-            background-color: var(--bg-primary);
-            transition: background-color 0.3s ease, color 0.3s ease;
-            overflow-x: hidden;
-        }
-       
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 800;
-            line-height: 1.2;
-            color: var(--text-primary);
-            letter-spacing: -0.03em;
-        }
-       
-        h1 { font-size: 4.5rem; }
-        h2 { font-size: 3.5rem; }
-        h3 { font-size: 2rem; }
-        h4 { font-size: 1.5rem; }
-       
-        p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            font-size: 1.125rem;
-        }
-       
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 3rem;
-        }
-       
-        .mono {
-            font-family: 'IBM Plex Mono', monospace;
-        }
-       
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: var(--nav-bg);
-            backdrop-filter: blur(var(--blur-amount));
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-       
-        nav.scrolled {
-            box-shadow: var(--shadow-lg);
-        }
-       
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 3rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-       
-        .logo {
-            font-size: 1.75rem;
-            font-weight: 900;
-            background: var(--gradient-hero);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            letter-spacing: -0.05em;
-            animation: gradient-shift 5s ease infinite;
-        }
-       
-        .logo svg {
-            width: 32px;
-            height: 32px;
-            animation: rotateGlow 10s linear infinite;
-        }
-       
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
-            align-items: center;
-        }
-       
-        .nav-links a {
-            color: var(--text-secondary);
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            position: relative;
-        }
-       
-        .nav-links a:not(.btn):after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-primary);
-            transition: width 0.3s ease;
-        }
-       
-        .nav-links a:not(.btn):hover:after {
-            width: 100%;
-        }
-       
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-       
-        .theme-toggle {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            padding: 0.625rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            transition: all 0.2s ease;
-            border-radius: 12px;
-        }
-       
-        .theme-toggle:hover {
-            color: var(--text-primary);
-            transform: scale(1.05) rotate(5deg);
-            border-color: var(--accent-primary);
-        }
-       
-        .theme-toggle svg {
-            width: 20px;
-            height: 20px;
-        }
-       
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            color: var(--text-primary);
-        }
-       
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 1.125rem 2.5rem;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-        }
-       
-        .btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s ease;
-        }
-       
-        .btn:hover:before {
-            left: 100%;
-        }
-       
-        .btn-primary {
-            background: var(--gradient-hero);
-            background-size: 300% 300%;
-            color: white;
-            box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.5);
-            animation: gradient-shift 5s ease infinite;
-        }
-       
-        .btn-primary:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.6);
-            color: white;
-        }
-       
-        .btn-secondary {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 2px solid var(--border-color);
-        }
-       
-        .btn-secondary:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
-       
-        /* Hero Section */
-        .hero {
-            padding: 12rem 0 8rem;
-            position: relative;
-            overflow: hidden;
-            background: var(--hero-bg-gradient);
-            background-size: 400% 400%;
-            animation: parallax 20s ease infinite;
-        }
-       
-        .hero:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 50%);
-            animation: gradient-shift 15s ease infinite;
-            pointer-events: none;
-        }
-
-        .hero-particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: rgba(37, 99, 235, 0.3);
-            border-radius: 50%;
-            animation: particleFloat 10s ease-in-out infinite;
-        }
-       
-        .hero-content {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-       
-        .hero h1 {
-            margin-bottom: 2.5rem;
-            background: var(--text-gradient);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 8s ease infinite;
-            line-height: 1.15;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-       
-        .hero .subheadline {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            margin-bottom: 4rem;
-            max-width: 750px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 400;
-            line-height: 1.7;
-        }
-       
-        .hero-cta {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-bottom: 5rem;
-            flex-wrap: wrap;
-        }
-       
-        /* Live Stats */
-        .live-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 5rem;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-       
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-       
-        .stat-card:hover {
-            transform: translateY(-5px) rotate(1deg);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--accent-primary);
-        }
-       
-        .stat-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--gradient-hero);
-        }
-       
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 900;
-            background: var(--gradient-hero);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-family: 'IBM Plex Mono', monospace;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-       
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-       
-        /* Industry Selector */
-        .industry-selector {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin: 4rem auto;
-            max-width: 900px;
-            box-shadow: var(--shadow-md);
-        }
-       
-        .industry-selector h3 {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 1.5rem;
-        }
-       
-        .industry-tabs {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-       
-        .industry-tab {
-            padding: 0.875rem 1.75rem;
-            background: var(--bg-tertiary);
-            border: 2px solid var(--border-color);
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-       
-        .industry-tab:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-2px) scale(1.05);
-        }
-       
-        .industry-tab.active {
-            background: var(--gradient-hero);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 8px 20px -5px rgba(37, 99, 235, 0.4);
-        }
-       
-        .industry-content {
-            margin-top: 2.5rem;
-            padding: 2rem;
-            background: var(--bg-secondary);
-            border-radius: 16px;
-            min-height: 150px;
-        }
-       
-        .industry-content h4 {
-            margin-bottom: 1rem;
-            color: var(--accent-primary);
-        }
-       
-        .industry-content p {
-            margin-bottom: 1rem;
-        }
-       
-        .industry-content ul {
-            list-style: none;
-            margin-top: 1rem;
-        }
-       
-        .industry-content li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-       
-        .industry-content li:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-success);
-        }
-       
-        /* Section Styles */
-        section {
-            padding: 10rem 0;
-            position: relative;
-        }
-       
-        section:nth-child(even) {
-            background: var(--bg-secondary);
-        }
-       
-        .section-header {
-            text-align: center;
-            margin-bottom: 6rem;
-        }
-       
-        .section-header h2 {
-            margin-bottom: 2rem;
-            position: relative;
-            display: inline-block;
-        }
-       
-        .section-header h2:after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--gradient-hero);
-            border-radius: 2px;
-        }
-       
-        .section-header p {
-            font-size: 1.3rem;
-            max-width: 800px;
-            margin: 0 auto;
-            margin-top: 2rem;
-            line-height: 1.8;
-        }
-       
-        /* Interactive Report Preview */
-        .report-preview-tool {
-            background: var(--card-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 24px;
-            padding: 3rem;
-            max-width: 1000px;
-            margin: 0 auto 4rem;
-            box-shadow: var(--shadow-xl);
-        }
-       
-        .report-preview-tool h3 {
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-       
-        .question-input-group {
-            margin-bottom: 2rem;
-        }
-       
-        .question-input-group label {
-            display: block;
-            margin-bottom: 0.75rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-       
-        .question-input {
-            width: 100%;
-            padding: 1.25rem;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            font-size: 1rem;
-            font-family: inherit;
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-        }
-       
-        .question-input:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-       
-        .question-suggestions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-       
-        .suggestion-chip {
-            padding: 0.625rem 1.25rem;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-       
-        .suggestion-chip:hover {
-            background: var(--accent-primary);
-            color: white;
-            border-color: var(--accent-primary);
-            transform: scale(1.05);
-        }
-       
-        .preview-result {
-            margin-top: 2rem;
-            padding: 2.5rem;
-            background: var(--bg-secondary);
-            border: 2px solid var(--border-color);
-            border-radius: 16px;
-            display: none;
-            animation: fadeInUp 0.5s ease;
-        }
-       
-        .preview-result.active {
-            display: block;
-        }
-       
-        .preview-result h4 {
-            margin-bottom: 1.5rem;
-            color: var(--accent-primary);
-        }
-       
-        .preview-insight {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--accent-success);
-        }
-       
-        .preview-metrics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-       
-        .preview-metric {
-            background: var(--card-bg);
-            padding: 1.25rem;
-            border-radius: 12px;
-            text-align: center;
-        }
-       
-        .preview-metric-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--accent-primary);
-            font-family: 'IBM Plex Mono', monospace;
-        }
-       
-        .preview-metric-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-top: 0.5rem;
-        }
-       
-        /* ROI Calculator */
-        .roi-calculator {
-            background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
-            border: 2px solid var(--border-color);
-            border-radius: 24px;
-            padding: 3.5rem;
-            max-width: 900px;
-            margin: 0 auto;
-            box-shadow: var(--shadow-xl);
-        }
-       
-        .roi-calculator h3 {
-            text-align: center;
-            margin-bottom: 3rem;
-            font-size: 2.25rem;
-        }
-       
-        .roi-inputs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-       
-        .roi-input-group {
-            display: flex;
-            flex-direction: column;
-        }
-       
-        .roi-input-group label {
-            margin-bottom: 0.75rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-       
-        .roi-input-group input {
-            padding: 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            font-size: 1.125rem;
-            font-family: 'IBM Plex Mono', monospace;
-            background: var(--card-bg);
-            color: var(--text-primary);
-        }
-       
-        .roi-input-group input:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-        }
-       
-        .roi-result {
-            background: var(--gradient-hero);
-            color: white;
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-            animation: pulse 2s infinite;
-        }
-       
-        .roi-result h4 {
-            color: white;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-       
-        .roi-value {
-            font-size: 4.5rem;
-            font-weight: 900;
-            font-family: 'IBM Plex Mono', monospace;
-            margin: 1rem 0;
-        }
-       
-        .roi-breakdown {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 2px solid rgba(255,255,255,0.2);
-        }
-       
-        .roi-breakdown-item {
-            text-align: center;
-        }
-       
-        .roi-breakdown-value {
-            font-size: 1.75rem;
-            font-weight: 700;
-            font-family: 'IBM Plex Mono', monospace;
-        }
-       
-        .roi-breakdown-label {
-            font-size: 0.875rem;
-            opacity: 0.9;
-            margin-top: 0.5rem;
-        }
-       
-        /* How It Works */
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4rem;
-            position: relative;
-        }
-       
-        .steps:before {
-            content: '';
-            position: absolute;
-            top: 80px;
-            left: 20%;
-            right: 20%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
-            z-index: 0;
-        }
-       
-        .step-card {
-            background: var(--card-bg);
-            padding: 3.5rem 3rem;
-            border-radius: 24px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-            transition: all 0.4s ease;
-            position: relative;
-            z-index: 1;
-        }
-       
-        .step-card:hover {
-            transform: translateY(-8px) rotate(2deg);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--accent-primary);
-        }
-       
-        .step-number {
-            width: 70px;
-            height: 70px;
-            background: var(--gradient-hero);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.875rem;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
-            font-family: 'IBM Plex Mono', monospace;
-        }
-       
-        .step-card h3 {
-            margin-bottom: 1.5rem;
-            font-size: 1.875rem;
-        }
-       
-        .step-card p {
-            font-size: 1.0625rem;
-            line-height: 1.9;
-        }
-       
-        /* Use Cases */
-        .use-cases-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2.5rem;
-        }
-       
-        .use-case-card {
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-       
-        .use-case-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-hero);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-       
-        .use-case-card:hover:before {
-            transform: scaleX(1);
-        }
-       
-        .use-case-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: var(--shadow-xl);
-            border-color: transparent;
-        }
-       
-        .use-case-card h3 {
-            margin-bottom: 1.25rem;
-            font-size: 1.625rem;
-            background: var(--gradient-hero);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-       
-        .use-case-card > p {
-            margin-bottom: 1.5rem;
-        }
-       
-        .use-case-examples {
-            list-style: none;
-            margin-top: 1.75rem;
-        }
-       
-        .use-case-examples li {
-            padding: 1rem 0;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            padding-left: 2rem;
-            position: relative;
-            transition: all 0.2s ease;
-        }
-       
-        .use-case-examples li:hover {
-            color: var(--text-primary);
-            padding-left: 2.5rem;
-        }
-       
-        .use-case-examples li:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-success);
-            font-weight: bold;
-            font-size: 1.125rem;
-        }
-       
-        /* Sample Reports Gallery */
-        .sample-reports-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-       
-        .sample-report-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
-       
-        .sample-report-card:hover {
-            transform: translateY(-8px) rotate(1deg);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--accent-primary);
-        }
-       
-        .sample-report-preview {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 3rem 2rem;
-            color: white;
-            text-align: center;
-            position: relative;
-            height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-       
-        .sample-report-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-       
-        .sample-report-title {
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
-       
-        .sample-report-content {
-            padding: 2rem;
-        }
-       
-        .sample-report-content h4 {
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-        }
-       
-        .sample-report-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-       
-        .sample-stat {
-            background: var(--bg-secondary);
-            padding: 1rem;
-            border-radius: 12px;
-            text-align: center;
-        }
-       
-        .sample-stat-value {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--accent-primary);
-            font-family: 'IBM Plex Mono', monospace;
-        }
-       
-        .sample-stat-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-top: 0.25rem;
-        }
-       
-        /* Testimonials */
-        .testimonials-carousel {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-        }
-       
-        .testimonial-track {
-            overflow: hidden;
-            position: relative;
-        }
-       
-        .testimonial {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 3.5rem;
-            text-align: center;
-            min-height: 350px;
-            display: none;
-            animation: fadeInUp 0.6s ease;
-        }
-       
-        .testimonial.active {
-            display: block;
-        }
-       
-        .testimonial-quote {
-            font-size: 1.5rem;
-            line-height: 1.8;
-            color: var(--text-primary);
-            margin-bottom: 2.5rem;
-            font-style: italic;
-        }
-       
-        .testimonial-author {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-       
-        .testimonial-name {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--text-primary);
-        }
-       
-        .testimonial-role {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-       
-        .testimonial-company {
-            color: var(--accent-primary);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-       
-        .carousel-controls {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2.5rem;
-        }
-       
-        .carousel-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--border-color);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-       
-        .carousel-dot.active {
-            background: var(--accent-primary);
-            width: 40px;
-            border-radius: 6px;
-        }
-       
-        /* Comparison Table */
-        .comparison-section {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-       
-        .comparison-table {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-        }
-       
-        .comparison-row {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            border-bottom: 1px solid var(--border-color);
-        }
-       
-        .comparison-row:last-child {
-            border-bottom: none;
-        }
-       
-        .comparison-row.header {
-            background: var(--gradient-hero);
-            color: white;
-            font-weight: 700;
-        }
-       
-        .comparison-row.highlight {
-            background: var(--bg-secondary);
-        }
-       
-        .comparison-cell {
-            padding: 1.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-       
-        .comparison-cell:first-child {
-            justify-content: flex-start;
-            text-align: left;
-            font-weight: 600;
-        }
-       
-        .comparison-cell.header {
-            color: white;
-        }
-       
-        .check-icon {
-            color: var(--accent-success);
-            font-size: 1.5rem;
-        }
-       
-        .cross-icon {
-            color: var(--text-tertiary);
-            font-size: 1.5rem;
-        }
-       
-        /* Pricing */
-        .pricing-container {
-            max-width: 750px;
-            margin: 0 auto;
-        }
-       
-        .pricing-card {
-            background: var(--card-bg);
-            border: 2px solid transparent;
-            background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
-                        var(--gradient-hero) border-box;
-            border-radius: 32px;
-            padding: 5rem 4rem;
-            text-align: center;
-            box-shadow: var(--shadow-xl);
-            position: relative;
-            transition: all 0.4s ease;
-        }
-       
-        .pricing-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 30px 60px -15px rgba(37, 99, 235, 0.5);
-        }
-       
-        .pricing-badge {
-            position: absolute;
-            top: -16px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gradient-hero);
-            color: white;
-            padding: 0.75rem 2.5rem;
-            border-radius: 50px;
-            font-size: 0.9375rem;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            box-shadow: 0 8px 20px -5px rgba(37, 99, 235, 0.5);
-        }
-       
-        .pricing-card h3 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-       
-        .price {
-            font-size: 5.5rem;
-            font-weight: 900;
-            background: var(--gradient-hero);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 2.5rem 0;
-            line-height: 1;
-            font-family: 'IBM Plex Mono', monospace;
-        }
-       
-        .price-label {
-            font-size: 1.375rem;
-            color: var(--text-secondary);
-            margin-bottom: 4rem;
-            font-weight: 500;
-        }
-       
-        .pricing-features {
-            list-style: none;
-            margin: 4rem 0;
-            text-align: left;
-        }
-       
-        .pricing-features li {
-            padding: 1.5rem 0;
-            display: flex;
-            gap: 1.5rem;
-            align-items: start;
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-       
-        .pricing-features li:last-child {
-            border-bottom: none;
-        }
-       
-        .pricing-features li svg {
-            color: var(--accent-success);
-            width: 26px;
-            height: 26px;
-            flex-shrink: 0;
-            margin-top: 0.125rem;
-        }
-       
-        .pricing-cta {
-            margin-top: 4rem;
-        }
-       
-        .pricing-cta .btn-primary {
-            padding: 1.375rem 3.5rem;
-            font-size: 1.25rem;
-        }
-       
-        /* FAQ */
-        .faq-list {
-            max-width: 950px;
-            margin: 0 auto;
-        }
-       
-        .faq-item {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-       
-        .faq-item:hover {
-            box-shadow: var(--shadow-md);
-        }
-       
-        .faq-question {
-            width: 100%;
-            text-align: left;
-            padding: 2rem 2.5rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.1875rem;
-            color: var(--text-primary);
-            transition: all 0.2s ease;
-        }
-       
-        .faq-question:hover {
-            background: var(--bg-secondary);
-        }
-       
-        .faq-icon {
-            transition: transform 0.3s ease;
-            color: var(--accent-primary);
-            font-size: 1.375rem;
-        }
-       
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-        }
-       
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-        }
-       
-        .faq-answer-content {
-            padding: 0 2.5rem 2rem;
-            color: var(--text-secondary);
-            line-height: 2;
-            font-size: 1.0625rem;
-        }
-       
-        /* Request Section */
-        .request-note {
-            background: var(--gradient-hero);
-            background-size: 200% 200%;
-            animation: gradient-shift 8s ease infinite;
-            color: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            text-align: center;
-            margin-bottom: 4rem;
-            font-weight: 700;
-            font-size: 1.5rem;
-            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.4);
-        }
-       
-        .tally-container {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            overflow: hidden;
-            margin-bottom: 4rem;
-            box-shadow: var(--shadow-lg);
-        }
-       
-        .tally-container iframe {
-            width: 100%;
-            height: 750px;
-            border: none;
-        }
-       
-        /* Footer */
-        footer {
-            background: var(--bg-secondary);
-            padding: 5rem 0 2.5rem;
-            border-top: 1px solid var(--border-color);
-        }
-       
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 4rem;
-            flex-wrap: wrap;
-            gap: 2.5rem;
-        }
-       
-        .footer-links {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
-        }
-       
-        .footer-links a {
-            color: var(--text-secondary);
-            font-size: 1.0625rem;
-            font-weight: 600;
-            transition: color 0.2s ease;
-            text-decoration: none;
-        }
-       
-        .footer-links a:hover {
-            color: var(--accent-primary);
-        }
-       
-        .copyright {
-            text-align: center;
-            color: var(--text-tertiary);
-            font-size: 1rem;
-            padding-top: 3rem;
-            border-top: 1px solid var(--border-color);
-        }
-       
-        /* Legal Sections */
-        .legal-container {
-            background: var(--bg-secondary);
-            padding: 4rem 0 3rem;
-            border-top: 1px solid var(--border-color);
-        }
-        .legal-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .legal-section h2 {
-            margin-bottom: 1.5rem;
-            font-size: 1.875rem;
-        }
-        .legal-section p {
-            margin-bottom: 1.25rem;
-            line-height: 1.8;
-            font-size: 1rem;
-        }
-       
-        /* Back to Top */
-        .back-to-top {
-            position: fixed;
-            bottom: 3rem;
-            right: 3rem;
-            background: var(--gradient-hero);
-            color: white;
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 10px 30px -5px rgba(37, 99, 235, 0.5);
-            transition: all 0.3s ease;
-            border: none;
-            z-index: 999;
-        }
-       
-        .back-to-top:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px -5px rgba(37, 99, 235, 0.6);
-        }
-       
-        .back-to-top.visible {
-            display: flex;
-        }
-       
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .container {
-                padding: 0 2rem;
-            }
-           
-            h1 { font-size: 3.5rem; }
-            h2 { font-size: 2.75rem; }
-           
-            .use-cases-grid {
-                grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            }
-           
-            .comparison-row {
-                grid-template-columns: 2fr 1fr 1fr 1fr;
-                font-size: 0.9rem;
-            }
-           
-            .comparison-cell {
-                padding: 1.25rem;
-            }
-        }
-       
-        @media (max-width: 968px) {
-            h1 { font-size: 2.75rem; }
-            h2 { font-size: 2.25rem; }
-            h3 { font-size: 1.5rem; }
-           
-            .steps {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-           
-            .steps:before {
-                display: none;
-            }
-           
-            .use-cases-grid {
-                grid-template-columns: 1fr;
-            }
-           
-            .sample-reports-gallery {
-                grid-template-columns: 1fr;
-            }
-           
-            .roi-inputs {
-                grid-template-columns: 1fr;
-            }
-           
-            .roi-breakdown {
-                grid-template-columns: 1fr;
-            }
-           
-            .comparison-row {
-                grid-template-columns: 1fr;
-            }
-           
-            .comparison-cell {
-                border-bottom: 1px solid var(--border-color);
-                padding: 1rem;
-            }
-           
-            .comparison-cell:first-child {
-                font-weight: 700;
-                background: var(--bg-tertiary);
-            }
-           
-            section {
-                padding: 6rem 0;
-            }
-           
-            .hero {
-                padding: 9rem 0 6rem;
-            }
-           
-            .price {
-                font-size: 4.5rem;
-            }
-           
-            .legal-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-        }
-/* FORCE NAV CTA TO ALWAYS BE WHITE */
-nav .btn-primary {
-  background: #ffffff !important;
-  color: #1e40af !important; /* blue text for contrast */
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+<style>
+:root {
+  --bg:        #080a0e;
+  --bg2:       #0e1118;
+  --bg3:       #141820;
+  --border:    rgba(255,255,255,0.07);
+  --border2:   rgba(255,255,255,0.12);
+  --accent:    #00e5a0;
+  --accent2:   #0090ff;
+  --text:      #e8eaf0;
+  --muted:     #6b7280;
+  --muted2:    #9ca3af;
+  --card-bg:   rgba(14,17,24,0.9);
+  --font-head: 'Syne', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Instrument Sans', sans-serif;
+  --r: 10px; --r2: 16px;
 }
-/* Hover state */
-nav .btn-primary:hover {
-  background: #f8fafc !important;
-  color: #1e40af !important;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);min-height:100vh;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}
+input,button,select{font-family:inherit}
+button{cursor:pointer;border:none;outline:none}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(8,10,14,0.9);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:60px;
 }
-       
-       
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1.5rem;
-            }
-           
-            .nav-links {
-                display: none;
-            }
-           
-            .nav-links.mobile-active {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--nav-bg);
-                backdrop-filter: blur(var(--blur-amount));
-                padding: 1.5rem;
-                border-bottom: 1px solid var(--border-color);
-                gap: 1rem;
-            }
-           
-            .mobile-menu-btn {
-                display: block;
-            }
-           
-            .hero-cta {
-                flex-direction: column;
-            }
-           
-            .industry-tabs {
-                flex-direction: column;
-            }
-           
-            .pricing-card {
-                padding: 3.5rem 2.5rem;
-            }
-           
-            .section-header {
-                margin-bottom: 4rem;
-            }
-        }
-    </style>
+.nav-logo{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-size:18px;font-weight:800;letter-spacing:-.4px}
+.logo-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:11px;font-weight:600;color:#000}
+.nav-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-badge{font-family:var(--font-mono);font-size:11px;color:var(--accent);background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.18);padding:3px 9px;border-radius:4px;letter-spacing:.5px}
+.btn-refresh{background:var(--bg3);border:1px solid var(--border);color:var(--muted2);font-size:12px;padding:6px 14px;border-radius:var(--r);transition:all .2s;display:flex;align-items:center;gap:6px}
+.btn-refresh:hover{color:var(--text);border-color:var(--border2)}
+.btn-refresh svg{width:12px;height:12px}
+
+/* STATS */
+.stats-bar{border-bottom:1px solid var(--border);background:var(--bg2);padding:22px 32px;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat-item{padding-right:32px;border-right:1px solid var(--border);animation:fadeUp .5s ease both}
+.stat-item:last-child{border-right:none;padding-right:0}
+.stat-label{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px}
+.stat-value{font-family:var(--font-head);font-size:30px;font-weight:800;letter-spacing:-1px}
+.stat-value em{font-style:normal;font-size:13px;font-weight:500;color:var(--accent);margin-left:3px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* TOOLBAR */
+.toolbar{padding:14px 32px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+.filter-select{padding:7px 28px 7px 11px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);color:var(--text);font-size:12.5px;cursor:pointer;transition:border-color .2s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;min-width:130px}
+.filter-select:focus{outline:none;border-color:var(--accent)}
+.filter-select option{background:var(--bg2)}
+.search-wrap{position:relative;margin-left:auto}
+.search-input{padding:7px 11px 7px 32px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);color:var(--text);font-size:12.5px;width:210px;transition:border-color .2s,width .3s}
+.search-input:focus{outline:none;border-color:var(--accent);width:270px}
+.search-input::placeholder{color:var(--muted)}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.count-pill{font-family:var(--font-mono);font-size:11px;background:var(--bg3);border:1px solid var(--border);color:var(--muted2);padding:4px 10px;border-radius:20px;white-space:nowrap}
+
+/* GRID */
+.grid-wrap{padding:24px 32px 64px}
+.expansion-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px}
+
+/* CARD */
+.exp-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--r2);padding:22px;position:relative;overflow:hidden;transition:border-color .22s,transform .18s,box-shadow .22s;animation:cardIn .35s ease both;cursor:pointer}
+.exp-card:hover{border-color:rgba(0,229,160,0.22);transform:translateY(-2px);box-shadow:0 14px 36px rgba(0,0,0,.45),0 0 0 1px rgba(0,229,160,.06)}
+.exp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity .22s}
+.exp-card:hover::before{opacity:1}
+@keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.card-company{font-family:var(--font-head);font-size:19px;font-weight:800;letter-spacing:-.3px;line-height:1.1}
+.card-flag{font-size:24px;line-height:1}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tag{font-family:var(--font-mono);font-size:10px;padding:3px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px}
+.tag-sector{background:rgba(0,144,255,.1);color:#60aaff;border:1px solid rgba(0,144,255,.18)}
+.tag-type{background:rgba(0,229,160,.07);color:var(--accent);border:1px solid rgba(0,229,160,.14)}
+.tag-month{background:rgba(255,255,255,.04);color:var(--muted2);border:1px solid var(--border)}
+.tag-jobs{background:rgba(255,107,53,.08);color:#ff9a7a;border:1px solid rgba(255,107,53,.18)}
+.card-summary{font-size:13px;line-height:1.65;color:var(--muted2);margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card-footer{display:flex;align-items:flex-end;justify-content:space-between}
+.invest-label{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px}
+.invest-val{font-family:var(--font-head);font-size:22px;font-weight:800;letter-spacing:-.5px;color:var(--accent)}
+.invest-unit{font-size:11px;font-weight:500;color:var(--muted2);margin-left:2px}
+.conf-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.conf-label{font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.conf-track{width:72px;height:3px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
+.conf-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent2),var(--accent))}
+.card-loc{font-family:var(--font-mono);font-size:10.5px;color:var(--muted);margin-top:10px;display:flex;align-items:center;gap:4px}
+
+/* LOADING */
+#loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 0;gap:16px}
+.spinner{width:34px;height:34px;border:2px solid rgba(0,229,160,.1);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-txt{font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:1px}
+.empty{text-align:center;padding:64px 0;font-family:var(--font-mono);font-size:12px;color:var(--muted)}
+.empty-icon{font-size:36px;margin-bottom:12px}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(8,10,14,.85);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;animation:fadeUp .2s ease}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:36px;width:560px;max-height:82vh;overflow-y:auto;position:relative;scrollbar-width:thin;scrollbar-color:var(--border2) transparent}
+.modal-close{position:absolute;top:14px;right:14px;background:var(--bg3);border:1px solid var(--border);color:var(--muted);width:28px;height:28px;border-radius:50%;font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close:hover{color:var(--text);border-color:var(--border2)}
+.modal-co{font-family:var(--font-head);font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+.modal-summary{color:var(--muted2);font-size:13px;line-height:1.65;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.modal-row{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border)}
+.modal-row:last-child{border-bottom:none}
+.modal-k{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding-top:1px;width:140px;flex-shrink:0}
+.modal-v{font-size:13px;color:var(--text);text-align:right;flex:1}
+.modal-v a{color:var(--accent);font-size:11px;font-family:var(--font-mono)}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--bg2);border:1px solid rgba(255,107,53,.3);color:#ff9a7a;padding:11px 18px;border-radius:var(--r);font-size:12px;font-family:var(--font-mono);box-shadow:0 8px 24px rgba(0,0,0,.4);display:none;max-width:360px}
+
+@media(max-width:768px){
+  .nav{padding:0 16px}
+  .stats-bar{grid-template-columns:repeat(2,1fr);gap:16px;padding:16px}
+  .stat-item{border-right:none;padding-right:0}
+  .toolbar{padding:12px 16px}
+  .grid-wrap{padding:16px 16px 48px}
+  .expansion-grid{grid-template-columns:1fr}
+  .modal{width:94%;margin:0 12px;padding:24px}
+}
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav id="main-nav">
-        <div class="nav-container">
-            <a href="#" class="logo" aria-label="Signal48 Home">
-                <svg viewBox="0 0 24 24" fill="none" stroke="url(#logo-gradient)" stroke-width="2.5">
-                    <defs>
-                        <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#2563eb"/>
-                            <stop offset="100%" style="stop-color:#7c3aed"/>
-                        </linearGradient>
-                    </defs>
-                    <path d="M21 21H3L3 3"></path>
-                    <path d="M8 16L8 11"></path>
-                    <path d="M12 16L12 6"></path>
-                    <path d="M16 16L16 9"></path>
-                </svg>
-                <span id="logo-text">Signal48</span>
-            </a>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#how-it-works">How it Works</a></li>
-                <li><a href="#use-cases">Use Cases</a></li>
-                <li><a href="#samples">Sample Reports</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="/talent-intelligence.html">Talent Intelligence</a></li>
-                <li><a href="#request" class="btn btn-primary" style="padding: 0.875rem 1.75rem;">Request Report</a></li>
-                <li>
-                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                    </button>
-                </li>
-            </ul>
-            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-            </button>
-        </div>
-    </nav>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-particles" id="hero-particles"></div>
-        <div class="container">
-            <div class="hero-content">
-                <h1 id="main-headline">Talent intelligence on demand — delivered in 48 hours.</h1>
-                <p class="subheadline">Executive-ready workforce insights, hiring trends, and talent market analytics. No subscriptions, no software—just answers.</p>
-                <div class="hero-cta">
-                    <a href="#request" class="btn btn-primary">Request a Report</a>
-               
-                </div>
-               
-                <!-- Live Stats -->
-                <div class="live-stats">
-                    <div class="stat-card">
-                        <div class="stat-number" data-count="847">0</div>
-                        <div class="stat-label">Reports Delivered</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" data-count="48">0</div>
-                        <div class="stat-label">Hour Turnaround</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" data-count="98">0</div>
-                        <div class="stat-label">Client Satisfaction</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Request Acceptance</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Industry Selector -->
-    <section style="padding: 6rem 0; background: var(--bg-secondary);">
-        <div class="container">
-            <div class="industry-selector">
-                <h3>Select Your Industry to See Relevant Use Cases</h3>
-                <div class="industry-tabs">
-                    <button class="industry-tab active" data-industry="tech">Tech & SaaS</button>
-                    <button class="industry-tab" data-industry="finance">Finance & Banking</button>
-                    <button class="industry-tab" data-industry="healthcare">Healthcare</button>
-                    <button class="industry-tab" data-industry="retail">Retail & E-commerce</button>
-                    <button class="industry-tab" data-industry="consulting">Consulting</button>
-                </div>
-                <div class="industry-content" id="industry-content">
-                    <h4>Tech & SaaS</h4>
-                    <p>Track engineering talent markets, monitor competitor hiring, and benchmark salaries across the tech ecosystem.</p>
-                    <ul>
-                        <li>What's the going rate for senior ML engineers in Austin?</li>
-                        <li>Which startups are aggressively hiring DevOps talent?</li>
-                        <li>How has demand for full-stack developers changed in Q4?</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ROI Calculator -->
-    <section style="background: var(--bg-secondary); padding: 8rem 0;">
-        <div class="container">
-            <div class="section-header">
-                <h2>Calculate Your ROI</h2>
-                <p>See how much a bad hire costs vs. $99 for talent intelligence</p>
-            </div>
-           
-            <div class="roi-calculator">
-                <h3>Bad Hire Cost Calculator</h3>
-                <div class="roi-inputs">
-                    <div class="roi-input-group">
-                        <label for="avg-salary">Average Role Salary ($)</label>
-                        <input type="number" id="avg-salary" value="120000" min="0" step="1000">
-                    </div>
-                    <div class="roi-input-group">
-                        <label for="time-to-hire">Avg. Time to Hire (days)</label>
-                        <input type="number" id="time-to-hire" value="60" min="1">
-                    </div>
-                </div>
-                <div class="roi-result">
-                    <h4>Cost of One Bad Hire</h4>
-                    <div class="roi-value" id="roi-total">$240,000</div>
-                    <div class="roi-breakdown">
-                        <div class="roi-breakdown-item">
-                            <div class="roi-breakdown-value" id="roi-salary">$120K</div>
-                            <div class="roi-breakdown-label">Salary Cost</div>
-                        </div>
-                        <div class="roi-breakdown-item">
-                            <div class="roi-breakdown-value" id="roi-recruiting">$24K</div>
-                            <div class="roi-breakdown-label">Recruiting Cost</div>
-                        </div>
-                        <div class="roi-breakdown-item">
-                            <div class="roi-breakdown-value" id="roi-productivity">$96K</div>
-                            <div class="roi-breakdown-label">Lost Productivity</div>
-                        </div>
-                    </div>
-                    <p style="margin-top: 2rem; font-size: 1.125rem; opacity: 0.95;">Make better hiring decisions with $99 talent intelligence → 2,424x ROI</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- How It Works -->
-    <section id="how-it-works">
-        <div class="container">
-            <div class="section-header">
-                <h2>How it Works</h2>
-                <p>Three simple steps from question to insight</p>
-            </div>
-            <div class="steps">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3>Submit Your Request</h3>
-                    <p>Tell us what you need—salary benchmarks, hiring trends, competitor intelligence, or talent market analysis. Be as specific or broad as you'd like.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3>Review & Quote</h3>
-                    <p>We'll reply within 2–6 business hours with scope confirmation, pricing, and timeline. Once you approve, we get to work immediately.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3>Receive Your Report</h3>
-                    <p>Your executive-ready PDF report arrives within 48 hours, complete with insights, data visualizations, and actionable recommendations.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Use Cases -->
-    <section id="use-cases">
-        <div class="container">
-            <div class="section-header">
-                <h2>Talent Intelligence Use Cases</h2>
-                <p>Explore how Signal48 delivers workforce insights across diverse talent needs</p>
-            </div>
-            <div class="use-cases-grid">
-                <div class="use-case-card">
-                    <h3>Hiring Market Analysis</h3>
-                    <p>Understand supply, demand, and competition in your talent markets.</p>
-                    <ul class="use-case-examples">
-                        <li>How competitive is hiring for ML engineers in Austin?</li>
-                        <li>What are emerging skill gaps in cybersecurity?</li>
-                        <li>Which cities have the fastest-growing product design talent?</li>
-                    </ul>
-                </div>
-                <div class="use-case-card">
-                    <h3>Salary Benchmarking</h3>
-                    <p>Get accurate, real-time compensation data for any role and location.</p>
-                    <ul class="use-case-examples">
-                        <li>What's the market rate for senior DevOps in Seattle?</li>
-                        <li>How do salaries for AI researchers compare across regions?</li>
-                        <li>What skills command premium compensation?</li>
-                    </ul>
-                </div>
-                <div class="use-case-card">
-                    <h3>Competitor Intelligence</h3>
-                    <p>Track competitor hiring strategies and team growth patterns.</p>
-                    <ul class="use-case-examples">
-                        <li>What roles is [Company X] hiring for this quarter?</li>
-                        <li>How fast is our competitor's engineering team growing?</li>
-                        <li>Where are they opening new offices or hubs?</li>
-                    </ul>
-                </div>
-                <div class="use-case-card">
-                    <h3>Layoff & Risk Signals</h3>
-                    <p>Detect early workforce changes and talent availability.</p>
-                    <ul class="use-case-examples">
-                        <li>Which tech companies are reducing sales headcount?</li>
-                        <li>Are there layoff patterns in fintech engineering?</li>
-                        <li>What roles are seeing the most displacement?</li>
-                    </ul>
-                </div>
-                <div class="use-case-card">
-                    <h3>Location Strategy</h3>
-                    <p>Identify optimal locations for expansion or remote hiring.</p>
-                    <ul class="use-case-examples">
-                        <li>Where should we open our next engineering hub?</li>
-                        <li>Which cities have the best cost-to-talent ratio?</li>
-                        <li>What's the talent density in emerging tech hubs?</li>
-                    </ul>
-                </div>
-                <div class="use-case-card">
-                    <h3>Employer Brand Insights</h3>
-                    <p>Monitor your reputation and external talent sentiment.</p>
-                    <ul class="use-case-examples">
-                        <li>How is our company perceived by candidates?</li>
-                        <li>What are people saying about our interview process?</li>
-                        <li>How does our brand compare to competitors?</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Sample Reports Gallery -->
-    <section id="samples" style="background: var(--bg-secondary);">
-        <div class="container">
-            <div class="section-header">
-                <h2>Sample Report Snapshots</h2>
-                <p>Real examples from actual talent intelligence reports (anonymized)</p>
-            </div>
-           
-            <div class="sample-reports-gallery">
-                <div class="sample-report-card">
-                    <div class="sample-report-preview" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                        <div class="sample-report-icon">💼</div>
-                        <div class="sample-report-title">Senior PM Hiring Trends</div>
-                    </div>
-                    <div class="sample-report-content">
-                        <h4>San Francisco Bay Area</h4>
-                        <p>Demand for senior product managers increased 28% QoQ, driven by AI product launches and Series B+ startups.</p>
-                        <div class="sample-report-stats">
-                            <div class="sample-stat">
-                                <div class="sample-stat-value">$185K</div>
-                                <div class="sample-stat-label">Median Base</div>
-                            </div>
-                            <div class="sample-stat">
-                                <div class="sample-stat-value">47 days</div>
-                                <div class="sample-stat-label">Time-to-Fill</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               
-                <div class="sample-report-card">
-                    <div class="sample-report-preview" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                        <div class="sample-report-icon">🤖</div>
-                        <div class="sample-report-title">ML Engineer Market</div>
-                    </div>
-                    <div class="sample-report-content">
-                        <h4>Austin, Texas</h4>
-                        <p>Competition for ML talent at all-time high. 12% salary premium vs. national average. Remote-first roles dominating.</p>
-                        <div class="sample-report-stats">
-                            <div class="sample-stat">
-                                <div class="sample-stat-value">+34%</div>
-                                <div class="sample-stat-label">YoY Growth</div>
-                            </div>
-                            <div class="sample-stat">
-                                <div class="sample-stat-value">62 days</div>
-                                <div class="sample-stat-label">Avg. Hire Time</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               
-                <div class="sample-report-card">
-                    <div class="sample-report-preview" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                        <div class="sample-report-icon">📊</div>
-                        <div class="sample-report-title">Fintech Layoff Analysis</div>
-                    </div>
-                    <div class="sample-report-content">
-                        <h4>Workforce Reduction Signals</h4>
-                        <p>14 fintech companies reduced headcount by 8-15% in Q3. Engineering roles most affected, creating talent opportunity.</p>
-                        <div class="sample-report-stats">
-                            <div class="sample-stat">
-                                <div class="sample-stat-value">2,300+</div>
-                                <div class="sample-stat-label">Displaced Roles</div>
-                            </div>
-                            <div class="sample-stat">
-                                <div class="sample-stat-value">High</div>
-                                <div class="sample-stat-label">Quality Talent</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Testimonials -->
-    <section style="padding: 8rem 0;">
-        <div class="container">
-            <div class="section-header">
-                <h2>What Our Clients Say</h2>
-            </div>
-           
-            <div class="testimonials-carousel">
-                <div class="testimonial-track">
-                    <div class="testimonial active">
-                        <div class="testimonial-quote">
-                            "Signal48 gave us the competitive intelligence we needed to make a critical hiring decision. The report was detailed, actionable, and worth every penny. 48-hour turnaround saved us weeks of internal research."
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="testimonial-name">Sarah Chen</div>
-                            <div class="testimonial-role">VP of Talent</div>
-                            <div class="testimonial-company">Series B SaaS Company</div>
-                        </div>
-                    </div>
-                   
-                    <div class="testimonial">
-                        <div class="testimonial-quote">
-                            "We use Signal48 quarterly to benchmark our compensation and track competitor hiring. The insights are always spot-on and help us stay ahead in talent markets. Best $99 we spend."
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="testimonial-name">Michael Rodriguez</div>
-                            <div class="testimonial-role">Head of People Operations</div>
-                            <div class="testimonial-company">Tech Startup (500+ employees)</div>
-                        </div>
-                    </div>
-                   
-                    <div class="testimonial">
-                        <div class="testimonial-quote">
-                            "The layoff signals report helped us identify and hire three senior engineers from a competitor before they hit the market. The ROI was massive—we got talent we couldn't have found otherwise."
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="testimonial-name">Jessica Park</div>
-                            <div class="testimonial-role">Engineering Director</div>
-                            <div class="testimonial-company">Fintech Scale-up</div>
-                        </div>
-                    </div>
-                </div>
-               
-                <div class="carousel-controls">
-                    <span class="carousel-dot active" data-index="0"></span>
-                    <span class="carousel-dot" data-index="1"></span>
-                    <span class="carousel-dot" data-index="2"></span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Comparison Table -->
-    <section style="background: var(--bg-secondary); padding: 8rem 0;">
-        <div class="container">
-            <div class="section-header">
-                <h2>Signal48 vs. Traditional Research</h2>
-                <p>See how we stack up against legacy talent intelligence providers</p>
-            </div>
-           
-            <div class="comparison-section">
-                <div class="comparison-table">
-                    <div class="comparison-row header">
-                        <div class="comparison-cell">Feature</div>
-                        <div class="comparison-cell">Signal48</div>
-                        <div class="comparison-cell">Traditional Firms</div>
-                        <div class="comparison-cell">Internal Research</div>
-                    </div>
-                    <div class="comparison-row">
-                        <div class="comparison-cell">Turnaround Time</div>
-                        <div class="comparison-cell"><strong>48 hours</strong></div>
-                        <div class="comparison-cell">2-4 weeks</div>
-                        <div class="comparison-cell">Varies</div>
-                    </div>
-                    <div class="comparison-row highlight">
-                        <div class="comparison-cell">Price Per Report</div>
-                        <div class="comparison-cell"><strong>$99</strong></div>
-                        <div class="comparison-cell">$5K - $50K+</div>
-                        <div class="comparison-cell">Hidden costs</div>
-                    </div>
-                    <div class="comparison-row">
-                        <div class="comparison-cell">Real-Time Data</div>
-                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
-                        <div class="comparison-cell"><span class="cross-icon">✗</span></div>
-                        <div class="comparison-cell"><span class="cross-icon">✗</span></div>
-                    </div>
-                    <div class="comparison-row">
-                        <div class="comparison-cell">Executive-Ready PDF</div>
-                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
-                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
-                        <div class="comparison-cell"><span class="cross-icon">✗</span></div>
-                    </div>
-                    <div class="comparison-row">
-                        <div class="comparison-cell">No Subscription Required</div>
-                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
-                        <div class="comparison-cell"><span class="cross-icon">✗</span></div>
-                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
-                    </div>
-                    <div class="comparison-row">
-                        <div class="comparison-cell">Confidential by Default</div>
-                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
-                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
-                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
-                    </div>
-                    <div class="comparison-row highlight">
-                        <div class="comparison-cell">Custom Analysis</div>
-                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
-                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
-                        <div class="comparison-cell"><span class="cross-icon">✗</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Pricing -->
-    <section id="pricing">
-        <div class="container">
-            <div class="section-header">
-                <h2>Simple, Transparent Pricing</h2>
-                <p>One price, one amazing report—no subscriptions, no hidden fees</p>
-            </div>
-            <div class="pricing-container">
-                <div class="pricing-card">
-                    <div class="pricing-badge">Limited Time Offer</div>
-                    <h3>Per Report</h3>
-                    <div class="price">$99</div>
-                    <p class="price-label">Pay once per report</p>
-                    <ul class="pricing-features">
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Delivered within 48 hours
-                        </li>
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            10–15 page executive-ready PDF
-                        </li>
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Data visualizations & insights
-                        </li>
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Actionable recommendations
-                        </li>
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Salary benchmarks included
-                        </li>
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Confidential by default
-                        </li>
-                    </ul>
-                    <div class="pricing-cta">
-                        <a href="#request" class="btn btn-primary">Get Your Report for $99</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- FAQ -->
-    <section id="faq">
-        <div class="container">
-            <div class="section-header">
-                <h2>Frequently Asked Questions</h2>
-            </div>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>What's your 48-hour SLA?</span>
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Once you approve the quote and scope, we deliver your talent intelligence report within 48 business hours. We've maintained a 98% on-time delivery rate since launch.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>What data sources do you use?</span>
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            We combine proprietary workforce datasets, job posting aggregators, LinkedIn insights, company disclosures, salary databases, and industry benchmarks. All sources are cited and we're transparent about confidence levels.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>How accurate are salary benchmarks?</span>
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Our salary data comes from multiple verified sources including job postings, self-reported compensation, company disclosures, and market surveys. We always show ranges (P25, median, P75) and confidence intervals so you can make informed decisions.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Can you track specific competitors?</span>
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Yes! We can analyze hiring patterns, team growth, job openings, and workforce signals for any company you specify. This is one of our most popular use cases for talent acquisition and workforce planning teams.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Is my request confidential?</span>
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Absolutely. All client requests and reports are confidential by default. We're happy to sign NDAs before engagement. Your data and insights are never shared with third parties or used for any other purpose.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>What if I need ongoing intelligence?</span>
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Many clients use us for quarterly benchmarking or monthly competitor tracking. We offer volume discounts for 5+ reports and can set up recurring intelligence on specific markets or competitors. Contact us to discuss custom arrangements.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Do you work with startups or only enterprises?</span>
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            We work with companies of all sizes—from seed-stage startups to Fortune 500 enterprises. Our $99 pricing makes professional talent intelligence accessible to everyone, regardless of company size or budget.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Request Section -->
-    <section id="request">
-        <div class="container">
-            <div class="section-header">
-                <h2>Request Your Talent Intelligence Report</h2>
-            </div>
-           
-            <div class="request-note">
-                Submit your request — we reply within 2–6 business hours with confirmation & next steps.
-            </div>
-            <div class="tally-container">
-                <iframe id="tally-iframe" src="" title="Signal48 Request Form" allow="geolocation"></iframe>
-            </div>
-        </div>
-    </section>
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="url(#footer-gradient)" stroke-width="2.5">
-                        <defs>
-                            <linearGradient id="footer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#2563eb"/>
-                                <stop offset="100%" style="stop-color:#7c3aed"/>
-                            </linearGradient>
-                        </defs>
-                        <path d="M21 21H3L3 3"></path>
-                        <path d="M8 16L8 11"></path>
-                        <path d="M12 16L12 6"></path>
-                        <path d="M16 16L16 9"></path>
-                    </svg>
-                    <span id="footer-logo-text">Signal48</span>
-                </div>
-                <ul class="footer-links">
-                    <li><a href="#privacy">Privacy</a></li>
-                    <li><a href="#terms">Terms</a></li>
-                </ul>
-            </div>
-            <div class="copyright">
-                © 2026 <span id="footer-product-name">Signal48</span>. All rights reserved.
-            </div>
-        </div>
-    </footer>
-    <!-- Legal Sections -->
-    <div class="legal-container">
-        <div class="container">
-            <div class="legal-grid">
-                <div id="privacy" class="legal-section">
-                    <h2>Privacy Policy</h2>
-                    <p>Your privacy is important to us. Signal48 collects only the information necessary to deliver talent intelligence reports. We do not sell, share, or distribute your data to third parties.</p>
-                    <p>All client requests, communications, and deliverables are treated as confidential. We're happy to sign NDAs before engagement if required.</p>
-                    <p>For questions about our privacy practices, contact us at <span id="privacy-email"></span>.</p>
-                </div>
-                <div id="terms" class="legal-section">
-                    <h2>Terms of Service</h2>
-                    <p>By submitting a request to Signal48, you agree to our terms of service. All reports are delivered "as-is" for informational purposes. While we strive for accuracy, we cannot guarantee the completeness or timeliness of all data sources.</p>
-                    <p>Payment is due upon scope confirmation. All sales are final. Reports are licensed for internal use only. Public redistribution or resale is prohibited without written permission.</p>
-                    <p>For full terms, contact us at <span id="terms-email"></span>.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Back to Top -->
-    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M12 19V5M5 12l7-7 7 7"/>
-        </svg>
-    </button>
-    <script>
-        // Configuration
-        (function() {
-            const config = window.SITE_CONFIG;
-            document.getElementById('logo-text').textContent = config.productName;
-            document.getElementById('footer-logo-text').textContent = config.productName;
-            document.getElementById('footer-product-name').textContent = config.productName;
-            document.getElementById('main-headline').textContent = config.tagline;
-            const iframe = document.getElementById('tally-iframe');
-            iframe.src = config.tallyFormUrl;
-            document.getElementById('privacy-email').textContent = config.adminEmail;
-            document.getElementById('terms-email').textContent = config.adminEmail;
-        })();
-       
-        // Theme Toggle
-        (function() {
-            const themeToggle = document.getElementById('theme-toggle');
-            const html = document.documentElement;
-            const getPreferredTheme = () => {
-                const saved = localStorage.getItem('theme');
-                if (saved) return saved;
-                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            };
-            const setTheme = (theme) => {
-                html.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-            };
-            setTheme(getPreferredTheme());
-            themeToggle.addEventListener('click', () => {
-                const current = html.getAttribute('data-theme');
-                const next = current === 'dark' ? 'light' : 'dark';
-                setTheme(next);
-            });
-        })();
-       
-        // Nav Scroll Effect
-        (function() {
-            const nav = document.getElementById('main-nav');
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 50) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                }
-            });
-        })();
-       
-        // Mobile Menu
-        (function() {
-            const menuBtn = document.getElementById('mobile-menu-btn');
-            const navLinks = document.getElementById('nav-links');
-            menuBtn.addEventListener('click', () => {
-                navLinks.classList.toggle('mobile-active');
-            });
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('mobile-active');
-                });
-            });
-        })();
-       
-        // Animated Stats Counter
-        (function() {
-            const animateCounter = (element, target) => {
-                const duration = 2000;
-                const start = 0;
-                const increment = target / (duration / 16);
-                let current = start;
-               
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        element.textContent = target;
-                        clearInterval(timer);
-                    } else {
-                        element.textContent = Math.floor(current);
-                    }
-                }, 16);
-            };
-           
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const target = parseInt(entry.target.getAttribute('data-count'));
-                        animateCounter(entry.target, target);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            });
-           
-            document.querySelectorAll('.stat-number[data-count]').forEach(stat => {
-                observer.observe(stat);
-            });
-        })();
-       
-        // Industry Selector
-        (function() {
-            const industries = {
-                tech: {
-                    title: 'Tech & SaaS',
-                    description: 'Track engineering talent markets, monitor competitor hiring, and benchmark salaries across the tech ecosystem.',
-                    examples: [
-                        "What's the going rate for senior ML engineers in Austin?",
-                        "Which startups are aggressively hiring DevOps talent?",
-                        "How has demand for full-stack developers changed in Q4?"
-                    ]
-                },
-                finance: {
-                    title: 'Finance & Banking',
-                    description: 'Monitor fintech hiring, analyze wealth management talent, and track compensation in financial services.',
-                    examples: [
-                        "What's the salary range for investment banking analysts in NYC?",
-                        "Which fintech companies are hiring risk & compliance roles?",
-                        "How competitive is the market for quantitative analysts?"
-                    ]
-                },
-                healthcare: {
-                    title: 'Healthcare',
-                    description: 'Track clinical talent shortages, monitor healthcare tech hiring, and analyze compensation trends.',
-                    examples: [
-                        "What's the demand for data scientists in healthtech?",
-                        "Where are healthcare companies hiring the most?",
-                        "What skills are needed for digital health product managers?"
-                    ]
-                },
-                retail: {
-                    title: 'Retail & E-commerce',
-                    description: 'Analyze e-commerce talent trends, supply chain hiring, and retail tech workforce patterns.',
-                    examples: [
-                        "What's the competition for supply chain engineers?",
-                        "How are salaries trending for e-commerce product managers?",
-                        "Which retail companies are hiring data analysts?"
-                    ]
-                },
-                consulting: {
-                    title: 'Consulting',
-                    description: 'Track strategy consulting talent, monitor specialized practice hiring, and analyze compensation.',
-                    examples: [
-                        "What's the demand for management consultants post-MBA?",
-                        "How competitive is hiring for tech consulting roles?",
-                        "What are typical signing bonuses for strategy consultants?"
-                    ]
-                }
-            };
-           
-            const tabs = document.querySelectorAll('.industry-tab');
-            const content = document.getElementById('industry-content');
-           
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                   
-                    const industry = tab.getAttribute('data-industry');
-                    const data = industries[industry];
-                   
-                    content.innerHTML = `
-                        <h4>${data.title}</h4>
-                        <p>${data.description}</p>
-                        <ul>
-                            ${data.examples.map(ex => `<li>${ex}</li>`).join('')}
-                        </ul>
-                    `;
-                });
-            });
-        })();
-       
-        // Report Preview Generator
-        function generatePreview() {
-            const input = document.getElementById('preview-question');
-            const result = document.getElementById('preview-result');
-            const question = input.value.trim();
-           
-            if (!question) {
-                alert('Please enter a question first!');
-                return;
-            }
-           
-            const insights = {
-                finding: "Demand has increased 34% quarter-over-quarter, with median salaries rising 12% to attract top talent. Competition is highest among mid-stage startups and enterprise tech companies.",
-                signal: "Job posting volume is up 28% month-over-month. Time-to-fill has increased from 38 to 52 days, indicating strong candidate leverage and market tightness."
-            };
-           
-            document.getElementById('preview-finding').textContent = insights.finding;
-            document.getElementById('preview-signal').textContent = insights.signal;
-           
-            // Randomize metrics slightly for demo
-            const growth = Math.floor(Math.random() * 20) + 25;
-            const days = Math.floor(Math.random() * 30) + 40;
-            const salary = Math.floor(Math.random() * 50) + 140;
-           
-            document.getElementById('metric-1').textContent = `+${growth}%`;
-            document.getElementById('metric-2').textContent = days;
-            document.getElementById('metric-3').textContent = `$${salary}K`;
-           
-            result.classList.add('active');
-            result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-       
-        // Question Suggestions
-        document.querySelectorAll('.suggestion-chip').forEach(chip => {
-            chip.addEventListener('click', () => {
-                const question = chip.getAttribute('data-question');
-                document.getElementById('preview-question').value = question;
-                generatePreview();
-            });
-        });
-       
-        // ROI Calculator
-        (function() {
-            const salaryInput = document.getElementById('avg-salary');
-            const timeInput = document.getElementById('time-to-hire');
-           
-            function calculateROI() {
-                const salary = parseInt(salaryInput.value) || 120000;
-                const recruiting = Math.floor(salary * 0.2);
-                const productivity = Math.floor(salary * 0.8);
-                const total = salary + recruiting + productivity;
-               
-                document.getElementById('roi-salary').textContent = `$${Math.floor(salary/1000)}K`;
-                document.getElementById('roi-recruiting').textContent = `$${Math.floor(recruiting/1000)}K`;
-                document.getElementById('roi-productivity').textContent = `$${Math.floor(productivity/1000)}K`;
-                document.getElementById('roi-total').textContent = `$${Math.floor(total/1000).toLocaleString()}K`;
-            }
-           
-            salaryInput.addEventListener('input', calculateROI);
-            timeInput.addEventListener('input', calculateROI);
-            calculateROI();
-        })();
-       
-        // Testimonials Carousel
-        (function() {
-            let currentIndex = 0;
-            const testimonials = document.querySelectorAll('.testimonial');
-            const dots = document.querySelectorAll('.carousel-dot');
-           
-            function showTestimonial(index) {
-                testimonials.forEach(t => t.classList.remove('active'));
-                dots.forEach(d => d.classList.remove('active'));
-               
-                testimonials[index].classList.add('active');
-                dots[index].classList.add('active');
-            }
-           
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentIndex = index;
-                    showTestimonial(currentIndex);
-                });
-            });
-           
-            // Auto-rotate every 6 seconds
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % testimonials.length;
-                showTestimonial(currentIndex);
-            }, 6000);
-        })();
-       
-        // FAQ Accordion
-        (function() {
-            const faqItems = document.querySelectorAll('.faq-item');
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                const answer = item.querySelector('.faq-answer');
-                question.addEventListener('click', () => {
-                    const isActive = item.classList.contains('active');
-                    faqItems.forEach(i => {
-                        i.classList.remove('active');
-                        i.querySelector('.faq-answer').style.maxHeight = null;
-                        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-                    });
-                    if (!isActive) {
-                        item.classList.add('active');
-                        answer.style.maxHeight = answer.scrollHeight + 'px';
-                        question.setAttribute('aria-expanded', 'true');
-                    }
-                });
-            });
-        })();
-       
-        // Back to Top
-        (function() {
-            const backToTop = document.getElementById('back-to-top');
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 600) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
-            });
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        })();
-       
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#' && document.querySelector(href)) {
-                    e.preventDefault();
-                    document.querySelector(href).scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
 
-        // Hero Particles
-        (function() {
-            const particleContainer = document.getElementById('hero-particles');
-            const particleCount = 50;
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 5 + 5}s`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                particle.style.setProperty('--tx', `${Math.random() * 50 - 25}px`);
-                particle.style.setProperty('--ty', `${Math.random() * 50 - 25}px`);
-                particleContainer.appendChild(particle);
-            }
-        })();
-    </script>
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="logo-mark">S48</div>
+    <div class="nav-dot"></div>
+    Signal48
+  </div>
+  <div class="nav-right">
+    <div class="nav-badge" id="sync-badge">LIVE</div>
+    <button class="btn-refresh" onclick="fetchSheetData()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+      </svg>
+      Refresh
+    </button>
+  </div>
+</nav>
+
+<div class="stats-bar">
+  <div class="stat-item" style="animation-delay:.05s"><div class="stat-label">Total Signals</div><div class="stat-value" id="s-total">—</div></div>
+  <div class="stat-item" style="animation-delay:.1s"><div class="stat-label">Capital Tracked</div><div class="stat-value" id="s-capital">—</div></div>
+  <div class="stat-item" style="animation-delay:.15s"><div class="stat-label">Markets</div><div class="stat-value" id="s-countries">—</div></div>
+  <div class="stat-item" style="animation-delay:.2s"><div class="stat-label">Jobs Est.</div><div class="stat-value" id="s-jobs">—</div></div>
+</div>
+
+<div class="toolbar">
+  <select class="filter-select" id="f-country" onchange="applyFilters()"><option value="">All Countries</option></select>
+  <select class="filter-select" id="f-sector"  onchange="applyFilters()"><option value="">All Sectors</option></select>
+  <select class="filter-select" id="f-type"    onchange="applyFilters()"><option value="">All Types</option></select>
+  <div class="count-pill" id="count-pill">— signals</div>
+  <div class="search-wrap">
+    <svg class="search-icon" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" class="search-input" id="search" placeholder="Search company, market, theme…" oninput="applyFilters()">
+  </div>
+</div>
+
+<div class="grid-wrap">
+  <div id="loading">
+    <div class="spinner"></div>
+    <div class="loading-txt">FETCHING EXPANSION SIGNALS…</div>
+  </div>
+  <div class="expansion-grid" id="grid" style="display:none"></div>
+  <div class="empty" id="empty" style="display:none">
+    <div class="empty-icon">📡</div>No signals match your filters.
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-overlay" style="display:none" onclick="overlayClick(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+let allData = [];
+
+const FLAGS = {
+  'USA':'🇺🇸','United States':'🇺🇸','Poland':'🇵🇱','Germany':'🇩🇪',
+  'UK':'🇬🇧','United Kingdom':'🇬🇧','India':'🇮🇳','China':'🇨🇳',
+  'Japan':'🇯🇵','Canada':'🇨🇦','Australia':'🇦🇺','France':'🇫🇷',
+  'Netherlands':'🇳🇱','Singapore':'🇸🇬','UAE':'🇦🇪','Saudi Arabia':'🇸🇦',
+  'Brazil':'🇧🇷','Mexico':'🇲🇽','South Korea':'🇰🇷','Taiwan':'🇹🇼',
+  'Ireland':'🇮🇪','Spain':'🇪🇸','Italy':'🇮🇹','Sweden':'🇸🇪',
+  'Switzerland':'🇨🇭','Israel':'🇮🇱','Vietnam':'🇻🇳','Indonesia':'🇮🇩',
+};
+
+async function fetchSheetData() {
+  document.getElementById('loading').style.display = 'flex';
+  document.getElementById('loading').innerHTML = '<div class="spinner"></div><div class="loading-txt">FETCHING EXPANSION SIGNALS…</div>';
+  document.getElementById('grid').style.display = 'none';
+  document.getElementById('empty').style.display = 'none';
+  document.getElementById('sync-badge').textContent = 'LOADING…';
+
+  const url = `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/export?format=csv&gid=${CONFIG.SHEET_GID}`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const csv = await res.text();
+    allData = parseCSV(csv);
+    renderStats(allData);
+    populateFilters(allData);
+    applyFilters();
+    const now = new Date();
+    document.getElementById('sync-badge').textContent =
+      `SYNCED ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
+  } catch(e) {
+    document.getElementById('loading').innerHTML = `
+      <div style="text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">⚠️</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:#ff9a7a;line-height:1.8">
+          Cannot reach Google Sheet.<br>
+          Share it as <strong style="color:var(--text)">"Anyone with the link → Viewer"</strong>
+        </div>
+        <button onclick="fetchSheetData()" style="margin-top:18px;background:var(--accent);color:#000;padding:8px 22px;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer">Retry</button>
+      </div>`;
+    document.getElementById('sync-badge').textContent = 'ERROR';
+  }
+}
+
+function parseCSV(text) {
+  const rows = [];
+  let inQ=false, cur='', fields=[];
+  for (let i=0;i<text.length;i++) {
+    const c=text[i];
+    if (c==='"') { inQ=!inQ; }
+    else if (c===',' && !inQ) { fields.push(cur.trim()); cur=''; }
+    else if ((c==='\n'||c==='\r') && !inQ) {
+      if (cur||fields.length) { fields.push(cur.trim()); rows.push(fields); }
+      fields=[]; cur='';
+      if (c==='\r' && text[i+1]==='\n') i++;
+    } else { cur+=c; }
+  }
+  if (cur||fields.length) { fields.push(cur.trim()); rows.push(fields); }
+  if (rows.length<2) return [];
+  const headers=rows[0].map(h=>h.replace(/\uFEFF/g,'').trim());
+  return rows.slice(1)
+    .map(r=>{const o={};headers.forEach((h,i)=>o[h]=r[i]||'');return o;})
+    .filter(r=>r.Company && r.Company!=='Company');
+}
+
+function renderStats(data) {
+  const capital = data.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
+  const countries = new Set(data.map(r=>r.Country).filter(Boolean)).size;
+  const jobs = data.reduce((s,r)=>{const n=parseInt((r.Jobs_Created||'').replace(/[^0-9]/g,''));return s+(isNaN(n)?0:n);},0);
+  document.getElementById('s-total').innerHTML    = `${data.length}<em>deals</em>`;
+  document.getElementById('s-capital').innerHTML  = `$${capital.toFixed(1)}<em>B</em>`;
+  document.getElementById('s-countries').innerHTML= `${countries}<em>mkts</em>`;
+  document.getElementById('s-jobs').innerHTML     = jobs>0?`${(jobs/1000).toFixed(0)}K<em>est</em>`:`—`;
+}
+
+function populateFilters(data) {
+  fill('f-country',[...new Set(data.map(r=>r.Country).filter(Boolean))].sort());
+  fill('f-sector', [...new Set(data.map(r=>r.Sector).filter(Boolean))].sort());
+  fill('f-type',   [...new Set(data.map(r=>r.Expansion_Type).filter(Boolean))].sort());
+}
+function fill(id,opts) {
+  const sel=document.getElementById(id), first=sel.options[0];
+  sel.innerHTML=''; sel.appendChild(first);
+  opts.forEach(o=>{const el=document.createElement('option');el.value=o;el.textContent=o;sel.appendChild(el);});
+}
+
+function applyFilters() {
+  const country=document.getElementById('f-country').value;
+  const sector =document.getElementById('f-sector').value;
+  const type   =document.getElementById('f-type').value;
+  const q      =document.getElementById('search').value.toLowerCase();
+  const filtered=allData.filter(r=>{
+    if (country && r.Country!==country) return false;
+    if (sector  && r.Sector!==sector)   return false;
+    if (type    && r.Expansion_Type!==type) return false;
+    if (q) { const hay=[r.Company,r.Country,r.Sector,r.Strategic_Theme,r.Short_Summary,r.City_Or_Region].join(' ').toLowerCase(); if (!hay.includes(q)) return false; }
+    return true;
+  });
+  document.getElementById('count-pill').textContent=`${filtered.length} signal${filtered.length!==1?'s':''}`;
+  document.getElementById('loading').style.display='none';
+  document.getElementById('grid').style.display   =filtered.length?'grid':'none';
+  document.getElementById('empty').style.display  =filtered.length?'none':'block';
+  const grid=document.getElementById('grid');
+  grid.innerHTML='';
+  filtered.forEach((row,i)=>grid.appendChild(buildCard(row,i)));
+}
+
+function fmtInv(row) {
+  const usd=parseFloat(row.Investment_Amount_USD_Billion);
+  if (!isNaN(usd)&&usd>0) return usd>=1?{val:usd.toFixed(usd%1===0?0:2),unit:'B USD'}:{val:(usd*1000).toFixed(0),unit:'M USD'};
+  if (row.Investment_Amount_Original&&row.Investment_Amount_Original!=='0')
+    return {val:row.Investment_Amount_Original.replace(/[^\d,.]/g,'').slice(0,8),unit:row.Investment_Currency||''};
+  return null;
+}
+
+function buildCard(row,idx) {
+  const card=document.createElement('div');
+  card.className='exp-card';
+  card.style.animationDelay=`${Math.min(idx*.04,.4)}s`;
+  const inv=fmtInv(row), flag=FLAGS[row.Country]||'🌐';
+  const conf=parseFloat(row.Confidence_Score)||0;
+  const loc=[row.City_Or_Region,row.Country].filter(Boolean).join(', ');
+  card.innerHTML=`
+    <div class="card-header">
+      <div class="card-company">${esc(row.Company)}</div>
+      <div class="card-flag">${flag}</div>
+    </div>
+    <div class="card-tags">
+      ${row.Sector?`<span class="tag tag-sector">${esc(row.Sector)}</span>`:''}
+      ${row.Expansion_Type?`<span class="tag tag-type">${esc(row.Expansion_Type)}</span>`:''}
+      ${row.Month_Year?`<span class="tag tag-month">${esc(row.Month_Year)}</span>`:''}
+      ${row.Jobs_Created&&row.Jobs_Created!=='0'?`<span class="tag tag-jobs">👥 ${esc(row.Jobs_Created)}</span>`:''}
+    </div>
+    <div class="card-summary">${esc(row.Short_Summary||row.Reason_For_Expansion||'—')}</div>
+    <div class="card-footer">
+      <div>
+        <div class="invest-label">Investment</div>
+        ${inv?`<div class="invest-val">$${inv.val}<span class="invest-unit">${inv.unit}</span></div>`:`<div style="color:var(--muted);font-size:13px">Undisclosed</div>`}
+      </div>
+      <div class="conf-wrap">
+        <div class="conf-label">Confidence</div>
+        <div class="conf-track"><div class="conf-fill" style="width:${conf*100}%"></div></div>
+      </div>
+    </div>
+    ${loc?`<div class="card-loc">📍 ${esc(loc)}</div>`:''}
+  `;
+  card.addEventListener('click',()=>openModal(row));
+  return card;
+}
+
+function openModal(row) {
+  const inv=fmtInv(row);
+  const rows=[
+    ['Month / Year',   row.Month_Year],
+    ['Country',        row.Country],
+    ['City / Region',  row.City_Or_Region],
+    ['Sector',         row.Sector],
+    ['Sub-Sector',     row.Sub_Sector],
+    ['Expansion Type', row.Expansion_Type],
+    ['Facility Type',  row.Facility_Type],
+    ['Investment',     inv?`$${inv.val} ${inv.unit}`:'Undisclosed'],
+    ['Jobs Created',   row.Jobs_Created||'—'],
+    ['Timeline',       row.Timeline||'—'],
+    ['Strategic Theme',row.Strategic_Theme||'—'],
+    ['Confidence',     row.Confidence_Score?`${Math.round(parseFloat(row.Confidence_Score)*100)}%`:'—'],
+    ['Source',         row.Source_URL||'—'],
+  ].filter(([,v])=>v&&v!=='—');
+  document.getElementById('modal-body').innerHTML=`
+    <div class="modal-co">${esc(row.Company)}</div>
+    <div class="modal-summary">${esc(row.Short_Summary||row.Reason_For_Expansion||'')}</div>
+    ${rows.map(([k,v])=>`
+      <div class="modal-row">
+        <div class="modal-k">${k}</div>
+        <div class="modal-v">${k==='Source'&&v.startsWith('http')?`<a href="${esc(v)}" target="_blank" rel="noopener">View source ↗</a>`:esc(v)}</div>
+      </div>`).join('')}
+  `;
+  document.getElementById('modal-overlay').style.display='flex';
+}
+function overlayClick(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
+function closeModal(){document.getElementById('modal-overlay').style.display='none';}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+fetchSheetData();
+</script>
 </body>
 </html>
-```
