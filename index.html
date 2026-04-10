@@ -24,7 +24,7 @@
 const CONFIG = {
   SHEET_ID:         "1h9aSAVaZerfgdjeFWYfdmy_d2mwH2NxxA828ihCSSxI",
   SHEET_GID:        "875272317",
-  GOOGLE_CLIENT_ID: "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com",
+  GOOGLE_CLIENT_ID: "903974375492-le08ka42avt5utkjt32h21tt95ttnqei.apps.googleusercontent.com",
   STRIPE_LINK:      "https://buy.stripe.com/YOUR_LINK",
   APPS_SCRIPT_URL:  "https://script.google.com/macros/s/AKfycbytQTlB1HKKIKs3NDir2SlPBV7e3h1wn3pMMgOK-louJLpM9yjhLhk49fMsWV2RF5fP/exec",
 };
@@ -166,7 +166,7 @@ a{color:var(--accent)}
   flex-shrink:0;height:44px;
   display:flex;align-items:center;gap:6px;
   padding:0 16px;background:var(--bg);
-  border-bottom:1px solid var(--border);box-shadow:var(--sh);z-index:50;
+  border-bottom:1px solid var(--border);box-shadow:var(--sh);z-index:1000;position:relative;overflow:visible;
 }
 .nfl{font-size:11px;color:var(--text3);font-weight:500;white-space:nowrap;flex-shrink:0}
 .fsel{
@@ -212,7 +212,7 @@ a{color:var(--accent)}
 .ibtn svg{width:12px;height:12px}
 
 /* ══ BODY ════════════════════════════════════════════ */
-.body{display:flex;flex:1;overflow:hidden}
+.body{display:flex;flex:1;overflow:hidden;position:relative;z-index:0}
 
 /* ══ LEFT SIDEBAR ════════════════════════════════════ */
 .sb{width:262px;flex-shrink:0;background:var(--bg2);
@@ -251,7 +251,7 @@ a{color:var(--accent)}
 .dd-trigger.open{border-color:var(--accent);background:var(--bg)}
 .dd-val{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)}
 .dd-val.sel{color:var(--accent);font-weight:500}
-.dd-panel{position:absolute;top:calc(100% + 4px);left:0;z-index:200;
+.dd-panel{position:absolute;top:calc(100% + 4px);left:0;z-index:2000;
   background:var(--bg);border:1px solid var(--border);
   border-radius:8px;box-shadow:var(--sh2);width:220px;display:none;overflow:hidden}
 .dd-wrap.open .dd-panel{display:block}
@@ -478,7 +478,7 @@ a{color:var(--accent)}
 .btn-get-pro:hover{opacity:.88}
 .pm-free{font-size:11px;color:var(--text3);margin-top:10px;line-height:1.5}
 
-.leaflet-popup-content-wrapper{border-radius:10px!important;box-shadow:0 8px 28px rgba(0,0,0,.12)!important;border:1px solid var(--border)!important;padding:0!important}
+.leaflet-pane{z-index:auto!important}.leaflet-map-pane{z-index:0!important}.leaflet-popup-content-wrapper{border-radius:10px!important;box-shadow:0 8px 28px rgba(0,0,0,.12)!important;border:1px solid var(--border)!important;padding:0!important}
 .leaflet-popup-content{margin:12px 14px!important;font-family:var(--font)!important}
 .leaflet-popup-tip-container{display:none!important}
 .leaflet-container{font-family:var(--font)!important}
