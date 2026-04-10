@@ -22,15 +22,17 @@
      ╚══════════════════════════════════════════════════════╝ -->
 <script>
 const CONFIG = {
-    SHEET_ID:         "1h9aSAVaZerfgdjeFWYfdmy_d2mwH2NxxA828ihCSSxI",
+  SHEET_ID:         "1h9aSAVaZerfgdjeFWYfdmy_d2mwH2NxxA828ihCSSxI",
   SHEET_GID:        "875272317",
-  GOOGLE_CLIENT_ID: "903974375492-le08ka42avt5utkjt32h21tt95ttnqei.apps.googleusercontent.com",
+  GOOGLE_CLIENT_ID: "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com",
   STRIPE_LINK:      "https://buy.stripe.com/YOUR_LINK",
   APPS_SCRIPT_URL:  "https://script.google.com/macros/s/AKfycbytQTlB1HKKIKs3NDir2SlPBV7e3h1wn3pMMgOK-louJLpM9yjhLhk49fMsWV2RF5fP/exec",
 };
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://accounts.google.com/gsi/client" async></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -476,6 +478,11 @@ a{color:var(--accent)}
 .btn-get-pro:hover{opacity:.88}
 .pm-free{font-size:11px;color:var(--text3);margin-top:10px;line-height:1.5}
 
+.leaflet-popup-content-wrapper{border-radius:10px!important;box-shadow:0 8px 28px rgba(0,0,0,.12)!important;border:1px solid var(--border)!important;padding:0!important}
+.leaflet-popup-content{margin:12px 14px!important;font-family:var(--font)!important}
+.leaflet-popup-tip-container{display:none!important}
+.leaflet-container{font-family:var(--font)!important}
+
 @media(max-width:1100px){.rp{display:none}}
 @media(max-width:860px){.sb{width:220px}}
 @media(max-width:680px){
@@ -634,62 +641,7 @@ a{color:var(--accent)}
         <div class="sp"></div>
         <div class="ltxt">Connecting to live expansion feed…</div>
       </div>
-      <svg id="wmap" class="wsvg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="display:none">
-        <rect width="1000" height="500" fill="#d8e8f5"/>
-        <g fill="#e8ecf4" stroke="#cdd5e6" stroke-width="0.6">
-          <path d="M75,62 L102,54 L130,57 L155,50 L174,59 L195,54 L215,61 L230,55 L252,57 L265,71 L270,88 L260,110 L243,120 L239,133 L250,150 L243,165 L229,180 L219,194 L203,205 L187,226 L176,244 L163,260 L150,267 L140,260 L128,250 L120,237 L114,220 L107,200 L94,184 L84,172 L77,156 L71,138 L70,120 L72,104 L67,88 Z"/>
-          <path d="M254,20 L287,15 L322,18 L339,33 L333,53 L314,60 L290,63 L266,56 L252,43 Z"/>
-          <path d="M68,52 L82,48 L95,54 L92,65 L80,68 L68,62 Z"/>
-          <path d="M153,270 L164,280 L170,293 L164,305 L155,308 L146,301 L143,287 L148,277 Z"/>
-          <ellipse cx="223" cy="229" rx="5" ry="3"/><ellipse cx="233" cy="233" rx="4" ry="3"/>
-          <path d="M175,293 L192,284 L215,290 L230,302 L241,323 L247,352 L251,381 L244,410 L234,433 L217,447 L200,455 L185,460 L172,450 L162,434 L155,416 L151,396 L148,368 L147,342 L150,318 L155,300 L166,292 Z"/>
-          <path d="M374,30 L390,25 L403,29 L406,40 L396,47 L380,46 L373,38 Z"/>
-          <path d="M404,62 L418,56 L430,61 L428,75 L418,80 L406,73 Z"/>
-          <path d="M394,66 L403,62 L407,70 L402,76 L394,73 Z"/>
-          <path d="M428,47 L453,40 L478,43 L503,47 L521,56 L530,68 L533,83 L525,97 L509,104 L492,110 L477,106 L463,111 L448,115 L440,109 L432,97 L427,83 L427,68 Z"/>
-          <path d="M450,22 L472,17 L494,20 L508,32 L502,48 L483,53 L464,50 L448,41 Z"/>
-          <path d="M495,20 L518,16 L535,22 L532,40 L518,50 L500,48 L492,36 Z"/>
-          <path d="M408,90 L432,86 L445,95 L440,110 L424,118 L408,112 L400,100 Z"/>
-          <path d="M467,110 L480,108 L488,120 L485,135 L475,142 L465,135 L462,120 Z"/>
-          <path d="M500,105 L518,100 L528,110 L525,125 L510,130 L498,124 Z"/>
-          <path d="M432,153 L456,145 L482,142 L504,148 L524,162 L534,182 L539,207 L536,234 L532,262 L522,286 L510,305 L495,323 L478,336 L462,340 L445,334 L432,321 L421,298 L413,274 L408,248 L408,222 L412,197 L418,176 L427,164 Z"/>
-          <path d="M556,265 L565,258 L572,265 L570,285 L561,292 L553,285 L552,272 Z"/>
-          <path d="M524,130 L549,124 L573,127 L589,140 L594,157 L584,168 L566,173 L548,169 L532,157 L525,143 Z"/>
-          <path d="M548,170 L574,165 L595,170 L608,185 L610,205 L598,215 L578,218 L558,210 L546,195 L544,180 Z"/>
-          <path d="M520,105 L550,100 L575,103 L590,112 L592,124 L578,130 L555,132 L535,128 L520,118 Z"/>
-          <path d="M516,20 L565,14 L615,12 L665,16 L712,20 L758,25 L800,30 L840,36 L862,44 L862,60 L848,73 L825,82 L800,87 L772,90 L742,92 L712,96 L684,102 L656,105 L628,100 L602,104 L580,110 L562,114 L544,110 L528,102 L519,90 L516,74 L514,55 Z"/>
-          <path d="M568,105 L610,100 L648,102 L672,110 L678,128 L660,136 L630,138 L600,134 L575,126 L562,115 Z"/>
-          <path d="M593,150 L618,143 L643,147 L660,162 L667,182 L662,204 L650,220 L634,230 L617,226 L604,212 L596,194 L591,174 L591,158 Z"/>
-          <ellipse cx="632" cy="238" rx="5" ry="8"/>
-          <path d="M695,158 L722,150 L746,154 L763,167 L766,185 L757,199 L739,204 L720,200 L705,187 L696,172 Z"/>
-          <path d="M722,200 L738,195 L748,205 L745,225 L735,235 L720,235 L712,222 L714,208 Z"/>
-          <path d="M655,70 L698,62 L734,64 L768,72 L791,86 L795,105 L787,126 L766,138 L742,144 L716,140 L690,133 L666,124 L653,110 L648,90 Z"/>
-          <path d="M793,84 L810,78 L824,82 L827,96 L820,109 L807,114 L797,107 Z"/>
-          <ellipse cx="830" cy="90" rx="5" ry="10"/>
-          <path d="M768,95 L783,92 L794,100 L792,116 L779,120 L767,111 Z"/>
-          <ellipse cx="780" cy="147" rx="7" ry="11"/>
-          <path d="M726,212 L754,206 L780,208 L800,220 L804,238 L794,250 L774,256 L752,254 L733,242 L724,228 Z"/>
-          <path d="M700,230 L730,222 L755,225 L765,238 L758,250 L732,255 L705,248 L696,238 Z"/>
-          <path d="M825,250 L855,242 L875,248 L878,265 L862,274 L840,272 L826,262 Z"/>
-          <path d="M748,292 L787,280 L826,280 L858,290 L876,308 L880,332 L873,356 L852,372 L826,378 L798,375 L775,363 L756,344 L747,320 L744,302 Z"/>
-          <path d="M878,355 L892,347 L902,352 L903,367 L895,376 L882,375 L876,364 Z"/>
-        </g>
-        <g stroke="#bad0e4" stroke-width=".35" opacity=".5">
-          <line x1="0" y1="125" x2="1000" y2="125"/><line x1="0" y1="250" x2="1000" y2="250"/>
-          <line x1="0" y1="375" x2="1000" y2="375"/><line x1="250" y1="0" x2="250" y2="500"/>
-          <line x1="500" y1="0" x2="500" y2="500"/><line x1="750" y1="0" x2="750" y2="500"/>
-        </g>
-        <g>
-          <rect x="10" y="458" width="172" height="36" rx="5" fill="rgba(255,255,255,.85)" stroke="#dde4f0" stroke-width=".8"/>
-          <circle cx="24" cy="469" r="5" fill="#e0460a" stroke="#fff" stroke-width="1.2"/>
-          <text x="33" y="473" font-family="DM Sans" font-size="9.5" fill="#44546a">Single deal</text>
-          <circle cx="24" cy="486" r="6" fill="#1847d6" stroke="#fff" stroke-width="1.2"/>
-          <text x="33" y="490" font-family="DM Sans" font-size="9.5" fill="#44546a">Multiple deals</text>
-          <circle cx="100" cy="469" r="7" fill="#b45309" stroke="#fff" stroke-width="1.2"/>
-          <text x="111" y="473" font-family="DM Sans" font-size="9.5" fill="#44546a">Mega ($10B+)</text>
-        </g>
-        <g id="sig"></g>
-      </svg>
+      <div id="leaflet-map" style="width:100%;height:100%;display:none"></div>
     </div>
   </div>
 
@@ -861,32 +813,106 @@ let all=[], filt=[], currentUser=null;
 const SESSION_KEY='s48_session', USERS_KEY='s48_users';
 const MORD={january:1,february:2,march:3,april:4,may:5,june:6,july:7,august:8,september:9,october:10,november:11,december:12};
 
-/* ════════ COORD MAP ════════ */
+/* ════════ COORDS (lat/lng for Leaflet) ════════ */
 const COORDS={
-  'USA':{x:178,y:167},'United States':{x:178,y:167},
-  'Canada':{x:168,y:110},'Mexico':{x:152,y:228},
-  'Brazil':{x:232,y:372},'Argentina':{x:215,y:430},'Colombia':{x:192,y:305},
-  'UK':{x:413,y:67},'United Kingdom':{x:413,y:67},'Ireland':{x:400,y:67},
-  'France':{x:435,y:82},'Germany':{x:462,y:70},'Netherlands':{x:450,y:63},
-  'Spain':{x:422,y:100},'Portugal':{x:408,y:100},'Italy':{x:473,y:112},
-  'Switzerland':{x:457,y:83},'Sweden':{x:472,y:38},'Norway':{x:453,y:30},
-  'Denmark':{x:460,y:53},'Finland':{x:500,y:33},'Poland':{x:493,y:66},
-  'Austria':{x:474,y:81},'Belgium':{x:443,y:69},'Czech Republic':{x:477,y:75},
-  'Romania':{x:508,y:83},'Hungary':{x:492,y:82},'Greece':{x:504,y:112},
-  'Russia':{x:630,y:52},'Ukraine':{x:528,y:84},'Turkey':{x:546,y:112},
-  'Israel':{x:527,y:130},'UAE':{x:569,y:158},'Saudi Arabia':{x:548,y:175},
-  'Qatar':{x:561,y:165},'Kuwait':{x:554,y:150},
-  'Egypt':{x:523,y:205},'Nigeria':{x:455,y:270},'South Africa':{x:490,y:332},
-  'Kenya':{x:535,y:278},'Morocco':{x:420,y:178},
-  'India':{x:626,y:188},'Pakistan':{x:600,y:162},'Bangladesh':{x:653,y:185},
-  'China':{x:724,y:110},'Japan':{x:806,y:106},'South Korea':{x:777,y:102},
-  'Taiwan':{x:780,y:148},'Hong Kong':{x:762,y:148},
-  'Singapore':{x:737,y:218},'Vietnam':{x:742,y:185},'Thailand':{x:721,y:200},
-  'Indonesia':{x:762,y:242},'Malaysia':{x:747,y:218},'Philippines':{x:780,y:200},
-  'Australia':{x:816,y:342},'New Zealand':{x:889,y:360},
-  'Kazakhstan':{x:620,y:108},'EMEA':{x:490,y:140},'Europe':{x:465,y:80},
-  'APAC':{x:750,y:180},'North America':{x:178,y:167},'Global':{x:500,y:60},
+  // North America
+  'USA':[38.9,-77.0],'United States':[38.9,-77.0],
+  'Canada':[56.1,-106.3],'Mexico':[23.6,-102.5],
+  // South America
+  'Brazil':[-14.2,-51.9],'Argentina':[-38.4,-63.6],'Colombia':[4.5,-74.3],
+  'Chile':[-35.7,-71.5],'Peru':[-9.2,-75.0],'Venezuela':[6.4,-66.6],
+  // Europe
+  'UK':[55.4,-3.4],'United Kingdom':[55.4,-3.4],'Ireland':[53.4,-8.2],
+  'France':[46.2,2.2],'Germany':[51.2,10.4],'Netherlands':[52.1,5.3],
+  'Spain':[40.5,-3.7],'Portugal':[39.4,-8.2],'Italy':[41.9,12.5],
+  'Switzerland':[46.8,8.2],'Sweden':[60.1,18.6],'Norway':[60.5,8.5],
+  'Denmark':[56.3,9.5],'Finland':[61.9,25.7],'Poland':[51.9,19.1],
+  'Austria':[47.5,14.6],'Belgium':[50.5,4.5],'Czech Republic':[49.8,15.5],
+  'Romania':[45.9,24.9],'Hungary':[47.2,19.5],'Greece':[39.1,21.8],
+  'Croatia':[45.1,15.2],'Serbia':[44.0,21.0],'Bulgaria':[42.7,25.5],
+  'Slovakia':[48.7,19.7],'Slovenia':[46.1,14.9],'Estonia':[58.6,25.0],
+  'Latvia':[56.9,24.6],'Lithuania':[55.2,23.9],
+  // Russia/CIS
+  'Russia':[61.5,105.3],'Ukraine':[48.4,31.2],'Kazakhstan':[48.0,68.0],
+  'Belarus':[53.7,27.9],'Georgia':[32.2,83.4],'Azerbaijan':[40.1,47.6],
+  'Armenia':[40.1,45.0],'Uzbekistan':[41.4,64.6],
+  // Middle East
+  'Turkey':[38.9,35.2],'Israel':[31.0,35.0],'UAE':[24.0,54.0],
+  'Saudi Arabia':[24.7,46.7],'Qatar':[25.4,51.2],'Kuwait':[29.5,47.8],
+  'Bahrain':[26.0,50.6],'Oman':[21.0,57.0],'Jordan':[31.0,36.5],
+  'Lebanon':[33.9,35.5],'Iraq':[33.2,43.7],'Iran':[32.4,53.7],
+  // Africa
+  'Egypt':[26.8,30.8],'Nigeria':[9.1,8.7],'South Africa':[-30.6,22.9],
+  'Kenya':[-0.0,37.9],'Morocco':[31.8,-7.1],'Ethiopia':[9.1,40.5],
+  'Ghana':[7.9,-1.0],'Tanzania':[-6.4,34.9],'Uganda':[1.4,32.3],
+  'Rwanda':[-1.9,29.9],'Senegal':[14.5,-14.5],'Algeria':[28.0,2.6],
+  'Tunisia':[33.9,9.6],'Libya':[26.3,17.2],'Angola':[-11.2,17.9],
+  // South Asia
+  'India':[20.6,78.9],'Pakistan':[30.4,69.3],'Bangladesh':[23.7,90.4],
+  'Sri Lanka':[7.9,80.8],'Nepal':[28.4,84.1],'Myanmar':[17.0,96.0],
+  // East Asia
+  'China':[35.9,104.2],'Japan':[36.2,138.3],'South Korea':[35.9,127.8],
+  'Taiwan':[23.7,121.0],'Hong Kong':[22.4,114.1],'Macau':[22.2,113.5],
+  'Mongolia':[46.9,103.8],
+  // Southeast Asia
+  'Singapore':[1.4,103.8],'Vietnam':[14.1,108.3],'Thailand':[15.9,100.9],
+  'Indonesia':[-0.8,113.9],'Malaysia':[4.2,108.0],'Philippines':[12.9,121.8],
+  'Cambodia':[12.6,104.9],'Laos':[19.9,102.5],
+  // Oceania
+  'Australia':[-25.3,133.8],'New Zealand':[-40.9,174.9],
+  'Papua New Guinea':[-6.3,143.9],'Fiji':[-17.7,178.0],
+  // Generic/regional
+  'EMEA':[30.0,20.0],'Europe':[54.5,15.3],'APAC':[10.0,120.0],
+  'North America':[40.0,-95.0],'Global':[20.0,0.0],
+  'Southeast Asia':[5.0,115.0],'East Asia':[35.0,115.0],
+  'South Asia':[20.0,80.0],'Middle East':[25.0,45.0],
+  'Latin America':[-15.0,-60.0],'Central Asia':[45.0,65.0],
 };
+
+// City/region-level coords (used when City_Or_Region is populated)
+const CITY_COORDS={
+  // US States / cities
+  'North Carolina':[35.8,-79.0],'Texas':[31.0,-100.0],'California':[36.8,-119.4],
+  'New York':[40.7,-74.0],'Florida':[27.7,-81.7],'Georgia':[32.2,-83.4],
+  'Ohio':[40.4,-82.7],'Michigan':[44.3,-85.6],'Tennessee':[35.9,-86.6],
+  'Arizona':[34.0,-111.1],'Washington':[47.4,-120.7],'Colorado':[39.1,-105.4],
+  'Virginia':[37.4,-78.7],'Pennsylvania':[40.6,-77.2],'Illinois':[40.0,-89.2],
+  'Massachusetts':[42.4,-71.4],'Nevada':[38.8,-116.4],'Indiana':[39.8,-86.1],
+  'Wisconsin':[44.3,-89.6],'Minnesota':[46.4,-93.1],'Oregon':[44.6,-122.1],
+  // Cities
+  'New York City':[40.7,-74.0],'Los Angeles':[34.1,-118.2],'Chicago':[41.9,-87.6],
+  'Houston':[29.7,-95.4],'Phoenix':[33.4,-112.1],'Philadelphia':[39.9,-75.2],
+  'San Antonio':[29.4,-98.5],'San Diego':[32.7,-117.2],'Dallas':[32.8,-96.8],
+  'San Jose':[37.3,-121.9],'Austin':[30.3,-97.7],'Jacksonville':[30.3,-81.7],
+  "North Carolina's Triad":[36.0,-79.8],'Research Triangle':[35.9,-79.1],
+  'Central Florida':[28.5,-81.4],'Silicon Valley':[37.4,-122.0],
+  // UK
+  'London':[51.5,-0.1],'Manchester':[53.5,-2.2],'Birmingham':[52.5,-1.9],
+  'Edinburgh':[55.9,-3.2],'Bristol':[51.5,-2.6],
+  'South Mimms':[51.7,0.0],'Hertfordshire':[51.8,-0.2],
+  // Europe
+  'Berlin':[52.5,13.4],'Munich':[48.1,11.6],'Frankfurt':[50.1,8.7],
+  'Hamburg':[53.6,10.0],'Paris':[48.9,2.3],'Amsterdam':[52.4,4.9],
+  'Barcelona':[41.4,2.2],'Madrid':[40.4,-3.7],'Rome':[41.9,12.5],
+  'Warsaw':[52.2,21.0],'Prague':[50.1,14.4],'Zurich':[47.4,8.5],
+  'Vienna':[48.2,16.4],'Brussels':[50.8,4.4],'Stockholm':[59.3,18.1],
+  'Helsinki':[60.2,24.9],'Oslo':[59.9,10.7],'Copenhagen':[55.7,12.6],
+  // Middle East / Asia
+  'Dubai':[25.2,55.3],'Abu Dhabi':[24.5,54.4],'Riyadh':[24.7,46.7],
+  'Tel Aviv':[32.1,34.8],'Istanbul':[41.0,29.0],'Cairo':[30.1,31.2],
+  'Mumbai':[19.1,72.9],'Delhi':[28.7,77.1],'Bangalore':[12.9,77.6],
+  'Hyderabad':[17.4,78.5],'Chennai':[13.1,80.3],'Pune':[18.5,73.9],
+  'Beijing':[39.9,116.4],'Shanghai':[31.2,121.5],'Shenzhen':[22.5,114.1],
+  'Guangzhou':[23.1,113.3],'Chengdu':[30.6,104.1],
+  'Tokyo':[35.7,139.7],'Osaka':[34.7,135.5],'Seoul':[37.6,127.0],
+  'Singapore':[1.4,103.8],'Kuala Lumpur':[3.2,101.7],'Bangkok':[13.8,100.5],
+  'Ho Chi Minh City':[10.8,106.7],'Jakarta':[-6.2,106.8],
+  'Sydney':[-33.9,151.2],'Melbourne':[-37.8,145.0],'Brisbane':[-27.5,153.0],
+  // India regions
+  'EMEA':[30.0,20.0],'APAC':[10.0,120.0],
+  'Europe':[54.5,15.3],'Americas':[15.0,-90.0],
+};
+
 const FLAGS={
   'USA':'🇺🇸','United States':'🇺🇸','Canada':'🇨🇦','Mexico':'🇲🇽',
   'Brazil':'🇧🇷','Argentina':'🇦🇷','Colombia':'🇨🇴',
@@ -1236,7 +1262,7 @@ async function saveToSheet(data){
 /* ════════ LOAD DATA ════════ */
 async function loadData(){
   document.getElementById('loading').style.display='flex';
-  document.getElementById('wmap').style.display='none';
+  document.getElementById('leaflet-map').style.display='none';
   document.getElementById('sbsub').textContent='Loading…';
   document.getElementById('stxt').textContent='LOADING';
   const url=`https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/export?format=csv&gid=${CONFIG.SHEET_GID}`;
@@ -1480,16 +1506,11 @@ function go(){
 
   renderSidebar(filtered);renderMap(mapData);renderInsights(filtered,hasF);
   document.getElementById('loading').style.display='none';
-  document.getElementById('wmap').style.display='block';
+  document.getElementById('leaflet-map').style.display='block';initMap();
 
   // Zoom map to selected country or region
-  const zoomTarget=cn||rg;
-  if(zoomTarget){
-    const zb=MAP_ZOOM[zoomTarget]||REGION_ZOOM[zoomTarget];
-    zoomMap(zb||null);
-  }else{
-    zoomMap(null); // reset to world view
-  }
+  const zoomTarget=cn||rg||null;
+  zoomMap(zoomTarget);
 }
 
 /* ════════ FORMAT INVESTMENT ════════ */
@@ -1530,119 +1551,108 @@ function renderSidebar(data){
 }
 
 /* ════════ MAP ════════ */
+/* ════════ LEAFLET MAP ════════ */
+let _map=null,_markers=[];
+
+function initMap(){
+  if(_map)return;
+  const el=document.getElementById('leaflet-map');
+  if(!el||!window.L)return;
+  _map=L.map('leaflet-map',{
+    center:[25,15],zoom:2,minZoom:2,maxZoom:10,
+    zoomControl:true,attributionControl:true,
+  });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains:'abcd',maxZoom:10,
+  }).addTo(_map);
+}
+
+function getLatLng(r){
+  const city=r.City_Or_Region||'';
+  if(city){
+    for(const[k,v]of Object.entries(CITY_COORDS)){
+      if(city.toLowerCase().includes(k.toLowerCase())||k.toLowerCase().includes(city.toLowerCase()))
+        return v;
+    }
+  }
+  return COORDS[r.Country]||null;
+}
+
 function renderMap(data){
-  const g=document.getElementById('sig');if(!g)return;g.innerHTML='';
+  if(!_map){setTimeout(()=>renderMap(data),150);return;}
+  _markers.forEach(m=>m.remove());_markers=[];
+  window._s48rows={};
   if(!data.length)return;
-  const byC={};
-  data.forEach(r=>{const k=r.Country||'';if(!byC[k])byC[k]=[];byC[k].push(r);});
-  Object.entries(byC).forEach(([country,rows])=>{
-    const pos=COORDS[country];if(!pos)return;
+  // Group by rounded lat/lng
+  const byLoc={};
+  data.forEach(r=>{
+    const ll=getLatLng(r);if(!ll)return;
+    const key=`${ll[0].toFixed(1)}_${ll[1].toFixed(1)}`;
+    if(!byLoc[key]){byLoc[key]={ll,rows:[]};}
+    byLoc[key].rows.push(r);
+  });
+  Object.values(byLoc).forEach(({ll,rows})=>{
     const cap=rows.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
     const isM=rows.length>1,isMega=cap>=10;
     const col=isMega?'#b45309':isM?'#1847d6':'#e0460a';
-    const br=isMega?12:isM?9:6;
-    const ring=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    ring.setAttribute('cx',pos.x);ring.setAttribute('cy',pos.y);ring.setAttribute('r',br);
-    ring.setAttribute('fill','none');ring.setAttribute('stroke',col);ring.setAttribute('stroke-width','1.5');
-    ring.setAttribute('opacity','0');ring.style.setProperty('--br',br+'px');
-    ring.classList.add('sr');ring.style.animationDelay=(Math.random()*.8)+'s';g.appendChild(ring);
-    const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    dot.setAttribute('cx',pos.x);dot.setAttribute('cy',pos.y);dot.setAttribute('r',br);
-    dot.setAttribute('fill',col);dot.setAttribute('stroke','#fff');dot.setAttribute('stroke-width','1.5');
-    dot.style.cursor='pointer';dot.style.filter='drop-shadow(0 1px 4px rgba(0,0,0,.2))';
-    dot.addEventListener('mousemove',ev=>showTT(ev,country,rows,cap));
-    dot.addEventListener('mouseleave',()=>document.getElementById('mtt').style.display='none');
-    dot.addEventListener('click',()=>{document.getElementById('mtt').style.display='none';rows.length===1?openModal(rows[0]):openGroup(country,rows);});
-    g.appendChild(dot);
-    if(rows.length>1){
-      const cbg=document.createElementNS('http://www.w3.org/2000/svg','circle');
-      cbg.setAttribute('cx',pos.x+br);cbg.setAttribute('cy',pos.y-br);cbg.setAttribute('r','6');
-      cbg.setAttribute('fill','#fff');cbg.setAttribute('stroke',col);cbg.setAttribute('stroke-width','1');g.appendChild(cbg);
-      const ct=document.createElementNS('http://www.w3.org/2000/svg','text');
-      ct.setAttribute('x',pos.x+br);ct.setAttribute('y',pos.y-br+4);
-      ct.setAttribute('text-anchor','middle');ct.setAttribute('fill',col);
-      ct.setAttribute('font-size','7.5');ct.setAttribute('font-family','DM Mono,monospace');ct.setAttribute('font-weight','500');
-      ct.textContent=rows.length;g.appendChild(ct);
-    }
+    const sz=isMega?22:isM?17:12;
+    const icon=L.divIcon({
+      className:'',
+      html:`<div style="width:${sz}px;height:${sz}px;border-radius:50%;background:${col};border:2.5px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;font-family:DM Mono,monospace;font-size:${sz>14?8:0}px;font-weight:600;color:#fff;cursor:pointer">${rows.length>1?rows.length:''}</div>`,
+      iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],
+    });
+    const top=rows[0];
+    const inv=fmtI(top);
+    const rowKey=top.Unique_ID||(top.Company+top.Month_Year);
+    const groupKey='group_'+(top.Country||rowKey);
+    if(rows.length===1)window._s48rows[rowKey]=rows[0];
+    else window._s48rows[groupKey]={_group:true,country:top.Country,rows};
+    const btnKey=rows.length===1?rowKey:groupKey;
+    const marker=L.marker(ll,{icon});
+    marker.bindPopup(`
+      <div style="font-family:DM Sans,sans-serif;min-width:180px;max-width:230px;padding:2px 0">
+        <div style="font-weight:700;font-size:13px;margin-bottom:2px">${esc(top.Company)}${rows.length>1?` <span style="opacity:.45;font-weight:400;font-size:11px">+${rows.length-1}</span>`:''}</div>
+        <div style="font-size:11px;color:#8fa0bb;margin-bottom:6px">${FLAGS[top.Country]||'🌐'} ${esc((top.City_Or_Region?top.City_Or_Region+', ':'')+( top.Country||''))}</div>
+        ${cap>0?`<div style="font-family:DM Mono,monospace;font-size:13px;font-weight:500;color:${col}">$${bigFmt(cap)}</div>`:''}
+        <div style="font-size:11px;color:#8fa0bb;margin-top:1px">${esc(top.Sector||'')}${top.Expansion_Type?' · '+esc(top.Expansion_Type):''}</div>
+        <div style="margin-top:8px">
+          <button onclick="window._s48open('${btnKey.replace(/'/g,'&#39;')}')" style="background:#1847d6;color:#fff;border:none;padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:DM Sans,sans-serif;font-weight:500">
+            ${rows.length===1?'View details →':'See all '+rows.length+' deals →'}
+          </button>
+        </div>
+      </div>`,{maxWidth:250});
+    marker.addTo(_map);_markers.push(marker);
   });
 }
-function showTT(ev,country,rows,cap){
-  const tt=document.getElementById('mtt');const top=rows[0];
-  tt.innerHTML=`
-    <div class="mtt-co">${esc(top.Company)}${rows.length>1?` <span style="opacity:.45;font-size:11px;font-weight:400">+${rows.length-1} more</span>`:''}</div>
-    <div class="mtt-loc">${FLAGS[country]||'🌐'} ${esc(country)}</div>
-    ${cap>0?`<div class="mtt-inv">$${bigFmt(cap)} tracked</div>`:''}
-    <div class="mtt-sec">${esc(top.Sector||'')}${top.Expansion_Type?' · '+esc(top.Expansion_Type):''}</div>`;
-  tt.style.display='block';tt.style.left=(ev.clientX+16)+'px';tt.style.top=(ev.clientY-12)+'px';
+window._s48open=function(key){
+  const d=window._s48rows&&window._s48rows[key];
+  if(!d)return;
+  if(d._group)openGroup(d.country,d.rows);else openModal(d);
+};
+
+/* Region zoom bounds */
+const REGION_BOUNDS={
+  'North America':[[10,-170],[85,-50]],
+  'Europe':[[35,-12],[72,45]],
+  'Middle East & Africa':[[-36,-20],[42,62]],
+  'South Asia':[[5,60],[38,100]],
+  'Southeast Asia':[[-11,92],[28,142]],
+  'East Asia':[[18,98],[54,148]],
+  'Oceania':[[-50,110],[0,180]],
+  'Latin America':[[-58,-85],[15,-30]],
+  'Central Asia & CIS':[[35,25],[82,180]],
+};
+function zoomMap(target){
+  if(!_map)return;
+  if(!target){_map.flyTo([25,15],2,{duration:0.8});return;}
+  const bounds=REGION_BOUNDS[target];
+  if(bounds){_map.flyToBounds(bounds,{padding:[20,20],duration:0.8});return;}
+  const ll=COORDS[target];
+  if(ll){const z=target.length>20?3:5;_map.flyTo(ll,z,{duration:0.8});}
 }
 
 /* ════════ INSIGHTS ════════ */
-/* ════════ MAP ZOOM ════════ */
-const MAP_ZOOM={
-  // [x, y, w, h] of viewBox for each country/region
-  'USA':[60,80,230,140],'United States':[60,80,230,140],
-  'Canada':[60,20,230,130],'Mexico':[100,185,100,90],
-  'Brazil':[150,260,140,220],'Argentina':[160,370,100,130],
-  'Colombia':[155,250,90,100],'Latin America':[100,220,200,260],
-  'UK':[370,42,80,60],'United Kingdom':[370,42,80,60],
-  'Germany':[420,42,80,60],'France':[395,52,80,60],
-  'Netherlands':[415,42,65,50],'Poland':[455,42,70,50],
-  'Spain':[380,70,80,60],'Italy':[445,80,70,70],
-  'Sweden':[425,10,70,60],'Norway':[415,5,70,60],
-  'Switzerland':[420,60,60,40],'Ireland':[365,45,55,45],
-  'Denmark':[425,30,55,40],'Europe':[350,5,240,135],
-  'Russia':[460,5,420,100],'Ukraine':[490,60,90,55],
-  'Turkey':[490,85,120,55],'Central Asia & CIS':[470,5,400,120],
-  'UAE':[530,130,80,60],'Saudi Arabia':[500,130,140,90],
-  'Israel':[498,105,55,50],'Egypt':[488,175,80,70],
-  'Nigeria':[415,240,80,70],'South Africa':[450,295,90,80],
-  'Morocco':[385,150,75,60],'Middle East & Africa':[370,100,240,270],
-  'India':[560,130,140,130],'Pakistan':[558,120,90,80],
-  'Bangladesh':[615,155,60,50],'South Asia':[540,110,160,155],
-  'China':[610,55,200,120],'Japan':[760,72,80,60],
-  'South Korea':[735,78,75,55],'Taiwan':[742,120,60,50],
-  'East Asia':[595,45,240,120],
-  'Vietnam':[700,150,80,70],'Thailand':[685,162,75,65],
-  'Indonesia':[690,195,150,80],'Malaysia':[700,185,80,65],
-  'Philippines':[740,165,75,60],'Singapore':[700,192,60,48],
-  'Southeast Asia':[670,140,170,130],
-  'Australia':[700,265,200,135],'New Zealand':[840,320,100,80],
-  'Oceania':[685,255,230,160],
-  'APAC':[550,50,460,310],
-};
-const REGION_ZOOM={
-  'North America':[50,10,260,270],'Europe':[350,5,240,135],
-  'Middle East & Africa':[370,100,240,270],'South Asia':[540,110,160,155],
-  'Southeast Asia':[670,140,170,130],'East Asia':[595,45,240,120],
-  'Oceania':[685,255,230,160],'Latin America':[100,220,200,260],
-  'Central Asia & CIS':[470,5,400,120],
-};
-
-let _zoomAnim=null;
-function zoomMap(vb){
-  const svg=document.getElementById('wmap');if(!svg)return;
-  if(!vb){animateViewBox(svg,'0 0 1000 500');return;}
-  const[x,y,w,h]=vb;
-  // Add some padding
-  const pad=30;
-  animateViewBox(svg,`${x-pad} ${y-pad} ${w+pad*2} ${h+pad*2}`);
-}
-function animateViewBox(svg,target){
-  const start=svg.getAttribute('viewBox').split(' ').map(Number);
-  const end=target.split(' ').map(Number);
-  const dur=500,t0=performance.now();
-  cancelAnimationFrame(_zoomAnim);
-  function step(t){
-    const p=Math.min((t-t0)/dur,1);
-    const ease=1-Math.pow(1-p,3); // ease-out cubic
-    const vb=start.map((s,i)=>s+(end[i]-s)*ease).join(' ');
-    svg.setAttribute('viewBox',vb);
-    if(p<1)_zoomAnim=requestAnimationFrame(step);
-  }
-  _zoomAnim=requestAnimationFrame(step);
-}
-
-/* ════════ CHARTS ════════ */
 let _chartDonut=null,_chartBar=null;
 const CHART_COLORS=['#1847d6','#e0460a','#b45309','#047857','#7c3aed','#0891b2','#be185d','#15803d','#c2410c','#6d28d9'];
 
