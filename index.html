@@ -1566,11 +1566,10 @@ function getLatLng(r){
 function renderMap(data){
   if(!_map){setTimeout(()=>renderMap(data),150);return;}
   _markers.forEach(m=>m.remove());_markers=[];
-  window._s48idx={}; // numeric index — no string key issues
+  window._s48idx={};
   let idx=0;
   if(!data.length)return;
 
-  // Group by rounded lat/lng
   const byLoc={};
   data.forEach(r=>{
     const ll=getLatLng(r);if(!ll)return;
@@ -1581,57 +1580,30 @@ function renderMap(data){
 
   Object.values(byLoc).forEach(({ll,rows})=>{
     const cap=rows.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
-    const isM=rows.length>1, isMega=cap>=10;
+    const isM=rows.length>1,isMega=cap>=10;
     const col=isMega?'#b45309':isM?'#1847d6':'#e0460a';
     const sz=isMega?22:isM?17:12;
+    const i=idx++;
+    window._s48idx[i]={rows,country:rows[0].Country};
 
     const icon=L.divIcon({
       className:'',
-      html:`<div style="width:${sz}px;height:${sz}px;border-radius:50%;background:${col};border:2.5px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;font-family:DM Mono,monospace;font-size:${sz>14?8:0}px;font-weight:600;color:#fff;cursor:pointer">${rows.length>1?rows.length:''}</div>`,
+      html:`<div style="width:${sz}px;height:${sz}px;border-radius:50%;background:${col};border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;font-family:DM Mono,monospace;font-size:${sz>14?8:0}px;font-weight:600;color:#fff;cursor:pointer;transition:transform .1s" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">${rows.length>1?rows.length:''}</div>`,
       iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],
     });
 
-    const top=rows[0];
-    const inv=fmtI(top);
-    const i=idx++;
-    window._s48idx[i]={rows,country:top.Country};
-
-    const popHtml=`
-      <div style="font-family:DM Sans,sans-serif;min-width:190px;max-width:240px;padding:2px 0">
-        <div style="font-weight:700;font-size:13px;margin-bottom:3px;color:#0b1929">${esc(top.Company)}${rows.length>1?` <span style="opacity:.4;font-weight:400;font-size:11px">+${rows.length-1} more</span>`:''}</div>
-        <div style="font-size:11px;color:#8fa0bb;margin-bottom:8px">${FLAGS[top.Country]||'🌐'} ${esc([top.City_Or_Region,top.Country].filter(Boolean).join(', '))}</div>
-        ${cap>0?`<div style="font-family:DM Mono,monospace;font-size:14px;font-weight:600;color:${col};margin-bottom:2px">$${bigFmt(cap)}</div>`:''}
-        <div style="font-size:11px;color:#8fa0bb">${esc(top.Sector||'')}${top.Expansion_Type?' · '+esc(top.Expansion_Type):''}</div>
-        ${rows.length>1?`<div style="font-size:11px;color:#8fa0bb;margin-top:2px">${rows.length} expansion signals</div>`:''}
-        ${top.Month_Year?`<div style="font-size:11px;color:#8fa0bb;margin-top:1px">📅 ${esc(top.Month_Year)}</div>`:''}
-        <div style="margin-top:10px;padding-top:8px;border-top:1px solid #f0f0f0">
-          <button onclick="window._s48click(${i})" style="background:#1847d6;color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;font-family:DM Sans,sans-serif;font-weight:500;width:100%">
-            ${rows.length===1?'View full details →':'See all '+rows.length+' deals →'}
-          </button>
-        </div>
-      </div>`;
-
-    const marker=L.marker(ll,{icon});
-    marker.bindPopup(popHtml,{
-      maxWidth:260,
-      autoPan:true,
-      autoPanPaddingTopLeft:L.point(20,100),
-      autoPanPaddingBottomRight:L.point(20,20),
-      offset:L.point(0,-(sz/2+4)),
+    const marker=L.marker(ll,{icon,interactive:true});
+    // Direct click → open modal immediately, no popup middleman
+    marker.on('click',()=>{
+      const d=window._s48idx[i];
+      if(!d)return;
+      if(d.rows.length===1)openModal(d.rows[0]);
+      else openGroup(d.country,d.rows);
     });
     marker.addTo(_map);
     _markers.push(marker);
   });
 }
-
-window._s48click=function(i){
-  const d=window._s48idx&&window._s48idx[i];
-  if(!d)return;
-  // Close all popups first
-  _map&&_map.closePopup();
-  if(d.rows.length===1)openModal(d.rows[0]);
-  else openGroup(d.country,d.rows);
-};
 
 /* Region zoom bounds */
 const REGION_BOUNDS={
