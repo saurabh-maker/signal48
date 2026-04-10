@@ -5,28 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Signal48 — Global Expansion Intelligence</title>
 
-<!-- ╔══════════════════════════════════════════════════════╗
-     ║  CONFIG — fill these in before deploying            ║
-     ╠══════════════════════════════════════════════════════╣
-     ║  GOOGLE_CLIENT_ID  → console.cloud.google.com       ║
-     ║    APIs & Services → Credentials → OAuth 2.0        ║
-     ║    Authorized origin: https://yourdomain.github.io  ║
-     ║                                                      ║
-     ║  STRIPE_LINK       → dashboard.stripe.com           ║
-     ║    Products → Add product ($204/mo) → Payment Link  ║
-     ║    Copy the link URL (starts with buy.stripe.com)   ║
-     ║                                                      ║
-     ║  APPS_SCRIPT_URL   → script.google.com              ║
-     ║    New project → paste webhook code (see README)    ║
-     ║    Deploy → Web app → Anyone → copy /exec URL       ║
-     ╚══════════════════════════════════════════════════════╝ -->
+
+<!-- Only the Apps Script URL lives in HTML. All other keys are fetched securely at runtime. -->
 <script>
 const CONFIG = {
-  SHEET_ID:         "1h9aSAVaZerfgdjeFWYfdmy_d2mwH2NxxA828ihCSSxI",
-  SHEET_GID:        "875272317",
-  GOOGLE_CLIENT_ID: "903974375492-le08ka42avt5utkjt32h21tt95ttnqei.apps.googleusercontent.com",
-  STRIPE_LINK:      "https://buy.stripe.com/YOUR_LINK",
-  APPS_SCRIPT_URL:  "https://script.google.com/macros/s/AKfycbytQTlB1HKKIKs3NDir2SlPBV7e3h1wn3pMMgOK-louJLpM9yjhLhk49fMsWV2RF5fP/exec",
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbytQTlB1HKKIKs3NDir2SlPBV7e3h1wn3pMMgOK-louJLpM9yjhLhk49fMsWV2RF5fP/exec',
+  SHEET_ID:'', SHEET_GID:'', GOOGLE_CLIENT_ID:'', STRIPE_LINK:'',
 };
 </script>
 
@@ -1621,7 +1605,13 @@ function renderMap(data){
             ${rows.length===1?'View details →':'See all '+rows.length+' deals →'}
           </button>
         </div>
-      </div>`,{maxWidth:250});
+      </div>`,{
+        maxWidth:250,
+        autoPan:true,
+        autoPanPaddingTopLeft:L.point(20,80),
+        autoPanPaddingBottomRight:L.point(20,20),
+        offset:L.point(0,-(sz/2+2)),
+      });
     marker.addTo(_map);_markers.push(marker);
   });
 }
@@ -1938,13 +1928,25 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')[1,2,3].forEach(n=>{
 // Restore session
 const saved=localStorage.getItem(SESSION_KEY);
 if(saved){try{loginUser(JSON.parse(saved));}catch(e){}}
-
-// Build FAQ
 buildFAQ();
-
-// Init page
 showTab('home');
-loadData();
+
+// Fetch config keys securely from Apps Script, then boot the app
+async function bootApp(){
+  try{
+    const r=await fetch(CONFIG.APPS_SCRIPT_URL+'?action=config');
+    const cfg=await r.json();
+    CONFIG.SHEET_ID       = cfg.SHEET_ID        || '';
+    CONFIG.SHEET_GID      = cfg.SHEET_GID       || '';
+    CONFIG.GOOGLE_CLIENT_ID = cfg.GOOGLE_CLIENT_ID || '';
+    CONFIG.STRIPE_LINK    = cfg.STRIPE_LINK     || '';
+  }catch(e){
+    console.warn('Could not fetch config from Apps Script. Loading sheet with fallback.');
+    // If Apps Script is down, still try to load — Sheet must be public
+  }
+  loadData();
+}
+bootApp();
 </script>
 </body>
 </html>
