@@ -238,6 +238,33 @@ a{color:var(--accent)}
 .sb-empty svg{width:22px;height:22px;opacity:.3}
 .sb-empty p{font-size:11.5px;line-height:1.5}
 
+/* searchable dropdowns */
+.dd-wrap{position:relative;flex-shrink:0}
+.dd-trigger{display:flex;align-items:center;gap:6px;padding:4px 8px 4px 10px;
+  background:var(--bg2);border:1px solid var(--border);border-radius:6px;
+  font-size:12px;cursor:pointer;min-width:110px;max-width:148px;
+  transition:border-color .15s;white-space:nowrap;}
+.dd-trigger:hover{border-color:var(--border2)}
+.dd-trigger.open{border-color:var(--accent);background:var(--bg)}
+.dd-val{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)}
+.dd-val.sel{color:var(--accent);font-weight:500}
+.dd-panel{position:absolute;top:calc(100% + 4px);left:0;z-index:200;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:8px;box-shadow:var(--sh2);width:220px;display:none;overflow:hidden}
+.dd-wrap.open .dd-panel{display:block}
+.dd-search-row{padding:8px 8px 6px}
+.dd-sinp{width:100%;padding:6px 10px;background:var(--bg2);
+  border:1px solid var(--border);border-radius:6px;font-size:12px;transition:border-color .15s}
+.dd-sinp:focus{outline:none;border-color:var(--accent)}
+.dd-sinp::placeholder{color:var(--text3)}
+.dd-list{max-height:220px;overflow-y:auto;padding:2px 0}
+.dd-opt{padding:7px 12px;font-size:12.5px;cursor:pointer;
+  transition:background .1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dd-opt:hover{background:var(--bg2)}
+.dd-opt.sel{background:var(--accent-l);color:var(--accent);font-weight:500}
+.dd-opt.all{color:var(--text3);font-style:italic}
+.dd-empty{padding:10px 12px;font-size:12px;color:var(--text3);text-align:center}
+
 /* ══ MAP ════════════════════════════════════════════ */
 .map-area{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}
 .map-wrap{flex:1;position:relative;overflow:hidden}
@@ -523,16 +550,15 @@ a{color:var(--accent)}
     <div class="kpi-val" id="kpi-cap">—</div>
     <div class="kpi-sub">across all tracked deals</div>
   </div>
+  <div class="kpi" id="kpi-sector-wrap">
+    <div class="kpi-label">🏭 Key Industry</div>
+    <div class="kpi-val" id="kpi-sector">—</div>
+    <div class="kpi-sub" id="kpi-sector-sub">top sector</div>
+  </div>
   <div class="kpi pro-blur" id="kpi-country-wrap">
     <div class="kpi-label">📍 Key Destination</div>
     <div class="kpi-val" id="kpi-country">United States</div>
     <div class="kpi-sub" id="kpi-country-sub">$2.2T inbound</div>
-    <div class="kpi-lock" onclick="openProGate()"><span>🔒 Pro only</span></div>
-  </div>
-  <div class="kpi pro-blur" id="kpi-sector-wrap">
-    <div class="kpi-label">🏭 Key Industry</div>
-    <div class="kpi-val" id="kpi-sector">Technology</div>
-    <div class="kpi-sub" id="kpi-sector-sub">174 deals · 33%</div>
     <div class="kpi-lock" onclick="openProGate()"><span>🔒 Pro only</span></div>
   </div>
   <div class="kpi pro-blur" id="kpi-type-wrap">
@@ -546,10 +572,10 @@ a{color:var(--accent)}
 <!-- ══ FILTER NAV ═══════════════════════════════════ -->
 <nav class="nav" id="filter-nav">
   <span class="nfl">Filter</span>
-  <select class="fsel" id="fc" onchange="go()"><option value="">All Companies</option></select>
-  <select class="fsel" id="fn" onchange="go()"><option value="">All Countries</option></select>
-  <select class="fsel" id="fs" onchange="go()"><option value="">All Sectors</option></select>
-  <select class="fsel" id="fm" onchange="go()"><option value="">All Periods</option></select>
+  <div class="dd-wrap" id="dd-co"><div class="dd-trigger" onclick="toggleDD('dd-co')"><span class="dd-val" id="dd-co-val">All Companies</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search companies…" oninput="filterDD('dd-co',this.value)"></div><div class="dd-list" id="dd-co-list"></div></div></div>
+  <div class="dd-wrap" id="dd-cn"><div class="dd-trigger" onclick="toggleDD('dd-cn')"><span class="dd-val" id="dd-cn-val">All Countries</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search countries…" oninput="filterDD('dd-cn',this.value)"></div><div class="dd-list" id="dd-cn-list"></div></div></div>
+  <div class="dd-wrap" id="dd-se"><div class="dd-trigger" onclick="toggleDD('dd-se')"><span class="dd-val" id="dd-se-val">All Sectors</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search sectors…" oninput="filterDD('dd-se',this.value)"></div><div class="dd-list" id="dd-se-list"></div></div></div>
+  <div class="dd-wrap" id="dd-mo"><div class="dd-trigger" onclick="toggleDD('dd-mo')"><span class="dd-val" id="dd-mo-val">All Periods</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search periods…" oninput="filterDD('dd-mo',this.value)"></div><div class="dd-list" id="dd-mo-list"></div></div></div>
   <div class="ndiv"></div>
   <div class="srchw">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -1095,87 +1121,148 @@ function updateKPIs(data){
   document.getElementById('kpi-month').textContent=latestData.length;
   document.getElementById('kpi-month-sub').textContent=`${curMonthData.length?'this month':latestPeriod||'latest period'} · $${bigFmt(latestCap)}`;
 
-  // Pro KPIs (always update values, just blur for non-pro)
-  const capMap=data.reduce((m,r)=>{if(r.Country)m[r.Country]=(m[r.Country]||0)+(parseFloat(r.Investment_Amount_USD_Billion)||0);return m;},{});
-  const topCap=Object.entries(capMap).sort((a,b)=>b[1]-a[1])[0];
-  if(topCap){document.getElementById('kpi-country').textContent=topCap[0];document.getElementById('kpi-country-sub').textContent='$'+bigFmt(topCap[1])+' inbound';}
-
+  // Sector is FREE — no lock
   const secMap=data.reduce((m,r)=>{if(r.Sector)m[r.Sector]=(m[r.Sector]||0)+1;return m;},{});
   const topSec=Object.entries(secMap).sort((a,b)=>b[1]-a[1])[0];
   if(topSec){document.getElementById('kpi-sector').textContent=topSec[0];document.getElementById('kpi-sector-sub').textContent=`${topSec[1]} deals · ${Math.round(topSec[1]/data.length*100)}%`;}
+
+  // Pro KPIs
+  const capMap=data.reduce((m,r)=>{if(r.Country)m[r.Country]=(m[r.Country]||0)+(parseFloat(r.Investment_Amount_USD_Billion)||0);return m;},{});
+  const topCap=Object.entries(capMap).sort((a,b)=>b[1]-a[1])[0];
+  if(topCap){document.getElementById('kpi-country').textContent=topCap[0];document.getElementById('kpi-country-sub').textContent='$'+bigFmt(topCap[1])+' inbound';}
 
   const typeMap=data.reduce((m,r)=>{if(r.Expansion_Type)m[r.Expansion_Type]=(m[r.Expansion_Type]||0)+1;return m;},{});
   const topType=Object.entries(typeMap).sort((a,b)=>b[1]-a[1])[0];
   if(topType){document.getElementById('kpi-type').textContent=topType[0];document.getElementById('kpi-type-sub').textContent='most common expansion type';}
 
-  // Show/hide pro locks
-  ['kpi-country-wrap','kpi-sector-wrap','kpi-type-wrap'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el){
-      const lock=el.querySelector('.kpi-lock');
-      if(lock)lock.style.display=isPro()?'none':'flex';
-      el.classList.toggle('pro-blur',!isPro());
-    }
+  // Only country + type are pro-locked
+  ['kpi-country-wrap','kpi-type-wrap'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    const lock=el.querySelector('.kpi-lock');
+    if(lock)lock.style.display=isPro()?'none':'flex';
+    el.classList.toggle('pro-blur',!isPro());
   });
+  // Sector: always visible, never blurred
+  const secWrap=document.getElementById('kpi-sector-wrap');
+  if(secWrap){secWrap.classList.remove('pro-blur');const l=secWrap.querySelector('.kpi-lock');if(l)l.style.display='none';}
+}
+
+/* ════════ SEARCHABLE DROPDOWNS ════════ */
+const DD_STATE={
+  'dd-co':{val:'',opts:[]},
+  'dd-cn':{val:'',opts:[]},
+  'dd-se':{val:'',opts:[]},
+  'dd-mo':{val:'',opts:[]},
+};
+function toggleDD(id){
+  const isOpen=document.getElementById(id).classList.contains('open');
+  closeAllDD();
+  if(!isOpen){
+    document.getElementById(id).classList.add('open');
+    document.getElementById(id).querySelector('.dd-trigger').classList.add('open');
+    const inp=document.getElementById(id).querySelector('.dd-sinp');
+    if(inp){inp.value='';filterDD(id,'');setTimeout(()=>inp.focus(),50);}
+  }
+}
+function closeAllDD(){
+  Object.keys(DD_STATE).forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    el.classList.remove('open');
+    const t=el.querySelector('.dd-trigger');if(t)t.classList.remove('open');
+  });
+}
+document.addEventListener('click',e=>{
+  let inside=false;
+  Object.keys(DD_STATE).forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&el.contains(e.target))inside=true;
+  });
+  const menu=document.getElementById('user-menu');
+  if(menu&&menu.contains(e.target))inside=true;
+  if(!inside){
+    closeAllDD();
+    document.getElementById('user-dropdown').classList.remove('open');
+  }
+});
+function filterDD(id,query){
+  const listEl=document.getElementById(id+'-list');if(!listEl)return;
+  const q=query.toLowerCase().trim();
+  const state=DD_STATE[id];
+  const opts=state.opts.filter(o=>!q||o.toLowerCase().includes(q));
+  listEl.innerHTML='';
+  // "All" option
+  const allOpt=document.createElement('div');
+  allOpt.className='dd-opt all'+(state.val===''?' sel':'');
+  const labels={'dd-co':'All Companies','dd-cn':'All Countries','dd-se':'All Sectors','dd-mo':'All Periods'};
+  allOpt.textContent=labels[id]||'All';
+  allOpt.onclick=()=>{setDD(id,'');closeAllDD();go();};
+  listEl.appendChild(allOpt);
+  if(!opts.length){
+    const em=document.createElement('div');em.className='dd-empty';em.textContent='No results';listEl.appendChild(em);return;
+  }
+  opts.forEach(o=>{
+    const div=document.createElement('div');
+    div.className='dd-opt'+(state.val===o?' sel':'');
+    div.textContent=o;
+    div.onclick=()=>{setDD(id,o);closeAllDD();go();};
+    listEl.appendChild(div);
+  });
+}
+function setDD(id,val){
+  DD_STATE[id].val=val;
+  const valEl=document.getElementById(id+'-val');if(!valEl)return;
+  const labels={'dd-co':'All Companies','dd-cn':'All Countries','dd-se':'All Sectors','dd-mo':'All Periods'};
+  valEl.textContent=val||labels[id];
+  valEl.classList.toggle('sel',!!val);
 }
 
 /* ════════ FILTERS ════════ */
 function popFilters(data){
-  fillS('fc',[...new Set(data.map(r=>r.Company).filter(Boolean))].sort());
-  fillS('fn',[...new Set(data.map(r=>r.Country).filter(Boolean))].sort());
-  fillS('fs',[...new Set(data.map(r=>r.Sector).filter(Boolean))].sort());
+  DD_STATE['dd-co'].opts=[...new Set(data.map(r=>r.Company).filter(Boolean))].sort();
+  DD_STATE['dd-cn'].opts=[...new Set(data.map(r=>r.Country).filter(Boolean))].sort();
+  DD_STATE['dd-se'].opts=[...new Set(data.map(r=>r.Sector).filter(Boolean))].sort();
   const periods=[...new Set(data.map(r=>r.Month_Year).filter(Boolean))].sort((a,b)=>mSort(b)-mSort(a));
-  fillS('fm',periods);
-}
-function fillS(id,opts){
-  const s=document.getElementById(id);if(!s)return;
-  const f=s.options[0];s.innerHTML='';s.appendChild(f);
-  opts.forEach(o=>{const e=document.createElement('option');e.value=o;e.textContent=o;s.appendChild(e);});
+  DD_STATE['dd-mo'].opts=periods;
+  // Pre-render lists
+  Object.keys(DD_STATE).forEach(id=>filterDD(id,''));
 }
 function clrF(){
-  ['fc','fn','fs','fm'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});
+  Object.keys(DD_STATE).forEach(id=>setDD(id,''));
   const sq=document.getElementById('sq');if(sq)sq.value='';
   go();
 }
 
-/* ════════ APPLY FILTERS — map always shows latest ════════ */
+/* ════════ APPLY FILTERS ════════ */
 function go(){
-  const co=document.getElementById('fc').value;
-  const cn=document.getElementById('fn').value;
-  const se=document.getElementById('fs').value;
-  const mo=document.getElementById('fm').value;
+  const co=DD_STATE['dd-co'].val;
+  const cn=DD_STATE['dd-cn'].val;
+  const se=DD_STATE['dd-se'].val;
+  const mo=DD_STATE['dd-mo'].val;
+  // IMPORTANT: search NEVER includes Month_Year, Timeline or any date field
   const q=(document.getElementById('sq').value||'').toLowerCase().trim();
   const hasF=co||cn||se||mo||q;
   const bclr=document.getElementById('bclr');if(bclr)bclr.classList.toggle('on',!!hasF);
 
-  // Text search searches ALL data
-  // Other filters applied to all data
   let filtered=all.filter(r=>{
     if(co&&r.Company!==co)return false;
     if(cn&&r.Country!==cn)return false;
     if(se&&r.Sector!==se)return false;
     if(mo&&r.Month_Year!==mo)return false;
     if(q){
+      // search only non-date fields
       const hay=[r.Company,r.Country,r.Sector,r.Sub_Sector,r.Strategic_Theme,
-        r.Short_Summary,r.City_Or_Region,r.Expansion_Type,r.Month_Year,
-        r.Facility_Type,r.Timeline].join(' ').toLowerCase();
+        r.Short_Summary,r.City_Or_Region,r.Expansion_Type,r.Facility_Type].join(' ').toLowerCase();
       if(!hay.includes(q))return false;
     }
     return true;
   });
 
-  // MAP always shows latest deal per company (unless period filter active)
   const mapData=mo?filtered:getLatestData(filtered);
   filt=filtered;
-
   const cap=filtered.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
   const ctag=document.getElementById('ctag');if(ctag)ctag.textContent=`${filtered.length} signal${filtered.length!==1?'s':''}`;
   const sbsub=document.getElementById('sbsub');if(sbsub)sbsub.textContent=`${filtered.length} deal${filtered.length!==1?'s':''} · $${bigFmt(cap)} tracked`;
-
-  renderSidebar(filtered);
-  renderMap(mapData);
-  renderInsights(filtered,hasF);
-
+  renderSidebar(filtered);renderMap(mapData);renderInsights(filtered,hasF);
   document.getElementById('loading').style.display='none';
   document.getElementById('wmap').style.display='block';
 }
@@ -1334,16 +1421,17 @@ function openGroup(country,rows){
 
 /* ════════ ALERT AGENT ════════ */
 function openAlerts(){
-  const SECTORS=['Technology','Pharmaceuticals','Manufacturing','Logistics','Energy','Healthcare','Financial Services','E-commerce','Data Centres','Automotive','Semiconductors'];
-  const COUNTRIES=['United States','Germany','India','UK','UAE','Singapore','Australia','Canada','Japan','China','France','Saudi Arabia'];
-  const COMPANIES=[...new Set(all.map(r=>r.Company).filter(Boolean))].sort().slice(0,20);
+  // Build from actual sheet data
+  const SECTORS=[...new Set(all.map(r=>r.Sector).filter(Boolean))].sort();
+  const COUNTRIES=[...new Set(all.map(r=>r.Country).filter(Boolean))].sort();
+  const COMPANIES=[...new Set(all.map(r=>r.Company).filter(Boolean))].sort();
 
   document.getElementById('mb2').innerHTML=`
     <div class="agent-modal">
       <h3>⚡ Set up your alert agent</h3>
       <p>Select what you want to track. We'll email you a weekly digest every Monday with new matching expansion signals.</p>
       <div class="ag-section">
-        <div class="ag-label">🏭 Industries <span style="font-weight:400;font-family:var(--font);text-transform:none;letter-spacing:0">(select all that apply)</span></div>
+        <div class="ag-label">🏭 Industries <span style="font-weight:400;font-family:var(--font);text-transform:none;letter-spacing:0">(click to select)</span></div>
         <div class="ag-chips" id="ag-sec">${SECTORS.map(s=>`<div class="ag-chip" onclick="toggleChip(this)">${esc(s)}</div>`).join('')}</div>
       </div>
       <div class="ag-section">
@@ -1351,16 +1439,41 @@ function openAlerts(){
         <div class="ag-chips" id="ag-cn">${COUNTRIES.map(c=>`<div class="ag-chip" onclick="toggleChip(this)">${esc(c)}</div>`).join('')}</div>
       </div>
       <div class="ag-section">
-        <div class="ag-label">🏢 Companies (optional)</div>
-        <div class="ag-chips" id="ag-co">${COMPANIES.map(c=>`<div class="ag-chip" onclick="toggleChip(this)">${esc(c)}</div>`).join('')}</div>
+        <div class="ag-label">🏢 Company (optional — search &amp; select)</div>
+        <div style="position:relative">
+          <input id="ag-co-inp" class="dd-sinp" style="width:100%;margin-bottom:6px" placeholder="Search company…" oninput="agCoSearch(this.value)">
+          <div id="ag-co-results" style="max-height:130px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;display:none;background:var(--bg)"></div>
+          <div id="ag-co-sel" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px"></div>
+        </div>
       </div>
       <div class="ag-email-row">
-        <input class="ag-email" id="ag-email" type="email" placeholder="Your email address" value="${currentUser?currentUser.email:''}">
+        <input class="ag-email" id="ag-email" type="email" placeholder="Your email address" value="${currentUser?esc(currentUser.email):''}">
         <button class="btn-agent" onclick="submitAgent()">Subscribe</button>
       </div>
       <div class="am-note" id="ag-msg">Free. No spam. Unsubscribe anytime.</div>
     </div>`;
+
+  // Store companies list for search
+  window._agCompanies=COMPANIES;
+  window._agSelectedCos=new Set();
   document.getElementById('ov2').style.display='flex';
+}
+function agCoSearch(q){
+  const res=document.getElementById('ag-co-results');
+  if(!q){res.style.display='none';return;}
+  const matches=window._agCompanies.filter(c=>c.toLowerCase().includes(q.toLowerCase())).slice(0,15);
+  if(!matches.length){res.style.display='none';return;}
+  res.style.display='block';
+  res.innerHTML=matches.map(c=>`<div class="dd-opt${window._agSelectedCos.has(c)?' sel':''}" onclick="selectAgCo('${esc(c)}')">${esc(c)}</div>`).join('');
+}
+function selectAgCo(co){
+  if(window._agSelectedCos.has(co)){window._agSelectedCos.delete(co);}
+  else{window._agSelectedCos.add(co);}
+  // Refresh results
+  agCoSearch(document.getElementById('ag-co-inp').value);
+  // Show selected chips
+  const sel=document.getElementById('ag-co-sel');
+  sel.innerHTML=[...window._agSelectedCos].map(c=>`<div class="ag-chip sel" onclick="selectAgCo('${esc(c)}')" style="font-size:11px">${esc(c)} ✕</div>`).join('');
 }
 function toggleChip(el){el.classList.toggle('sel');}
 function submitAgent(){
@@ -1369,7 +1482,7 @@ function submitAgent(){
   if(!email.includes('@')){msg.textContent='Enter a valid email.';msg.style.color='var(--red)';return;}
   const sectors=[...document.querySelectorAll('#ag-sec .sel')].map(e=>e.textContent);
   const countries=[...document.querySelectorAll('#ag-cn .sel')].map(e=>e.textContent);
-  const companies=[...document.querySelectorAll('#ag-co .sel')].map(e=>e.textContent);
+  const companies=[...(window._agSelectedCos||new Set())];
   const rec={type:'alert_signup',email,sectors,countries,companies,ts:new Date().toISOString()};
   const subs=JSON.parse(localStorage.getItem('s48_agents')||'[]');subs.push(rec);localStorage.setItem('s48_agents',JSON.stringify(subs));
   saveToSheet(rec);
