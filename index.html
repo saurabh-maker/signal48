@@ -13,7 +13,7 @@
      ║    Authorized origin: https://yourdomain.github.io  ║
      ║                                                      ║
      ║  STRIPE_LINK       → dashboard.stripe.com           ║
-     ║    Products → Add product ($20/mo) → Payment Link  ║
+     ║    Products → Add product ($204/mo) → Payment Link  ║
      ║    Copy the link URL (starts with buy.stripe.com)   ║
      ║                                                      ║
      ║  APPS_SCRIPT_URL   → script.google.com              ║
@@ -522,7 +522,7 @@ a{color:var(--accent)}
     </div>
     <button class="btn-upgrade" onclick="openProGate()" id="upgrade-btn">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      Upgrade · $20/mo
+      Upgrade · $204/mo
     </button>
   </div>
 </div>
@@ -711,7 +711,7 @@ a{color:var(--accent)}
       <div class="price-card featured">
         <div class="price-badge">MOST POPULAR</div>
         <div class="price-tier">Pro</div>
-        <div class="price-amount">$20<span>/month</span></div>
+        <div class="price-amount">$204<span>/month</span></div>
         <div class="price-desc">For investors, site selectors, and strategy teams who need the full picture before anyone else.</div>
         <div class="price-features">
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Everything in Free</div>
@@ -722,7 +722,7 @@ a{color:var(--accent)}
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Agent alerts — weekly report, by sector/country</div>
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Priority support via email</div>
         </div>
-        <button class="btn-price pro-btn" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $20/month →</button>
+        <button class="btn-price pro-btn" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $204/month →</button>
       </div>
     </div>
     <div style="text-align:center;font-size:12.5px;color:var(--text3);margin-top:8px">
@@ -888,7 +888,7 @@ const FAQS=[
   {q:"What does the confidence score mean?",a:"Each signal is scored 0–100% based on how many independent sources corroborate it. 90%+ = officially confirmed by the company or government. Below 70% = plausible but single-source. We include lower-confidence signals but always display the score so you can judge the risk."},
   {q:"Why does the map sometimes show fewer signals than expected?",a:"The map shows all signals matching your active filters. If the company filter or search bar is active, only matching signals are plotted. Use the 'Clear' button to reset all filters and see the full dataset."},
   {q:"How do I get alerts for specific sectors or countries?",a:"Click 'Set up alerts' in the filter bar or your user menu. You can select industries, companies, and countries — our system emails you a weekly digest whenever new matching signals are added. Free for all users."},
-  {q:"Can I export the data?",a:"CSV export is a Pro feature ($20/mo). It exports all currently filtered signals with every data column including investment amounts, source URLs, confidence scores, and timelines."},
+  {q:"Can I export the data?",a:"CSV export is a Pro feature ($204/mo). It exports all currently filtered signals with every data column including investment amounts, source URLs, confidence scores, and timelines."},
   {q:"How do you handle currency conversion?",a:"Investment amounts are converted to USD at the exchange rate prevailing at announcement date. The original amount and currency are always preserved and visible in the signal detail view."},
   {q:"Can I get a team plan?",a:"Yes — email contact@signal48.com for team pricing. We offer discounts for teams of 3+."},
   {q:"How do you decide which expansions to track?",a:"We focus on announcements above $10M involving physical infrastructure (plants, hubs, campuses, centres) or meaningful new market entry. Purely digital or online expansions are not included unless they involve significant headcount or infrastructure investment."},
@@ -1017,6 +1017,9 @@ function openAuth(defaultTab){
       <input class="am-inp" id="am-pass" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doEmailAuth()">
       <button class="btn-am" id="am-submit" onclick="doEmailAuth()">${tab==='up'?'Create account':'Sign in'}</button>
       <div class="am-note" id="am-msg">Your data is stored securely. No spam, ever.</div>
+      <div style="text-align:center;margin-top:8px">
+        <button onclick="openForgotPassword()" style="font-size:12px;color:var(--text3);background:none;border:none;cursor:pointer;text-decoration:underline">Forgot password?</button>
+      </div>
     </div>`;
   document.getElementById('ov3').style.display='flex';
   initGoogleAuth(); // renders the real Google button
@@ -1034,26 +1037,119 @@ function switchAM(m){
   document.getElementById('am-msg').style.color='';
 }
 function doEmailAuth(){
-  const email=(document.getElementById('am-email').value||'').trim();
+  const email=(document.getElementById('am-email').value||'').trim().toLowerCase();
   const pass=document.getElementById('am-pass').value||'';
-  const name=(document.getElementById('am-name')?document.getElementById('am-name').value.trim():'') || email.split('@')[0];
-  if(!email.includes('@')||!pass){showNote('am-msg','Please enter email and password.','red');return;}
-  const users=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
+  const nameEl=document.getElementById('am-name');
+  const name=(nameEl?nameEl.value.trim():'')||email.split('@')[0];
+  if(!email.includes('@')){showNote('am-msg','Enter a valid email address.','red');return;}
+  if(!pass||pass.length<6){showNote('am-msg','Password must be at least 6 characters.','red');return;}
+  showNote('am-msg','Checking…','');
+
   if(amMode==='up'){
-    if(users[email]){showNote('am-msg','Account already exists — click Sign in instead.','red');return;}
-    users[email]={name,pass,plan:'free',created:new Date().toISOString()};
-    localStorage.setItem(USERS_KEY,JSON.stringify(users));
-    saveUserToSheet(email,name,'email','free');
-    loginUser({name,email,avatar:name[0].toUpperCase(),provider:'email',plan:'free'});
-    cm(3);
-    showAuthToast(`✅ Account created — welcome, ${name.split(' ')[0]}!`);
+    if(!name||name.length<2){showNote('am-msg','Please enter your full name.','red');return;}
+    // Check sheet for duplicate across devices
+    checkEmailExists(email).then(existsInSheet=>{
+      const ul=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
+      if(existsInSheet||ul[email]){
+        showNote('am-msg','Account already exists — use the Sign in tab.','red');return;
+      }
+      ul[email]={name,pass,plan:'free',created:new Date().toISOString()};
+      localStorage.setItem(USERS_KEY,JSON.stringify(ul));
+      saveUserToSheet(email,name,'email','free');
+      loginUser({name,email,avatar:name[0].toUpperCase(),provider:'email',plan:'free'});
+      cm(3);
+      showAuthToast(`✅ Account created — welcome, ${name.split(' ')[0]}!`);
+    });
   }else{
-    if(!users[email]){showNote('am-msg','No account found — please Sign up first.','red');return;}
-    if(users[email].pass!==pass){showNote('am-msg','Incorrect password.','red');return;}
-    loginUser({name:users[email].name,email,avatar:users[email].name[0].toUpperCase(),provider:'email',plan:users[email].plan||'free'});
+    const ul=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
+    if(!ul[email]){
+      checkEmailExists(email).then(existsInSheet=>{
+        if(!existsInSheet){showNote('am-msg','No account found — please Sign up first.','red');return;}
+        showNote('am-msg','Account found on another device. Use Forgot password below.','orange');
+      });
+      return;
+    }
+    if(ul[email].provider==='google'){
+      showNote('am-msg','This email uses Google Sign-In — click the Google button above.','orange');return;
+    }
+    if(ul[email].pass!==pass){showNote('am-msg','Incorrect password.','red');return;}
+    loginUser({name:ul[email].name,email,avatar:ul[email].name[0].toUpperCase(),provider:'email',plan:ul[email].plan||'free'});
     cm(3);
-    showAuthToast(`👋 Welcome back, ${users[email].name.split(' ')[0]}!`);
+    showAuthToast(`👋 Welcome back, ${ul[email].name.split(' ')[0]}!`);
   }
+}
+
+async function checkEmailExists(email){
+  if(!CONFIG.APPS_SCRIPT_URL||CONFIG.APPS_SCRIPT_URL.includes('YOUR_SCRIPT'))return false;
+  try{
+    const r=await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=check&email=${encodeURIComponent(email)}`);
+    const d=await r.json();return d.exists===true;
+  }catch(e){return false;}
+}
+
+function openForgotPassword(){
+  document.getElementById('mb3').innerHTML=`
+    <div class="auth-modal">
+      <div class="am-logo">Signal<em>48</em></div>
+      <div class="am-sub" id="fp-hl">Reset your password</div>
+      <div id="fp-s1">
+        <p style="font-size:12.5px;color:var(--text2);margin-bottom:14px;line-height:1.6">Enter your email — we'll send a 6-digit code.</p>
+        <input class="am-inp" id="fp-email" type="email" placeholder="Your email address">
+        <button class="btn-am" onclick="sendResetOTP()">Send reset code</button>
+        <div class="am-note" id="fp-msg"></div>
+      </div>
+      <div id="fp-s2" style="display:none">
+        <p style="font-size:12.5px;color:var(--text2);margin-bottom:14px;line-height:1.6">Enter the 6-digit code from your email, then set a new password.</p>
+        <input class="am-inp" id="fp-otp" type="text" placeholder="6-digit code" maxlength="6" style="letter-spacing:6px;font-size:18px;text-align:center;font-family:var(--mono)">
+        <input class="am-inp" id="fp-np" type="password" placeholder="New password (min 6 chars)">
+        <input class="am-inp" id="fp-np2" type="password" placeholder="Confirm new password">
+        <button class="btn-am" onclick="verifyOTPAndReset()">Reset password</button>
+        <div class="am-note" id="fp-msg2"></div>
+      </div>
+      <div style="text-align:center;margin-top:14px">
+        <button onclick="openAuth('in')" style="font-size:12px;color:var(--accent);background:none;border:none;cursor:pointer">← Back to sign in</button>
+      </div>
+    </div>`;
+  document.getElementById('ov3').style.display='flex';
+}
+
+async function sendResetOTP(){
+  const email=(document.getElementById('fp-email').value||'').trim().toLowerCase();
+  const msg=document.getElementById('fp-msg');
+  if(!email.includes('@')){msg.textContent='Enter a valid email.';msg.style.color='var(--red)';return;}
+  msg.textContent='Sending…';msg.style.color='var(--text3)';
+  try{
+    const r=await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=reset&email=${encodeURIComponent(email)}`);
+    const d=await r.json();
+    if(d.error==='google_account'){msg.textContent='This account uses Google Sign-In — no password to reset.';msg.style.color='var(--gold)';return;}
+    if(!d.sent){msg.textContent=d.error==='Email not found'?'No account with that email.':'Could not send. Try again.';msg.style.color='var(--red)';return;}
+    window._resetEmail=email;
+    document.getElementById('fp-s1').style.display='none';
+    document.getElementById('fp-s2').style.display='block';
+    document.getElementById('fp-hl').textContent='Enter your reset code';
+    document.getElementById('fp-otp').focus();
+  }catch(e){msg.textContent='Network error. Try again.';msg.style.color='var(--red)';}
+}
+
+async function verifyOTPAndReset(){
+  const otp=(document.getElementById('fp-otp').value||'').trim();
+  const np=document.getElementById('fp-np').value||'';
+  const np2=document.getElementById('fp-np2').value||'';
+  const msg=document.getElementById('fp-msg2');
+  if(otp.length!==6){msg.textContent='Enter the 6-digit code.';msg.style.color='var(--red)';return;}
+  if(np.length<6){msg.textContent='Password must be at least 6 characters.';msg.style.color='var(--red)';return;}
+  if(np!==np2){msg.textContent='Passwords do not match.';msg.style.color='var(--red)';return;}
+  msg.textContent='Verifying…';msg.style.color='var(--text3)';
+  try{
+    const r=await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=verify_otp&email=${encodeURIComponent(window._resetEmail)}&otp=${otp}`);
+    const d=await r.json();
+    if(!d.valid){msg.textContent='Invalid or expired code. Try again.';msg.style.color='var(--red)';return;}
+    const ul=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
+    if(ul[window._resetEmail])ul[window._resetEmail].pass=np;
+    localStorage.setItem(USERS_KEY,JSON.stringify(ul));
+    cm(3);showAuthToast('✅ Password reset — sign in with your new password.');
+    setTimeout(()=>openAuth('in'),400);
+  }catch(e){msg.textContent='Network error. Try again.';msg.style.color='var(--red)';}
 }
 function loginUser(u){
   currentUser=u;
@@ -1591,7 +1687,7 @@ function openProGate(){
         <div class="pmf">📊 Key industry, destination &amp; type KPIs</div>
         <div class="pmf">🎯 Priority email support</div>
       </div>
-      <button class="btn-get-pro" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $20/month via Stripe →</button>
+      <button class="btn-get-pro" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $204/month via Stripe →</button>
       <div class="pm-free">Secure payment via Stripe. Cancel anytime. Free tier stays free forever.</div>
     </div>`;
   document.getElementById('ov2').style.display='flex';
