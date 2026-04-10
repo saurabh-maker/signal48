@@ -925,16 +925,31 @@ function onGoogleCred(resp){
   try{
     const payload=JSON.parse(atob(resp.credential.split('.')[1]));
     const u={name:payload.name,email:payload.email,avatar:payload.given_name[0].toUpperCase(),provider:'google',plan:'free'};
-    // Save to sheet only if first time (not in localStorage yet)
     const users=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
-    if(!users[u.email]){
+    const isNew=!users[u.email];
+    if(isNew){
       users[u.email]={name:u.name,provider:'google',plan:'free',created:new Date().toISOString()};
       localStorage.setItem(USERS_KEY,JSON.stringify(users));
       saveToSheet({type:'new_user',email:u.email,name:u.name,provider:'google',plan:'free',ts:new Date().toISOString()});
     }
     loginUser(u);
     cm(3);
+    // Show toast so user knows what happened
+    showAuthToast(isNew
+      ? `✅ Account created — welcome to Signal48, ${payload.given_name}!`
+      : `👋 Welcome back, ${payload.given_name}!`
+    );
   }catch(e){console.error('Google auth error',e);}
+}
+function showAuthToast(msg){
+  let t=document.getElementById('auth-toast');
+  if(!t){
+    t=document.createElement('div');t.id='auth-toast';
+    t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;background:var(--text);color:#fff;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,.2);transition:opacity .3s;white-space:nowrap';
+    document.body.appendChild(t);
+  }
+  t.textContent=msg;t.style.opacity='1';t.style.display='block';
+  clearTimeout(t._t);t._t=setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.style.display='none',300);},3500);
 }
 function openAuth(){
   document.getElementById('mb3').innerHTML=`
@@ -947,19 +962,19 @@ function openAuth(){
       </button>
       <div class="am-divider">or email</div>
       <div class="am-tabs">
-        <div class="am-tab act" id="am-t1" onclick="switchAM('in')">Sign in</div>
-        <div class="am-tab" id="am-t2" onclick="switchAM('up')">Sign up</div>
+        <div class="am-tab" id="am-t1" onclick="switchAM('in')">Sign in</div>
+        <div class="am-tab act" id="am-t2" onclick="switchAM('up')">Sign up</div>
       </div>
-      <div id="am-name-row" style="display:none"><input class="am-inp" id="am-name" type="text" placeholder="Full name"></div>
+      <div id="am-name-row"><input class="am-inp" id="am-name" type="text" placeholder="Full name"></div>
       <input class="am-inp" id="am-email" type="email" placeholder="Email address">
       <input class="am-inp" id="am-pass" type="password" placeholder="Password">
-      <button class="btn-am" id="am-submit" onclick="doEmailAuth()">Sign in</button>
+      <button class="btn-am" id="am-submit" onclick="doEmailAuth()">Create account</button>
       <div class="am-note" id="am-msg">By signing in you agree to our terms. Your data is stored securely.</div>
     </div>`;
   document.getElementById('ov3').style.display='flex';
   initGoogleAuth();
 }
-let amMode='in';
+let amMode='up';
 function switchAM(m){
   amMode=m;
   document.getElementById('am-t1').classList.toggle('act',m==='in');
@@ -980,15 +995,20 @@ function doEmailAuth(){
   if(!email.includes('@')||!pass){showNote('am-msg','Please enter email and password.','red');return;}
   const users=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
   if(amMode==='up'){
-    if(users[email]){showNote('am-msg','Account exists — sign in instead.','red');return;}
+    if(users[email]){showNote('am-msg','Account already exists — use Sign in instead.','red');return;}
     users[email]={name,pass,plan:'free',created:new Date().toISOString()};
     localStorage.setItem(USERS_KEY,JSON.stringify(users));
-    saveToSheet({type:'new_user',email,name,plan:'free',ts:new Date().toISOString()});
+    saveToSheet({type:'new_user',email,name,provider:'email',plan:'free',ts:new Date().toISOString()});
+    loginUser({name,email,avatar:name[0].toUpperCase(),provider:'email',plan:'free'});
+    cm(3);
+    showAuthToast(`✅ Account created — welcome to Signal48, ${name.split(' ')[0]}!`);
   }else{
-    if(!users[email]||users[email].pass!==pass){showNote('am-msg','Incorrect email or password.','red');return;}
+    if(!users[email]){showNote('am-msg','No account found. Please Sign up first.','red');return;}
+    if(users[email].pass!==pass){showNote('am-msg','Incorrect password.','red');return;}
+    loginUser({name:users[email].name,email,avatar:users[email].name[0].toUpperCase(),provider:'email',plan:users[email].plan||'free'});
+    cm(3);
+    showAuthToast(`👋 Welcome back, ${users[email].name.split(' ')[0]}!`);
   }
-  loginUser({name:users[email].name,email,avatar:users[email].name[0].toUpperCase(),provider:'email',plan:users[email].plan||'free'});
-  cm(3);
 }
 function loginUser(u){
   currentUser=u;
