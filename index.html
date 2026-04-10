@@ -346,6 +346,17 @@ a{color:var(--accent)}
   </div>
 </div>
 
+<!-- ══ CONTEXT STRIP (header) ════════════════════════ -->
+<div class="ctx-strip">
+  <div class="ctx-text"><strong>Signal48</strong> tracks corporate expansion announcements globally — manufacturing plants, logistics hubs, R&amp;D centres, new market entries — so investors, site selectors, and strategy teams can act before deals become public knowledge.</div>
+  <div class="ctx-pills">
+    <span class="ctx-pill">🏭 Facility Openings</span>
+    <span class="ctx-pill">💰 Investment Flows</span>
+    <span class="ctx-pill">🌍 Market Entries</span>
+    <span class="ctx-pill">📡 Updated Weekly</span>
+  </div>
+</div>
+
 <!-- ══ FILTERS ════════════════════════════════════════ -->
 <nav class="nav">
   <span class="nfl">Filter</span>
@@ -496,18 +507,7 @@ a{color:var(--accent)}
       </svg>
     </div>
 
-    <!-- PLATFORM CONTEXT STRIP -->
-    <div class="ctx-strip">
-      <div class="ctx-text">
-        <strong>Signal48</strong> tracks corporate expansion announcements globally — manufacturing plants, logistics hubs, R&amp;D centres, new market entries — so investors, site selectors, and strategy teams can act before deals become public knowledge.
-      </div>
-      <div class="ctx-pills">
-        <span class="ctx-pill">🏭 Facility Openings</span>
-        <span class="ctx-pill">💰 Investment Flows</span>
-        <span class="ctx-pill">🌍 Market Entries</span>
-        <span class="ctx-pill">📡 Updated Weekly</span>
-      </div>
-    </div>
+
   </div>
 </div>
 </div>
@@ -551,25 +551,9 @@ a{color:var(--accent)}
     <button class="mx" onclick="cm(3)">✕</button>
     <div class="alerts-modal">
       <div class="al-h">📡 Expansion Alerts</div>
-      <div class="al-sub">Get a weekly digest when new expansion signals are added to the feed — filtered by the sectors and markets you care about. Free, no spam, unsubscribe anytime.</div>
+      <div class="al-sub">Get a weekly digest when new expansion signals are added. Free, no spam, unsubscribe anytime.</div>
       <div class="al-form">
         <input class="al-inp" id="al-email" type="email" placeholder="Your email address">
-        <div class="al-row2">
-          <select class="al-sel" id="al-sector">
-            <option value="">Any sector</option>
-            <option>Technology</option><option>Pharmaceuticals</option>
-            <option>Manufacturing</option><option>Logistics</option>
-            <option>Energy</option><option>Financial Services</option>
-            <option>Healthcare</option><option>E-commerce</option>
-          </select>
-          <select class="al-sel" id="al-country">
-            <option value="">Any country</option>
-            <option>United States</option><option>Germany</option>
-            <option>India</option><option>UK</option>
-            <option>UAE</option><option>Singapore</option>
-            <option>Australia</option><option>Canada</option>
-          </select>
-        </div>
         <button class="btn-al-go" onclick="submitAlert()">Subscribe to alerts — free</button>
         <div class="al-note" id="al-msg">
           Alerts sent via weekly email digest.
@@ -930,32 +914,20 @@ function joinWaitlist(){
 
 async function submitAlert(){
   const email=document.getElementById('al-email').value.trim();
-  const sector=document.getElementById('al-sector').value;
-  const country=document.getElementById('al-country').value;
   const msg=document.getElementById('al-msg');
-
   if(!email||!email.includes('@')){msg.textContent='Enter a valid email.';msg.style.color='var(--red)';return;}
-
-  // Save locally always
   const subs=JSON.parse(localStorage.getItem('s48_alerts')||'[]');
-  subs.push({email,sector,country,ts:new Date().toISOString()});
+  subs.push({email,ts:new Date().toISOString()});
   localStorage.setItem('s48_alerts',JSON.stringify(subs));
-
-  // If Formspree is configured, submit there too (free tier: 50/month)
   if(CONFIG.FORMSPREE_ID&&CONFIG.FORMSPREE_ID!=='YOUR_FORM_ID'){
-    try{
-      await fetch(`https://formspree.io/f/${CONFIG.FORMSPREE_ID}`,{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({email,sector:sector||'Any',country:country||'Any',source:'Signal48 Alerts'})
-      });
-    }catch(e){}
+    try{await fetch(`https://formspree.io/f/${CONFIG.FORMSPREE_ID}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,source:'Signal48 Alerts'})});}catch(e){}
   }
 
   document.querySelector('.alerts-modal').innerHTML=`
     <div style="text-align:center;padding:20px 0">
       <div style="font-size:36px;margin-bottom:12px">✅</div>
       <div style="font-family:var(--serif);font-size:19px;font-weight:700;margin-bottom:8px">You're subscribed</div>
-      <div style="font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:18px">Weekly alerts${sector?' for '+sector:''}${country?' in '+country:''} will arrive in your inbox.<br>Check spam if you don't hear from us.</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:18px">Weekly alerts will arrive in your inbox.<br>Check spam if you don't hear from us.</div>
       <button onclick="cm(3)" style="background:var(--accent);color:#fff;padding:8px 24px;border-radius:8px;font-size:13px;font-weight:500;border:none;cursor:pointer">Done</button>
     </div>`;
 }
