@@ -575,7 +575,7 @@ a{color:var(--accent)}
   <div class="dd-wrap" id="dd-co"><div class="dd-trigger" onclick="toggleDD('dd-co')"><span class="dd-val" id="dd-co-val">All Companies</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search companies…" oninput="filterDD('dd-co',this.value)"></div><div class="dd-list" id="dd-co-list"></div></div></div>
   <div class="dd-wrap" id="dd-cn"><div class="dd-trigger" onclick="toggleDD('dd-cn')"><span class="dd-val" id="dd-cn-val">All Countries</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search countries…" oninput="filterDD('dd-cn',this.value)"></div><div class="dd-list" id="dd-cn-list"></div></div></div>
   <div class="dd-wrap" id="dd-se"><div class="dd-trigger" onclick="toggleDD('dd-se')"><span class="dd-val" id="dd-se-val">All Sectors</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search sectors…" oninput="filterDD('dd-se',this.value)"></div><div class="dd-list" id="dd-se-list"></div></div></div>
-  <div class="dd-wrap" id="dd-mo"><div class="dd-trigger" onclick="toggleDD('dd-mo')"><span class="dd-val" id="dd-mo-val">All Periods</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search periods…" oninput="filterDD('dd-mo',this.value)"></div><div class="dd-list" id="dd-mo-list"></div></div></div>
+  <div class="dd-wrap" id="dd-mo" style="position:relative"><div class="dd-trigger" onclick="openProGate()" style="opacity:.7;cursor:pointer" title="Pro only"><span class="dd-val" id="dd-mo-val">Period 🔒</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div></div>
   <div class="ndiv"></div>
   <div class="srchw">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -1430,22 +1430,28 @@ function openAlerts(){
     <div class="agent-modal">
       <h3>⚡ Set up your alert agent</h3>
       <p>Select what you want to track. We'll email you a weekly digest every Monday with new matching expansion signals.</p>
+
       <div class="ag-section">
-        <div class="ag-label">🏭 Industries <span style="font-weight:400;font-family:var(--font);text-transform:none;letter-spacing:0">(click to select)</span></div>
-        <div class="ag-chips" id="ag-sec">${SECTORS.map(s=>`<div class="ag-chip" onclick="toggleChip(this)">${esc(s)}</div>`).join('')}</div>
+        <div class="ag-label">🏭 Industries — search &amp; select</div>
+        <input id="ag-sec-inp" class="dd-sinp" style="width:100%;margin-bottom:6px" placeholder="Search industry…" oninput="agSearch('sec',this.value)">
+        <div id="ag-sec-results" style="max-height:120px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;display:none;background:var(--bg)"></div>
+        <div id="ag-sec-sel" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px"></div>
       </div>
+
       <div class="ag-section">
-        <div class="ag-label">🌍 Countries</div>
-        <div class="ag-chips" id="ag-cn">${COUNTRIES.map(c=>`<div class="ag-chip" onclick="toggleChip(this)">${esc(c)}</div>`).join('')}</div>
+        <div class="ag-label">🌍 Countries — search &amp; select</div>
+        <input id="ag-cn-inp" class="dd-sinp" style="width:100%;margin-bottom:6px" placeholder="Search country…" oninput="agSearch('cn',this.value)">
+        <div id="ag-cn-results" style="max-height:120px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;display:none;background:var(--bg)"></div>
+        <div id="ag-cn-sel" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px"></div>
       </div>
+
       <div class="ag-section">
-        <div class="ag-label">🏢 Company (optional — search &amp; select)</div>
-        <div style="position:relative">
-          <input id="ag-co-inp" class="dd-sinp" style="width:100%;margin-bottom:6px" placeholder="Search company…" oninput="agCoSearch(this.value)">
-          <div id="ag-co-results" style="max-height:130px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;display:none;background:var(--bg)"></div>
-          <div id="ag-co-sel" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px"></div>
-        </div>
+        <div class="ag-label">🏢 Company — search &amp; select (optional)</div>
+        <input id="ag-co-inp" class="dd-sinp" style="width:100%;margin-bottom:6px" placeholder="Search company…" oninput="agSearch('co',this.value)">
+        <div id="ag-co-results" style="max-height:120px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;display:none;background:var(--bg)"></div>
+        <div id="ag-co-sel" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px"></div>
       </div>
+
       <div class="ag-email-row">
         <input class="ag-email" id="ag-email" type="email" placeholder="Your email address" value="${currentUser?esc(currentUser.email):''}">
         <button class="btn-agent" onclick="submitAgent()">Subscribe</button>
@@ -1453,36 +1459,35 @@ function openAlerts(){
       <div class="am-note" id="ag-msg">Free. No spam. Unsubscribe anytime.</div>
     </div>`;
 
-  // Store companies list for search
-  window._agCompanies=COMPANIES;
-  window._agSelectedCos=new Set();
+  // Store lists + selections for all 3 fields
+  window._agLists={sec:SECTORS, cn:COUNTRIES, co:COMPANIES};
+  window._agSel={sec:new Set(), cn:new Set(), co:new Set()};
   document.getElementById('ov2').style.display='flex';
 }
-function agCoSearch(q){
-  const res=document.getElementById('ag-co-results');
+function agSearch(field,q){
+  const res=document.getElementById('ag-'+field+'-results');
   if(!q){res.style.display='none';return;}
-  const matches=window._agCompanies.filter(c=>c.toLowerCase().includes(q.toLowerCase())).slice(0,15);
+  const matches=(window._agLists[field]||[]).filter(c=>c.toLowerCase().includes(q.toLowerCase())).slice(0,20);
   if(!matches.length){res.style.display='none';return;}
   res.style.display='block';
-  res.innerHTML=matches.map(c=>`<div class="dd-opt${window._agSelectedCos.has(c)?' sel':''}" onclick="selectAgCo('${esc(c)}')">${esc(c)}</div>`).join('');
+  res.innerHTML=matches.map(c=>`<div class="dd-opt${window._agSel[field].has(c)?' sel':''}" onclick="agSelect('${field}','${c.replace(/\\/g,'\\\\').replace(/'/g,'\\\'')}')">${esc(c)}</div>`).join('');
 }
-function selectAgCo(co){
-  if(window._agSelectedCos.has(co)){window._agSelectedCos.delete(co);}
-  else{window._agSelectedCos.add(co);}
-  // Refresh results
-  agCoSearch(document.getElementById('ag-co-inp').value);
-  // Show selected chips
-  const sel=document.getElementById('ag-co-sel');
-  sel.innerHTML=[...window._agSelectedCos].map(c=>`<div class="ag-chip sel" onclick="selectAgCo('${esc(c)}')" style="font-size:11px">${esc(c)} ✕</div>`).join('');
+function agSelect(field,val){
+  const sel=window._agSel[field];
+  if(sel.has(val))sel.delete(val);else sel.add(val);
+  agSearch(field,document.getElementById('ag-'+field+'-inp').value);
+  document.getElementById('ag-'+field+'-sel').innerHTML=
+    [...sel].map(c=>`<div class="ag-chip sel" onclick="agSelect('${field}','${c.replace(/\\/g,'\\\\').replace(/'/g,'\\\'')}');" style="font-size:11px">${esc(c)} ✕</div>`).join('');
 }
 function toggleChip(el){el.classList.toggle('sel');}
 function submitAgent(){
   const email=(document.getElementById('ag-email').value||'').trim();
   const msg=document.getElementById('ag-msg');
   if(!email.includes('@')){msg.textContent='Enter a valid email.';msg.style.color='var(--red)';return;}
-  const sectors=[...document.querySelectorAll('#ag-sec .sel')].map(e=>e.textContent);
-  const countries=[...document.querySelectorAll('#ag-cn .sel')].map(e=>e.textContent);
-  const companies=[...(window._agSelectedCos||new Set())];
+  const sel=window._agSel||{sec:new Set(),cn:new Set(),co:new Set()};
+  const sectors=[...sel.sec];
+  const countries=[...sel.cn];
+  const companies=[...sel.co];
   const rec={type:'alert_signup',email,sectors,countries,companies,ts:new Date().toISOString()};
   const subs=JSON.parse(localStorage.getItem('s48_agents')||'[]');subs.push(rec);localStorage.setItem('s48_agents',JSON.stringify(subs));
   saveToSheet(rec);
