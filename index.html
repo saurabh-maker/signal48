@@ -8,182 +8,194 @@
 const CONFIG={SHEET_ID:"1h9aSAVaZerfgdjeFWYfdmy_d2mwH2NxxA828ihCSSxI",SHEET_GID:"875272317"};
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ── TOKENS ──────────────────────────── */
 :root{
-  --bg:       #ffffff;
-  --bg2:      #f7f8fc;
-  --bg3:      #eef1f7;
-  --border:   #e2e6ef;
-  --border2:  #c8cedb;
-  --text:     #0d1a2e;
-  --text2:    #4a5568;
-  --text3:    #94a3b8;
-  --accent:   #1b4fdf;
-  --accent-l: #eff4ff;
-  --signal:   #e8470a;
-  --signal-l: #fff3ef;
-  --green:    #059669;
-  --green-l:  #ecfdf5;
-  --gold:     #d97706;
-  --ocean:    #dbe8f4;
-  --land:     #e9ecf3;
-  --land2:    #dde1ea;
-  --font:     'DM Sans', sans-serif;
-  --serif:    'Libre Baskerville', serif;
-  --mono:     'DM Mono', monospace;
-  --sh:       0 1px 3px rgba(0,0,0,.06),0 1px 8px rgba(0,0,0,.04);
-  --sh2:      0 4px 16px rgba(0,0,0,.08),0 1px 4px rgba(0,0,0,.04);
+  --bg:#ffffff;--bg2:#f6f8fc;--bg3:#edf0f7;--bg4:#e3e8f2;
+  --border:#e1e6f0;--border2:#c8d0e0;
+  --text:#0c1a2e;--text2:#46546a;--text3:#8fa0bb;
+  --accent:#1847d6;--accent-l:#eef2ff;--accent-m:rgba(24,71,214,.12);
+  --signal:#e0460a;--signal-l:#fff3ef;
+  --multi:#1847d6;--mega:#c47d00;
+  --green:#047857;--green-l:#ecfdf5;
+  --gold:#b45309;
+  --font:'DM Sans',sans-serif;
+  --serif:'Libre Baskerville',serif;
+  --mono:'DM Mono',monospace;
+  --sh:0 1px 3px rgba(0,0,0,.06),0 1px 10px rgba(0,0,0,.04);
+  --sh2:0 4px 20px rgba(0,0,0,.09),0 1px 4px rgba(0,0,0,.05);
 }
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:13.5px;overflow:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:13px;overflow:hidden}
 button{cursor:pointer;border:none;background:none;font-family:var(--font);color:inherit}
-select,input{font-family:var(--font)}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+select,input{font-family:var(--font);color:var(--text)}
+a{color:var(--accent)}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
 
-/* ── SHELL ───────────────────────────── */
+/* APP SHELL */
 .app{display:flex;flex-direction:column;height:100vh}
 
-/* ── NAV ─────────────────────────────── */
+/* ── HERO STRIP ─────────────────────────────────── */
+.hero{
+  background:var(--text);
+  padding:9px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.hero-left{display:flex;align-items:baseline;gap:10px}
+.hero-logo{font-family:var(--serif);font-size:15px;font-weight:700;color:#fff;letter-spacing:-.2px}
+.hero-logo span{color:#4df3c0}
+.hero-tag{font-family:var(--mono);font-size:9px;color:#4df3c0;background:rgba(77,243,192,.12);
+  border:1px solid rgba(77,243,192,.25);padding:2px 6px;border-radius:3px;letter-spacing:.5px}
+.hero-line{font-size:12px;color:rgba(255,255,255,.55);font-style:italic;font-family:var(--serif)}
+.hero-right{display:flex;align-items:center;gap:10px}
+.hero-stat{text-align:right}
+.hero-stat-val{font-family:var(--mono);font-size:14px;font-weight:500;color:#fff}
+.hero-stat-lbl{font-size:10px;color:rgba(255,255,255,.45);letter-spacing:.3px}
+.hero-divider{width:1px;height:28px;background:rgba(255,255,255,.12)}
+.btn-subscribe{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:6px;
+  background:linear-gradient(135deg,#4df3c0,#22d3ee);
+  color:#0c1a2e;font-size:12px;font-weight:600;
+  transition:opacity .15s;white-space:nowrap;
+}
+.btn-subscribe:hover{opacity:.88}
+.btn-subscribe svg{width:13px;height:13px}
+
+/* ── NAV ─────────────────────────────────────────── */
 .nav{
-  flex-shrink:0;height:52px;
-  display:flex;align-items:center;gap:0;
-  padding:0 20px;
+  flex-shrink:0;height:46px;
+  display:flex;align-items:center;gap:6px;
+  padding:0 16px;
   background:var(--bg);
   border-bottom:1px solid var(--border);
   box-shadow:var(--sh);
-  z-index:50;position:relative;
+  z-index:50;
 }
-.logo{display:flex;align-items:baseline;gap:8px;margin-right:28px;flex-shrink:0}
-.logo-mark{
-  font-family:var(--serif);font-size:18px;font-weight:700;
-  color:var(--text);letter-spacing:-.3px;
-}
-.logo-mark span{color:var(--accent)}
-.logo-tag{
-  font-family:var(--mono);font-size:9px;font-weight:500;
-  color:var(--accent);background:var(--accent-l);
-  border:1px solid rgba(27,79,223,.15);
-  padding:2px 6px;border-radius:3px;letter-spacing:.5px;
-  text-transform:uppercase;
-}
+.nav-divider{width:1px;height:20px;background:var(--border);margin:0 4px;flex-shrink:0}
+.nf-label{font-size:11px;color:var(--text3);font-weight:500;white-space:nowrap;flex-shrink:0}
 
-/* FILTERS in nav */
-.nav-filters{display:flex;align-items:center;gap:8px;flex:1}
-.nf-label{font-size:11px;color:var(--text3);font-weight:500;letter-spacing:.3px;margin-right:2px;white-space:nowrap}
 .fsel{
-  padding:5px 24px 5px 9px;
+  padding:5px 22px 5px 8px;
   background:var(--bg2);border:1px solid var(--border);
-  border-radius:6px;color:var(--text);font-size:12px;
+  border-radius:6px;font-size:12px;
   cursor:pointer;appearance:none;transition:border-color .15s;
-  min-width:110px;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 8px center;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238fa0bb' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 7px center;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .fsel:focus{outline:none;border-color:var(--accent)}
 .fsel option{background:#fff}
-.srch-w{position:relative}
-.srch-w svg{position:absolute;left:8px;top:50%;transform:translateY(-50%);color:var(--text3);width:13px;height:13px;pointer-events:none}
+.fsel.w-co{min-width:130px;max-width:160px}
+.fsel.w-cn{min-width:110px;max-width:140px}
+.fsel.w-se{min-width:100px;max-width:130px}
+.fsel.w-mo{min-width:110px;max-width:140px}
+.fsel.w-iv{min-width:110px;max-width:130px}
+
+.srch-w{position:relative;flex-shrink:0}
+.srch-w svg{position:absolute;left:8px;top:50%;transform:translateY(-50%);color:var(--text3);width:12px;height:12px;pointer-events:none}
 .sinp{
-  padding:5px 9px 5px 28px;
+  padding:5px 8px 5px 26px;
   background:var(--bg2);border:1px solid var(--border);
-  border-radius:6px;color:var(--text);font-size:12px;width:180px;
+  border-radius:6px;font-size:12px;width:160px;
   transition:border-color .15s,width .25s;
 }
-.sinp:focus{outline:none;border-color:var(--accent);width:220px}
+.sinp:focus{outline:none;border-color:var(--accent);width:200px}
 .sinp::placeholder{color:var(--text3)}
+
 .btn-clr{
   display:none;align-items:center;gap:4px;
-  padding:5px 10px;border-radius:6px;
-  background:var(--signal-l);border:1px solid rgba(232,71,10,.2);
-  color:var(--signal);font-size:12px;font-weight:500;
-  transition:all .15s;white-space:nowrap;
+  padding:5px 9px;border-radius:6px;
+  background:var(--signal-l);border:1px solid rgba(224,70,10,.2);
+  color:var(--signal);font-size:11px;font-weight:500;
+  transition:all .15s;white-space:nowrap;flex-shrink:0;
 }
 .btn-clr.show{display:flex}
 .btn-clr svg{width:10px;height:10px}
-.btn-clr:hover{background:#ffe5dd}
+
 .ctag{
   font-family:var(--mono);font-size:11px;
   background:var(--bg3);border:1px solid var(--border);
-  color:var(--text3);padding:4px 10px;border-radius:20px;
-  white-space:nowrap;
+  color:var(--text3);padding:3px 9px;border-radius:20px;
+  white-space:nowrap;flex-shrink:0;
 }
 
-.nav-r{display:flex;align-items:center;gap:8px;margin-left:12px;flex-shrink:0}
+.nav-r{display:flex;align-items:center;gap:7px;margin-left:auto;flex-shrink:0}
 .sync-tag{
   font-family:var(--mono);font-size:10px;color:var(--green);
-  background:var(--green-l);border:1px solid rgba(5,150,105,.15);
-  padding:3px 9px;border-radius:4px;letter-spacing:.3px;
-  display:flex;align-items:center;gap:5px;
+  background:var(--green-l);border:1px solid rgba(4,120,87,.15);
+  padding:3px 8px;border-radius:4px;letter-spacing:.3px;
+  display:flex;align-items:center;gap:5px;white-space:nowrap;
 }
-.sdot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s ease infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.sdot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s ease infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.btn-export{
+  display:flex;align-items:center;gap:5px;
+  padding:5px 11px;border-radius:6px;
+  background:var(--bg2);border:1px solid var(--border);
+  color:var(--text2);font-size:11px;font-weight:500;
+  transition:all .15s;white-space:nowrap;
+}
+.btn-export:hover{background:var(--bg3);border-color:var(--border2);color:var(--text)}
+.btn-export svg{width:12px;height:12px}
 .ibtn{
   width:28px;height:28px;display:flex;align-items:center;justify-content:center;
   border:1px solid var(--border);border-radius:6px;color:var(--text2);
-  background:var(--bg2);transition:all .15s;
+  background:var(--bg2);transition:all .15s;flex-shrink:0;
 }
-.ibtn:hover{background:var(--bg3);border-color:var(--border2);color:var(--text)}
-.ibtn svg{width:13px;height:13px}
+.ibtn:hover{background:var(--bg3);color:var(--text)}
+.ibtn svg{width:12px;height:12px}
 
-/* ── BODY ────────────────────────────── */
+/* ── BODY ────────────────────────────────────────── */
 .body{display:flex;flex:1;overflow:hidden}
 
-/* ── SIDEBAR ─────────────────────────── */
+/* ── SIDEBAR ─────────────────────────────────────── */
 .sidebar{
-  width:280px;flex-shrink:0;
-  background:var(--bg2);
-  border-right:1px solid var(--border);
-  display:flex;flex-direction:column;
-  overflow:hidden;
+  width:272px;flex-shrink:0;
+  background:var(--bg2);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
 }
 .sb-head{
-  padding:14px 16px 12px;
-  border-bottom:1px solid var(--border);
-  flex-shrink:0;
+  padding:12px 14px 10px;border-bottom:1px solid var(--border);flex-shrink:0;
 }
-.sb-title{font-family:var(--serif);font-size:13px;font-weight:700;margin-bottom:2px}
-.sb-sub{font-size:11px;color:var(--text3)}
-.sb-list{flex:1;overflow-y:auto;padding:8px 0}
+.sb-h1{font-family:var(--serif);font-size:12.5px;font-weight:700;color:var(--text)}
+.sb-h2{font-size:11px;color:var(--text3);margin-top:2px}
+.sb-list{flex:1;overflow-y:auto;padding:4px 0}
 
 .co-row{
-  display:flex;flex-direction:column;gap:2px;
-  padding:10px 16px;border-bottom:1px solid var(--border);
+  padding:9px 14px;border-bottom:1px solid var(--border);
   cursor:pointer;transition:background .12s;
-  animation:fadeIn .3s ease both;
+  animation:slIn .3s ease both;
 }
 .co-row:hover{background:var(--bg3)}
-.co-row.active{background:var(--accent-l);border-left:2px solid var(--accent)}
-.co-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.co-name{font-size:13px;font-weight:600;color:var(--text);flex:1;min-width:0;
+.co-row.hi{background:var(--accent-l);border-left:2px solid var(--accent)}
+@keyframes slIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:none}}
+.co-line1{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:1px}
+.co-name{font-size:13px;font-weight:600;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.co-cc{font-size:11px;color:var(--text3);font-family:var(--mono);flex-shrink:0}
+.co-line2{font-size:11px;color:var(--text2);margin-bottom:3px;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.co-flag{font-size:16px;line-height:1;flex-shrink:0}
-.co-loc{font-size:11px;color:var(--text2);margin-top:1px}
-.co-bot{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
-.co-inv{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--accent)}
+.co-line3{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.co-inv{font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--accent)}
 .co-chip{
   font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.3px;
   padding:2px 6px;border-radius:3px;
-  background:var(--bg3);color:var(--text3);border:1px solid var(--border);
+  background:var(--bg4);color:var(--text3);border:1px solid var(--border);
+  white-space:nowrap;max-width:90px;overflow:hidden;text-overflow:ellipsis;
 }
-@keyframes fadeIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}
-
 .sb-empty{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:40px 20px;color:var(--text3);gap:8px;text-align:center;
 }
-.sb-empty svg{width:28px;height:28px;opacity:.35}
-.sb-empty p{font-size:12px;line-height:1.5}
+.sb-empty svg{width:24px;height:24px;opacity:.3}
+.sb-empty p{font-size:11.5px;line-height:1.5}
 
-/* ── MAP AREA ────────────────────────── */
+/* ── MAP ─────────────────────────────────────────── */
 .map-area{flex:1;display:flex;flex-direction:column;overflow:hidden}
-
-.map-wrap{flex:1;position:relative;overflow:hidden;background:var(--ocean)}
+.map-wrap{flex:1;position:relative;overflow:hidden}
 .world-svg{width:100%;height:100%;display:block}
 
 /* map tooltip */
@@ -192,161 +204,216 @@ select,input{font-family:var(--font)}
   background:var(--text);color:#fff;
   border-radius:8px;padding:10px 14px;
   pointer-events:none;display:none;
-  box-shadow:0 8px 24px rgba(0,0,0,.18);
-  max-width:230px;min-width:160px;
+  box-shadow:var(--sh2);max-width:240px;
 }
-.mtt-co{font-size:13px;font-weight:600;margin-bottom:3px}
-.mtt-loc{font-size:11px;opacity:.6;margin-bottom:6px}
+.mtt-co{font-size:13px;font-weight:600;margin-bottom:2px}
+.mtt-loc{font-size:11px;opacity:.55;margin-bottom:6px}
 .mtt-inv{font-family:var(--mono);font-size:13px;font-weight:500;color:#4df3c0}
-.mtt-sec{font-size:11px;opacity:.55;margin-top:2px}
+.mtt-sec{font-size:11px;opacity:.45;margin-top:2px}
+.mtt-more{font-size:11px;opacity:.45;margin-top:2px}
 
-/* signal markers */
-@keyframes ripple{0%{r:var(--br);opacity:.5}100%{r:calc(var(--br) * 2.8);opacity:0}}
-.sig-ring{animation:ripple 2.4s ease-out infinite}
+/* signal pulse */
+@keyframes rpl{0%{r:var(--br);opacity:.55}100%{r:calc(var(--br) * 3);opacity:0}}
+.sr{animation:rpl 2.6s ease-out infinite}
 
-/* ── INSIGHTS BAR ────────────────────── */
+/* ── INSIGHTS ────────────────────────────────────── */
 .insights{
-  flex-shrink:0;
-  border-top:1px solid var(--border);
-  background:var(--bg);
-  padding:12px 20px;
-  display:flex;align-items:flex-start;gap:16px;
+  flex-shrink:0;border-top:1px solid var(--border);background:var(--bg);
+  padding:10px 18px;display:flex;align-items:flex-start;gap:14px;
 }
-.ins-label{
-  font-family:var(--serif);font-style:italic;font-size:12px;color:var(--text2);
-  white-space:nowrap;padding-top:3px;flex-shrink:0;border-right:1px solid var(--border);
-  padding-right:16px;min-width:130px;
+.ins-lbl{
+  font-family:var(--serif);font-style:italic;font-size:11.5px;
+  color:var(--text2);white-space:nowrap;padding-top:4px;flex-shrink:0;
+  border-right:1px solid var(--border);padding-right:14px;min-width:110px;
 }
-.ins-grid{display:flex;gap:10px;flex-wrap:wrap;flex:1}
+.ins-grid{display:flex;gap:8px;flex-wrap:wrap;flex:1}
 .ins-card{
   display:flex;align-items:flex-start;gap:8px;
-  padding:6px 12px;border-radius:8px;
+  padding:6px 11px;border-radius:8px;
   background:var(--bg2);border:1px solid var(--border);
-  flex:1;min-width:160px;max-width:260px;
-  animation:insIn .4s ease both;
+  flex:1;min-width:150px;max-width:240px;
+  animation:fu .35s ease both;
 }
-@keyframes insIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.ins-icon{font-size:16px;line-height:1;flex-shrink:0;margin-top:2px}
-.ins-body{}
+@keyframes fu{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.ins-ico{font-size:15px;line-height:1;flex-shrink:0;margin-top:2px}
 .ins-val{font-size:13px;font-weight:600;color:var(--text);line-height:1.2}
 .ins-desc{font-size:11px;color:var(--text3);margin-top:1px}
+.ins-trend{
+  font-family:var(--mono);font-size:10px;margin-top:2px;
+  display:inline-flex;align-items:center;gap:3px;
+  padding:1px 5px;border-radius:3px;
+}
+.up{color:var(--green);background:var(--green-l)}
+.neutral{color:var(--text3);background:var(--bg3)}
 
-/* ── LOADING / STATES ────────────────── */
+/* ── LOADING ─────────────────────────────────────── */
 #loading{
-  position:absolute;inset:0;z-index:100;
-  background:var(--bg);
+  position:absolute;inset:0;z-index:100;background:var(--bg);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
 }
-.sp{width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+.sp{width:26px;height:26px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.ltxt{font-size:12px;color:var(--text3);letter-spacing:.3px}
+.ltxt{font-size:12px;color:var(--text3)}
 
-/* ── MODAL ───────────────────────────── */
+/* ── MODAL ───────────────────────────────────────── */
 .ov{
   position:fixed;inset:0;z-index:300;
-  background:rgba(13,26,46,.55);backdrop-filter:blur(6px);
+  background:rgba(12,26,46,.5);backdrop-filter:blur(6px);
   display:flex;align-items:center;justify-content:center;
-  animation:fadeOv .15s ease;
+  animation:fdi .15s ease;
 }
-@keyframes fadeOv{from{opacity:0}to{opacity:1}}
+@keyframes fdi{from{opacity:0}to{opacity:1}}
 .modal{
   background:var(--bg);border:1px solid var(--border);
-  border-radius:16px;padding:32px;width:540px;
-  max-height:85vh;overflow-y:auto;position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.15),0 4px 16px rgba(0,0,0,.1);
-  animation:mslide .2s ease;
+  border-radius:16px;padding:28px 32px;width:560px;
+  max-height:87vh;overflow-y:auto;position:relative;
+  box-shadow:0 24px 64px rgba(0,0,0,.14),0 4px 16px rgba(0,0,0,.08);
+  animation:msl .18s ease;
 }
-@keyframes mslide{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes msl{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .mx{
-  position:absolute;top:16px;right:16px;
-  width:28px;height:28px;border-radius:50%;
+  position:absolute;top:14px;right:14px;
+  width:26px;height:26px;border-radius:50%;
   border:1px solid var(--border);background:var(--bg2);
   color:var(--text2);font-size:14px;
   display:flex;align-items:center;justify-content:center;transition:all .15s;
 }
-.mx:hover{background:var(--bg3);color:var(--text);border-color:var(--border2)}
-.m-co{font-family:var(--serif);font-size:22px;font-weight:700;letter-spacing:-.3px;margin-bottom:4px}
-.m-sum{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:20px;
+.mx:hover{background:var(--bg3);color:var(--text)}
+.m-co{font-family:var(--serif);font-size:21px;font-weight:700;letter-spacing:-.3px;margin-bottom:4px}
+.m-sum{font-size:12.5px;color:var(--text2);line-height:1.7;margin-bottom:18px;
   padding-bottom:16px;border-bottom:1px solid var(--border)}
 .m-row{display:flex;justify-content:space-between;align-items:flex-start;
-  padding:8px 0;border-bottom:1px solid var(--border)}
+  padding:7px 0;border-bottom:1px solid var(--border)}
 .m-row:last-child{border-bottom:none}
-.m-k{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.8px;
-  color:var(--text3);padding-top:1px;width:130px;flex-shrink:0}
-.m-v{font-size:12.5px;color:var(--text);text-align:right;flex:1}
+.m-k{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.8px;
+  color:var(--text3);padding-top:1px;width:120px;flex-shrink:0}
+.m-v{font-size:12.5px;color:var(--text);text-align:right;flex:1;word-break:break-word}
 .m-v a{color:var(--accent);font-size:11px;font-family:var(--mono)}
 .m-v a:hover{text-decoration:underline}
+.m-badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;
+  background:var(--accent-l);color:var(--accent);font-family:var(--mono);
+  font-size:10px;border:1px solid rgba(24,71,214,.15)}
 
-/* ── RESPONSIVE ──────────────────────── */
+/* ── SUBSCRIBE MODAL ─────────────────────────────── */
+.sub-modal{
+  width:420px;
+  text-align:center;
+  padding:36px 36px 32px;
+}
+.sub-icon{font-size:36px;margin-bottom:12px}
+.sub-h{font-family:var(--serif);font-size:21px;font-weight:700;margin-bottom:6px}
+.sub-p{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:22px}
+.sub-form{display:flex;flex-direction:column;gap:10px}
+.sub-inp{
+  width:100%;padding:10px 14px;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:8px;font-size:13px;transition:border-color .15s;
+}
+.sub-inp:focus{outline:none;border-color:var(--accent)}
+.sub-inp::placeholder{color:var(--text3)}
+.btn-sub-go{
+  width:100%;padding:11px;border-radius:8px;
+  background:var(--accent);color:#fff;
+  font-size:13px;font-weight:600;font-family:var(--font);
+  transition:opacity .15s;
+}
+.btn-sub-go:hover{opacity:.88}
+.sub-note{font-size:11px;color:var(--text3);margin-top:8px}
+
 @media(max-width:900px){
-  .sidebar{width:240px}
-  .insights{flex-wrap:wrap}
-  .ins-label{border-right:none;padding-right:0;width:100%;padding-bottom:8px;border-bottom:1px solid var(--border)}
+  .sidebar{width:230px}
+  .hero-line,.hero-divider,.hero-stat:last-of-type{display:none}
 }
 @media(max-width:680px){
   .sidebar{display:none}
-  .nf-label,.logo-tag{display:none}
-  .sinp{width:140px}
+  .fsel.w-co,.fsel.w-mo,.fsel.w-iv{display:none}
 }
 </style>
 </head>
 <body>
 <div class="app">
 
-<!-- ═══ NAV ════════════════════════════ -->
-<nav class="nav">
-  <div class="logo">
-    <span class="logo-mark">Signal<span>48</span></span>
-    <span class="logo-tag">Intel</span>
+<!-- ═══ HERO ════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-logo">Signal<span>48</span></div>
+    <div class="hero-tag">INTEL</div>
+    <div class="hero-line">Track where global capital moves before it becomes news.</div>
   </div>
-
-  <div class="nav-filters">
-    <span class="nf-label">Filter</span>
-
-    <div style="position:relative">
-      <select class="fsel" id="fc" onchange="go()"><option value="">All Companies</option></select>
+  <div class="hero-right">
+    <div class="hero-stat">
+      <div class="hero-stat-val" id="h-deals">—</div>
+      <div class="hero-stat-lbl">DEALS TRACKED</div>
     </div>
-    <div style="position:relative">
-      <select class="fsel" id="fn" onchange="go()"><option value="">All Countries</option></select>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-val" id="h-cap">—</div>
+      <div class="hero-stat-lbl">CAPITAL USD</div>
     </div>
-    <div style="position:relative">
-      <select class="fsel" id="fs" onchange="go()"><option value="">All Sectors</option></select>
-    </div>
-
-    <div class="srch-w">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input class="sinp" id="sq" type="text" placeholder="Search company, theme…" oninput="go()">
-    </div>
-
-    <button class="btn-clr" id="btn-clr" onclick="clrF()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
-      Clear
+    <div class="hero-divider"></div>
+    <button class="btn-subscribe" onclick="openSub()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      Get Alerts
     </button>
-
-    <div class="ctag" id="ctag">—</div>
   </div>
+</div>
+
+<!-- ═══ NAV / FILTERS ════════════════════════════════ -->
+<nav class="nav">
+  <span class="nf-label">Filter</span>
+
+  <select class="fsel w-co" id="fc" onchange="go()"><option value="">All Companies</option></select>
+  <select class="fsel w-cn" id="fn" onchange="go()"><option value="">All Countries</option></select>
+  <select class="fsel w-se" id="fs" onchange="go()"><option value="">All Sectors</option></select>
+  <select class="fsel w-mo" id="fm" onchange="go()"><option value="">All Periods</option></select>
+  <select class="fsel w-iv" id="fv" onchange="go()">
+    <option value="">All Deal Sizes</option>
+    <option value="0-0.1">Under $100M</option>
+    <option value="0.1-0.5">$100M – $500M</option>
+    <option value="0.5-1">$500M – $1B</option>
+    <option value="1-5">$1B – $5B</option>
+    <option value="5-9999">$5B+</option>
+  </select>
+
+  <div class="nav-divider"></div>
+
+  <div class="srch-w">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input class="sinp" id="sq" type="text" placeholder="Search…" oninput="go()">
+  </div>
+
+  <button class="btn-clr" id="btn-clr" onclick="clrF()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    Clear
+  </button>
+
+  <div class="ctag" id="ctag">—</div>
 
   <div class="nav-r">
-    <div class="sync-tag" id="sync"><span class="sdot"></span><span id="sync-txt">LIVE</span></div>
-    <button class="ibtn" title="Refresh" onclick="loadData()">
+    <button class="btn-export" onclick="exportCSV()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export CSV
+    </button>
+    <div class="sync-tag"><span class="sdot"></span><span id="sync-txt">LIVE</span></div>
+    <button class="ibtn" title="Refresh data" onclick="loadData()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
     </button>
   </div>
 </nav>
 
-<!-- ═══ BODY ════════════════════════════ -->
+<!-- ═══ BODY ═════════════════════════════════════════ -->
 <div class="body">
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sb-head">
-      <div class="sb-title">Expansion Signals</div>
-      <div class="sb-sub" id="sb-sub">Loading…</div>
+      <div class="sb-h1">Expansion Signals</div>
+      <div class="sb-h2" id="sb-sub">Loading…</div>
     </div>
     <div class="sb-list" id="sb-list">
       <div class="sb-empty">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 8v4M12 16h.01"/></svg>
-        <p>Loading signals…</p>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <p>Fetching signals…</p>
       </div>
     </div>
   </aside>
@@ -354,30 +421,25 @@ select,input{font-family:var(--font)}
   <!-- MAP + INSIGHTS -->
   <div class="map-area">
     <div class="map-wrap" id="map-wrap">
-      <!-- Loading state -->
+
       <div id="loading">
         <div class="sp"></div>
-        <div class="ltxt">Fetching expansion signals…</div>
+        <div class="ltxt">Fetching expansion signals from live feed…</div>
       </div>
 
-      <!-- World Map SVG -->
-      <svg id="wmap" class="world-svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="display:none">
-        <!-- Ocean fill -->
-        <rect width="1000" height="500" fill="#dbe8f4"/>
-
-        <!-- Countries / Land -->
-        <g fill="#e9ecf3" stroke="#d4d9e6" stroke-width="0.6">
+      <svg id="wmap" class="world-svg" viewBox="0 0 1000 500"
+           preserveAspectRatio="xMidYMid meet"
+           xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <rect width="1000" height="500" fill="#dbe8f5"/>
+        <!-- Land masses -->
+        <g fill="#e8ecf5" stroke="#d2d8e8" stroke-width="0.6">
           <!-- North America -->
           <path d="M75,62 L102,54 L130,57 L155,50 L174,59 L195,54 L215,61 L230,55 L252,57 L265,71 L270,88 L260,110 L243,120 L239,133 L250,150 L243,165 L229,180 L219,194 L203,205 L187,226 L176,244 L163,260 L150,267 L140,260 L128,250 L120,237 L114,220 L107,200 L94,184 L84,172 L77,156 L71,138 L70,120 L72,104 L67,88 Z"/>
-          <!-- Greenland -->
           <path d="M254,20 L287,15 L322,18 L339,33 L333,53 L314,60 L290,63 L266,56 L252,43 Z"/>
-          <!-- Alaska -->
           <path d="M68,52 L82,48 L95,54 L92,65 L80,68 L68,62 Z"/>
-          <!-- Central America -->
           <path d="M153,270 L164,280 L170,293 L164,305 L155,308 L146,301 L143,287 L148,277 Z"/>
-          <!-- Caribbean islands (simplified) -->
-          <ellipse cx="222" cy="228" rx="5" ry="3" fill="#e9ecf3"/>
-          <ellipse cx="232" cy="232" rx="4" ry="3" fill="#e9ecf3"/>
+          <ellipse cx="222" cy="228" rx="5" ry="3"/>
+          <ellipse cx="232" cy="232" rx="4" ry="3"/>
           <!-- South America -->
           <path d="M175,293 L192,284 L215,290 L230,302 L241,323 L247,352 L251,381 L244,410 L234,433 L217,447 L200,455 L185,460 L172,450 L162,434 L155,416 L151,396 L148,368 L147,342 L150,318 L155,300 L166,292 Z"/>
           <!-- Iceland -->
@@ -385,68 +447,48 @@ select,input{font-family:var(--font)}
           <!-- UK + Ireland -->
           <path d="M404,62 L418,56 L430,61 L428,75 L418,80 L406,73 Z"/>
           <path d="M394,66 L403,62 L407,70 L402,76 L394,73 Z"/>
-          <!-- Europe (mainland) -->
+          <!-- Europe mainland -->
           <path d="M428,47 L453,40 L478,43 L503,47 L521,56 L530,68 L533,83 L525,97 L509,104 L492,110 L477,106 L463,111 L448,115 L440,109 L432,97 L427,83 L427,68 Z"/>
-          <!-- Scandinavia -->
           <path d="M450,22 L472,17 L494,20 L508,32 L502,48 L483,53 L464,50 L448,41 Z"/>
-          <!-- Finland + Baltics -->
           <path d="M495,20 L518,16 L535,22 L532,40 L518,50 L500,48 L492,36 Z"/>
-          <!-- Iberia -->
           <path d="M408,90 L432,86 L445,95 L440,110 L424,118 L408,112 L400,100 Z"/>
-          <!-- France lower + Italy -->
           <path d="M430,95 L450,98 L464,108 L475,125 L465,135 L450,130 L438,118 L428,108 Z"/>
-          <!-- Italy boot -->
           <path d="M467,110 L480,108 L488,120 L485,135 L475,142 L465,135 L462,120 Z"/>
-          <!-- Greece + Balkans -->
           <path d="M500,105 L518,100 L528,110 L525,125 L510,130 L498,124 L494,113 Z"/>
           <!-- Africa -->
           <path d="M432,153 L456,145 L482,142 L504,148 L524,162 L534,182 L539,207 L536,234 L532,262 L522,286 L510,305 L495,323 L478,336 L462,340 L445,334 L432,321 L421,298 L413,274 L408,248 L408,222 L412,197 L418,176 L427,164 Z"/>
-          <!-- Madagascar -->
           <path d="M556,265 L565,258 L572,265 L570,285 L561,292 L553,285 L552,272 Z"/>
           <!-- Middle East -->
           <path d="M524,130 L549,124 L573,127 L589,140 L594,157 L584,168 L566,173 L548,169 L532,157 L525,143 Z"/>
-          <!-- Arabian Peninsula -->
           <path d="M548,170 L574,165 L595,170 L608,185 L610,205 L598,215 L578,218 L558,210 L546,195 L544,180 Z"/>
-          <!-- Turkey -->
           <path d="M520,105 L550,100 L575,103 L590,112 L592,124 L578,130 L555,132 L535,128 L520,118 Z"/>
-          <!-- Russia / Siberia -->
+          <!-- Russia -->
           <path d="M516,20 L565,14 L615,12 L665,16 L712,20 L758,25 L800,30 L840,36 L862,44 L862,60 L848,73 L825,82 L800,87 L772,90 L742,92 L712,96 L684,102 L656,105 L628,100 L602,104 L580,110 L562,114 L544,110 L528,102 L519,90 L516,74 L514,55 Z"/>
-          <!-- Kazakhstan / Central Asia -->
           <path d="M568,105 L610,100 L648,102 L672,110 L678,128 L660,136 L630,138 L600,134 L575,126 L562,115 Z"/>
-          <!-- India subcontinent -->
+          <!-- India -->
           <path d="M593,150 L618,143 L643,147 L660,162 L667,182 L662,204 L650,220 L634,230 L617,226 L604,212 L596,194 L591,174 L591,158 Z"/>
-          <!-- Sri Lanka -->
-          <ellipse cx="632" cy="238" rx="5" ry="8" fill="#e9ecf3"/>
-          <!-- Southeast Asia mainland -->
+          <ellipse cx="632" cy="238" rx="5" ry="8"/>
+          <!-- SE Asia -->
           <path d="M695,158 L722,150 L746,154 L763,167 L766,185 L757,199 L739,204 L720,200 L705,187 L696,172 Z"/>
-          <!-- Indochina / Thailand-->
           <path d="M722,200 L738,195 L748,205 L745,225 L735,235 L720,235 L712,222 L714,208 Z"/>
           <!-- China -->
           <path d="M655,70 L698,62 L734,64 L768,72 L791,86 L795,105 L787,126 L766,138 L742,144 L716,140 L690,133 L666,124 L653,110 L648,90 Z"/>
           <!-- Japan -->
           <path d="M793,84 L810,78 L824,82 L827,96 L820,109 L807,114 L797,107 Z"/>
-          <!-- Korean peninsula -->
+          <ellipse cx="830" cy="90" rx="5" ry="10"/>
+          <!-- Korea + Taiwan -->
           <path d="M768,95 L783,92 L794,100 L792,116 L779,120 L767,111 Z"/>
-          <!-- Taiwan -->
-          <ellipse cx="780" cy="147" rx="7" ry="11" fill="#e9ecf3"/>
-          <!-- Philippines (simplified) -->
-          <ellipse cx="778" cy="195" rx="8" ry="18" fill="#e9ecf3"/>
-          <!-- Malaysia / Borneo -->
+          <ellipse cx="780" cy="147" rx="7" ry="11"/>
+          <!-- SE Islands -->
           <path d="M726,212 L754,206 L780,208 L800,220 L804,238 L794,250 L774,256 L752,254 L733,242 L724,228 Z"/>
-          <!-- Indonesia (Java+Sumatra simplified) -->
           <path d="M700,230 L730,222 L755,225 L765,238 L758,250 L732,255 L705,248 L696,238 Z"/>
-          <!-- Papua New Guinea -->
           <path d="M825,250 L855,242 L875,248 L878,265 L862,274 L840,272 L826,262 Z"/>
           <!-- Australia -->
           <path d="M748,292 L787,280 L826,280 L858,290 L876,308 L880,332 L873,356 L852,372 L826,378 L798,375 L775,363 L756,344 L747,320 L744,302 Z"/>
-          <!-- New Zealand -->
           <path d="M878,355 L892,347 L902,352 L903,367 L895,376 L882,375 L876,364 Z"/>
-          <!-- Japan islands continued -->
-          <ellipse cx="830" cy="90" rx="5" ry="10" fill="#e9ecf3"/>
         </g>
-
-        <!-- Graticule lines (subtle) -->
-        <g stroke="#c8d4e3" stroke-width=".3" opacity=".5">
+        <!-- Grid lines -->
+        <g stroke="#c5d4e6" stroke-width=".3" opacity=".6">
           <line x1="0" y1="125" x2="1000" y2="125"/>
           <line x1="0" y1="250" x2="1000" y2="250"/>
           <line x1="0" y1="375" x2="1000" y2="375"/>
@@ -454,26 +496,34 @@ select,input{font-family:var(--font)}
           <line x1="500" y1="0" x2="500" y2="500"/>
           <line x1="750" y1="0" x2="750" y2="500"/>
         </g>
-
-        <!-- Signal dots layer -->
-        <g id="sig-layer"></g>
+        <!-- Map legend -->
+        <g>
+          <rect x="8" y="460" width="160" height="35" rx="5" fill="rgba(255,255,255,.82)" stroke="#dde4f0" stroke-width=".8"/>
+          <circle cx="22" cy="471" r="5" fill="#e0460a" stroke="#fff" stroke-width="1"/>
+          <text x="31" y="475" font-family="DM Sans" font-size="9" fill="#46546a">Single deal</text>
+          <circle cx="22" cy="487" r="6" fill="#1847d6" stroke="#fff" stroke-width="1"/>
+          <text x="31" y="491" font-family="DM Sans" font-size="9" fill="#46546a">Multiple deals</text>
+          <circle cx="86" cy="471" r="7" fill="#c47d00" stroke="#fff" stroke-width="1"/>
+          <text x="97" y="475" font-family="DM Sans" font-size="9" fill="#46546a">Mega ($10B+)</text>
+        </g>
+        <!-- Signal layer -->
+        <g id="sig"></g>
       </svg>
     </div>
 
     <!-- INSIGHTS -->
     <div class="insights" id="insights" style="display:none">
-      <div class="ins-label">What this<br>data tells us</div>
+      <div class="ins-lbl">What this<br>data tells us</div>
       <div class="ins-grid" id="ins-grid"></div>
     </div>
   </div>
-
-</div><!-- end body -->
-</div><!-- end app -->
+</div>
+</div>
 
 <!-- MAP TOOLTIP -->
 <div class="mtt" id="mtt"></div>
 
-<!-- MODAL -->
+<!-- DETAIL MODAL -->
 <div class="ov" id="ov" style="display:none" onclick="ovc(event)">
   <div class="modal">
     <button class="mx" onclick="cm()">✕</button>
@@ -481,60 +531,88 @@ select,input{font-family:var(--font)}
   </div>
 </div>
 
+<!-- SUBSCRIBE MODAL -->
+<div class="ov" id="sub-ov" style="display:none" onclick="ovc2(event)">
+  <div class="modal sub-modal">
+    <button class="mx" onclick="closeSub()">✕</button>
+    <div class="sub-icon">📡</div>
+    <div class="sub-h">Stay ahead of the signal</div>
+    <div class="sub-p">Get weekly alerts when new corporate expansion deals are added — filtered by your sectors and markets.</div>
+    <div class="sub-form">
+      <input class="sub-inp" id="sub-email" type="email" placeholder="Work email address">
+      <input class="sub-inp" id="sub-interest" type="text" placeholder="Markets / sectors you follow (optional)">
+      <button class="btn-sub-go" onclick="submitSub()">Subscribe — it's free</button>
+    </div>
+    <div class="sub-note">No spam. Unsubscribe anytime. Used only for expansion signal alerts.</div>
+  </div>
+</div>
+
 <script>
-/* ─── DATA ─── */
+/* ─── DATA & STATE ─── */
 let all=[], filt=[];
 
+/* ─── COORDINATE MAP ─── */
 const COORDS={
-  'USA':{x:178,y:165},'United States':{x:178,y:165},
+  'USA':{x:178,y:167},'United States':{x:178,y:167},
   'Canada':{x:168,y:110},'Mexico':{x:152,y:228},
-  'Brazil':{x:232,y:370},'Argentina':{x:218,y:430},
-  'Colombia':{x:192,y:305},'Chile':{x:205,y:418},
+  'Brazil':{x:232,y:372},'Argentina':{x:215,y:430},
+  'Colombia':{x:192,y:305},'Chile':{x:207,y:418},
+  'Peru':{x:198,y:350},'Venezuela':{x:210,y:290},
   'UK':{x:413,y:67},'United Kingdom':{x:413,y:67},
-  'Ireland':{x:400,y:67},'France':{x:435,y:83},
+  'Ireland':{x:400,y:67},'France':{x:435,y:82},
   'Germany':{x:462,y:70},'Netherlands':{x:450,y:63},
   'Spain':{x:422,y:100},'Portugal':{x:408,y:100},
-  'Italy':{x:473,y:113},'Switzerland':{x:458,y:84},
-  'Sweden':{x:472,y:40},'Norway':{x:455,y:32},
-  'Denmark':{x:461,y:54},'Finland':{x:500,y:34},
-  'Poland':{x:493,y:67},'Austria':{x:475,y:82},
-  'Belgium':{x:444,y:70},'Czech Republic':{x:478,y:76},
-  'Russia':{x:628,y:53},'Ukraine':{x:530,y:85},
-  'Turkey':{x:548,y:112},'Israel':{x:528,y:130},
-  'UAE':{x:570,y:158},'Saudi Arabia':{x:549,y:175},
-  'Qatar':{x:562,y:165},'Kuwait':{x:555,y:150},
-  'Egypt':{x:524,y:205},'Nigeria':{x:455,y:270},
-  'South Africa':{x:492,y:332},'Kenya':{x:535,y:278},
+  'Italy':{x:473,y:112},'Switzerland':{x:457,y:83},
+  'Sweden':{x:472,y:38},'Norway':{x:453,y:30},
+  'Denmark':{x:460,y:53},'Finland':{x:500,y:33},
+  'Poland':{x:493,y:66},'Austria':{x:474,y:81},
+  'Belgium':{x:443,y:69},'Czech Republic':{x:477,y:75},
+  'Romania':{x:508,y:83},'Hungary':{x:492,y:82},
+  'Greece':{x:504,y:112},'Croatia':{x:480,y:90},
+  'Russia':{x:630,y:52},'Ukraine':{x:528,y:84},
+  'Turkey':{x:546,y:112},'Israel':{x:527,y:130},
+  'UAE':{x:569,y:158},'Saudi Arabia':{x:548,y:175},
+  'Qatar':{x:561,y:165},'Kuwait':{x:554,y:150},
+  'Bahrain':{x:560,y:160},'Oman':{x:580,y:180},
+  'Egypt':{x:523,y:205},'Nigeria':{x:455,y:270},
+  'South Africa':{x:490,y:332},'Kenya':{x:535,y:278},
   'Morocco':{x:420,y:178},'Ethiopia':{x:545,y:258},
+  'Ghana':{x:442,y:272},'Tanzania':{x:530,y:295},
   'India':{x:626,y:188},'Pakistan':{x:600,y:162},
-  'Bangladesh':{x:655,y:185},'Sri Lanka':{x:632,y:238},
-  'China':{x:724,y:110},'Japan':{x:805,y:106},
-  'South Korea':{x:778,y:103},'Taiwan':{x:781,y:148},
-  'Hong Kong':{x:762,y:148},'Singapore':{x:738,y:218},
-  'Vietnam':{x:742,y:185},'Thailand':{x:722,y:200},
-  'Indonesia':{x:762,y:242},'Malaysia':{x:748,y:218},
-  'Philippines':{x:780,y:200},'Myanmar':{x:712,y:178},
+  'Bangladesh':{x:653,y:185},'Sri Lanka':{x:632,y:238},
+  'China':{x:724,y:110},'Japan':{x:806,y:106},
+  'South Korea':{x:777,y:102},'Taiwan':{x:780,y:148},
+  'Hong Kong':{x:762,y:148},'Macau':{x:759,y:152},
+  'Singapore':{x:737,y:218},'Vietnam':{x:742,y:185},
+  'Thailand':{x:721,y:200},'Indonesia':{x:762,y:242},
+  'Malaysia':{x:747,y:218},'Philippines':{x:780,y:200},
+  'Myanmar':{x:710,y:177},'Cambodia':{x:736,y:200},
   'Australia':{x:816,y:342},'New Zealand':{x:889,y:360},
-  'Kazakhstan':{x:620,y:108},'Uzbekistan':{x:596,y:120},
+  'Kazakhstan':{x:620,y:108},'Uzbekistan':{x:595,y:120},
+  'EMEA':{x:490,y:180},'APAC':{x:750,y:180},'Global':{x:500,y:250},
 };
 
 const FLAGS={
   'USA':'🇺🇸','United States':'🇺🇸','Canada':'🇨🇦','Mexico':'🇲🇽',
-  'Brazil':'🇧🇷','Argentina':'🇦🇷','Colombia':'🇨🇴',
+  'Brazil':'🇧🇷','Argentina':'🇦🇷','Colombia':'🇨🇴','Chile':'🇨🇱',
   'UK':'🇬🇧','United Kingdom':'🇬🇧','Ireland':'🇮🇪','France':'🇫🇷',
   'Germany':'🇩🇪','Netherlands':'🇳🇱','Spain':'🇪🇸','Italy':'🇮🇹',
   'Switzerland':'🇨🇭','Sweden':'🇸🇪','Norway':'🇳🇴','Denmark':'🇩🇰',
   'Finland':'🇫🇮','Poland':'🇵🇱','Austria':'🇦🇹','Belgium':'🇧🇪',
-  'Russia':'🇷🇺','Turkey':'🇹🇷','Israel':'🇮🇱',
-  'UAE':'🇦🇪','Saudi Arabia':'🇸🇦','Qatar':'🇶🇦',
+  'Romania':'🇷🇴','Hungary':'🇭🇺','Greece':'🇬🇷','Czech Republic':'🇨🇿',
+  'Russia':'🇷🇺','Ukraine':'🇺🇦','Turkey':'🇹🇷','Israel':'🇮🇱',
+  'UAE':'🇦🇪','Saudi Arabia':'🇸🇦','Qatar':'🇶🇦','Kuwait':'🇰🇼',
   'Egypt':'🇪🇬','Nigeria':'🇳🇬','South Africa':'🇿🇦','Kenya':'🇰🇪',
+  'Morocco':'🇲🇦','Ghana':'🇬🇭','Ethiopia':'🇪🇹',
   'India':'🇮🇳','Pakistan':'🇵🇰','China':'🇨🇳','Japan':'🇯🇵',
   'South Korea':'🇰🇷','Taiwan':'🇹🇼','Singapore':'🇸🇬',
   'Vietnam':'🇻🇳','Thailand':'🇹🇭','Indonesia':'🇮🇩','Malaysia':'🇲🇾',
+  'Philippines':'🇵🇭','Bangladesh':'🇧🇩',
   'Australia':'🇦🇺','New Zealand':'🇳🇿',
+  'Kazakhstan':'🇰🇿','Hong Kong':'🇭🇰',
 };
 
-/* ─── LOAD ─── */
+/* ─── LOAD DATA ─── */
 async function loadData(){
   document.getElementById('loading').style.display='flex';
   document.getElementById('wmap').style.display='none';
@@ -546,76 +624,125 @@ async function loadData(){
   try{
     const r=await fetch(url);
     if(!r.ok)throw new Error('HTTP '+r.status);
-    all=csv(await r.text());
-    popF(all);go();
+    all=parseCSV(await r.text());
+    updateHeroStats(all);
+    populateFilters(all);
+    go();
     const n=new Date();
-    document.getElementById('sync-txt').textContent=`SYNCED ${p(n.getHours())}:${p(n.getMinutes())}`;
+    document.getElementById('sync-txt').textContent=`SYNCED ${p2(n.getHours())}:${p2(n.getMinutes())}`;
   }catch(err){
     document.getElementById('loading').innerHTML=`
-      <div style="text-align:center;max-width:280px">
+      <div style="text-align:center;max-width:300px">
         <div style="font-size:28px;margin-bottom:10px;opacity:.4">⚠</div>
         <div style="font-size:13px;color:var(--text2);line-height:1.7">
-          Cannot reach your Google Sheet.<br>
-          Go to <strong>Share → Anyone with link → Viewer</strong>
+          Cannot reach Google Sheet.<br>
+          Set <strong>Share → Anyone with link → Viewer</strong>
         </div>
         <button onclick="loadData()" style="margin-top:14px;background:var(--accent);color:#fff;padding:7px 20px;border-radius:7px;font-size:12px;font-weight:500;border:none;cursor:pointer">Retry</button>
       </div>`;
     document.getElementById('sync-txt').textContent='ERROR';
   }
 }
+function p2(n){return n.toString().padStart(2,'0')}
 
-function p(n){return n.toString().padStart(2,'0')}
-
-function csv(t){
+/* ─── CSV PARSER ─── */
+function parseCSV(txt){
   const rows=[];let q=false,cur='',f=[];
-  for(let i=0;i<t.length;i++){
-    const c=t[i];
+  for(let i=0;i<txt.length;i++){
+    const c=txt[i];
     if(c==='"'){q=!q;}
     else if(c===','&&!q){f.push(cur.trim());cur='';}
     else if((c==='\n'||c==='\r')&&!q){
       if(cur||f.length){f.push(cur.trim());rows.push(f);}
-      f=[];cur='';if(c==='\r'&&t[i+1]==='\n')i++;
+      f=[];cur='';if(c==='\r'&&txt[i+1]==='\n')i++;
     }else cur+=c;
   }
   if(cur||f.length){f.push(cur.trim());rows.push(f);}
   if(rows.length<2)return[];
   const h=rows[0].map(x=>x.replace(/\uFEFF/g,'').trim());
-  return rows.slice(1).map(r=>{const o={};h.forEach((k,i)=>o[k]=r[i]||'');return o;})
+  return rows.slice(1)
+    .map(r=>{const o={};h.forEach((k,i)=>o[k]=r[i]||'');return o;})
     .filter(r=>r.Company&&r.Company!=='Company');
 }
 
-/* ─── FILTERS ─── */
-function popF(d){
-  fillS('fc',[...new Set(d.map(r=>r.Company).filter(Boolean))].sort());
-  fillS('fn',[...new Set(d.map(r=>r.Country).filter(Boolean))].sort());
-  fillS('fs',[...new Set(d.map(r=>r.Sector).filter(Boolean))].sort());
+/* ─── MONTH SORT ─── */
+const MON_ORD={january:1,february:2,march:3,april:4,may:5,june:6,
+  july:7,august:8,september:9,october:10,november:11,december:12};
+function parseMonthYear(s){
+  if(!s)return{sort:0,label:s};
+  const parts=s.trim().split(/\s+/);
+  const mon=MON_ORD[(parts[0]||'').toLowerCase()]||0;
+  const yr=parseInt(parts[1])||0;
+  return{sort:yr*100+mon,label:s};
 }
-function fillS(id,opts){
+
+/* ─── HERO STATS ─── */
+function updateHeroStats(data){
+  const cap=data.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
+  document.getElementById('h-deals').textContent=data.length.toLocaleString();
+  document.getElementById('h-cap').textContent='$'+formatBig(cap);
+}
+function formatBig(n){return n>=1000?`${(n/1000).toFixed(1)}T`:n>=1?`${n.toFixed(1)}B`:`${(n*1000).toFixed(0)}M`;}
+
+/* ─── POPULATE FILTERS ─── */
+function populateFilters(data){
+  fillSel('fc',[...new Set(data.map(r=>r.Company).filter(Boolean))].sort());
+  fillSel('fn',[...new Set(data.map(r=>r.Country).filter(Boolean))].sort());
+  fillSel('fs',[...new Set(data.map(r=>r.Sector).filter(Boolean))].sort());
+
+  // Periods sorted chronologically desc
+  const periods=[...new Set(data.map(r=>r.Month_Year).filter(Boolean))];
+  periods.sort((a,b)=>parseMonthYear(b).sort-parseMonthYear(a).sort);
+  fillSel('fm',periods);
+}
+function fillSel(id,opts){
   const s=document.getElementById(id),f=s.options[0];
   s.innerHTML='';s.appendChild(f);
-  opts.forEach(o=>{const e=document.createElement('option');e.value=o;e.textContent=o;s.appendChild(e);});
+  opts.forEach(o=>{const el=document.createElement('option');el.value=o;el.textContent=o;s.appendChild(el);});
 }
+
+/* ─── CLEAR FILTERS ─── */
 function clrF(){
-  ['fc','fn','fs'].forEach(i=>document.getElementById(i).value='');
-  document.getElementById('sq').value='';go();
+  ['fc','fn','fs','fm','fv'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('sq').value='';
+  go();
 }
+
+/* ─── APPLY FILTERS ─── */
 function go(){
   const co=document.getElementById('fc').value;
   const cn=document.getElementById('fn').value;
   const se=document.getElementById('fs').value;
-  const q=document.getElementById('sq').value.toLowerCase();
-  const hasF=co||cn||se||q;
+  const mo=document.getElementById('fm').value;
+  const iv=document.getElementById('fv').value;
+  const q=document.getElementById('sq').value.toLowerCase().trim();
+  const hasF=co||cn||se||mo||iv||q;
   document.getElementById('btn-clr').classList.toggle('show',!!hasF);
 
   filt=all.filter(r=>{
     if(co&&r.Company!==co)return false;
     if(cn&&r.Country!==cn)return false;
     if(se&&r.Sector!==se)return false;
-    if(q){const h=[r.Company,r.Country,r.Sector,r.Strategic_Theme,r.Short_Summary].join(' ').toLowerCase();if(!h.includes(q))return false;}
+    if(mo&&r.Month_Year!==mo)return false;
+    if(iv){
+      const[lo,hi]=iv.split('-').map(Number);
+      const usd=parseFloat(r.Investment_Amount_USD_Billion)||0;
+      if(usd<lo||usd>hi)return false;
+    }
+    if(q){
+      const hay=[r.Company,r.Country,r.Sector,r.Sub_Sector,r.Strategic_Theme,
+                 r.Short_Summary,r.City_Or_Region,r.Expansion_Type,r.Facility_Type,
+                 r.Month_Year].join(' ').toLowerCase();
+      if(!hay.includes(q))return false;
+    }
     return true;
   });
 
+  const cap=filt.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
   document.getElementById('ctag').textContent=`${filt.length} signal${filt.length!==1?'s':''}`;
+  document.getElementById('sb-sub').textContent=
+    `${filt.length} deal${filt.length!==1?'s':''} · $${formatBig(cap)} tracked`;
+
   renderSidebar(filt);
   renderMap(filt);
   renderInsights(filt);
@@ -625,40 +752,45 @@ function go(){
   document.getElementById('insights').style.display='flex';
 }
 
-/* ─── FORMAT ─── */
-function fI(r){
+/* ─── FORMAT INVESTMENT ─── */
+function fmtInv(r){
   const u=parseFloat(r.Investment_Amount_USD_Billion);
-  if(!isNaN(u)&&u>0)return u>=1?{v:u.toFixed(u%1===0?0:1),u:'B'}:{v:(u*1000).toFixed(0),u:'M'};
-  if(r.Investment_Amount_Original&&r.Investment_Amount_Original!=='0')
-    return{v:r.Investment_Amount_Original.replace(/[^\d,.]/g,'').slice(0,8),u:r.Investment_Currency||''};
+  if(!isNaN(u)&&u>0){
+    if(u>=1)return{v:u%1===0?u.toFixed(0):u.toFixed(1),u:'B',raw:u};
+    return{v:(u*1000).toFixed(0),u:'M',raw:u};
+  }
+  if(r.Investment_Amount_Original&&r.Investment_Amount_Original!=='0'&&r.Investment_Amount_Original!==''){
+    const clean=r.Investment_Amount_Original.replace(/[^\d,.]/g,'').slice(0,10);
+    if(clean)return{v:clean,u:r.Investment_Currency||'',raw:0};
+  }
   return null;
 }
 
 /* ─── SIDEBAR ─── */
 function renderSidebar(data){
   const list=document.getElementById('sb-list');
-  const sub=document.getElementById('sb-sub');
-  const cap=data.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
-  sub.textContent=`${data.length} deals · $${cap.toFixed(1)}B tracked`;
   list.innerHTML='';
   if(!data.length){
-    list.innerHTML=`<div class="sb-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>No signals match<br>your filters.</p></div>`;
+    list.innerHTML=`<div class="sb-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>No signals match<br>your current filters.</p></div>`;
     return;
   }
-  data.forEach((r,i)=>{
-    const inv=fI(r);const flag=FLAGS[r.Country]||'🌐';
+  // Sort by investment desc
+  const sorted=[...data].sort((a,b)=>(parseFloat(b.Investment_Amount_USD_Billion)||0)-(parseFloat(a.Investment_Amount_USD_Billion)||0));
+  sorted.forEach((r,i)=>{
+    const inv=fmtInv(r);
+    const flag=FLAGS[r.Country]||'🌐';
     const loc=[r.City_Or_Region,r.Country].filter(Boolean).join(', ');
     const div=document.createElement('div');
-    div.className='co-row';div.style.animationDelay=`${Math.min(i*.04,.5)}s`;
+    div.className='co-row';div.style.animationDelay=`${Math.min(i*.025,.5)}s`;
     div.innerHTML=`
-      <div class="co-top">
-        <div class="co-name">${e(r.Company)}</div>
-        <div class="co-flag">${flag}</div>
+      <div class="co-line1">
+        <div class="co-name">${esc(r.Company)}</div>
+        <div class="co-cc">${flag} ${esc(r.Country||'')}</div>
       </div>
-      ${loc?`<div class="co-loc">📍 ${e(loc)}</div>`:''}
-      <div class="co-bot">
+      ${loc?`<div class="co-line2">📍 ${esc(loc)}</div>`:''}
+      <div class="co-line3">
         <div class="co-inv">${inv?`$${inv.v}${inv.u} USD`:'Undisclosed'}</div>
-        ${r.Sector?`<div class="co-chip">${e(r.Sector)}</div>`:''}
+        ${r.Sector?`<div class="co-chip">${esc(r.Sector)}</div>`:''}
       </div>`;
     div.addEventListener('click',()=>openModal(r));
     list.appendChild(div);
@@ -667,30 +799,31 @@ function renderSidebar(data){
 
 /* ─── MAP ─── */
 function renderMap(data){
-  const g=document.getElementById('sig-layer');
+  const g=document.getElementById('sig');
   g.innerHTML='';
   if(!data.length)return;
 
-  // group by country
   const byC={};
-  data.forEach(r=>{const k=r.Country||'';if(!byC[k])byC[k]=[];byC[k].push(r);});
+  data.forEach(r=>{
+    const k=r.Country||'';
+    if(!byC[k])byC[k]=[];
+    byC[k].push(r);
+  });
 
   Object.entries(byC).forEach(([country,rows])=>{
     const pos=COORDS[country];if(!pos)return;
     const cap=rows.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
-    const isL=cap>=10,isM=rows.length>1;
-    const col=isL?'#d97706':isM?'#1b4fdf':'#e8470a';
-    const br=isL?11:isM?9:7;
+    const isM=rows.length>1;
+    const isMega=cap>=10;
+    const col=isMega?'#c47d00':isM?'#1847d6':'#e0460a';
+    const br=isMega?12:isM?9:6;
 
-    // ripple
+    // ripple ring
     const ring=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    ring.setAttribute('cx',pos.x);ring.setAttribute('cy',pos.y);
-    ring.setAttribute('r',br);ring.setAttribute('fill','none');
-    ring.setAttribute('stroke',col);ring.setAttribute('stroke-width','1.5');
-    ring.setAttribute('opacity','0');
-    ring.style.setProperty('--br',br+'px');
-    ring.classList.add('sig-ring');
-    ring.style.animationDelay=(Math.random()*.8)+'s';
+    ring.setAttribute('cx',pos.x);ring.setAttribute('cy',pos.y);ring.setAttribute('r',br);
+    ring.setAttribute('fill','none');ring.setAttribute('stroke',col);ring.setAttribute('stroke-width','1.5');
+    ring.setAttribute('opacity','0');ring.style.setProperty('--br',br+'px');
+    ring.classList.add('sr');ring.style.animationDelay=(Math.random()*.8)+'s';
     g.appendChild(ring);
 
     // dot
@@ -698,24 +831,28 @@ function renderMap(data){
     dot.setAttribute('cx',pos.x);dot.setAttribute('cy',pos.y);dot.setAttribute('r',br);
     dot.setAttribute('fill',col);dot.setAttribute('stroke','#fff');dot.setAttribute('stroke-width','1.5');
     dot.style.cursor='pointer';
-    dot.style.filter=`drop-shadow(0 1px 3px rgba(0,0,0,.25))`;
+    dot.style.filter='drop-shadow(0 1px 4px rgba(0,0,0,.22))';
     dot.addEventListener('mousemove',ev=>showTT(ev,country,rows,cap));
     dot.addEventListener('mouseleave',()=>document.getElementById('mtt').style.display='none');
-    dot.addEventListener('click',()=>openModal(rows[0]));
+    dot.addEventListener('click',()=>{
+      document.getElementById('mtt').style.display='none';
+      rows.length===1?openModal(rows[0]):openGroupModal(country,rows);
+    });
     g.appendChild(dot);
 
     // count badge
     if(rows.length>1){
-      const bg=document.createElementNS('http://www.w3.org/2000/svg','circle');
-      bg.setAttribute('cx',pos.x+br-1);bg.setAttribute('cy',pos.y-br+1);
-      bg.setAttribute('r','6');bg.setAttribute('fill','#fff');bg.setAttribute('stroke',col);bg.setAttribute('stroke-width','1');
-      g.appendChild(bg);
-      const tx=document.createElementNS('http://www.w3.org/2000/svg','text');
-      tx.setAttribute('x',pos.x+br-1);tx.setAttribute('y',pos.y-br+4.5);
-      tx.setAttribute('text-anchor','middle');tx.setAttribute('fill',col);
-      tx.setAttribute('font-size','7');tx.setAttribute('font-family','DM Mono,monospace');tx.setAttribute('font-weight','500');
-      tx.textContent=rows.length;
-      g.appendChild(tx);
+      const cbg=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      cbg.setAttribute('cx',pos.x+br);cbg.setAttribute('cy',pos.y-br);
+      cbg.setAttribute('r','6');cbg.setAttribute('fill','#fff');
+      cbg.setAttribute('stroke',col);cbg.setAttribute('stroke-width','1');
+      g.appendChild(cbg);
+      const ct=document.createElementNS('http://www.w3.org/2000/svg','text');
+      ct.setAttribute('x',pos.x+br);ct.setAttribute('y',pos.y-br+4);
+      ct.setAttribute('text-anchor','middle');ct.setAttribute('fill',col);
+      ct.setAttribute('font-size','7.5');ct.setAttribute('font-family','DM Mono,monospace');ct.setAttribute('font-weight','500');
+      ct.textContent=rows.length;
+      g.appendChild(ct);
     }
   });
 }
@@ -724,12 +861,12 @@ function showTT(ev,country,rows,cap){
   const tt=document.getElementById('mtt');
   const top=rows[0];
   tt.innerHTML=`
-    <div class="mtt-co">${e(top.Company)}${rows.length>1?` <span style="opacity:.55;font-weight:400">+${rows.length-1} more</span>`:''}</div>
-    <div class="mtt-loc">${FLAGS[country]||'🌐'} ${e(country)}</div>
-    ${cap>0?`<div class="mtt-inv">$${cap.toFixed(cap<1?2:1)}${cap<1?'M':'B'} USD</div>`:''}
-    <div class="mtt-sec">${e(top.Sector||'')}</div>`;
+    <div class="mtt-co">${esc(top.Company)}${rows.length>1?`<span class="mtt-more"> +${rows.length-1} more</span>`:''}</div>
+    <div class="mtt-loc">${FLAGS[country]||'🌐'} ${esc(country)}</div>
+    ${cap>0?`<div class="mtt-inv">$${formatBig(cap)} tracked</div>`:''}
+    <div class="mtt-sec">${esc(top.Sector||'')}${top.Expansion_Type?' · '+esc(top.Expansion_Type):''}</div>`;
   tt.style.display='block';
-  tt.style.left=(ev.clientX+14)+'px';
+  tt.style.left=(ev.clientX+16)+'px';
   tt.style.top=(ev.clientY-12)+'px';
 }
 
@@ -741,59 +878,147 @@ function renderInsights(data){
 
   const cap=data.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
   const countries=[...new Set(data.map(r=>r.Country).filter(Boolean))];
-  const sectors=data.reduce((m,r)=>{if(r.Sector)m[r.Sector]=(m[r.Sector]||0)+1;return m;},{});
-  const topSector=Object.entries(sectors).sort((a,b)=>b[1]-a[1])[0];
-  const topDeal=data.reduce((mx,r)=>parseFloat(r.Investment_Amount_USD_Billion||0)>parseFloat(mx.Investment_Amount_USD_Billion||0)?r:mx,data[0]);
-  const topInv=fI(topDeal);
-  const countryCap=data.reduce((m,r)=>{if(r.Country){m[r.Country]=(m[r.Country]||0)+(parseFloat(r.Investment_Amount_USD_Billion)||0);}return m;},{});
-  const topCountry=Object.entries(countryCap).sort((a,b)=>b[1]-a[1])[0];
+
+  // Sector breakdown
+  const secMap=data.reduce((m,r)=>{if(r.Sector)m[r.Sector]=(m[r.Sector]||0)+1;return m;},{});
+  const topSec=Object.entries(secMap).sort((a,b)=>b[1]-a[1])[0];
+  const topSecPct=topSec?Math.round(topSec[1]/data.length*100):0;
+
+  // Top destination by capital
+  const capMap=data.reduce((m,r)=>{
+    if(r.Country){m[r.Country]=(m[r.Country]||0)+(parseFloat(r.Investment_Amount_USD_Billion)||0);}
+    return m;
+  },{});
+  const topCap=Object.entries(capMap).sort((a,b)=>b[1]-a[1])[0];
+
+  // Largest deal
+  const topDeal=[...data].sort((a,b)=>(parseFloat(b.Investment_Amount_USD_Billion)||0)-(parseFloat(a.Investment_Amount_USD_Billion)||0))[0];
+  const topInv=topDeal?fmtInv(topDeal):null;
+
+  // Jobs
+  const jobs=data.reduce((s,r)=>{const n=parseInt((r.Jobs_Created||'').replace(/\D/g,''));return s+(isNaN(n)?0:n);},0);
 
   const cards=[
-    {icon:'💰',val:`$${cap.toFixed(1)}B`,desc:`Total capital tracked across ${data.length} deals`},
-    {icon:'🌍',val:`${countries.length} market${countries.length!==1?'s':''}`,desc:`Active expansion destinations`},
-    topSector?{icon:'🏭',val:topSector[0],desc:`Most active sector — ${topSector[1]} deal${topSector[1]>1?'s':''}`}:null,
-    topCountry&&topCountry[1]>0?{icon:'📍',val:topCountry[0],desc:`Largest destination — $${topCountry[1].toFixed(1)}B inbound`}:null,
-    topInv&&topDeal?{icon:'🏆',val:`${topDeal.Company} $${topInv.v}${topInv.u}`,desc:`Largest single deal in current view`}:null,
-  ].filter(Boolean).slice(0,4);
+    {i:'💰',v:`$${formatBig(cap)}`,d:`Total capital across ${data.length} deal${data.length!==1?'s':''}`,t:null},
+    {i:'🌍',v:`${countries.length} market${countries.length!==1?'s':''}`,d:`Active expansion destinations`,t:null},
+    topSec?{i:'🏭',v:topSec[0],d:`${topSecPct}% of tracked deals — most active sector`,t:`↑ ${topSec[1]} deals`}:null,
+    topCap&&topCap[1]>0?{i:'📍',v:topCap[0],d:`Largest inbound market — $${formatBig(topCap[1])} tracked`,t:null}:null,
+    topInv&&topDeal?{i:'🏆',v:`${topDeal.Company}`,d:`Largest single deal — $${topInv.v}${topInv.u} USD`,t:null}:null,
+    jobs>0?{i:'👥',v:`${jobs>1000?(jobs/1000).toFixed(0)+'K':jobs}`,d:`Estimated jobs created from tracked expansions`,t:null}:null,
+  ].filter(Boolean).slice(0,5);
 
   cards.forEach((c,i)=>{
     const div=document.createElement('div');
-    div.className='ins-card';div.style.animationDelay=`${i*.06}s`;
-    div.innerHTML=`<div class="ins-icon">${c.icon}</div><div class="ins-body"><div class="ins-val">${e(c.val)}</div><div class="ins-desc">${e(c.desc)}</div></div>`;
+    div.className='ins-card';div.style.animationDelay=`${i*.05}s`;
+    div.innerHTML=`
+      <div class="ins-ico">${c.i}</div>
+      <div class="ins-body">
+        <div class="ins-val">${esc(c.v)}</div>
+        <div class="ins-desc">${esc(c.d)}</div>
+        ${c.t?`<div class="ins-trend up">${esc(c.t)}</div>`:''}
+      </div>`;
     grid.appendChild(div);
   });
 }
 
-/* ─── MODAL ─── */
+/* ─── MODALS ─── */
 function openModal(r){
-  const inv=fI(r);
-  const rows=[
-    ['Month / Year',r.Month_Year],['Country',r.Country],
-    ['City / Region',r.City_Or_Region],['Sector',r.Sector],
-    ['Sub-Sector',r.Sub_Sector],['Expansion Type',r.Expansion_Type],
+  const inv=fmtInv(r);
+  const fields=[
+    ['Month / Year',r.Month_Year],
+    ['Country',r.Country],
+    ['City / Region',r.City_Or_Region],
+    ['Sector',r.Sector],
+    ['Sub-Sector',r.Sub_Sector],
+    ['Expansion Type',r.Expansion_Type],
     ['Facility Type',r.Facility_Type],
-    ['Investment',inv?`$${inv.v}${inv.u} USD`:'Undisclosed'],
-    ['Jobs Created',r.Jobs_Created||'—'],['Timeline',r.Timeline||'—'],
+    ['Investment (USD)',inv?`$${inv.v}${inv.u}`:'Undisclosed'],
+    ['Investment (Original)',r.Investment_Amount_Original&&r.Investment_Amount_Original!=='0'?`${r.Investment_Amount_Original} ${r.Investment_Currency||''}`.trim():'—'],
+    ['Jobs Created',r.Jobs_Created||'—'],
+    ['Timeline',r.Timeline||'—'],
     ['Strategic Theme',r.Strategic_Theme||'—'],
-    ['Confidence',r.Confidence_Score?Math.round(parseFloat(r.Confidence_Score)*100)+'%':'—'],
-    ['Source',r.Source_URL||'—'],
-  ].filter(([,v])=>v&&v!=='—');
+    ['Confidence',r.Confidence_Score?`${Math.round(parseFloat(r.Confidence_Score)*100)}%`:'—'],
+    ['Data Source',r.Source_URL||'—'],
+    ['Fetched',r.Fetched_At||'—'],
+  ].filter(([,v])=>v&&v!=='—'&&v.trim()!=='');
+
   document.getElementById('mb').innerHTML=`
-    <div class="m-co">${FLAGS[r.Country]||''} ${e(r.Company)}</div>
-    <div class="m-sum">${e(r.Short_Summary||r.Reason_For_Expansion||'')}</div>
-    ${rows.map(([k,v])=>`
+    <div class="m-co">${FLAGS[r.Country]||''} ${esc(r.Company)}</div>
+    <div class="m-sum">${esc(r.Short_Summary||r.Reason_For_Expansion||'')}</div>
+    ${fields.map(([k,v])=>`
       <div class="m-row">
         <div class="m-k">${k}</div>
-        <div class="m-v">${k==='Source'&&v.startsWith('http')?`<a href="${e(v)}" target="_blank" rel="noopener">View source ↗</a>`:e(v)}</div>
+        <div class="m-v">${k==='Data Source'&&v.startsWith('http')
+          ?`<a href="${esc(v)}" target="_blank" rel="noopener">View source ↗</a>`
+          :esc(v)}</div>
       </div>`).join('')}`;
   document.getElementById('ov').style.display='flex';
 }
+
+function openGroupModal(country,rows){
+  const sorted=[...rows].sort((a,b)=>(parseFloat(b.Investment_Amount_USD_Billion)||0)-(parseFloat(a.Investment_Amount_USD_Billion)||0));
+  const flag=FLAGS[country]||'🌐';
+  const cap=rows.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
+  document.getElementById('mb').innerHTML=`
+    <div class="m-co">${flag} ${esc(country)}</div>
+    <div class="m-sum">${rows.length} expansion signals tracked · $${formatBig(cap)} total capital</div>
+    ${sorted.map(r=>{
+      const inv=fmtInv(r);
+      return `<div class="m-row" style="cursor:pointer;transition:background .12s" onmouseover="this.style.background='var(--bg2)'" onmouseout="this.style.background=''" onclick="openModal(${JSON.stringify(r).replace(/"/g,'&quot;')})">
+        <div class="m-k" style="width:auto;flex:1">${esc(r.Company)}<br><span style="font-family:var(--font);font-size:11px;color:var(--text3);text-transform:none;letter-spacing:0">${esc(r.Month_Year||'')} · ${esc(r.Sector||'')}</span></div>
+        <div class="m-v" style="flex-shrink:0;margin-left:12px">${inv?`<span class="m-badge">$${inv.v}${inv.u}</span>`:'—'}</div>
+      </div>`;
+    }).join('')}`;
+  document.getElementById('ov').style.display='flex';
+}
+
 function ovc(ev){if(ev.target===document.getElementById('ov'))cm();}
 function cm(){document.getElementById('ov').style.display='none';}
 
-function e(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-document.addEventListener('keydown',ev=>{if(ev.key==='Escape')cm();});
+/* ─── SUBSCRIBE ─── */
+function openSub(){document.getElementById('sub-ov').style.display='flex';}
+function closeSub(){document.getElementById('sub-ov').style.display='none';}
+function ovc2(ev){if(ev.target===document.getElementById('sub-ov'))closeSub();}
+function submitSub(){
+  const email=document.getElementById('sub-email').value.trim();
+  if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
+  // Store locally (replace with your backend/Mailchimp/Sendgrid endpoint)
+  const subs=JSON.parse(localStorage.getItem('s48_subs')||'[]');
+  subs.push({email,interest:document.getElementById('sub-interest').value,ts:new Date().toISOString()});
+  localStorage.setItem('s48_subs',JSON.stringify(subs));
+  document.querySelector('.sub-modal').innerHTML=`
+    <div class="sub-icon">✅</div>
+    <div class="sub-h">You're subscribed</div>
+    <div class="sub-p">We'll send you weekly alerts on new expansion signals.<br>Check your inbox for a confirmation.</div>
+    <button onclick="closeSub()" style="margin-top:16px;background:var(--accent);color:#fff;padding:8px 24px;border-radius:8px;font-size:13px;font-weight:500;border:none;cursor:pointer">Done</button>`;
+}
 
+/* ─── EXPORT CSV ─── */
+function exportCSV(){
+  if(!filt.length){alert('No signals to export.');return;}
+  const cols=['Company','Month_Year','Country','City_Or_Region','Sector','Sub_Sector',
+    'Expansion_Type','Facility_Type','Investment_Amount_USD_Billion','Investment_Amount_Original',
+    'Investment_Currency','Jobs_Created','Timeline','Strategic_Theme','Short_Summary',
+    'Confidence_Score','Source_URL'];
+  const header=cols.join(',');
+  const rows=filt.map(r=>cols.map(c=>{
+    const v=String(r[c]||'').replace(/"/g,'""');
+    return v.includes(',')||v.includes('"')||v.includes('\n')?`"${v}"`:v;
+  }).join(','));
+  const csv=[header,...rows].join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download=`signal48-expansions-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+
+/* ─── UTILS ─── */
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+document.addEventListener('keydown',ev=>{
+  if(ev.key==='Escape'){cm();closeSub();}
+});
+
+/* ─── BOOT ─── */
 loadData();
 </script>
 </body>
