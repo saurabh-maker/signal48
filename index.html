@@ -13,7 +13,7 @@
      ║    Authorized origin: https://yourdomain.github.io  ║
      ║                                                      ║
      ║  STRIPE_LINK       → dashboard.stripe.com           ║
-     ║    Products → Add product ($20/mo) → Payment Link  ║
+     ║    Products → Add product ($204/mo) → Payment Link  ║
      ║    Copy the link URL (starts with buy.stripe.com)   ║
      ║                                                      ║
      ║  APPS_SCRIPT_URL   → script.google.com              ║
@@ -22,7 +22,7 @@
      ╚══════════════════════════════════════════════════════╝ -->
 <script>
 const CONFIG = {
-  SHEET_ID:         "1h9aSAVaZerfgdjeFWYfdmy_d2mwH2NxxA828ihCSSxI",
+    SHEET_ID:         "1h9aSAVaZerfgdjeFWYfdmy_d2mwH2NxxA828ihCSSxI",
   SHEET_GID:        "875272317",
   GOOGLE_CLIENT_ID: "903974375492-le08ka42avt5utkjt32h21tt95ttnqei.apps.googleusercontent.com",
   STRIPE_LINK:      "https://buy.stripe.com/YOUR_LINK",
@@ -30,6 +30,7 @@ const CONFIG = {
 };
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://accounts.google.com/gsi/client" async></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -286,23 +287,38 @@ a{color:var(--accent)}
 .ltxt{font-size:12px;color:var(--text3)}
 
 /* ══ RIGHT PANEL ════════════════════════════════════ */
-.rp{width:212px;flex-shrink:0;background:var(--bg2);
+.rp{width:232px;flex-shrink:0;background:var(--bg2);
   border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
 .rp-head{padding:13px 14px 10px;border-bottom:1px solid var(--border);flex-shrink:0}
 .rp-title{font-family:var(--serif);font-style:italic;font-size:12.5px;
   font-weight:700;color:var(--text);line-height:1.3;margin-bottom:4px}
 .rp-scope{font-family:var(--mono);font-size:9px;text-transform:uppercase;
   letter-spacing:.6px;color:var(--text3)}
-.ins-list{flex:1;overflow-y:auto;padding:4px 0}
-.ins-row{padding:10px 14px;border-bottom:1px solid var(--border);
-  animation:slin .3s ease both;cursor:default}
-.ins-row:last-child{border-bottom:none}
-.ins-ico{font-size:17px;line-height:1;margin-bottom:4px}
-.ins-val{font-size:15px;font-weight:700;color:var(--text);letter-spacing:-.4px;line-height:1.1;margin-bottom:2px}
-.ins-desc{font-size:10.5px;color:var(--text3);line-height:1.4}
-.ins-pill{font-family:var(--mono);font-size:9px;padding:1px 6px;
-  border-radius:3px;margin-top:3px;display:inline-block}
-.up{color:var(--green);background:var(--green-l)}
+.ins-list{flex:1;overflow-y:auto;padding:0;display:flex;flex-direction:column;gap:0}
+
+.rp-daterange{padding:10px 14px;border-bottom:1px solid var(--border);background:var(--accent-l)}
+.rp-dr-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);margin-bottom:2px}
+.rp-dr-val{font-size:12px;font-weight:600;color:var(--text);line-height:1.3}
+.rp-dr-sub{font-size:10.5px;color:var(--text2);margin-top:1px}
+
+.rp-chart-block{padding:12px 14px;border-bottom:1px solid var(--border)}
+.rp-chart-title{font-family:var(--mono);font-size:9px;text-transform:uppercase;
+  letter-spacing:.7px;color:var(--text3);margin-bottom:10px}
+.rp-donut-wrap{width:120px;height:120px;margin:0 auto 10px}
+.rp-bar-wrap{height:140px;position:relative}
+.rp-legend{display:flex;flex-direction:column;gap:4px;margin-top:2px}
+.rp-leg-item{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--text2)}
+.rp-leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.rp-leg-name{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px}
+.rp-leg-val{font-family:var(--mono);font-size:9.5px;color:var(--text3);flex-shrink:0}
+
+.rp-stat-row{padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.rp-stat{display:flex;align-items:flex-start;gap:8px}
+.rp-stat-ico{font-size:14px;line-height:1;flex-shrink:0}
+.rp-stat-body{}
+.rp-stat-val{font-size:13px;font-weight:700;color:var(--text);letter-spacing:-.3px;line-height:1.1}
+.rp-stat-desc{font-size:10px;color:var(--text3);margin-top:1px}
+
 
 /* ══ PAGE TABS (non-home) ═══════════════════════════ */
 .page{display:none;flex:1;overflow-y:auto;padding:48px 0}
@@ -522,7 +538,7 @@ a{color:var(--accent)}
     </div>
     <button class="btn-upgrade" onclick="openProGate()" id="upgrade-btn">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      Upgrade · $20/mo
+      Upgrade · $204/mo
     </button>
   </div>
 </div>
@@ -534,7 +550,7 @@ a{color:var(--accent)}
     <span class="ctx-pill">🏭 Facility Openings</span>
     <span class="ctx-pill">💰 Investment Flows</span>
     <span class="ctx-pill">🌍 Market Entries</span>
-    <span class="ctx-pill">📡 Updated 48 Hours</span>
+    <span class="ctx-pill">📡 Updated Weekly</span>
   </div>
 </div>
 
@@ -572,6 +588,7 @@ a{color:var(--accent)}
 <!-- ══ FILTER NAV ═══════════════════════════════════ -->
 <nav class="nav" id="filter-nav">
   <span class="nfl">Filter</span>
+  <div class="dd-wrap" id="dd-rg"><div class="dd-trigger" onclick="toggleDD('dd-rg')"><span class="dd-val" id="dd-rg-val">All Regions</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search regions…" oninput="filterDD('dd-rg',this.value)"></div><div class="dd-list" id="dd-rg-list"></div></div></div>
   <div class="dd-wrap" id="dd-co"><div class="dd-trigger" onclick="toggleDD('dd-co')"><span class="dd-val" id="dd-co-val">All Companies</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search companies…" oninput="filterDD('dd-co',this.value)"></div><div class="dd-list" id="dd-co-list"></div></div></div>
   <div class="dd-wrap" id="dd-cn"><div class="dd-trigger" onclick="toggleDD('dd-cn')"><span class="dd-val" id="dd-cn-val">All Countries</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search countries…" oninput="filterDD('dd-cn',this.value)"></div><div class="dd-list" id="dd-cn-list"></div></div></div>
   <div class="dd-wrap" id="dd-se"><div class="dd-trigger" onclick="toggleDD('dd-se')"><span class="dd-val" id="dd-se-val">All Sectors</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search sectors…" oninput="filterDD('dd-se',this.value)"></div><div class="dd-list" id="dd-se-list"></div></div></div>
@@ -681,7 +698,27 @@ a{color:var(--accent)}
       <div class="rp-title">What this data<br>tells us</div>
       <div class="rp-scope" id="ins-scope">GLOBAL VIEW</div>
     </div>
-    <div class="ins-list" id="ins-list"></div>
+    <div class="ins-list" id="ins-list">
+      <!-- date range strip -->
+      <div class="rp-daterange" id="rp-daterange" style="display:none">
+        <div class="rp-dr-label">Signal window</div>
+        <div class="rp-dr-val" id="rp-dr-val">—</div>
+        <div class="rp-dr-sub" id="rp-dr-sub"></div>
+      </div>
+      <!-- donut: investment by sector -->
+      <div class="rp-chart-block">
+        <div class="rp-chart-title">Investment by sector</div>
+        <div class="rp-donut-wrap"><canvas id="chart-donut"></canvas></div>
+        <div class="rp-legend" id="legend-donut"></div>
+      </div>
+      <!-- bar: top cities/regions -->
+      <div class="rp-chart-block" id="rp-city-block">
+        <div class="rp-chart-title" id="rp-city-title">Top locations by investment</div>
+        <div class="rp-bar-wrap"><canvas id="chart-bar"></canvas></div>
+      </div>
+      <!-- key stat -->
+      <div class="rp-stat-row" id="rp-stat-row"></div>
+    </div>
   </aside>
 </div>
 
@@ -700,18 +737,18 @@ a{color:var(--accent)}
           <div class="pf"><div class="pf-check">✓</div>Company + country + sector filters</div>
           <div class="pf"><div class="pf-check">✓</div>Signal detail modals</div>
           <div class="pf"><div class="pf-check">✓</div>Right-panel insights</div>
-          <div class="pf"><div class="pf-check">✓</div>48 Hours alert sign-up</div>
+          <div class="pf"><div class="pf-check">✓</div>Weekly alert sign-up</div>
           <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">Period & deal size filters</span></div>
           <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">Export to CSV / Excel</span></div>
           <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">KPI bar: Key industry, destination, type</span></div>
-          <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">Agent-powered alerts (48 Hours report)</span></div>
+          <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">Agent-powered alerts (weekly report)</span></div>
         </div>
         <button class="btn-price free-btn" onclick="openAuth()">Get started free →</button>
       </div>
       <div class="price-card featured">
         <div class="price-badge">MOST POPULAR</div>
         <div class="price-tier">Pro</div>
-        <div class="price-amount">$20<span>/month</span></div>
+        <div class="price-amount">$204<span>/month</span></div>
         <div class="price-desc">For investors, site selectors, and strategy teams who need the full picture before anyone else.</div>
         <div class="price-features">
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Everything in Free</div>
@@ -719,10 +756,10 @@ a{color:var(--accent)}
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Deal size filter ($100M to $5B+)</div>
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Export to CSV — all filtered signals</div>
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Key industry, destination & type KPIs</div>
-          <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Agent alerts — 48 Hours report, by sector/country</div>
+          <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Agent alerts — weekly report, by sector/country</div>
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Priority support via email</div>
         </div>
-        <button class="btn-price pro-btn" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $20/month →</button>
+        <button class="btn-price pro-btn" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $204/month →</button>
       </div>
     </div>
     <div style="text-align:center;font-size:12.5px;color:var(--text3);margin-top:8px">
@@ -754,7 +791,7 @@ a{color:var(--accent)}
       <h3>Confidence score</h3>
       <p>Every signal carries a <strong>confidence score (0–100%)</strong> reflecting how well-sourced and independently verified the announcement is. Scores above 90% indicate multiple corroborating sources with official confirmation. Scores below 70% indicate single-source announcements that are plausible but unconfirmed.</p>
       <h3>How often is data updated?</h3>
-      <p>The dataset is reviewed and updated <strong>48 Hours</strong>. New signals are added every Monday morning (UTC). The "Synced" timestamp in the top filter bar shows when your browser last fetched the live sheet.</p>
+      <p>The dataset is reviewed and updated <strong>weekly</strong>. New signals are added every Monday morning (UTC). The "Synced" timestamp in the top filter bar shows when your browser last fetched the live sheet.</p>
       <h3>Map display logic</h3>
       <p>The map defaults to showing the <strong>latest available data</strong>. Signals are grouped by country — clicking a country dot with multiple signals shows a ranked list sorted by investment size. The most recent deal per company is shown first. Historical signals remain searchable via the Period filter (Pro).</p>
       <h3>Investment amounts</h3>
@@ -884,11 +921,11 @@ function showTab(name, btn){
 
 /* ════════ FAQ DATA ════════ */
 const FAQS=[
-  {q:"Is the data real-time?",a:"The dataset is updated 48 Hours, every Monday. Your browser fetches the latest version on each page load. The 'Synced' badge in the filter bar shows the exact fetch time."},
+  {q:"Is the data real-time?",a:"The dataset is updated weekly, every Monday. Your browser fetches the latest version on each page load. The 'Synced' badge in the filter bar shows the exact fetch time."},
   {q:"What does the confidence score mean?",a:"Each signal is scored 0–100% based on how many independent sources corroborate it. 90%+ = officially confirmed by the company or government. Below 70% = plausible but single-source. We include lower-confidence signals but always display the score so you can judge the risk."},
   {q:"Why does the map sometimes show fewer signals than expected?",a:"The map shows all signals matching your active filters. If the company filter or search bar is active, only matching signals are plotted. Use the 'Clear' button to reset all filters and see the full dataset."},
-  {q:"How do I get alerts for specific sectors or countries?",a:"Click 'Set up alerts' in the filter bar or your user menu. You can select industries, companies, and countries — our system emails you a 48 Hours digest whenever new matching signals are added. Free for all users."},
-  {q:"Can I export the data?",a:"CSV export is a Pro feature ($20/mo). It exports all currently filtered signals with every data column including investment amounts, source URLs, confidence scores, and timelines."},
+  {q:"How do I get alerts for specific sectors or countries?",a:"Click 'Set up alerts' in the filter bar or your user menu. You can select industries, companies, and countries — our system emails you a weekly digest whenever new matching signals are added. Free for all users."},
+  {q:"Can I export the data?",a:"CSV export is a Pro feature ($204/mo). It exports all currently filtered signals with every data column including investment amounts, source URLs, confidence scores, and timelines."},
   {q:"How do you handle currency conversion?",a:"Investment amounts are converted to USD at the exchange rate prevailing at announcement date. The original amount and currency are always preserved and visible in the signal detail view."},
   {q:"Can I get a team plan?",a:"Yes — email contact@signal48.com for team pricing. We offer discounts for teams of 3+."},
   {q:"How do you decide which expansions to track?",a:"We focus on announcements above $10M involving physical infrastructure (plants, hubs, campuses, centres) or meaningful new market entry. Purely digital or online expansions are not included unless they involve significant headcount or infrastructure investment."},
@@ -1318,6 +1355,7 @@ function updateKPIs(data){
 
 /* ════════ SEARCHABLE DROPDOWNS ════════ */
 const DD_STATE={
+  'dd-rg':{val:'',opts:[]},
   'dd-co':{val:'',opts:[]},
   'dd-cn':{val:'',opts:[]},
   'dd-se':{val:'',opts:[]},
@@ -1362,7 +1400,7 @@ function filterDD(id,query){
   // "All" option
   const allOpt=document.createElement('div');
   allOpt.className='dd-opt all'+(state.val===''?' sel':'');
-  const labels={'dd-co':'All Companies','dd-cn':'All Countries','dd-se':'All Sectors','dd-mo':'All Periods'};
+  const labels={'dd-rg':'All Regions','dd-co':'All Companies','dd-cn':'All Countries','dd-se':'All Sectors','dd-mo':'All Periods'};
   allOpt.textContent=labels[id]||'All';
   allOpt.onclick=()=>{setDD(id,'');closeAllDD();go();};
   listEl.appendChild(allOpt);
@@ -1380,19 +1418,23 @@ function filterDD(id,query){
 function setDD(id,val){
   DD_STATE[id].val=val;
   const valEl=document.getElementById(id+'-val');if(!valEl)return;
-  const labels={'dd-co':'All Companies','dd-cn':'All Countries','dd-se':'All Sectors','dd-mo':'All Periods'};
+  const labels={'dd-rg':'All Regions','dd-co':'All Companies','dd-cn':'All Countries','dd-se':'All Sectors','dd-mo':'All Periods'};
   valEl.textContent=val||labels[id];
   valEl.classList.toggle('sel',!!val);
 }
 
 /* ════════ FILTERS ════════ */
 function popFilters(data){
+  // Region sorted in logical order
+  const REGION_ORDER=['North America','Europe','East Asia','Southeast Asia','South Asia','Middle East & Africa','Latin America','Oceania','Central Asia & CIS','Other'];
+  const regions=[...new Set(data.map(r=>r.Region).filter(Boolean))];
+  regions.sort((a,b)=>{const ia=REGION_ORDER.indexOf(a),ib=REGION_ORDER.indexOf(b);return (ia===-1?99:ia)-(ib===-1?99:ib);});
+  DD_STATE['dd-rg'].opts=regions;
   DD_STATE['dd-co'].opts=[...new Set(data.map(r=>r.Company).filter(Boolean))].sort();
   DD_STATE['dd-cn'].opts=[...new Set(data.map(r=>r.Country).filter(Boolean))].sort();
   DD_STATE['dd-se'].opts=[...new Set(data.map(r=>r.Sector).filter(Boolean))].sort();
   const periods=[...new Set(data.map(r=>r.Month_Year).filter(Boolean))].sort((a,b)=>mSort(b)-mSort(a));
   DD_STATE['dd-mo'].opts=periods;
-  // Pre-render lists
   Object.keys(DD_STATE).forEach(id=>filterDD(id,''));
 }
 function clrF(){
@@ -1403,23 +1445,23 @@ function clrF(){
 
 /* ════════ APPLY FILTERS ════════ */
 function go(){
+  const rg=DD_STATE['dd-rg'].val;
   const co=DD_STATE['dd-co'].val;
   const cn=DD_STATE['dd-cn'].val;
   const se=DD_STATE['dd-se'].val;
   const mo=DD_STATE['dd-mo'].val;
-  // IMPORTANT: search NEVER includes Month_Year, Timeline or any date field
   const q=(document.getElementById('sq').value||'').toLowerCase().trim();
-  const hasF=co||cn||se||mo||q;
+  const hasF=rg||co||cn||se||mo||q;
   const bclr=document.getElementById('bclr');if(bclr)bclr.classList.toggle('on',!!hasF);
 
   let filtered=all.filter(r=>{
+    if(rg&&r.Region!==rg)return false;
     if(co&&r.Company!==co)return false;
     if(cn&&r.Country!==cn)return false;
     if(se&&r.Sector!==se)return false;
     if(mo&&r.Month_Year!==mo)return false;
     if(q){
-      // search only non-date fields
-      const hay=[r.Company,r.Country,r.Sector,r.Sub_Sector,r.Strategic_Theme,
+      const hay=[r.Company,r.Country,r.Region,r.Sector,r.Sub_Sector,r.Strategic_Theme,
         r.Short_Summary,r.City_Or_Region,r.Expansion_Type,r.Facility_Type].join(' ').toLowerCase();
       if(!hay.includes(q))return false;
     }
@@ -1431,9 +1473,23 @@ function go(){
   const cap=filtered.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
   const ctag=document.getElementById('ctag');if(ctag)ctag.textContent=`${filtered.length} signal${filtered.length!==1?'s':''}`;
   const sbsub=document.getElementById('sbsub');if(sbsub)sbsub.textContent=`${filtered.length} deal${filtered.length!==1?'s':''} · $${bigFmt(cap)} tracked`;
+
+  // Update right panel scope label
+  const scope=document.getElementById('ins-scope');
+  if(scope)scope.textContent=rg?`${rg.toUpperCase()} VIEW`:hasF?'FILTERED VIEW':'GLOBAL VIEW';
+
   renderSidebar(filtered);renderMap(mapData);renderInsights(filtered,hasF);
   document.getElementById('loading').style.display='none';
   document.getElementById('wmap').style.display='block';
+
+  // Zoom map to selected country or region
+  const zoomTarget=cn||rg;
+  if(zoomTarget){
+    const zb=MAP_ZOOM[zoomTarget]||REGION_ZOOM[zoomTarget];
+    zoomMap(zb||null);
+  }else{
+    zoomMap(null); // reset to world view
+  }
 }
 
 /* ════════ FORMAT INVESTMENT ════════ */
@@ -1521,33 +1577,204 @@ function showTT(ev,country,rows,cap){
 }
 
 /* ════════ INSIGHTS ════════ */
+/* ════════ MAP ZOOM ════════ */
+const MAP_ZOOM={
+  // [x, y, w, h] of viewBox for each country/region
+  'USA':[60,80,230,140],'United States':[60,80,230,140],
+  'Canada':[60,20,230,130],'Mexico':[100,185,100,90],
+  'Brazil':[150,260,140,220],'Argentina':[160,370,100,130],
+  'Colombia':[155,250,90,100],'Latin America':[100,220,200,260],
+  'UK':[370,42,80,60],'United Kingdom':[370,42,80,60],
+  'Germany':[420,42,80,60],'France':[395,52,80,60],
+  'Netherlands':[415,42,65,50],'Poland':[455,42,70,50],
+  'Spain':[380,70,80,60],'Italy':[445,80,70,70],
+  'Sweden':[425,10,70,60],'Norway':[415,5,70,60],
+  'Switzerland':[420,60,60,40],'Ireland':[365,45,55,45],
+  'Denmark':[425,30,55,40],'Europe':[350,5,240,135],
+  'Russia':[460,5,420,100],'Ukraine':[490,60,90,55],
+  'Turkey':[490,85,120,55],'Central Asia & CIS':[470,5,400,120],
+  'UAE':[530,130,80,60],'Saudi Arabia':[500,130,140,90],
+  'Israel':[498,105,55,50],'Egypt':[488,175,80,70],
+  'Nigeria':[415,240,80,70],'South Africa':[450,295,90,80],
+  'Morocco':[385,150,75,60],'Middle East & Africa':[370,100,240,270],
+  'India':[560,130,140,130],'Pakistan':[558,120,90,80],
+  'Bangladesh':[615,155,60,50],'South Asia':[540,110,160,155],
+  'China':[610,55,200,120],'Japan':[760,72,80,60],
+  'South Korea':[735,78,75,55],'Taiwan':[742,120,60,50],
+  'East Asia':[595,45,240,120],
+  'Vietnam':[700,150,80,70],'Thailand':[685,162,75,65],
+  'Indonesia':[690,195,150,80],'Malaysia':[700,185,80,65],
+  'Philippines':[740,165,75,60],'Singapore':[700,192,60,48],
+  'Southeast Asia':[670,140,170,130],
+  'Australia':[700,265,200,135],'New Zealand':[840,320,100,80],
+  'Oceania':[685,255,230,160],
+  'APAC':[550,50,460,310],
+};
+const REGION_ZOOM={
+  'North America':[50,10,260,270],'Europe':[350,5,240,135],
+  'Middle East & Africa':[370,100,240,270],'South Asia':[540,110,160,155],
+  'Southeast Asia':[670,140,170,130],'East Asia':[595,45,240,120],
+  'Oceania':[685,255,230,160],'Latin America':[100,220,200,260],
+  'Central Asia & CIS':[470,5,400,120],
+};
+
+let _zoomAnim=null;
+function zoomMap(vb){
+  const svg=document.getElementById('wmap');if(!svg)return;
+  if(!vb){animateViewBox(svg,'0 0 1000 500');return;}
+  const[x,y,w,h]=vb;
+  // Add some padding
+  const pad=30;
+  animateViewBox(svg,`${x-pad} ${y-pad} ${w+pad*2} ${h+pad*2}`);
+}
+function animateViewBox(svg,target){
+  const start=svg.getAttribute('viewBox').split(' ').map(Number);
+  const end=target.split(' ').map(Number);
+  const dur=500,t0=performance.now();
+  cancelAnimationFrame(_zoomAnim);
+  function step(t){
+    const p=Math.min((t-t0)/dur,1);
+    const ease=1-Math.pow(1-p,3); // ease-out cubic
+    const vb=start.map((s,i)=>s+(end[i]-s)*ease).join(' ');
+    svg.setAttribute('viewBox',vb);
+    if(p<1)_zoomAnim=requestAnimationFrame(step);
+  }
+  _zoomAnim=requestAnimationFrame(step);
+}
+
+/* ════════ CHARTS ════════ */
+let _chartDonut=null,_chartBar=null;
+const CHART_COLORS=['#1847d6','#e0460a','#b45309','#047857','#7c3aed','#0891b2','#be185d','#15803d','#c2410c','#6d28d9'];
+
 function renderInsights(data,isFiltered){
-  const list=document.getElementById('ins-list');const scope=document.getElementById('ins-scope');
-  if(!list)return;list.innerHTML='';
-  if(scope)scope.textContent=isFiltered?'FILTERED VIEW':'GLOBAL VIEW';
-  if(!data.length){list.innerHTML='<div style="padding:12px 14px;font-size:11px;color:var(--text3)">No signals in current view.</div>';return;}
+  if(!data.length){
+    document.getElementById('rp-daterange').style.display='none';
+    document.getElementById('rp-stat-row').innerHTML='<div style="padding:16px 14px;font-size:11px;color:var(--text3)">No signals in current view.</div>';
+    destroyCharts();return;
+  }
+
+  // ── Date range ──
+  const periods=data.map(r=>r.Month_Year).filter(Boolean);
+  const sorted=[...periods].sort((a,b)=>mSort(a)-mSort(b));
+  const drEl=document.getElementById('rp-daterange');
+  const drVal=document.getElementById('rp-dr-val');
+  const drSub=document.getElementById('rp-dr-sub');
+  if(sorted.length){
+    const earliest=sorted[0],latest=sorted[sorted.length-1];
+    drEl.style.display='block';
+    drVal.textContent=earliest===latest?earliest:`${earliest} → ${latest}`;
+    // Current month count
+    const now=new Date();
+    const MONTHS=['january','february','march','april','may','june','july','august','september','october','november','december'];
+    const curM=MONTHS[now.getMonth()];const curY=now.getFullYear();
+    const curCount=data.filter(r=>{
+      const p=(r.Month_Year||'').toLowerCase().split(/\s+/);
+      return p[0]===curM&&parseInt(p[1])===curY;
+    }).length;
+    drSub.textContent=curCount?`${curCount} signal${curCount!==1?'s':''} added this month`:``;
+  }else{drEl.style.display='none';}
+
+  // ── Donut: investment by sector ──
+  const secCap=data.reduce((m,r)=>{
+    const s=r.Sector||'Other';const v=parseFloat(r.Investment_Amount_USD_Billion)||0;
+    m[s]=(m[s]||0)+v;return m;
+  },{});
+  const secTop=Object.entries(secCap).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  destroyCharts();
+  const dCtx=document.getElementById('chart-donut');
+  if(dCtx&&window.Chart){
+    _chartDonut=new Chart(dCtx,{
+      type:'doughnut',
+      data:{
+        labels:secTop.map(([k])=>k),
+        datasets:[{
+          data:secTop.map(([,v])=>v),
+          backgroundColor:CHART_COLORS.slice(0,secTop.length),
+          borderWidth:0,hoverOffset:3,
+        }]
+      },
+      options:{
+        cutout:'68%',
+        plugins:{legend:{display:false},tooltip:{
+          callbacks:{label:ctx=>`$${bigFmt(ctx.raw)}`}
+        }},
+        animation:{duration:600},
+      }
+    });
+    // Custom legend
+    const leg=document.getElementById('legend-donut');
+    leg.innerHTML=secTop.map(([k,v],i)=>`
+      <div class="rp-leg-item">
+        <div class="rp-leg-dot" style="background:${CHART_COLORS[i]}"></div>
+        <div class="rp-leg-name">${esc(k)}</div>
+        <div class="rp-leg-val">$${bigFmt(v)}</div>
+      </div>`).join('');
+  }
+
+  // ── Bar: top cities/locations ──
+  // If country is selected → use City_Or_Region. Else → use Country
+  const cn=DD_STATE['dd-cn'].val;
+  const rg=DD_STATE['dd-rg'].val;
+  const useCity=!!(cn||(rg&&data.length<100));
+  const locField=useCity?'City_Or_Region':'Country';
+  const titleEl=document.getElementById('rp-city-title');
+  if(titleEl)titleEl.textContent=useCity?'Top cities / states':'Top countries by investment';
+
+  const locCap=data.reduce((m,r)=>{
+    const k=r[locField]||'Unknown';const v=parseFloat(r.Investment_Amount_USD_Billion)||0;
+    if(k&&k!=='Unknown')m[k]=(m[k]||0)+v;return m;
+  },{});
+  const locTop=Object.entries(locCap).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const bCtx=document.getElementById('chart-bar');
+  if(bCtx&&window.Chart&&locTop.length){
+    _chartBar=new Chart(bCtx,{
+      type:'bar',
+      data:{
+        labels:locTop.map(([k])=>k.length>14?k.slice(0,13)+'…':k),
+        datasets:[{
+          data:locTop.map(([,v])=>v),
+          backgroundColor:CHART_COLORS[0],
+          borderRadius:3,
+          hoverBackgroundColor:CHART_COLORS[1],
+        }]
+      },
+      options:{
+        indexAxis:'y',
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`$${bigFmt(ctx.raw)}`}}},
+        scales:{
+          x:{display:false,grid:{display:false}},
+          y:{grid:{display:false},ticks:{font:{size:10},color:'#8fa0bb'}}
+        },
+        animation:{duration:500},
+      }
+    });
+  }
+
+  // ── Key stat row ──
+  const statRow=document.getElementById('rp-stat-row');
   const cap=data.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
-  const countries=[...new Set(data.map(r=>r.Country).filter(Boolean))];
-  const secMap=data.reduce((m,r)=>{if(r.Sector)m[r.Sector]=(m[r.Sector]||0)+1;return m;},{});
-  const topSec=Object.entries(secMap).sort((a,b)=>b[1]-a[1])[0];
-  const capMap=data.reduce((m,r)=>{if(r.Country)m[r.Country]=(m[r.Country]||0)+(parseFloat(r.Investment_Amount_USD_Billion)||0);return m;},{});
-  const topCap=Object.entries(capMap).sort((a,b)=>b[1]-a[1])[0];
+  const jobs=data.reduce((s,r)=>{const n=parseInt((r.Jobs_Created||'').replace(/\D/g,''));return s+(isNaN(n)?0:n);},0);
   const topDeal=[...data].sort((a,b)=>(parseFloat(b.Investment_Amount_USD_Billion)||0)-(parseFloat(a.Investment_Amount_USD_Billion)||0))[0];
   const topInv=topDeal?fmtI(topDeal):null;
-  const jobs=data.reduce((s,r)=>{const n=parseInt((r.Jobs_Created||'').replace(/\D/g,''));return s+(isNaN(n)?0:n);},0);
-  const rows=[
-    {i:'💰',v:'$'+bigFmt(cap),d:`${data.length} deal${data.length!==1?'s':''} tracked`},
-    {i:'🌍',v:`${countries.length} market${countries.length!==1?'s':''}`,d:'Active destinations'},
-    topSec?{i:'🏭',v:topSec[0],d:`${Math.round(topSec[1]/data.length*100)}% of deals — top sector`,pill:`${topSec[1]} deals`}:null,
-    topCap&&topCap[1]>0?{i:'📍',v:topCap[0],d:`Largest inbound · $${bigFmt(topCap[1])}`}:null,
-    topInv&&topDeal?{i:'🏆',v:topDeal.Company,d:`Biggest deal · $${topInv.v}${topInv.u} USD`}:null,
+  const stats=[
+    {i:'💰',v:`$${bigFmt(cap)}`,d:`${data.length} deals tracked`},
+    topInv&&topDeal?{i:'🏆',v:topDeal.Company,d:`Biggest deal · $${topInv.v}${topInv.u}`}:null,
     jobs>0?{i:'👥',v:jobs>1000?`${(jobs/1000).toFixed(0)}K jobs`:`${jobs} jobs`,d:'Est. jobs created'}:null,
-  ].filter(Boolean).slice(0,6);
-  rows.forEach((r,i)=>{
-    const d=document.createElement('div');d.className='ins-row';d.style.animationDelay=`${i*.04}s`;
-    d.innerHTML=`<div class="ins-ico">${r.i}</div><div class="ins-val">${esc(r.v)}</div><div class="ins-desc">${esc(r.d)}</div>${r.pill?`<div class="ins-pill up">${esc(r.pill)}</div>`:''}`;
-    list.appendChild(d);
-  });
+  ].filter(Boolean);
+  statRow.innerHTML=stats.map(s=>`
+    <div class="rp-stat">
+      <div class="rp-stat-ico">${s.i}</div>
+      <div class="rp-stat-body">
+        <div class="rp-stat-val">${esc(s.v)}</div>
+        <div class="rp-stat-desc">${esc(s.d)}</div>
+      </div>
+    </div>`).join('');
+}
+
+function destroyCharts(){
+  if(_chartDonut){_chartDonut.destroy();_chartDonut=null;}
+  if(_chartBar){_chartBar.destroy();_chartBar=null;}
+  const leg=document.getElementById('legend-donut');if(leg)leg.innerHTML='';
 }
 
 /* ════════ MODALS ════════ */
@@ -1598,7 +1825,7 @@ function openAlerts(){
   document.getElementById('mb2').innerHTML=`
     <div class="agent-modal">
       <h3>⚡ Set up your alert agent</h3>
-      <p>Select what you want to track. We'll email you a 48 Hours digest every Monday with new matching expansion signals.</p>
+      <p>Select what you want to track. We'll email you a weekly digest every Monday with new matching expansion signals.</p>
 
       <div class="ag-section">
         <div class="ag-label">🏭 Industries — search &amp; select</div>
@@ -1667,7 +1894,7 @@ function submitAgent(){
       <div style="font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:18px">
         ${sectors.length?`Tracking: <strong>${sectors.slice(0,3).join(', ')}</strong><br>`:''}
         ${countries.length?`In: <strong>${countries.slice(0,3).join(', ')}</strong><br>`:''}
-        48 Hours digest every Monday to <strong>${esc(email)}</strong>
+        Weekly digest every Monday to <strong>${esc(email)}</strong>
       </div>
       <button onclick="cm(2)" style="background:var(--accent);color:#fff;padding:8px 24px;border-radius:8px;font-size:13px;font-weight:500;border:none;cursor:pointer">Done</button>
     </div>`;
@@ -1683,11 +1910,11 @@ function openProGate(){
       <div class="pm-features">
         <div class="pmf">📥 Export filtered signals to CSV</div>
         <div class="pmf">📅 Period &amp; deal size filters</div>
-        <div class="pmf">⚡ Agent-powered 48 Hours reports</div>
+        <div class="pmf">⚡ Agent-powered weekly reports</div>
         <div class="pmf">📊 Key industry, destination &amp; type KPIs</div>
         <div class="pmf">🎯 Priority email support</div>
       </div>
-      <button class="btn-get-pro" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $20/month via Stripe →</button>
+      <button class="btn-get-pro" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $204/month via Stripe →</button>
       <div class="pm-free">Secure payment via Stripe. Cancel anytime. Free tier stays free forever.</div>
     </div>`;
   document.getElementById('ov2').style.display='flex';
