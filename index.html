@@ -1790,17 +1790,21 @@ function openModal(r){
 function openGroup(country,rows){
   const sorted=[...rows].sort((a,b)=>(parseFloat(b.Investment_Amount_USD_Billion)||0)-(parseFloat(a.Investment_Amount_USD_Billion)||0));
   const cap=rows.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
+  const useGrid=rows.length>10;
   document.getElementById('mh1').innerHTML=`
     <div class="m-co">${FLAGS[country]||'🌐'} ${esc(country)}</div>
     <div style="font-size:12.5px;color:var(--text2);margin-top:3px">${rows.length} expansion signals · $${bigFmt(cap)} total</div>`;
-  document.getElementById('mb1').innerHTML=
-    sorted.map(r=>{const inv=fmtI(r);return`
-      <div class="m-row" style="cursor:pointer" onclick='openModal(${JSON.stringify(r).replace(/'/g,"&#39;")})'>
-        <div class="mk" style="width:auto;flex:1;font-family:var(--font);font-size:12.5px;font-weight:600;text-transform:none;letter-spacing:0;color:var(--text)">
-          ${esc(r.Company)}<br><span style="font-size:11px;color:var(--text3);font-weight:400">${esc(r.Month_Year||'')}${r.Sector?' · '+esc(r.Sector):''}</span>
-        </div>
-        <div class="mv" style="flex-shrink:0;margin-left:10px">${inv?`<span class="mbadge">$${inv.v}${inv.u}</span>`:'—'}</div>
-      </div>`}).join('');
+  document.getElementById('mb1').innerHTML=`
+    <div style="${useGrid?'display:grid;grid-template-columns:1fr 1fr;gap:0 8px':''}">
+      ${sorted.map(r=>{const inv=fmtI(r);return`
+        <div class="m-row" style="cursor:pointer;${useGrid?'padding:7px 5px;':''}align-items:center" onclick='openModal(${JSON.stringify(r).replace(/'/g,"&#39;")})'>
+          <div class="mk" style="width:auto;flex:1;font-family:var(--font);font-size:12px;font-weight:600;text-transform:none;letter-spacing:0;color:var(--text);min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+            ${esc(r.Company)}<br>
+            <span style="font-size:10px;color:var(--text3);font-weight:400">${esc(r.Month_Year||'')}${r.Sector?' · '+esc(r.Sector):''}</span>
+          </div>
+          <div class="mv" style="flex-shrink:0;margin-left:6px">${inv?`<span class="mbadge" style="font-size:9px;padding:2px 6px">$${inv.v}${inv.u}</span>`:'—'}</div>
+        </div>`}).join('')}
+    </div>`;
   document.getElementById('ov1').style.display='flex';
 }
 
