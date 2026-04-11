@@ -379,8 +379,11 @@ a{color:var(--accent)}
   display:flex;align-items:center;justify-content:center;animation:fdi .15s ease}
 @keyframes fdi{from{opacity:0}to{opacity:1}}
 .modal{background:var(--bg);border:1px solid var(--border);border-radius:16px;
-  padding:28px 30px;width:560px;max-height:87vh;overflow-y:auto;
-  position:relative;box-shadow:var(--sh3);animation:msl .18s ease;scrollbar-width:thin}
+  width:560px;max-height:87vh;overflow:hidden;
+  display:flex;flex-direction:column;
+  position:relative;box-shadow:var(--sh3);animation:msl .18s ease}
+.modal-hd{padding:22px 28px 16px;border-bottom:1px solid var(--border);flex-shrink:0}
+.modal-bd{padding:0 28px 20px;overflow-y:auto;flex:1;scrollbar-width:thin}
 .modal.sm{width:440px}
 .modal.xs{width:380px}
 @keyframes msl{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -782,13 +785,13 @@ a{color:var(--accent)}
 
 <!-- MODALS -->
 <div class="ov" id="ov1" style="display:none" onclick="if(event.target===this)cm(1)">
-  <div class="modal"><button class="mx" onclick="cm(1)">✕</button><div id="mb1"></div></div>
+  <div class="modal"><button class="mx" onclick="cm(1)">✕</button><div class="modal-hd" id="mh1"></div><div class="modal-bd" id="mb1"></div></div>
 </div>
 <div class="ov" id="ov2" style="display:none" onclick="if(event.target===this)cm(2)">
-  <div class="modal sm"><button class="mx" onclick="cm(2)">✕</button><div id="mb2"></div></div>
+  <div class="modal sm"><button class="mx" onclick="cm(2)">✕</button><div class="modal-hd" id="mh2"></div><div class="modal-bd" id="mb2"></div></div>
 </div>
 <div class="ov" id="ov3" style="display:none" onclick="if(event.target===this)cm(3)">
-  <div class="modal sm"><button class="mx" onclick="cm(3)">✕</button><div id="mb3"></div></div>
+  <div class="modal sm"><button class="mx" onclick="cm(3)">✕</button><div class="modal-hd" id="mh3"></div><div class="modal-bd" id="mb3"></div></div>
 </div>
 
 <script>
@@ -1039,7 +1042,7 @@ function showAuthToast(msg){
 
 function openAuth(defaultTab){
   const tab=defaultTab||'up';
-  document.getElementById('mb3').innerHTML=`
+  document.getElementById('mh3').innerHTML='';document.getElementById('mb3').innerHTML=`
     <div class="auth-modal">
       <div class="am-logo">Signal<em>48</em></div>
       <div class="am-sub" id="am-headline">${tab==='up'?'Create your free account':'Welcome back'}</div>
@@ -1135,7 +1138,7 @@ async function checkEmailExists(email){
 }
 
 function openForgotPassword(){
-  document.getElementById('mb3').innerHTML=`
+  document.getElementById('mh3').innerHTML='';document.getElementById('mb3').innerHTML=`
     <div class="auth-modal">
       <div class="am-logo">Signal<em>48</em></div>
       <div class="am-sub" id="fp-hl">Reset your password</div>
@@ -1776,28 +1779,28 @@ function openModal(r){
     ['Confidence',r.Confidence_Score?`${Math.round(parseFloat(r.Confidence_Score)*100)}%`:'—'],
     ['Source',r.Source_URL||'—'],
   ].filter(([,v])=>v&&v!=='—'&&v.trim()!=='');
-  document.getElementById('mb1').innerHTML=`
+  document.getElementById('mh1').innerHTML=`
     <div class="m-co">${FLAGS[r.Country]||''} ${esc(r.Company)}</div>
-    <div class="m-sum">${esc(r.Short_Summary||r.Reason_For_Expansion||'')}</div>
-    ${fields.map(([k,v])=>`<div class="m-row"><div class="mk">${k}</div><div class="mv">${k==='Source'&&v.startsWith('http')?`<a href="${esc(v)}" target="_blank" rel="noopener">View source ↗</a>`:esc(v)}</div></div>`).join('')}`;
+    ${r.Short_Summary||r.Reason_For_Expansion?`<div style="font-size:12.5px;color:var(--text2);margin-top:4px;line-height:1.55">${esc(r.Short_Summary||r.Reason_For_Expansion)}</div>`:''}`;
+  document.getElementById('mb1').innerHTML=
+    fields.map(([k,v])=>`<div class="m-row"><div class="mk">${k}</div><div class="mv">${k==='Source'&&v.startsWith('http')?`<a href="${esc(v)}" target="_blank" rel="noopener">View source ↗</a>`:esc(v)}</div></div>`).join('');
   document.getElementById('ov1').style.display='flex';
 }
 
 function openGroup(country,rows){
   const sorted=[...rows].sort((a,b)=>(parseFloat(b.Investment_Amount_USD_Billion)||0)-(parseFloat(a.Investment_Amount_USD_Billion)||0));
   const cap=rows.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
-  document.getElementById('mb1').innerHTML=`
-    <div style="position:sticky;top:-28px;margin:-28px -30px 12px;background:var(--bg);z-index:10;padding:20px 30px 14px;border-bottom:1px solid var(--border)">
-      <div class="m-co">${FLAGS[country]||'🌐'} ${esc(country)}</div>
-      <div class="m-sum" style="margin-bottom:0;padding-bottom:0;border-bottom:none">${rows.length} expansion signals · $${bigFmt(cap)} total</div>
-    </div>
-    ${sorted.map(r=>{const inv=fmtI(r);return`
+  document.getElementById('mh1').innerHTML=`
+    <div class="m-co">${FLAGS[country]||'🌐'} ${esc(country)}</div>
+    <div style="font-size:12.5px;color:var(--text2);margin-top:3px">${rows.length} expansion signals · $${bigFmt(cap)} total</div>`;
+  document.getElementById('mb1').innerHTML=
+    sorted.map(r=>{const inv=fmtI(r);return`
       <div class="m-row" style="cursor:pointer" onclick='openModal(${JSON.stringify(r).replace(/'/g,"&#39;")})'>
         <div class="mk" style="width:auto;flex:1;font-family:var(--font);font-size:12.5px;font-weight:600;text-transform:none;letter-spacing:0;color:var(--text)">
           ${esc(r.Company)}<br><span style="font-size:11px;color:var(--text3);font-weight:400">${esc(r.Month_Year||'')}${r.Sector?' · '+esc(r.Sector):''}</span>
         </div>
         <div class="mv" style="flex-shrink:0;margin-left:10px">${inv?`<span class="mbadge">$${inv.v}${inv.u}</span>`:'—'}</div>
-      </div>`}).join('')}`;
+      </div>`}).join('');
   document.getElementById('ov1').style.display='flex';
 }
 
@@ -1808,7 +1811,7 @@ function openAlerts(){
   const COUNTRIES=[...new Set(all.map(r=>r.Country).filter(Boolean))].sort();
   const COMPANIES=[...new Set(all.map(r=>r.Company).filter(Boolean))].sort();
 
-  document.getElementById('mb2').innerHTML=`
+  document.getElementById('mh2').innerHTML='';document.getElementById('mb2').innerHTML=`
     <div class="agent-modal">
       <h3>⚡ Set up your alert agent</h3>
       <p>Select what you want to track. We'll email you a weekly digest every Monday with new matching expansion signals.</p>
@@ -1888,7 +1891,7 @@ function submitAgent(){
 
 /* ════════ PRO GATE ════════ */
 function openProGate(){
-  document.getElementById('mb2').innerHTML=`
+  document.getElementById('mh2').innerHTML='';document.getElementById('mb2').innerHTML=`
     <div class="pro-modal">
       <div class="pm-ico">🔒</div>
       <div class="pm-h">Signal48 Pro</div>
