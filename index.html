@@ -529,7 +529,7 @@ a{color:var(--accent)}
     </div>
     <button class="btn-upgrade" onclick="openProGate()" id="upgrade-btn">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      Upgrade · $20/mo
+      Upgrade · $204/mo
     </button>
   </div>
 </div>
@@ -684,7 +684,7 @@ a{color:var(--accent)}
       <div class="price-card featured">
         <div class="price-badge">MOST POPULAR</div>
         <div class="price-tier">Pro</div>
-        <div class="price-amount">$20<span>/month</span></div>
+        <div class="price-amount">$204<span>/month</span></div>
         <div class="price-desc">For investors, site selectors, and strategy teams who need the full picture before anyone else.</div>
         <div class="price-features">
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Everything in Free</div>
@@ -695,7 +695,7 @@ a{color:var(--accent)}
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Agent alerts — weekly report, by sector/country</div>
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Priority support via email</div>
         </div>
-        <button class="btn-price pro-btn" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $20/month →</button>
+        <button class="btn-price pro-btn" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $204/month →</button>
       </div>
     </div>
     <div style="text-align:center;font-size:12.5px;color:var(--text3);margin-top:8px">
@@ -935,7 +935,7 @@ const FAQS=[
   {q:"What does the confidence score mean?",a:"Each signal is scored 0–100% based on how many independent sources corroborate it. 90%+ = officially confirmed by the company or government. Below 70% = plausible but single-source. We include lower-confidence signals but always display the score so you can judge the risk."},
   {q:"Why does the map sometimes show fewer signals than expected?",a:"The map shows all signals matching your active filters. If the company filter or search bar is active, only matching signals are plotted. Use the 'Clear' button to reset all filters and see the full dataset."},
   {q:"How do I get alerts for specific sectors or countries?",a:"Click 'Set up alerts' in the filter bar or your user menu. You can select industries, companies, and countries — our system emails you a weekly digest whenever new matching signals are added. Free for all users."},
-  {q:"Can I export the data?",a:"CSV export is a Pro feature ($20/mo). It exports all currently filtered signals with every data column including investment amounts, source URLs, confidence scores, and timelines."},
+  {q:"Can I export the data?",a:"CSV export is a Pro feature ($204/mo). It exports all currently filtered signals with every data column including investment amounts, source URLs, confidence scores, and timelines."},
   {q:"How do you handle currency conversion?",a:"Investment amounts are converted to USD at the exchange rate prevailing at announcement date. The original amount and currency are always preserved and visible in the signal detail view."},
   {q:"Can I get a team plan?",a:"Yes — email contact@signal48.com for team pricing. We offer discounts for teams of 3+."},
   {q:"How do you decide which expansions to track?",a:"We focus on announcements above $10M involving physical infrastructure (plants, hubs, campuses, centres) or meaningful new market entry. Purely digital or online expansions are not included unless they involve significant headcount or infrastructure investment."},
@@ -1787,7 +1787,7 @@ function openGroup(country,rows){
   const sorted=[...rows].sort((a,b)=>(parseFloat(b.Investment_Amount_USD_Billion)||0)-(parseFloat(a.Investment_Amount_USD_Billion)||0));
   const cap=rows.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
   document.getElementById('mb1').innerHTML=`
-    <div style="position:sticky;top:-28px;background:var(--bg);z-index:10;padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid var(--border)">
+    <div style="position:sticky;top:-28px;margin:-28px -30px 12px;background:var(--bg);z-index:10;padding:20px 30px 14px;border-bottom:1px solid var(--border)">
       <div class="m-co">${FLAGS[country]||'🌐'} ${esc(country)}</div>
       <div class="m-sum" style="margin-bottom:0;padding-bottom:0;border-bottom:none">${rows.length} expansion signals · $${bigFmt(cap)} total</div>
     </div>
@@ -1900,7 +1900,7 @@ function openProGate(){
         <div class="pmf">📊 Key industry, destination &amp; type KPIs</div>
         <div class="pmf">🎯 Priority email support</div>
       </div>
-      <button class="btn-get-pro" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $20/month via Stripe →</button>
+      <button class="btn-get-pro" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $204/month via Stripe →</button>
       <div class="pm-free">Secure payment via Stripe. Cancel anytime. Free tier stays free forever.</div>
     </div>`;
   document.getElementById('ov2').style.display='flex';
