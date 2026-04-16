@@ -5,12 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Signal48 — Global Expansion Intelligence</title>
 
-
-<!-- Only the Apps Script URL lives in HTML. All other keys are fetched securely at runtime. -->
 <script>
 const CONFIG = {
   APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbytQTlB1HKKIKs3NDir2SlPBV7e3h1wn3pMMgOK-louJLpM9yjhLhk49fMsWV2RF5fP/exec',
-  SHEET_ID:'', SHEET_GID:'', GOOGLE_CLIENT_ID:'', STRIPE_LINK:'',
+  SHEET_ID:'', SHEET_GID:'', GOOGLE_CLIENT_ID:'', STRIPE_LINK:'', GCC_GID:'',
 };
 </script>
 
@@ -61,8 +59,6 @@ a{color:var(--accent)}
 .logo-tag{font-family:var(--mono);font-size:9px;color:#4df3c0;
   background:rgba(77,243,192,.12);border:1px solid rgba(77,243,192,.22);
   padding:2px 6px;border-radius:3px;letter-spacing:.5px}
-
-/* tab nav */
 .top-tabs{display:flex;gap:0;margin:0 16px}
 .top-tab{
   padding:0 14px;height:48px;display:flex;align-items:center;
@@ -71,7 +67,6 @@ a{color:var(--accent)}
 }
 .top-tab:hover{color:rgba(255,255,255,.8)}
 .top-tab.act{color:#fff;border-bottom-color:#4df3c0}
-
 .top-r{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .topbar-kpi{text-align:right;flex-shrink:0}
 .topbar-kpi-v{font-family:var(--mono);font-size:13px;font-weight:500;color:#fff;letter-spacing:-.3px}
@@ -82,8 +77,6 @@ a{color:var(--accent)}
   font-size:12px;font-weight:600;white-space:nowrap;transition:opacity .15s}
 .btn-upgrade:hover{opacity:.85}
 .btn-upgrade svg{width:12px;height:12px}
-
-/* auth button / avatar */
 .auth-btn{display:flex;align-items:center;gap:7px;padding:5px 12px;
   border-radius:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
   color:#fff;font-size:12px;font-weight:500;transition:all .15s;white-space:nowrap}
@@ -93,11 +86,9 @@ a{color:var(--accent)}
   display:flex;align-items:center;justify-content:center;
   font-size:11px;font-weight:700;color:#0b1929;flex-shrink:0}
 .user-menu{position:relative}
-.user-dropdown{
-  position:absolute;top:calc(100% + 8px);right:0;z-index:100;
+.user-dropdown{position:absolute;top:calc(100% + 8px);right:0;z-index:100;
   background:var(--bg);border:1px solid var(--border);border-radius:10px;
-  box-shadow:var(--sh2);min-width:200px;padding:8px 0;display:none;
-}
+  box-shadow:var(--sh2);min-width:200px;padding:8px 0;display:none}
 .user-dropdown.open{display:block}
 .ud-name{padding:10px 14px 6px;font-size:13px;font-weight:600}
 .ud-email{padding:0 14px 10px;font-size:11px;color:var(--text3);border-bottom:1px solid var(--border);margin-bottom:6px}
@@ -109,10 +100,8 @@ a{color:var(--accent)}
 .ud-badge.free{background:var(--bg3);color:var(--text3);border-color:var(--border)}
 
 /* ══ CONTEXT STRIP ═════════════════════════════════════ */
-.ctx{
-  flex-shrink:0;background:var(--accent-l);border-bottom:1px solid rgba(24,71,214,.1);
-  padding:7px 20px;display:flex;align-items:center;gap:14px;
-}
+.ctx{flex-shrink:0;background:var(--accent-l);border-bottom:1px solid rgba(24,71,214,.1);
+  padding:7px 20px;display:flex;align-items:center;gap:14px}
 .ctx-text{font-size:11.5px;color:var(--accent);flex:1;line-height:1.4}
 .ctx-text strong{font-weight:600}
 .ctx-pills{display:flex;gap:7px;flex-shrink:0;flex-wrap:wrap}
@@ -121,29 +110,44 @@ a{color:var(--accent)}
   color:var(--accent);border:1px solid rgba(24,71,214,.18);white-space:nowrap}
 
 /* ══ KPI BAR ═══════════════════════════════════════════ */
-.kpis{
-  flex-shrink:0;display:flex;
-  border-bottom:1px solid var(--border);background:var(--bg);
-}
-.kpi{
-  flex:1;padding:10px 16px;border-right:1px solid var(--border);
-  position:relative;
-}
+.kpis{flex-shrink:0;display:flex;border-bottom:1px solid var(--border);background:var(--bg)}
+.kpi{flex:1;padding:10px 16px;border-right:1px solid var(--border);position:relative}
 .kpi:last-child{border-right:none}
 .kpi-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;
-  letter-spacing:.8px;color:var(--text3);margin-bottom:3px;
-  display:flex;align-items:center;gap:5px}
+  letter-spacing:.8px;color:var(--text3);margin-bottom:3px;display:flex;align-items:center;gap:5px}
 .kpi-val{font-size:16px;font-weight:700;color:var(--text);letter-spacing:-.4px;line-height:1}
 .kpi-sub{font-size:10px;color:var(--text3);margin-top:2px}
 .kpi.pro-blur .kpi-val{filter:blur(5px);user-select:none;pointer-events:none}
 .kpi.pro-blur .kpi-sub{filter:blur(4px)}
-.kpi-lock{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  background:rgba(255,255,255,.7);border-radius:0;cursor:pointer;
-}
+.kpi-lock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.7);border-radius:0;cursor:pointer}
 .kpi-lock span{font-size:10px;color:var(--pro);font-weight:600;
   background:var(--pro-l);border:1px solid rgba(124,58,237,.2);
   padding:3px 8px;border-radius:4px;display:flex;align-items:center;gap:4px}
+
+/* ══ GCC HUB STRIP ══════════════════════════════════════ */
+.gcc-hub-strip{
+  flex-shrink:0;display:flex;gap:10px;
+  padding:12px 16px;border-bottom:1px solid var(--border);
+  background:var(--bg2);overflow-x:auto;
+}
+.gcc-hub{
+  flex:1;min-width:140px;max-width:220px;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:10px;padding:10px 13px;cursor:pointer;
+  transition:border-color .15s,box-shadow .15s;position:relative;
+}
+.gcc-hub:hover{border-color:var(--border2);box-shadow:var(--sh)}
+.gcc-hub.top{border-color:rgba(24,71,214,.3);background:var(--accent-l)}
+.gcc-hub.top .gcc-hub-count{color:var(--accent)}
+.gcc-hub.act{border-color:var(--accent);box-shadow:0 0 0 2px rgba(24,71,214,.12)}
+.gcc-hub-city{font-size:12px;font-weight:600;color:var(--text)}
+.gcc-hub-country{font-size:9.5px;color:var(--text3);margin-top:1px}
+.gcc-hub-count{font-size:22px;font-weight:700;color:var(--text2);line-height:1;margin:5px 0 2px;letter-spacing:-.5px}
+.gcc-hub-jobs{font-size:10px;color:var(--text3)}
+.gcc-hub-barwrap{height:3px;border-radius:2px;background:var(--bg3);margin-top:8px}
+.gcc-hub-fill{height:3px;border-radius:2px;background:var(--accent);transition:width .4s ease}
+.gcc-hub.monitoring .gcc-hub-count{color:var(--text3);font-size:16px}
 
 /* ══ NAV FILTERS ════════════════════════════════════════ */
 .nav{
@@ -161,7 +165,6 @@ a{color:var(--accent)}
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:100px;max-width:145px;
 }
 .fsel:focus{outline:none;border-color:var(--accent)}
-.fsel option{background:#fff}
 .ndiv{width:1px;height:20px;background:var(--border);margin:0 2px;flex-shrink:0}
 .srchw{position:relative;flex-shrink:0}
 .srchw svg{position:absolute;left:7px;top:50%;transform:translateY(-50%);
@@ -195,6 +198,14 @@ a{color:var(--accent)}
 .ibtn:hover{background:var(--bg3);color:var(--text)}
 .ibtn svg{width:12px;height:12px}
 
+/* type toggle pills in nav */
+.type-toggle{display:flex;gap:4px;flex-shrink:0}
+.tpill{padding:4px 9px;border-radius:20px;border:1px solid var(--border);
+  background:var(--bg2);font-size:11px;color:var(--text2);transition:all .15s;cursor:pointer;white-space:nowrap}
+.tpill:hover{border-color:var(--border2)}
+.tpill.on.new-gcc{background:var(--green-l);border-color:rgba(4,120,87,.25);color:var(--green)}
+.tpill.on.expansion{background:var(--pro-l);border-color:rgba(124,58,237,.25);color:var(--pro)}
+
 /* ══ BODY ════════════════════════════════════════════ */
 .body{display:flex;flex:1;overflow:hidden;position:relative;z-index:0}
 
@@ -205,16 +216,13 @@ a{color:var(--accent)}
 .sb-h1{font-family:var(--serif);font-size:12.5px;font-weight:700}
 .sb-h2{font-size:11px;color:var(--text3);margin-top:1px}
 .sb-list{flex:1;overflow-y:auto;padding:4px 0;min-height:0}
-.cor{padding:9px 14px;border-bottom:1px solid var(--border);
-  cursor:pointer;transition:background .12s;animation:slin .3s ease both}
+.cor{padding:9px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;animation:slin .3s ease both}
 .cor:hover{background:var(--bg3)}
 @keyframes slin{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:none}}
 .cor-r1{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:2px}
-.cor-name{font-size:12.5px;font-weight:600;flex:1;min-width:0;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cor-name{font-size:12.5px;font-weight:600;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cor-flag{font-size:14px;line-height:1;flex-shrink:0}
-.cor-loc{font-size:11px;color:var(--text2);margin-bottom:3px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cor-loc{font-size:11px;color:var(--text2);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cor-r3{display:flex;align-items:center;justify-content:space-between;gap:6px}
 .cor-inv{font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--accent)}
 .cor-chip{font-family:var(--mono);font-size:8.5px;text-transform:uppercase;letter-spacing:.3px;
@@ -230,7 +238,7 @@ a{color:var(--accent)}
 .dd-trigger{display:flex;align-items:center;gap:6px;padding:4px 8px 4px 10px;
   background:var(--bg2);border:1px solid var(--border);border-radius:6px;
   font-size:12px;cursor:pointer;min-width:110px;max-width:148px;
-  transition:border-color .15s;white-space:nowrap;}
+  transition:border-color .15s;white-space:nowrap}
 .dd-trigger:hover{border-color:var(--border2)}
 .dd-trigger.open{border-color:var(--accent);background:var(--bg)}
 .dd-val{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)}
@@ -245,17 +253,88 @@ a{color:var(--accent)}
 .dd-sinp:focus{outline:none;border-color:var(--accent)}
 .dd-sinp::placeholder{color:var(--text3)}
 .dd-list{max-height:220px;overflow-y:auto;padding:2px 0}
-.dd-opt{padding:7px 12px;font-size:12.5px;cursor:pointer;
-  transition:background .1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dd-opt{padding:7px 12px;font-size:12.5px;cursor:pointer;transition:background .1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dd-opt:hover{background:var(--bg2)}
 .dd-opt.sel{background:var(--accent-l);color:var(--accent);font-weight:500}
 .dd-opt.all{color:var(--text3);font-style:italic}
 .dd-empty{padding:10px 12px;font-size:12px;color:var(--text3);text-align:center}
 
+/* ══ GCC MAIN CONTENT ═══════════════════════════════════ */
+.gcc-body{display:flex;flex:1;overflow:hidden}
+.gcc-main{flex:1;overflow-y:auto;padding:10px 14px;min-height:0;display:flex;flex-direction:column;gap:8px}
+.gcc-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:60px 24px;color:var(--text3);gap:10px;text-align:center}
+.gcc-empty svg{width:28px;height:28px;opacity:.25}
+.gcc-empty p{font-size:12px;line-height:1.6}
+
+/* GCC Card */
+.gcc-card{
+  background:var(--bg);border:1px solid var(--border);border-radius:10px;
+  padding:12px 14px;display:flex;align-items:center;gap:12px;
+  cursor:pointer;transition:border-color .15s,box-shadow .15s;animation:slin .25s ease both;
+}
+.gcc-card:hover{border-color:var(--border2);box-shadow:var(--sh)}
+.gcc-avatar{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;
+  justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;letter-spacing:-.3px}
+.gcc-co{flex:1;min-width:0}
+.gcc-co-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.gcc-co-loc{font-size:11px;color:var(--text3);margin-bottom:5px;
+  display:flex;align-items:center;gap:4px}
+.gcc-badges{display:flex;gap:4px;flex-wrap:wrap}
+.gcc-badge{font-size:9.5px;padding:2px 7px;border-radius:3px;white-space:nowrap;max-width:110px;overflow:hidden;text-overflow:ellipsis}
+.gcc-badge-blue{background:var(--accent-l);color:var(--accent)}
+.gcc-badge-purple{background:var(--pro-l);color:var(--pro)}
+.gcc-badge-green{background:var(--green-l);color:var(--green)}
+.gcc-badge-gold{background:var(--gold-l);color:var(--gold)}
+.gcc-badge-gray{background:var(--bg3);color:var(--text3)}
+.gcc-badge-more{background:var(--bg3);color:var(--text3);font-family:var(--mono)}
+.gcc-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0}
+.gcc-jobs{font-size:16px;font-weight:700;color:var(--accent);letter-spacing:-.4px;line-height:1}
+.gcc-jobs-l{font-size:9.5px;color:var(--text3)}
+.gcc-type{font-size:9.5px;padding:3px 8px;border-radius:20px;font-weight:500;white-space:nowrap}
+.gcc-type-new{background:var(--green-l);color:var(--green);border:1px solid rgba(4,120,87,.2)}
+.gcc-type-exp{background:var(--pro-l);color:var(--pro);border:1px solid rgba(124,58,237,.2)}
+
+/* ══ GCC RIGHT PANEL ════════════════════════════════════ */
+.gcc-rp{
+  width:248px;flex-shrink:0;background:var(--bg2);
+  border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;
+}
+.gcc-rp-head{padding:13px 14px 10px;border-bottom:1px solid var(--border);flex-shrink:0}
+.gcc-rp-title{font-family:var(--serif);font-style:italic;font-size:12.5px;
+  font-weight:700;color:var(--text);line-height:1.3;margin-bottom:3px}
+.gcc-rp-scope{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3)}
+.gcc-rp-body{flex:1;overflow-y:auto;padding:0;display:flex;flex-direction:column;gap:0}
+.gcc-chart-block{padding:12px 14px;border-bottom:1px solid var(--border)}
+.gcc-chart-title{font-family:var(--mono);font-size:9px;text-transform:uppercase;
+  letter-spacing:.7px;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;gap:5px}
+.gcc-chart-title span{font-size:10px}
+.gcc-bar-wrap{height:120px;position:relative}
+.gcc-donut-wrap{width:110px;height:110px;margin:0 auto 8px}
+.gcc-legend{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.gcc-leg{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--text2)}
+.gcc-leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.gcc-leg-name{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px}
+.gcc-leg-val{font-family:var(--mono);font-size:9.5px;color:var(--text3);flex-shrink:0}
+.gcc-demand-wrap{height:160px;position:relative}
+.gcc-stat-row{padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.gcc-stat{display:flex;align-items:flex-start;gap:8px}
+.gcc-stat-ico{font-size:14px;line-height:1;flex-shrink:0}
+.gcc-stat-val{font-size:13px;font-weight:700;color:var(--text);letter-spacing:-.3px;line-height:1.1}
+.gcc-stat-desc{font-size:10px;color:var(--text3);margin-top:1px}
+.gcc-insight-box{margin:10px 14px;padding:10px 12px;border-radius:8px;
+  background:linear-gradient(135deg,var(--accent-l),#f0f4ff);
+  border:1px solid rgba(24,71,214,.12)}
+.gcc-insight-tag{font-family:var(--mono);font-size:8.5px;text-transform:uppercase;
+  letter-spacing:.5px;color:var(--accent);margin-bottom:4px}
+.gcc-insight-text{font-size:11px;color:var(--text2);line-height:1.55}
+.gcc-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:60px 24px;gap:12px}
+.gcc-loading .sp{width:22px;height:22px}
+
 /* ══ MAP ════════════════════════════════════════════ */
 .map-area{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}
 .map-wrap{flex:1;position:relative;overflow:hidden}
-.wsvg{width:100%;height:100%;display:block}
 .mtt{position:fixed;z-index:200;background:var(--text);color:#fff;
   border-radius:8px;padding:10px 14px;pointer-events:none;display:none;
   box-shadow:var(--sh2);max-width:230px}
@@ -272,24 +351,19 @@ a{color:var(--accent)}
 @keyframes spin{to{transform:rotate(360deg)}}
 .ltxt{font-size:12px;color:var(--text3)}
 
-/* ══ RIGHT PANEL ════════════════════════════════════ */
+/* ══ RIGHT PANEL (main map) ════════════════════════════════════ */
 .rp{width:232px;flex-shrink:0;background:var(--bg2);
   border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
 .rp-head{padding:13px 14px 10px;border-bottom:1px solid var(--border);flex-shrink:0}
-.rp-title{font-family:var(--serif);font-style:italic;font-size:12.5px;
-  font-weight:700;color:var(--text);line-height:1.3;margin-bottom:4px}
-.rp-scope{font-family:var(--mono);font-size:9px;text-transform:uppercase;
-  letter-spacing:.6px;color:var(--text3)}
+.rp-title{font-family:var(--serif);font-style:italic;font-size:12.5px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:4px}
+.rp-scope{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3)}
 .ins-list{flex:1;overflow-y:auto;padding:0;display:flex;flex-direction:column;gap:0}
-
 .rp-daterange{padding:10px 14px;border-bottom:1px solid var(--border);background:var(--accent-l)}
 .rp-dr-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);margin-bottom:2px}
 .rp-dr-val{font-size:12px;font-weight:600;color:var(--text);line-height:1.3}
 .rp-dr-sub{font-size:10.5px;color:var(--text2);margin-top:1px}
-
 .rp-chart-block{padding:12px 14px;border-bottom:1px solid var(--border)}
-.rp-chart-title{font-family:var(--mono);font-size:9px;text-transform:uppercase;
-  letter-spacing:.7px;color:var(--text3);margin-bottom:10px}
+.rp-chart-title{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.7px;color:var(--text3);margin-bottom:10px}
 .rp-donut-wrap{width:120px;height:120px;margin:0 auto 10px}
 .rp-bar-wrap{height:140px;position:relative}
 .rp-legend{display:flex;flex-direction:column;gap:4px;margin-top:2px}
@@ -297,7 +371,6 @@ a{color:var(--accent)}
 .rp-leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .rp-leg-name{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px}
 .rp-leg-val{font-family:var(--mono);font-size:9.5px;color:var(--text3);flex-shrink:0}
-
 .rp-stat-row{padding:12px 14px;display:flex;flex-direction:column;gap:8px}
 .rp-stat{display:flex;align-items:flex-start;gap:8px}
 .rp-stat-ico{font-size:14px;line-height:1;flex-shrink:0}
@@ -305,16 +378,12 @@ a{color:var(--accent)}
 .rp-stat-val{font-size:13px;font-weight:700;color:var(--text);letter-spacing:-.3px;line-height:1.1}
 .rp-stat-desc{font-size:10px;color:var(--text3);margin-top:1px}
 
-
-/* ══ PAGE TABS (non-home) ═══════════════════════════ */
+/* ══ PAGE TABS ═══════════════════════════════════════ */
 .page{display:none;flex:1;overflow-y:auto;padding:48px 0}
 .page.act{display:block}
 .page-inner{max-width:860px;margin:0 auto;padding:0 32px}
-.page-h1{font-family:var(--serif);font-size:28px;font-weight:700;
-  letter-spacing:-.5px;margin-bottom:8px}
+.page-h1{font-family:var(--serif);font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:8px}
 .page-sub{font-size:15px;color:var(--text2);line-height:1.65;margin-bottom:40px}
-
-/* pricing cards */
 .pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px}
 .price-card{border:1px solid var(--border);border-radius:16px;padding:28px;position:relative}
 .price-card.featured{border-color:var(--pro);box-shadow:0 0 0 1px var(--pro),0 8px 24px rgba(124,58,237,.12)}
@@ -330,42 +399,29 @@ a{color:var(--accent)}
 .pf-check{width:16px;height:16px;border-radius:50%;background:var(--green-l);
   border:1px solid rgba(4,120,87,.2);display:flex;align-items:center;justify-content:center;
   flex-shrink:0;margin-top:1px;font-size:9px;color:var(--green)}
-.pf-x{background:var(--bg3);border-color:var(--border);color:var(--text3)}
 .btn-price{width:100%;padding:11px;border-radius:8px;font-size:13px;font-weight:600;
   font-family:var(--font);transition:all .15s;text-align:center}
 .btn-price.free-btn{background:var(--bg2);border:1px solid var(--border);color:var(--text)}
 .btn-price.pro-btn{background:var(--pro);color:#fff;border:none}
 .btn-price.pro-btn:hover{background:var(--pro-d)}
-
-/* FAQ */
 .faq-item{border:1px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden}
 .faq-q{padding:14px 16px;font-size:13.5px;font-weight:600;cursor:pointer;
   display:flex;align-items:center;justify-content:space-between;transition:background .12s}
 .faq-q:hover{background:var(--bg2)}
 .faq-q svg{width:14px;height:14px;color:var(--text3);transition:transform .2s;flex-shrink:0}
 .faq-q.open svg{transform:rotate(180deg)}
-.faq-a{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .25s ease,padding .25s ease;
-  font-size:13px;color:var(--text2);line-height:1.7}
+.faq-a{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .25s ease,padding .25s ease;font-size:13px;color:var(--text2);line-height:1.7}
 .faq-a.open{max-height:200px;padding:0 16px 14px}
-
-/* about / policy */
 .prose{font-size:13.5px;color:var(--text2);line-height:1.75}
-.prose h3{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--text);
-  margin-top:28px;margin-bottom:8px}
+.prose h3{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--text);margin-top:28px;margin-bottom:8px}
 .prose h3:first-child{margin-top:0}
 .prose ul{padding-left:20px;margin:8px 0}
 .prose li{margin-bottom:4px}
 .prose strong{color:var(--text);font-weight:600}
-
-/* source tags */
 .source-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .src-tag{display:flex;align-items:center;gap:7px;padding:8px 12px;
-  border:1px solid var(--border);border-radius:8px;font-size:12px;
-  background:var(--bg2);transition:all .15s;cursor:default}
-.src-tag:hover{background:var(--bg3);border-color:var(--border2)}
+  border:1px solid var(--border);border-radius:8px;font-size:12px;background:var(--bg2)}
 .src-icon{font-size:16px}
-
-/* contact */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
 .contact-card{border:1px solid var(--border);border-radius:12px;padding:22px}
 .cc-icon{font-size:24px;margin-bottom:10px}
@@ -379,8 +435,7 @@ a{color:var(--accent)}
   display:flex;align-items:center;justify-content:center;animation:fdi .15s ease}
 @keyframes fdi{from{opacity:0}to{opacity:1}}
 .modal{background:var(--bg);border:1px solid var(--border);border-radius:16px;
-  width:560px;max-height:87vh;overflow:hidden;
-  display:flex;flex-direction:column;
+  width:560px;max-height:87vh;overflow:hidden;display:flex;flex-direction:column;
   position:relative;box-shadow:var(--sh3);animation:msl .18s ease}
 .modal-hd{padding:22px 28px 16px;border-bottom:1px solid var(--border);flex-shrink:0}
 .modal-bd{padding:0 28px 20px;overflow-y:auto;flex:1;scrollbar-width:thin}
@@ -392,20 +447,13 @@ a{color:var(--accent)}
   font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .mx:hover{background:var(--bg3);color:var(--text)}
 .m-co{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:-.3px;margin-bottom:4px}
-.m-sum{font-size:12.5px;color:var(--text2);line-height:1.7;margin-bottom:16px;
-  padding-bottom:14px;border-bottom:1px solid var(--border)}
-.m-row{display:flex;justify-content:space-between;align-items:flex-start;
-  padding:7px 0;border-bottom:1px solid var(--border)}
+.m-sum{font-size:12.5px;color:var(--text2);line-height:1.7;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.m-row{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--border)}
 .m-row:last-child{border-bottom:none}
-.mk{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.8px;
-  color:var(--text3);padding-top:1px;width:120px;flex-shrink:0}
+.mk{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);padding-top:1px;width:120px;flex-shrink:0}
 .mv{font-size:12.5px;color:var(--text);text-align:right;flex:1;word-break:break-word}
 .mv a{color:var(--accent);font-size:11px;font-family:var(--mono)}
-.mbadge{display:inline-flex;padding:2px 8px;border-radius:4px;
-  background:var(--accent-l);color:var(--accent);font-family:var(--mono);
-  font-size:10px;border:1px solid rgba(24,71,214,.15)}
-
-/* Auth modal */
+.mbadge{display:inline-flex;padding:2px 8px;border-radius:4px;background:var(--accent-l);color:var(--accent);font-family:var(--mono);font-size:10px;border:1px solid rgba(24,71,214,.15)}
 .auth-modal{text-align:center;padding:10px 10px 4px}
 .am-logo{font-family:var(--serif);font-size:22px;font-weight:700;margin-bottom:4px}
 .am-logo em{color:var(--accent);font-style:normal}
@@ -414,63 +462,47 @@ a{color:var(--accent)}
   padding:11px;border:1px solid var(--border);border-radius:8px;
   background:var(--bg2);font-size:13.5px;font-weight:500;transition:all .15s;margin-bottom:14px}
 .btn-google-auth:hover{background:var(--bg3);border-color:var(--border2)}
-.btn-google-auth svg{width:18px;height:18px}
 .am-divider{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--text3);margin-bottom:14px}
 .am-divider::before,.am-divider::after{content:'';flex:1;height:1px;background:var(--border)}
-.am-inp{width:100%;padding:10px 12px;background:var(--bg2);
-  border:1px solid var(--border);border-radius:8px;font-size:13px;
-  margin-bottom:10px;transition:border-color .15s}
+.am-inp{width:100%;padding:10px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:13px;margin-bottom:10px;transition:border-color .15s}
 .am-inp:focus{outline:none;border-color:var(--accent)}
 .am-inp::placeholder{color:var(--text3)}
 .am-tabs{display:flex;background:var(--bg3);border-radius:8px;padding:3px;margin-bottom:16px}
-.am-tab{flex:1;padding:6px;border-radius:6px;font-size:12.5px;font-weight:500;
-  color:var(--text3);transition:all .15s;text-align:center}
+.am-tab{flex:1;padding:6px;border-radius:6px;font-size:12.5px;font-weight:500;color:var(--text3);transition:all .15s;text-align:center}
 .am-tab.act{background:var(--bg);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.1)}
-.btn-am{width:100%;padding:10px;border-radius:8px;background:var(--accent);
-  color:#fff;font-size:13px;font-weight:600;font-family:var(--font);transition:opacity .15s}
+.btn-am{width:100%;padding:10px;border-radius:8px;background:var(--accent);color:#fff;font-size:13px;font-weight:600;font-family:var(--font);transition:opacity .15s}
 .btn-am:hover{opacity:.88}
 .am-note{font-size:11px;color:var(--text3);margin-top:10px;line-height:1.5}
-
-/* Alert Agent modal */
 .agent-modal h3{font-family:var(--serif);font-size:18px;font-weight:700;margin-bottom:5px}
-.agent-modal p{font-size:12.5px;color:var(--text2);line-height:1.6;margin-bottom:20px;
-  padding-bottom:16px;border-bottom:1px solid var(--border)}
+.agent-modal p{font-size:12.5px;color:var(--text2);line-height:1.6;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
 .ag-section{margin-bottom:16px}
-.ag-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.7px;
-  color:var(--text3);margin-bottom:7px;display:flex;align-items:center;gap:5px}
-.ag-chips{display:flex;flex-wrap:wrap;gap:6px}
-.ag-chip{padding:5px 11px;border-radius:20px;border:1px solid var(--border);
-  background:var(--bg2);font-size:12px;cursor:pointer;transition:all .15s}
+.ag-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--text3);margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.ag-chip{padding:5px 11px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);font-size:12px;cursor:pointer;transition:all .15s}
 .ag-chip:hover{border-color:var(--accent);color:var(--accent)}
 .ag-chip.sel{background:var(--accent-l);border-color:var(--accent);color:var(--accent);font-weight:500}
 .ag-email-row{display:flex;gap:8px;margin-top:16px}
-.ag-email{flex:1;padding:9px 12px;background:var(--bg2);
-  border:1px solid var(--border);border-radius:7px;font-size:13px;transition:border-color .15s}
+.ag-email{flex:1;padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:7px;font-size:13px;transition:border-color .15s}
 .ag-email:focus{outline:none;border-color:var(--accent)}
 .ag-email::placeholder{color:var(--text3)}
-.btn-agent{padding:9px 18px;border-radius:7px;background:var(--accent);
-  color:#fff;font-size:12.5px;font-weight:600;font-family:var(--font);
-  white-space:nowrap;transition:opacity .15s}
+.btn-agent{padding:9px 18px;border-radius:7px;background:var(--accent);color:#fff;font-size:12.5px;font-weight:600;font-family:var(--font);white-space:nowrap;transition:opacity .15s}
 .btn-agent:hover{opacity:.88}
-
-/* Pro gate */
 .pro-modal{text-align:center;padding:8px 8px 4px}
 .pm-ico{font-size:34px;margin-bottom:10px}
 .pm-h{font-family:var(--serif);font-size:20px;font-weight:700;margin-bottom:6px}
 .pm-p{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:20px}
 .pm-features{text-align:left;margin-bottom:22px;display:flex;flex-direction:column;gap:8px}
 .pmf{display:flex;align-items:center;gap:8px;font-size:12.5px}
-.btn-get-pro{width:100%;padding:11px;border-radius:8px;background:var(--pro);
-  color:#fff;font-size:13px;font-weight:600;font-family:var(--font);transition:opacity .15s}
+.btn-get-pro{width:100%;padding:11px;border-radius:8px;background:var(--pro);color:#fff;font-size:13px;font-weight:600;font-family:var(--font);transition:opacity .15s}
 .btn-get-pro:hover{opacity:.88}
 .pm-free{font-size:11px;color:var(--text3);margin-top:10px;line-height:1.5}
 
-.leaflet-pane{z-index:auto!important}.leaflet-map-pane{z-index:0!important}.leaflet-popup-content-wrapper{border-radius:10px!important;box-shadow:0 8px 28px rgba(0,0,0,.12)!important;border:1px solid var(--border)!important;padding:0!important}
+.leaflet-pane{z-index:auto!important}.leaflet-map-pane{z-index:0!important}
+.leaflet-popup-content-wrapper{border-radius:10px!important;box-shadow:0 8px 28px rgba(0,0,0,.12)!important;border:1px solid var(--border)!important;padding:0!important}
 .leaflet-popup-content{margin:12px 14px!important;font-family:var(--font)!important}
 .leaflet-popup-tip-container{display:none!important}
 .leaflet-container{font-family:var(--font)!important}
 
-@media(max-width:1100px){.rp{display:none}}
+@media(max-width:1100px){.rp{display:none}.gcc-rp{display:none}}
 @media(max-width:860px){.sb{width:220px}}
 @media(max-width:680px){
   .sb{display:none}.ctx-pills,.topbar-kpi,.tdiv{display:none}
@@ -488,6 +520,7 @@ a{color:var(--accent)}
 
   <div class="top-tabs">
     <button class="top-tab act" onclick="showTab('home',this)">🗺 Platform</button>
+    <button class="top-tab" onclick="showTab('gcc',this)">🏢 GCC Watch</button>
     <button class="top-tab" onclick="showTab('pricing',this)">💳 Pricing</button>
     <button class="top-tab" onclick="showTab('about',this)">📖 About</button>
     <button class="top-tab" onclick="showTab('faq',this)">❓ FAQ</button>
@@ -505,7 +538,6 @@ a{color:var(--accent)}
       <div class="topbar-kpi-l">Capital USD</div>
     </div>
     <div class="tdiv"></div>
-    <!-- AUTH AREA -->
     <div id="auth-area">
       <button class="auth-btn" onclick="openAuth()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -537,7 +569,7 @@ a{color:var(--accent)}
   </div>
 </div>
 
-<!-- ══ CONTEXT STRIP ════════════════════════════════ -->
+<!-- ══ CONTEXT STRIP (Platform tab only) ════════════════ -->
 <div class="ctx" id="ctx-strip">
   <div class="ctx-text"><strong>Signal48</strong> tracks corporate expansion announcements globally — manufacturing plants, logistics hubs, R&amp;D centres, new market entries — so investors, site selectors, and strategy teams can act before deals become public knowledge.</div>
   <div class="ctx-pills">
@@ -548,7 +580,7 @@ a{color:var(--accent)}
   </div>
 </div>
 
-<!-- ══ KPI BAR ══════════════════════════════════════ -->
+<!-- ══ KPI BAR (Platform tab only) ══════════════════════ -->
 <div class="kpis" id="kpi-bar">
   <div class="kpi">
     <div class="kpi-label">📅 Current Month Signals</div>
@@ -579,7 +611,12 @@ a{color:var(--accent)}
   </div>
 </div>
 
-<!-- ══ FILTER NAV ═══════════════════════════════════ -->
+<!-- ══ GCC HUB STRIP (GCC tab only) ════════════════════ -->
+<div class="gcc-hub-strip" id="gcc-hub-strip" style="display:none">
+  <!-- populated by renderGCCHubs() -->
+</div>
+
+<!-- ══ FILTER NAV (Platform tab) ═══════════════════════ -->
 <nav class="nav" id="filter-nav">
   <span class="nfl">Filter</span>
   <div class="dd-wrap" id="dd-rg"><div class="dd-trigger" onclick="toggleDD('dd-rg')"><span class="dd-val" id="dd-rg-val">All Regions</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search regions…" oninput="filterDD('dd-rg',this.value)"></div><div class="dd-list" id="dd-rg-list"></div></div></div>
@@ -607,7 +644,69 @@ a{color:var(--accent)}
   </div>
 </nav>
 
-<!-- ══ HOME TAB (Map) ════════════════════════════════ -->
+<!-- ══ GCC FILTER NAV (GCC tab only) ════════════════════ -->
+<nav class="nav" id="gcc-filter-nav" style="display:none">
+  <span class="nfl">Filter</span>
+  <!-- City dropdown -->
+  <div class="dd-wrap" id="gcc-dd-ci">
+    <div class="dd-trigger" onclick="toggleDD('gcc-dd-ci')">
+      <span class="dd-val" id="gcc-dd-ci-val">All Cities</span>
+      <svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div class="dd-panel">
+      <div class="dd-search-row"><input class="dd-sinp" placeholder="Search cities…" oninput="filterDD('gcc-dd-ci',this.value)"></div>
+      <div class="dd-list" id="gcc-dd-ci-list"></div>
+    </div>
+  </div>
+  <!-- Sector dropdown -->
+  <div class="dd-wrap" id="gcc-dd-se">
+    <div class="dd-trigger" onclick="toggleDD('gcc-dd-se')">
+      <span class="dd-val" id="gcc-dd-se-val">All Sectors</span>
+      <svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div class="dd-panel">
+      <div class="dd-search-row"><input class="dd-sinp" placeholder="Search sectors…" oninput="filterDD('gcc-dd-se',this.value)"></div>
+      <div class="dd-list" id="gcc-dd-se-list"></div>
+    </div>
+  </div>
+  <!-- Month/Year dropdown -->
+  <div class="dd-wrap" id="gcc-dd-mo">
+    <div class="dd-trigger" onclick="toggleDD('gcc-dd-mo')">
+      <span class="dd-val" id="gcc-dd-mo-val">All Periods</span>
+      <svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div class="dd-panel">
+      <div class="dd-search-row"><input class="dd-sinp" placeholder="Search periods…" oninput="filterDD('gcc-dd-mo',this.value)"></div>
+      <div class="dd-list" id="gcc-dd-mo-list"></div>
+    </div>
+  </div>
+  <div class="ndiv"></div>
+  <!-- Type toggle pills -->
+  <div class="type-toggle">
+    <button class="tpill new-gcc" id="tpill-new" onclick="toggleType('New GCC')">New GCC</button>
+    <button class="tpill expansion" id="tpill-exp" onclick="toggleType('Expansion')">Expansion</button>
+  </div>
+  <div class="ndiv"></div>
+  <div class="srchw">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input class="sinp" id="gcc-sq" type="text" placeholder="Search company, focus area…" oninput="goGCC()">
+  </div>
+  <button class="btn-clr" id="gcc-bclr" onclick="clrGCC()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    Clear
+  </button>
+  <div class="ctag" id="gcc-ctag">—</div>
+  <div class="nav-r">
+    <button class="btn-pf" onclick="openAlerts()">⚡ Alerts</button>
+    <button class="btn-pf" onclick="gccExport()">🔒 Export CSV</button>
+    <div class="sync" id="gcc-sync"><span class="sdot"></span><span id="gcc-stxt">LIVE</span></div>
+    <button class="ibtn" title="Refresh" onclick="loadGCCData()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ HOME TAB ════════════════════════════════════════ -->
 <div class="body" id="tab-home">
   <aside class="sb">
     <div class="sb-head">
@@ -638,30 +737,52 @@ a{color:var(--accent)}
       <div class="rp-scope" id="ins-scope">GLOBAL VIEW</div>
     </div>
     <div class="ins-list" id="ins-list">
-      <!-- date range strip -->
       <div class="rp-daterange" id="rp-daterange" style="display:none">
         <div class="rp-dr-label">Signal window</div>
         <div class="rp-dr-val" id="rp-dr-val">—</div>
         <div class="rp-dr-sub" id="rp-dr-sub"></div>
       </div>
-      <!-- donut: investment by sector -->
       <div class="rp-chart-block">
         <div class="rp-chart-title">Investment by sector</div>
         <div class="rp-donut-wrap"><canvas id="chart-donut"></canvas></div>
         <div class="rp-legend" id="legend-donut"></div>
       </div>
-      <!-- bar: top cities/regions -->
       <div class="rp-chart-block" id="rp-city-block">
         <div class="rp-chart-title" id="rp-city-title">Top locations by investment</div>
         <div class="rp-bar-wrap"><canvas id="chart-bar"></canvas></div>
       </div>
-      <!-- key stat -->
       <div class="rp-stat-row" id="rp-stat-row"></div>
     </div>
   </aside>
 </div>
 
-<!-- ══ PRICING TAB ══════════════════════════════════ -->
+<!-- ══ GCC WATCH TAB ══════════════════════════════════ -->
+<div id="tab-gcc" style="display:none;flex:1;overflow:hidden;flex-direction:row">
+  <div class="gcc-body" style="flex:1;overflow:hidden">
+
+    <!-- Card list -->
+    <div class="gcc-main" id="gcc-card-list">
+      <div class="gcc-loading">
+        <div class="sp"></div>
+        <div class="ltxt">Loading GCC signals…</div>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <aside class="gcc-rp">
+      <div class="gcc-rp-head">
+        <div class="gcc-rp-title">GCC Intelligence<br>India 2024–26</div>
+        <div class="gcc-rp-scope" id="gcc-rp-scope">LOADING…</div>
+      </div>
+      <div class="gcc-rp-body" id="gcc-rp-body">
+        <div class="gcc-loading"><div class="sp"></div></div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- ══ PRICING TAB ════════════════════════════════════ -->
 <div class="page" id="tab-pricing">
   <div class="page-inner">
     <div class="page-h1">Simple, transparent pricing</div>
@@ -670,17 +791,17 @@ a{color:var(--accent)}
       <div class="price-card">
         <div class="price-tier">Free</div>
         <div class="price-amount">$0<span>/month</span></div>
-        <div class="price-desc">Everything you need to start tracking global expansion signals. No credit card required.</div>
+        <div class="price-desc">Everything you need to start tracking global expansion signals and GCC openings. No credit card required.</div>
         <div class="price-features">
           <div class="pf"><div class="pf-check">✓</div>Full world map — all signals</div>
+          <div class="pf"><div class="pf-check">✓</div>GCC Watch — India hub tracker</div>
           <div class="pf"><div class="pf-check">✓</div>Company + country + sector filters</div>
           <div class="pf"><div class="pf-check">✓</div>Signal detail modals</div>
-          <div class="pf"><div class="pf-check">✓</div>Right-panel insights</div>
+          <div class="pf"><div class="pf-check">✓</div>Right-panel insights + charts</div>
           <div class="pf"><div class="pf-check">✓</div>48 Hours alert sign-up</div>
-          <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">Period & deal size filters</span></div>
+          <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">Period &amp; deal size filters</span></div>
           <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">Export to CSV / Excel</span></div>
-          <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">KPI bar: Key industry, destination, type</span></div>
-          <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">Agent-powered alerts (48 Hours report)</span></div>
+          <div class="pf"><div class="pf-x pf-check" style="background:var(--bg3);border-color:var(--border);color:var(--text3)">—</div><span style="color:var(--text3)">GCC focus area deep-dive</span></div>
         </div>
         <button class="btn-price free-btn" onclick="openAuth()">Get started free →</button>
       </div>
@@ -692,17 +813,17 @@ a{color:var(--accent)}
         <div class="price-features">
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Everything in Free</div>
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Period filter (month/quarter)</div>
-          <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Deal size filter ($100M to $5B+)</div>
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Export to CSV — all filtered signals</div>
-          <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Key industry, destination & type KPIs</div>
-          <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Agent alerts — 48 Hours report, by sector/country</div>
+          <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Export GCC Watch data</div>
+          <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Key industry, destination &amp; type KPIs</div>
+          <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Agent alerts — 48 Hours report</div>
           <div class="pf"><div class="pf-check" style="background:var(--pro-l);border-color:rgba(124,58,237,.2);color:var(--pro)">✓</div>Priority support via email</div>
         </div>
         <button class="btn-price pro-btn" onclick="window.open(CONFIG.STRIPE_LINK,'_blank')">Subscribe · $20/month →</button>
       </div>
     </div>
     <div style="text-align:center;font-size:12.5px;color:var(--text3);margin-top:8px">
-      Powered by Stripe. Cancel anytime. No contracts. For team plans contact <a href="mailto:contact@signal48.com">contact@signal48.com</a>
+      Powered by Stripe. Cancel anytime. For team plans contact <a href="mailto:contact@signal48.com">contact@signal48.com</a>
     </div>
   </div>
 </div>
@@ -714,32 +835,25 @@ a{color:var(--accent)}
     <div class="page-sub">How we collect, score, and maintain the data you see on the platform.</div>
     <div class="prose">
       <h3>What Signal48 tracks</h3>
-      <p>Signal48 monitors corporate expansion announcements globally — new manufacturing plants, logistics hubs, R&amp;D centres, data centres, office expansions, and new market entries. We track both the announcement and, where possible, confirmed facility openings.</p>
+      <p>Signal48 monitors corporate expansion announcements globally — new manufacturing plants, logistics hubs, R&amp;D centres, data centres, office expansions, and new market entries. We also track Global Capability Centre (GCC) openings across India's major tech hubs.</p>
+      <h3>GCC Watch</h3>
+      <p>GCC Watch is a dedicated tracker for Global Capability Centre announcements in India — covering new GCC establishments, expansions, and job creation across Hyderabad, Pune, Bengaluru, Chennai, and other emerging hubs. Data is sourced from press releases, Economic Times, Times of India, and company IR pages.</p>
       <h3>Data sources</h3>
-      <p>Every signal is sourced from multiple independent feeds and cross-referenced before publication:</p>
       <div class="source-grid">
         <div class="src-tag"><span class="src-icon">📰</span>Press releases &amp; company IR</div>
         <div class="src-tag"><span class="src-icon">🏛</span>Government investment agencies</div>
         <div class="src-tag"><span class="src-icon">📡</span>Business intelligence feeds</div>
-        <div class="src-tag"><span class="src-icon">🔬</span>R&amp;D and academic publications</div>
-        <div class="src-tag"><span class="src-icon">🗞</span>Financial news aggregators</div>
-        <div class="src-tag"><span class="src-icon">🌐</span>Regional economic development boards</div>
+        <div class="src-tag"><span class="src-icon">🗞</span>Economic Times / Times of India</div>
         <div class="src-tag"><span class="src-icon">📊</span>SEC &amp; regulatory filings</div>
-        <div class="src-tag"><span class="src-icon">🤝</span>Trade association reports</div>
+        <div class="src-tag"><span class="src-icon">🌐</span>Regional economic development boards</div>
       </div>
-      <h3>Confidence score</h3>
-      <p>Every signal carries a <strong>confidence score (0–100%)</strong> reflecting how well-sourced and independently verified the announcement is. Scores above 90% indicate multiple corroborating sources with official confirmation. Scores below 70% indicate single-source announcements that are plausible but unconfirmed.</p>
       <h3>How often is data updated?</h3>
-      <p>The dataset is reviewed and updated <strong>48 Hours</strong>. New signals are added every Monday morning (UTC). The "Synced" timestamp in the top filter bar shows when your browser last fetched the live sheet.</p>
-      <h3>Map display logic</h3>
-      <p>The map defaults to showing the <strong>latest available data</strong>. Signals are grouped by country — clicking a country dot with multiple signals shows a ranked list sorted by investment size. The most recent deal per company is shown first. Historical signals remain searchable via the Period filter (Pro).</p>
-      <h3>Investment amounts</h3>
-      <p>Where announced in local currency, amounts are converted to USD using the exchange rate at announcement date. Investment figures represent announced commitments, not necessarily capital already deployed.</p>
+      <p>The dataset is reviewed and updated <strong>48 Hours</strong>. New signals are added every Monday morning (UTC).</p>
     </div>
   </div>
 </div>
 
-<!-- ══ FAQ TAB ══════════════════════════════════════ -->
+<!-- ══ FAQ TAB ════════════════════════════════════════ -->
 <div class="page" id="tab-faq">
   <div class="page-inner">
     <div class="page-h1">Frequently asked questions</div>
@@ -748,39 +862,22 @@ a{color:var(--accent)}
   </div>
 </div>
 
-<!-- ══ CONTACT TAB ══════════════════════════════════ -->
+<!-- ══ CONTACT TAB ════════════════════════════════════ -->
 <div class="page" id="tab-contact">
   <div class="page-inner">
     <div class="page-h1">Get in touch</div>
     <div class="page-sub">Questions about the data, partnerships, custom enterprise plans, or anything else.</div>
     <div class="contact-grid">
-      <div class="contact-card">
-        <div class="cc-icon">✉️</div>
-        <div class="cc-title">General enquiries</div>
-        <div class="cc-text">For questions about the platform, data coverage, or your subscription.<br><br><a href="mailto:contact@signal48.com">contact@signal48.com</a></div>
-      </div>
-      <div class="contact-card">
-        <div class="cc-icon">🤝</div>
-        <div class="cc-title">Enterprise &amp; partnerships</div>
-        <div class="cc-text">Custom data feeds, API access, white-label options, or team subscriptions. We'll respond within 1 business day.<br><br><a href="mailto:contact@signal48.com">contact@signal48.com</a></div>
-      </div>
-      <div class="contact-card">
-        <div class="cc-icon">🐛</div>
-        <div class="cc-title">Data corrections</div>
-        <div class="cc-text">Spotted an error in a signal? Let us know and we'll review within 48 hours.<br><br><a href="mailto:contact@signal48.com?subject=Data correction">contact@signal48.com</a></div>
-      </div>
-      <div class="contact-card">
-        <div class="cc-icon">💳</div>
-        <div class="cc-title">Billing</div>
-        <div class="cc-text">All billing is handled via Stripe. To cancel or modify your subscription, email us or manage via your Stripe customer portal.<br><br><a href="mailto:contact@signal48.com?subject=Billing">contact@signal48.com</a></div>
-      </div>
+      <div class="contact-card"><div class="cc-icon">✉️</div><div class="cc-title">General enquiries</div><div class="cc-text">For questions about the platform, data coverage, or your subscription.<br><br><a href="mailto:contact@signal48.com">contact@signal48.com</a></div></div>
+      <div class="contact-card"><div class="cc-icon">🤝</div><div class="cc-title">Enterprise &amp; partnerships</div><div class="cc-text">Custom data feeds, API access, white-label options, or team subscriptions.<br><br><a href="mailto:contact@signal48.com">contact@signal48.com</a></div></div>
+      <div class="contact-card"><div class="cc-icon">🐛</div><div class="cc-title">Data corrections</div><div class="cc-text">Spotted an error in a signal? Let us know and we'll review within 48 hours.<br><br><a href="mailto:contact@signal48.com?subject=Data correction">contact@signal48.com</a></div></div>
+      <div class="contact-card"><div class="cc-icon">💳</div><div class="cc-title">Billing</div><div class="cc-text">All billing is handled via Stripe. Cancel or modify via Stripe portal.<br><br><a href="mailto:contact@signal48.com?subject=Billing">contact@signal48.com</a></div></div>
     </div>
   </div>
 </div>
 
 </div><!-- end app -->
 
-<!-- TOOLTIP -->
 <div class="mtt" id="mtt"></div>
 
 <!-- MODALS -->
@@ -797,160 +894,75 @@ a{color:var(--accent)}
 <script>
 /* ════════ STATE ════════ */
 let all=[], filt=[], currentUser=null;
+let gcc_all=[], gcc_filt=[], gcc_type_filter='';
 const SESSION_KEY='s48_session', USERS_KEY='s48_users';
 const MORD={january:1,february:2,march:3,april:4,may:5,june:6,july:7,august:8,september:9,october:10,november:11,december:12};
+const GCC_MORD={jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
 
-/* ════════ COORDS (lat/lng for Leaflet) ════════ */
-const COORDS={
-  // North America
-  'USA':[38.9,-77.0],'United States':[38.9,-77.0],
-  'Canada':[56.1,-106.3],'Mexico':[23.6,-102.5],
-  // South America
-  'Brazil':[-14.2,-51.9],'Argentina':[-38.4,-63.6],'Colombia':[4.5,-74.3],
-  'Chile':[-35.7,-71.5],'Peru':[-9.2,-75.0],'Venezuela':[6.4,-66.6],
-  // Europe
-  'UK':[55.4,-3.4],'United Kingdom':[55.4,-3.4],'Ireland':[53.4,-8.2],
-  'France':[46.2,2.2],'Germany':[51.2,10.4],'Netherlands':[52.1,5.3],
-  'Spain':[40.5,-3.7],'Portugal':[39.4,-8.2],'Italy':[41.9,12.5],
-  'Switzerland':[46.8,8.2],'Sweden':[60.1,18.6],'Norway':[60.5,8.5],
-  'Denmark':[56.3,9.5],'Finland':[61.9,25.7],'Poland':[51.9,19.1],
-  'Austria':[47.5,14.6],'Belgium':[50.5,4.5],'Czech Republic':[49.8,15.5],
-  'Romania':[45.9,24.9],'Hungary':[47.2,19.5],'Greece':[39.1,21.8],
-  'Croatia':[45.1,15.2],'Serbia':[44.0,21.0],'Bulgaria':[42.7,25.5],
-  'Slovakia':[48.7,19.7],'Slovenia':[46.1,14.9],'Estonia':[58.6,25.0],
-  'Latvia':[56.9,24.6],'Lithuania':[55.2,23.9],
-  // Russia/CIS
-  'Russia':[61.5,105.3],'Ukraine':[48.4,31.2],'Kazakhstan':[48.0,68.0],
-  'Belarus':[53.7,27.9],'Georgia':[32.2,83.4],'Azerbaijan':[40.1,47.6],
-  'Armenia':[40.1,45.0],'Uzbekistan':[41.4,64.6],
-  // Middle East
-  'Turkey':[38.9,35.2],'Israel':[31.0,35.0],'UAE':[24.0,54.0],
-  'Saudi Arabia':[24.7,46.7],'Qatar':[25.4,51.2],'Kuwait':[29.5,47.8],
-  'Bahrain':[26.0,50.6],'Oman':[21.0,57.0],'Jordan':[31.0,36.5],
-  'Lebanon':[33.9,35.5],'Iraq':[33.2,43.7],'Iran':[32.4,53.7],
-  // Africa
-  'Egypt':[26.8,30.8],'Nigeria':[9.1,8.7],'South Africa':[-30.6,22.9],
-  'Kenya':[-0.0,37.9],'Morocco':[31.8,-7.1],'Ethiopia':[9.1,40.5],
-  'Ghana':[7.9,-1.0],'Tanzania':[-6.4,34.9],'Uganda':[1.4,32.3],
-  'Rwanda':[-1.9,29.9],'Senegal':[14.5,-14.5],'Algeria':[28.0,2.6],
-  'Tunisia':[33.9,9.6],'Libya':[26.3,17.2],'Angola':[-11.2,17.9],
-  // South Asia
-  'India':[20.6,78.9],'Pakistan':[30.4,69.3],'Bangladesh':[23.7,90.4],
-  'Sri Lanka':[7.9,80.8],'Nepal':[28.4,84.1],'Myanmar':[17.0,96.0],
-  // East Asia
-  'China':[35.9,104.2],'Japan':[36.2,138.3],'South Korea':[35.9,127.8],
-  'Taiwan':[23.7,121.0],'Hong Kong':[22.4,114.1],'Macau':[22.2,113.5],
-  'Mongolia':[46.9,103.8],
-  // Southeast Asia
-  'Singapore':[1.4,103.8],'Vietnam':[14.1,108.3],'Thailand':[15.9,100.9],
-  'Indonesia':[-0.8,113.9],'Malaysia':[4.2,108.0],'Philippines':[12.9,121.8],
-  'Cambodia':[12.6,104.9],'Laos':[19.9,102.5],
-  // Oceania
-  'Australia':[-25.3,133.8],'New Zealand':[-40.9,174.9],
-  'Papua New Guinea':[-6.3,143.9],'Fiji':[-17.7,178.0],
-  // Generic/regional
-  'EMEA':[30.0,20.0],'Europe':[54.5,15.3],'APAC':[10.0,120.0],
-  'North America':[40.0,-95.0],'Global':[20.0,0.0],
-  'Southeast Asia':[5.0,115.0],'East Asia':[35.0,115.0],
-  'South Asia':[20.0,80.0],'Middle East':[25.0,45.0],
-  'Latin America':[-15.0,-60.0],'Central Asia':[45.0,65.0],
+/* ════════ GCC COLORS ════════ */
+const GCC_AVATAR_COLORS={
+  'BFSI':['#1847d6','#eef2ff'],
+  'Talent / HR Services':['#7c3aed','#f5f3ff'],
+  'Logistics':['#b45309','#fffbeb'],
+  'Technology':['#047857','#ecfdf5'],
+  'default':['#44546a','#f5f7fc'],
 };
+function gccAvatarStyle(sector){
+  const s=sector||'default';
+  for(const k of Object.keys(GCC_AVATAR_COLORS)){
+    if(s.toLowerCase().includes(k.toLowerCase())){
+      const[bg,col]=GCC_AVATAR_COLORS[k];
+      return `background:${bg};color:${col}`;
+    }
+  }
+  const[bg,col]=GCC_AVATAR_COLORS['default'];
+  return `background:${bg};color:${col}`;
+}
+function gccBadgeClass(i){
+  return ['gcc-badge-blue','gcc-badge-purple','gcc-badge-green','gcc-badge-gold','gcc-badge-gray'][i%5];
+}
+const CHART_COLORS=['#1847d6','#e0460a','#b45309','#047857','#7c3aed','#0891b2','#be185d'];
+const GCC_CITY_COLORS={'Hyderabad':'#1847d6','Pune':'#e0460a','Bengaluru':'#047857','Chennai':'#b45309','Mumbai':'#7c3aed','Gurgaon':'#0891b2','Noida':'#be185d'};
 
-// City/region-level coords (used when City_Or_Region is populated)
-const CITY_COORDS={
-  // US States / cities
-  'North Carolina':[35.8,-79.0],'Texas':[31.0,-100.0],'California':[36.8,-119.4],
-  'New York':[40.7,-74.0],'Florida':[27.7,-81.7],'Georgia':[32.2,-83.4],
-  'Ohio':[40.4,-82.7],'Michigan':[44.3,-85.6],'Tennessee':[35.9,-86.6],
-  'Arizona':[34.0,-111.1],'Washington':[47.4,-120.7],'Colorado':[39.1,-105.4],
-  'Virginia':[37.4,-78.7],'Pennsylvania':[40.6,-77.2],'Illinois':[40.0,-89.2],
-  'Massachusetts':[42.4,-71.4],'Nevada':[38.8,-116.4],'Indiana':[39.8,-86.1],
-  'Wisconsin':[44.3,-89.6],'Minnesota':[46.4,-93.1],'Oregon':[44.6,-122.1],
-  // Cities
-  'New York City':[40.7,-74.0],'Los Angeles':[34.1,-118.2],'Chicago':[41.9,-87.6],
-  'Houston':[29.7,-95.4],'Phoenix':[33.4,-112.1],'Philadelphia':[39.9,-75.2],
-  'San Antonio':[29.4,-98.5],'San Diego':[32.7,-117.2],'Dallas':[32.8,-96.8],
-  'San Jose':[37.3,-121.9],'Austin':[30.3,-97.7],'Jacksonville':[30.3,-81.7],
-  "North Carolina's Triad":[36.0,-79.8],'Research Triangle':[35.9,-79.1],
-  'Central Florida':[28.5,-81.4],'Silicon Valley':[37.4,-122.0],
-  // UK
-  'London':[51.5,-0.1],'Manchester':[53.5,-2.2],'Birmingham':[52.5,-1.9],
-  'Edinburgh':[55.9,-3.2],'Bristol':[51.5,-2.6],
-  'South Mimms':[51.7,0.0],'Hertfordshire':[51.8,-0.2],
-  // Europe
-  'Berlin':[52.5,13.4],'Munich':[48.1,11.6],'Frankfurt':[50.1,8.7],
-  'Hamburg':[53.6,10.0],'Paris':[48.9,2.3],'Amsterdam':[52.4,4.9],
-  'Barcelona':[41.4,2.2],'Madrid':[40.4,-3.7],'Rome':[41.9,12.5],
-  'Warsaw':[52.2,21.0],'Prague':[50.1,14.4],'Zurich':[47.4,8.5],
-  'Vienna':[48.2,16.4],'Brussels':[50.8,4.4],'Stockholm':[59.3,18.1],
-  'Helsinki':[60.2,24.9],'Oslo':[59.9,10.7],'Copenhagen':[55.7,12.6],
-  // Middle East / Asia
-  'Dubai':[25.2,55.3],'Abu Dhabi':[24.5,54.4],'Riyadh':[24.7,46.7],
-  'Tel Aviv':[32.1,34.8],'Istanbul':[41.0,29.0],'Cairo':[30.1,31.2],
-  'Mumbai':[19.1,72.9],'Delhi':[28.7,77.1],'Bangalore':[12.9,77.6],
-  'Hyderabad':[17.4,78.5],'Chennai':[13.1,80.3],'Pune':[18.5,73.9],
-  'Beijing':[39.9,116.4],'Shanghai':[31.2,121.5],'Shenzhen':[22.5,114.1],
-  'Guangzhou':[23.1,113.3],'Chengdu':[30.6,104.1],
-  'Tokyo':[35.7,139.7],'Osaka':[34.7,135.5],'Seoul':[37.6,127.0],
-  'Singapore':[1.4,103.8],'Kuala Lumpur':[3.2,101.7],'Bangkok':[13.8,100.5],
-  'Ho Chi Minh City':[10.8,106.7],'Jakarta':[-6.2,106.8],
-  'Sydney':[-33.9,151.2],'Melbourne':[-37.8,145.0],'Brisbane':[-27.5,153.0],
-  // India regions
-  'EMEA':[30.0,20.0],'APAC':[10.0,120.0],
-  'Europe':[54.5,15.3],'Americas':[15.0,-90.0],
-};
-
-const FLAGS={
-  'USA':'🇺🇸','United States':'🇺🇸','Canada':'🇨🇦','Mexico':'🇲🇽',
-  'Brazil':'🇧🇷','Argentina':'🇦🇷','Colombia':'🇨🇴',
-  'UK':'🇬🇧','United Kingdom':'🇬🇧','Ireland':'🇮🇪','France':'🇫🇷',
-  'Germany':'🇩🇪','Netherlands':'🇳🇱','Spain':'🇪🇸','Italy':'🇮🇹',
-  'Switzerland':'🇨🇭','Sweden':'🇸🇪','Norway':'🇳🇴','Denmark':'🇩🇰',
-  'Finland':'🇫🇮','Poland':'🇵🇱','Austria':'🇦🇹','Belgium':'🇧🇪',
-  'Romania':'🇷🇴','Hungary':'🇭🇺','Greece':'🇬🇷','Czech Republic':'🇨🇿',
-  'Russia':'🇷🇺','Ukraine':'🇺🇦','Turkey':'🇹🇷','Israel':'🇮🇱',
-  'UAE':'🇦🇪','Saudi Arabia':'🇸🇦','Qatar':'🇶🇦','Kuwait':'🇰🇼',
-  'Egypt':'🇪🇬','Nigeria':'🇳🇬','South Africa':'🇿🇦','Kenya':'🇰🇪','Morocco':'🇲🇦',
-  'India':'🇮🇳','Pakistan':'🇵🇰','China':'🇨🇳','Japan':'🇯🇵',
-  'South Korea':'🇰🇷','Taiwan':'🇹🇼','Singapore':'🇸🇬',
-  'Vietnam':'🇻🇳','Thailand':'🇹🇭','Indonesia':'🇮🇩','Malaysia':'🇲🇾',
-  'Philippines':'🇵🇭','Bangladesh':'🇧🇩','Australia':'🇦🇺','New Zealand':'🇳🇿',
-  'Hong Kong':'🇭🇰',
-};
+/* ════════ GCC KNOWN HUBS ════════ */
+const GCC_KNOWN_CITIES=['Hyderabad','Pune','Bengaluru','Chennai'];
 
 /* ════════ TABS ════════ */
 const HOME_ELS=['ctx-strip','kpi-bar','filter-nav'];
+const GCC_ELS=['gcc-hub-strip','gcc-filter-nav'];
+
 function showTab(name, btn){
   document.querySelectorAll('.top-tab').forEach(t=>t.classList.remove('act'));
   if(btn)btn.classList.add('act');
-  const isHome=name==='home';
+  const isHome=name==='home', isGCC=name==='gcc';
   HOME_ELS.forEach(id=>document.getElementById(id).style.display=isHome?'':'none');
+  GCC_ELS.forEach(id=>document.getElementById(id).style.display=isGCC?'':'none');
   document.getElementById('tab-home').style.display=isHome?'flex':'none';
+  document.getElementById('tab-gcc').style.display=isGCC?'flex':'none';
   ['pricing','about','faq','contact'].forEach(t=>{
     const el=document.getElementById('tab-'+t);
     if(el)el.classList.toggle('act',t===name);
   });
+  if(isGCC&&gcc_all.length===0)loadGCCData();
 }
 
-/* ════════ FAQ DATA ════════ */
+/* ════════ FAQ ════════ */
 const FAQS=[
   {q:"Is the data real-time?",a:"The dataset is updated 48 Hours, every Monday. Your browser fetches the latest version on each page load. The 'Synced' badge in the filter bar shows the exact fetch time."},
-  {q:"What does the confidence score mean?",a:"Each signal is scored 0–100% based on how many independent sources corroborate it. 90%+ = officially confirmed by the company or government. Below 70% = plausible but single-source. We include lower-confidence signals but always display the score so you can judge the risk."},
-  {q:"Why does the map sometimes show fewer signals than expected?",a:"The map shows all signals matching your active filters. If the company filter or search bar is active, only matching signals are plotted. Use the 'Clear' button to reset all filters and see the full dataset."},
-  {q:"How do I get alerts for specific sectors or countries?",a:"Click 'Set up alerts' in the filter bar or your user menu. You can select industries, companies, and countries — our system emails you a 48 Hours digest whenever new matching signals are added. Free for all users."},
+  {q:"What does the confidence score mean?",a:"Each signal is scored 0–100% based on how many independent sources corroborate it. 90%+ = officially confirmed by the company or government. Below 70% = plausible but single-source."},
+  {q:"What is GCC Watch?",a:"GCC Watch tracks Global Capability Centre (GCC) openings and expansions across India — covering Hyderabad, Pune, Bengaluru, Chennai and other hubs. It shows which companies are building engineering and operations capability in India, how many jobs are being created, and what skill areas are in demand."},
+  {q:"Why does the map sometimes show fewer signals than expected?",a:"The map shows all signals matching your active filters. Use the 'Clear' button to reset all filters and see the full dataset."},
+  {q:"How do I get alerts for specific sectors or countries?",a:"Click 'Set up alerts' in the filter bar or your user menu. Free for all users."},
   {q:"Can I export the data?",a:"CSV export is a Pro feature ($20/mo). It exports all currently filtered signals with every data column including investment amounts, source URLs, confidence scores, and timelines."},
-  {q:"How do you handle currency conversion?",a:"Investment amounts are converted to USD at the exchange rate prevailing at announcement date. The original amount and currency are always preserved and visible in the signal detail view."},
   {q:"Can I get a team plan?",a:"Yes — email contact@signal48.com for team pricing. We offer discounts for teams of 3+."},
-  {q:"How do you decide which expansions to track?",a:"We focus on announcements above $10M involving physical infrastructure (plants, hubs, campuses, centres) or meaningful new market entry. Purely digital or online expansions are not included unless they involve significant headcount or infrastructure investment."},
-  {q:"Is my account data secure?",a:"Yes. Account data (email, subscription status) is stored in a private Google Sheet accessible only to the Signal48 team. Payment data is handled entirely by Stripe — we never see or store your card details."},
+  {q:"Is my account data secure?",a:"Yes. Account data is stored in a private Google Sheet accessible only to the Signal48 team. Payment data is handled entirely by Stripe."},
 ];
 function buildFAQ(){
   const el=document.getElementById('faq-list');
   FAQS.forEach((f,i)=>{
     const item=document.createElement('div');item.className='faq-item';
     item.innerHTML=`
-      <div class="faq-q" onclick="toggleFAQ(${i},this)">
-        ${esc(f.q)}
+      <div class="faq-q" onclick="toggleFAQ(${i},this)">${esc(f.q)}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
       </div>
       <div class="faq-a" id="faq-a-${i}">${esc(f.a)}</div>`;
@@ -967,7 +979,6 @@ function toggleFAQ(i,btn){
 
 /* ════════ AUTH ════════ */
 const GOOGLE_READY=new Promise(res=>{
-  // Wait for GSI script to load
   if(window.google){res();return;}
   const t=setInterval(()=>{if(window.google){clearInterval(t);res();}},100);
   setTimeout(()=>{clearInterval(t);res();},5000);
@@ -977,65 +988,28 @@ async function initGoogleAuth(){
   if(CONFIG.GOOGLE_CLIENT_ID==='YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com')return;
   await GOOGLE_READY;
   if(!window.google?.accounts)return;
-  google.accounts.id.initialize({
-    client_id:CONFIG.GOOGLE_CLIENT_ID,
-    callback:onGoogleCred,
-    auto_select:false,
-    cancel_on_tap_outside:true,
-  });
-  // Render actual button (reliable, not One Tap popup)
+  google.accounts.id.initialize({client_id:CONFIG.GOOGLE_CLIENT_ID,callback:onGoogleCred,auto_select:false,cancel_on_tap_outside:true});
   const btn=document.getElementById('google-signin-btn');
-  if(btn){
-    btn.innerHTML='';
-    google.accounts.id.renderButton(btn,{
-      theme:'outline',size:'large',width:360,
-      text:'continue_with',shape:'rectangular',
-    });
-  }
+  if(btn){btn.innerHTML='';google.accounts.id.renderButton(btn,{theme:'outline',size:'large',width:360,text:'continue_with',shape:'rectangular'});}
 }
 
 function onGoogleCred(resp){
   try{
     const payload=JSON.parse(atob(resp.credential.split('.')[1]));
-    const u={
-      name:payload.name,
-      email:payload.email,
-      avatar:(payload.given_name||payload.name)[0].toUpperCase(),
-      provider:'google',
-      plan:'free',
-    };
+    const u={name:payload.name,email:payload.email,avatar:(payload.given_name||payload.name)[0].toUpperCase(),provider:'google',plan:'free'};
     const users=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
     const isNew=!users[u.email];
-    if(isNew){
-      users[u.email]={name:u.name,provider:'google',plan:'free',created:new Date().toISOString()};
-      localStorage.setItem(USERS_KEY,JSON.stringify(users));
-      saveUserToSheet(u.email,u.name,'google','free');
-    }
-    loginUser(u);
-    cm(3);
-    showAuthToast(isNew
-      ? `✅ Account created — welcome, ${(payload.given_name||u.name).split(' ')[0]}!`
-      : `👋 Welcome back, ${(payload.given_name||u.name).split(' ')[0]}!`
-    );
+    if(isNew){users[u.email]={name:u.name,provider:'google',plan:'free',created:new Date().toISOString()};localStorage.setItem(USERS_KEY,JSON.stringify(users));saveUserToSheet(u.email,u.name,'google','free');}
+    loginUser(u);cm(3);
+    showAuthToast(isNew?`✅ Account created — welcome, ${(payload.given_name||u.name).split(' ')[0]}!`:`👋 Welcome back, ${(payload.given_name||u.name).split(' ')[0]}!`);
   }catch(e){console.error('Google auth error',e);}
 }
 
-function saveUserToSheet(email,name,provider,plan){
-  saveToSheet({
-    type:'users',
-    email,name,provider,plan,
-    signup_date:new Date().toISOString().slice(0,10),
-    ts:new Date().toISOString(),
-  });
-}
+function saveUserToSheet(email,name,provider,plan){saveToSheet({type:'users',email,name,provider,plan,signup_date:new Date().toISOString().slice(0,10),ts:new Date().toISOString()});}
 
 function showAuthToast(msg){
   let t=document.getElementById('auth-toast');
-  if(!t){
-    t=document.createElement('div');t.id='auth-toast';
-    t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;background:var(--text);color:#fff;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,.2);transition:opacity .3s;white-space:nowrap';
-    document.body.appendChild(t);
-  }
+  if(!t){t=document.createElement('div');t.id='auth-toast';t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;background:var(--text);color:#fff;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,.2);transition:opacity .3s;white-space:nowrap';document.body.appendChild(t);}
   t.textContent=msg;t.style.opacity='1';t.style.display='block';
   clearTimeout(t._t);t._t=setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.style.display='none',300);},3500);
 }
@@ -1046,33 +1020,25 @@ function openAuth(defaultTab){
     <div class="auth-modal">
       <div class="am-logo">Signal<em>48</em></div>
       <div class="am-sub" id="am-headline">${tab==='up'?'Create your free account':'Welcome back'}</div>
-
-      <!-- Google button rendered here by GSI renderButton -->
       <div id="google-signin-btn" style="display:flex;justify-content:center;margin-bottom:14px;min-height:44px">
         ${CONFIG.GOOGLE_CLIENT_ID==='YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com'
-          ? `<div style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg2);font-size:12px;color:var(--text3);text-align:center">Google Sign-In: add your Client ID to CONFIG</div>`
-          : `<div style="font-size:12px;color:var(--text3);padding:10px">Loading Google Sign-In…</div>`
-        }
+          ?`<div style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg2);font-size:12px;color:var(--text3);text-align:center">Google Sign-In: add your Client ID to CONFIG</div>`
+          :`<div style="font-size:12px;color:var(--text3);padding:10px">Loading Google Sign-In…</div>`}
       </div>
-
       <div class="am-divider">or use email</div>
       <div class="am-tabs">
         <div class="am-tab ${tab==='up'?'':'act'}" id="am-t1" onclick="switchAM('in')">Sign in</div>
         <div class="am-tab ${tab==='up'?'act':''}" id="am-t2" onclick="switchAM('up')">Sign up</div>
       </div>
-      <div id="am-name-row" style="display:${tab==='up'?'block':'none'}">
-        <input class="am-inp" id="am-name" type="text" placeholder="Full name">
-      </div>
+      <div id="am-name-row" style="display:${tab==='up'?'block':'none'}"><input class="am-inp" id="am-name" type="text" placeholder="Full name"></div>
       <input class="am-inp" id="am-email" type="email" placeholder="Email address">
       <input class="am-inp" id="am-pass" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doEmailAuth()">
       <button class="btn-am" id="am-submit" onclick="doEmailAuth()">${tab==='up'?'Create account':'Sign in'}</button>
       <div class="am-note" id="am-msg">Your data is stored securely. No spam, ever.</div>
-      <div style="text-align:center;margin-top:8px">
-        <button onclick="openForgotPassword()" style="font-size:12px;color:var(--text3);background:none;border:none;cursor:pointer;text-decoration:underline">Forgot password?</button>
-      </div>
+      <div style="text-align:center;margin-top:8px"><button onclick="openForgotPassword()" style="font-size:12px;color:var(--text3);background:none;border:none;cursor:pointer;text-decoration:underline">Forgot password?</button></div>
     </div>`;
   document.getElementById('ov3').style.display='flex';
-  initGoogleAuth(); // renders the real Google button
+  initGoogleAuth();
 }
 
 let amMode='up';
@@ -1094,49 +1060,30 @@ function doEmailAuth(){
   if(!email.includes('@')){showNote('am-msg','Enter a valid email address.','red');return;}
   if(!pass||pass.length<6){showNote('am-msg','Password must be at least 6 characters.','red');return;}
   showNote('am-msg','Checking…','');
-
   if(amMode==='up'){
     if(!name||name.length<2){showNote('am-msg','Please enter your full name.','red');return;}
-    // Check sheet for duplicate across devices
     checkEmailExists(email).then(existsInSheet=>{
       const ul=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
-      if(existsInSheet||ul[email]){
-        showNote('am-msg','Account already exists — use the Sign in tab.','red');return;
-      }
+      if(existsInSheet||ul[email]){showNote('am-msg','Account already exists — use the Sign in tab.','red');return;}
       ul[email]={name,pass,plan:'free',created:new Date().toISOString()};
       localStorage.setItem(USERS_KEY,JSON.stringify(ul));
       saveUserToSheet(email,name,'email','free');
       loginUser({name,email,avatar:name[0].toUpperCase(),provider:'email',plan:'free'});
-      cm(3);
-      showAuthToast(`✅ Account created — welcome, ${name.split(' ')[0]}!`);
+      cm(3);showAuthToast(`✅ Account created — welcome, ${name.split(' ')[0]}!`);
     });
   }else{
     const ul=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
-    if(!ul[email]){
-      checkEmailExists(email).then(existsInSheet=>{
-        if(!existsInSheet){showNote('am-msg','No account found — please Sign up first.','red');return;}
-        showNote('am-msg','Account found on another device. Use Forgot password below.','orange');
-      });
-      return;
-    }
-    if(ul[email].provider==='google'){
-      showNote('am-msg','This email uses Google Sign-In — click the Google button above.','orange');return;
-    }
+    if(!ul[email]){checkEmailExists(email).then(existsInSheet=>{if(!existsInSheet){showNote('am-msg','No account found — please Sign up first.','red');return;}showNote('am-msg','Account found on another device. Use Forgot password below.','orange');});return;}
+    if(ul[email].provider==='google'){showNote('am-msg','This email uses Google Sign-In — click the Google button above.','orange');return;}
     if(ul[email].pass!==pass){showNote('am-msg','Incorrect password.','red');return;}
     loginUser({name:ul[email].name,email,avatar:ul[email].name[0].toUpperCase(),provider:'email',plan:ul[email].plan||'free'});
-    cm(3);
-    showAuthToast(`👋 Welcome back, ${ul[email].name.split(' ')[0]}!`);
+    cm(3);showAuthToast(`👋 Welcome back, ${ul[email].name.split(' ')[0]}!`);
   }
 }
-
 async function checkEmailExists(email){
   if(!CONFIG.APPS_SCRIPT_URL||CONFIG.APPS_SCRIPT_URL.includes('YOUR_SCRIPT'))return false;
-  try{
-    const r=await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=check&email=${encodeURIComponent(email)}`);
-    const d=await r.json();return d.exists===true;
-  }catch(e){return false;}
+  try{const r=await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=check&email=${encodeURIComponent(email)}`);const d=await r.json();return d.exists===true;}catch(e){return false;}
 }
-
 function openForgotPassword(){
   document.getElementById('mh3').innerHTML='';document.getElementById('mb3').innerHTML=`
     <div class="auth-modal">
@@ -1156,13 +1103,10 @@ function openForgotPassword(){
         <button class="btn-am" onclick="verifyOTPAndReset()">Reset password</button>
         <div class="am-note" id="fp-msg2"></div>
       </div>
-      <div style="text-align:center;margin-top:14px">
-        <button onclick="openAuth('in')" style="font-size:12px;color:var(--accent);background:none;border:none;cursor:pointer">← Back to sign in</button>
-      </div>
+      <div style="text-align:center;margin-top:14px"><button onclick="openAuth('in')" style="font-size:12px;color:var(--accent);background:none;border:none;cursor:pointer">← Back to sign in</button></div>
     </div>`;
   document.getElementById('ov3').style.display='flex';
 }
-
 async function sendResetOTP(){
   const email=(document.getElementById('fp-email').value||'').trim().toLowerCase();
   const msg=document.getElementById('fp-msg');
@@ -1174,13 +1118,10 @@ async function sendResetOTP(){
     if(d.error==='google_account'){msg.textContent='This account uses Google Sign-In — no password to reset.';msg.style.color='var(--gold)';return;}
     if(!d.sent){msg.textContent=d.error==='Email not found'?'No account with that email.':'Could not send. Try again.';msg.style.color='var(--red)';return;}
     window._resetEmail=email;
-    document.getElementById('fp-s1').style.display='none';
-    document.getElementById('fp-s2').style.display='block';
-    document.getElementById('fp-hl').textContent='Enter your reset code';
-    document.getElementById('fp-otp').focus();
+    document.getElementById('fp-s1').style.display='none';document.getElementById('fp-s2').style.display='block';
+    document.getElementById('fp-hl').textContent='Enter your reset code';document.getElementById('fp-otp').focus();
   }catch(e){msg.textContent='Network error. Try again.';msg.style.color='var(--red)';}
 }
-
 async function verifyOTPAndReset(){
   const otp=(document.getElementById('fp-otp').value||'').trim();
   const np=document.getElementById('fp-np').value||'';
@@ -1202,8 +1143,7 @@ async function verifyOTPAndReset(){
   }catch(e){msg.textContent='Network error. Try again.';msg.style.color='var(--red)';}
 }
 function loginUser(u){
-  currentUser=u;
-  localStorage.setItem(SESSION_KEY,JSON.stringify(u));
+  currentUser=u;localStorage.setItem(SESSION_KEY,JSON.stringify(u));
   document.getElementById('auth-area').style.display='none';
   document.getElementById('user-area').style.display='block';
   document.getElementById('uavatar').textContent=u.avatar;
@@ -1220,9 +1160,7 @@ function signOut(){
   document.getElementById('upgrade-btn').style.display='flex';
   document.getElementById('user-dropdown').classList.remove('open');
 }
-function toggleDropdown(){
-  document.getElementById('user-dropdown').classList.toggle('open');
-}
+function toggleDropdown(){document.getElementById('user-dropdown').classList.toggle('open');}
 document.addEventListener('click',e=>{
   const menu=document.getElementById('user-menu');
   if(menu&&!menu.contains(e.target))document.getElementById('user-dropdown').classList.remove('open');
@@ -1234,19 +1172,13 @@ function showNote(id,msg,color){
 }
 function isPro(){return currentUser&&currentUser.plan==='pro';}
 
-/* ════════ GOOGLE APPS SCRIPT WEBHOOK ════════ */
+/* ════════ APPS SCRIPT ════════ */
 async function saveToSheet(data){
   if(!CONFIG.APPS_SCRIPT_URL||CONFIG.APPS_SCRIPT_URL.includes('YOUR_SCRIPT'))return;
-  try{
-    await fetch(CONFIG.APPS_SCRIPT_URL,{
-      method:'POST',mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(data)
-    });
-  }catch(e){}
+  try{await fetch(CONFIG.APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});}catch(e){}
 }
 
-/* ════════ LOAD DATA ════════ */
+/* ════════ MAIN DATA LOAD ════════ */
 async function loadData(){
   document.getElementById('loading').style.display='flex';
   document.getElementById('leaflet-map').style.display='none';
@@ -1256,18 +1188,11 @@ async function loadData(){
   try{
     const r=await fetch(url);if(!r.ok)throw new Error();
     all=parseCSV(await r.text());
-    updateKPIs(all);
-    popFilters(all);
-    go();
+    updateKPIs(all);popFilters(all);go();
     const n=new Date();
     document.getElementById('stxt').textContent=`SYNCED ${p2(n.getHours())}:${p2(n.getMinutes())}`;
   }catch(e){
-    document.getElementById('loading').innerHTML=`
-      <div style="text-align:center;max-width:280px">
-        <div style="font-size:26px;opacity:.4;margin-bottom:10px">⚠</div>
-        <div style="font-size:13px;color:var(--text2);line-height:1.7">Cannot fetch sheet.<br>Set <strong>Share → Anyone with link → Viewer</strong></div>
-        <button onclick="loadData()" style="margin-top:14px;background:var(--accent);color:#fff;padding:6px 18px;border-radius:7px;font-size:12px;font-weight:500;border:none;cursor:pointer">Retry</button>
-      </div>`;
+    document.getElementById('loading').innerHTML=`<div style="text-align:center;max-width:280px"><div style="font-size:26px;opacity:.4;margin-bottom:10px">⚠</div><div style="font-size:13px;color:var(--text2);line-height:1.7">Cannot fetch sheet.<br>Set <strong>Share → Anyone with link → Viewer</strong></div><button onclick="loadData()" style="margin-top:14px;background:var(--accent);color:#fff;padding:6px 18px;border-radius:7px;font-size:12px;font-weight:500;border:none;cursor:pointer">Retry</button></div>`;
     document.getElementById('stxt').textContent='ERROR';
   }
 }
@@ -1295,97 +1220,92 @@ function mSort(s){
   return(parseInt(p[1])||0)*100+(MORD[(p[0]||'').toLowerCase()]||0);
 }
 
-/* ════════ LATEST DATA LOGIC ════════ */
-function getLatestData(data){
-  // Find the latest period in the dataset
-  const periods=[...new Set(data.map(r=>r.Month_Year).filter(Boolean))];
-  if(!periods.length)return data;
-  periods.sort((a,b)=>mSort(b)-mSort(a));
-  // Group by company — only keep each company's latest deal
-  const byCompany={};
-  data.forEach(r=>{
-    if(!r.Company)return;
-    const existing=byCompany[r.Company];
-    if(!existing||mSort(r.Month_Year)>mSort(existing.Month_Year)){
-      byCompany[r.Company]=r;
-    }
-  });
-  return Object.values(byCompany);
+/* ════════ GCC DATA LOAD ════════ */
+async function loadGCCData(){
+  const cardList=document.getElementById('gcc-card-list');
+  const rpBody=document.getElementById('gcc-rp-body');
+  if(cardList)cardList.innerHTML=`<div class="gcc-loading"><div class="sp"></div><div class="ltxt">Loading GCC signals…</div></div>`;
+  if(rpBody)rpBody.innerHTML=`<div class="gcc-loading"><div class="sp"></div></div>`;
+
+  // Use sheet name "GCC" — works without needing GID
+  const url=`https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:csv&sheet=GCC`;
+  try{
+    const r=await fetch(url);
+    if(!r.ok)throw new Error('fetch failed');
+    const text=await r.text();
+    gcc_all=parseGCC(text);
+    if(!gcc_all.length)throw new Error('empty');
+    popGCCFilters(gcc_all);
+    goGCC();
+    const n=new Date();
+    const stxt=document.getElementById('gcc-stxt');
+    if(stxt)stxt.textContent=`SYNCED ${p2(n.getHours())}:${p2(n.getMinutes())}`;
+  }catch(e){
+    if(cardList)cardList.innerHTML=`
+      <div class="gcc-empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <p>Cannot load GCC sheet.<br><br>
+        Make sure your Google Sheet has a tab named <strong>GCC</strong> and is shared as<br><em>Anyone with link → Viewer</em>.</p>
+        <button onclick="loadGCCData()" style="margin-top:8px;background:var(--accent);color:#fff;padding:6px 16px;border-radius:7px;font-size:12px;font-weight:500;border:none;cursor:pointer">Retry</button>
+      </div>`;
+    const stxt=document.getElementById('gcc-stxt');
+    if(stxt)stxt.textContent='ERROR';
+  }
 }
 
-/* ════════ KPI BAR ════════ */
-function updateKPIs(data){
-  // All-time totals
-  const cap=data.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
-  document.getElementById('hkd').textContent=data.length.toLocaleString();
-  document.getElementById('hkc').textContent='$'+bigFmt(cap);
-  document.getElementById('kpi-cap').textContent='$'+bigFmt(cap);
-
-  // Current month
-  const now=new Date();
-  const months=['january','february','march','april','may','june','july','august','september','october','november','december'];
-  const curMonth=months[now.getMonth()];
-  const curYear=now.getFullYear();
-  const curMonthData=data.filter(r=>{
-    if(!r.Month_Year)return false;
-    const p=r.Month_Year.trim().toLowerCase().split(/\s+/);
-    return p[0]===curMonth&&parseInt(p[1])===curYear;
-  });
-  // Fallback to latest period if current month has no data
-  const periods=[...new Set(data.map(r=>r.Month_Year).filter(Boolean))].sort((a,b)=>mSort(b)-mSort(a));
-  const latestPeriod=periods[0]||'';
-  const latestData=curMonthData.length?curMonthData:data.filter(r=>r.Month_Year===latestPeriod);
-  const latestCap=latestData.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
-
-  document.getElementById('kpi-month').textContent=latestData.length;
-  document.getElementById('kpi-month-sub').textContent=`${curMonthData.length?'this month':latestPeriod||'latest period'} · $${bigFmt(latestCap)}`;
-
-  // Sector is FREE — no lock
-  const secMap=data.reduce((m,r)=>{if(r.Sector)m[r.Sector]=(m[r.Sector]||0)+1;return m;},{});
-  const topSec=Object.entries(secMap).sort((a,b)=>b[1]-a[1])[0];
-  if(topSec){document.getElementById('kpi-sector').textContent=topSec[0];document.getElementById('kpi-sector-sub').textContent=`${topSec[1]} deals · ${Math.round(topSec[1]/data.length*100)}%`;}
-
-  // Pro KPIs
-  const capMap=data.reduce((m,r)=>{if(r.Country)m[r.Country]=(m[r.Country]||0)+(parseFloat(r.Investment_Amount_USD_Billion)||0);return m;},{});
-  const topCap=Object.entries(capMap).sort((a,b)=>b[1]-a[1])[0];
-  if(topCap){document.getElementById('kpi-country').textContent=topCap[0];document.getElementById('kpi-country-sub').textContent='$'+bigFmt(topCap[1])+' inbound';}
-
-  const typeMap=data.reduce((m,r)=>{if(r.Expansion_Type)m[r.Expansion_Type]=(m[r.Expansion_Type]||0)+1;return m;},{});
-  const topType=Object.entries(typeMap).sort((a,b)=>b[1]-a[1])[0];
-  if(topType){document.getElementById('kpi-type').textContent=topType[0];document.getElementById('kpi-type-sub').textContent='most common expansion type';}
-
-  // Only country + type are pro-locked
-  ['kpi-country-wrap','kpi-type-wrap'].forEach(id=>{
-    const el=document.getElementById(id);if(!el)return;
-    const lock=el.querySelector('.kpi-lock');
-    if(lock)lock.style.display=isPro()?'none':'flex';
-    el.classList.toggle('pro-blur',!isPro());
-  });
-  // Sector: always visible, never blurred
-  const secWrap=document.getElementById('kpi-sector-wrap');
-  if(secWrap){secWrap.classList.remove('pro-blur');const l=secWrap.querySelector('.kpi-lock');if(l)l.style.display='none';}
+function parseGCC(t){
+  const rows=[];let q=false,c='',f=[];
+  for(let i=0;i<t.length;i++){
+    const ch=t[i];
+    if(ch==='"'){q=!q;}else if(ch===','&&!q){f.push(c.trim());c='';}
+    else if((ch==='\n'||ch==='\r')&&!q){if(c||f.length){f.push(c.trim());rows.push(f);}f=[];c='';if(ch==='\r'&&t[i+1]==='\n')i++;}
+    else c+=ch;
+  }
+  if(c||f.length){f.push(c.trim());rows.push(f);}
+  if(rows.length<2)return[];
+  const h=rows[0].map(x=>x.replace(/\uFEFF/g,'').trim());
+  return rows.slice(1).map(r=>{const o={};h.forEach((k,i)=>o[k]=(r[i]||'').trim());return o;})
+    .filter(r=>r.Company&&r.Company!=='Company'&&r.Company!=='');
 }
 
-/* ════════ SEARCHABLE DROPDOWNS ════════ */
-const DD_STATE={
-  'dd-rg':{val:'',opts:[]},
-  'dd-co':{val:'',opts:[]},
-  'dd-cn':{val:'',opts:[]},
-  'dd-se':{val:'',opts:[]},
-  'dd-mo':{val:'',opts:[]},
+function gccMSort(s){
+  if(!s)return 0;
+  const p=s.replace(/_/g,' ').trim().split(/\s+/);
+  return(parseInt(p[1])||0)*100+(GCC_MORD[(p[0]||'').toLowerCase().slice(0,3)]||0);
+}
+
+/* ════════ GCC SEARCHABLE DROPDOWNS ════════ */
+const GCC_DD_LABELS={'gcc-dd-ci':'All Cities','gcc-dd-se':'All Sectors','gcc-dd-mo':'All Periods'};
+const GCC_DD_STATE={
+  'gcc-dd-ci':{val:'',opts:[]},
+  'gcc-dd-se':{val:'',opts:[]},
+  'gcc-dd-mo':{val:'',opts:[]},
 };
+
+function popGCCFilters(data){
+  GCC_DD_STATE['gcc-dd-ci'].opts=[...new Set(data.map(r=>r.City).filter(Boolean))].sort();
+  GCC_DD_STATE['gcc-dd-se'].opts=[...new Set(data.map(r=>r.Sector).filter(Boolean))].sort();
+  const periods=[...new Set(data.map(r=>r.Month_Year).filter(Boolean))].sort((a,b)=>gccMSort(b)-gccMSort(a));
+  GCC_DD_STATE['gcc-dd-mo'].opts=periods;
+  Object.keys(GCC_DD_STATE).forEach(id=>filterDD(id,''));
+}
+
+/* Unified DD toggle — handles both main and gcc dropdowns */
+const ALL_DD_IDS=['dd-rg','dd-co','dd-cn','dd-se','dd-mo','gcc-dd-ci','gcc-dd-se','gcc-dd-mo'];
+
 function toggleDD(id){
-  const isOpen=document.getElementById(id).classList.contains('open');
+  const isOpen=document.getElementById(id)?.classList.contains('open');
   closeAllDD();
   if(!isOpen){
-    document.getElementById(id).classList.add('open');
-    document.getElementById(id).querySelector('.dd-trigger').classList.add('open');
-    const inp=document.getElementById(id).querySelector('.dd-sinp');
+    const el=document.getElementById(id);if(!el)return;
+    el.classList.add('open');
+    const t=el.querySelector('.dd-trigger');if(t)t.classList.add('open');
+    const inp=el.querySelector('.dd-sinp');
     if(inp){inp.value='';filterDD(id,'');setTimeout(()=>inp.focus(),50);}
   }
 }
 function closeAllDD(){
-  Object.keys(DD_STATE).forEach(id=>{
+  ALL_DD_IDS.forEach(id=>{
     const el=document.getElementById(id);if(!el)return;
     el.classList.remove('open');
     const t=el.querySelector('.dd-trigger');if(t)t.classList.remove('open');
@@ -1393,10 +1313,7 @@ function closeAllDD(){
 }
 document.addEventListener('click',e=>{
   let inside=false;
-  Object.keys(DD_STATE).forEach(id=>{
-    const el=document.getElementById(id);
-    if(el&&el.contains(e.target))inside=true;
-  });
+  ALL_DD_IDS.forEach(id=>{const el=document.getElementById(id);if(el&&el.contains(e.target))inside=true;});
   const menu=document.getElementById('user-menu');
   if(menu&&menu.contains(e.target))inside=true;
   if(!inside){
@@ -1404,66 +1321,407 @@ document.addEventListener('click',e=>{
     document.getElementById('user-dropdown').classList.remove('open');
   }
 });
+
 function filterDD(id,query){
+  // Determine if it's a GCC dropdown or main dropdown
+  const isGCC=id.startsWith('gcc-');
+  const state=isGCC?GCC_DD_STATE[id]:DD_STATE[id];
+  if(!state)return;
   const listEl=document.getElementById(id+'-list');if(!listEl)return;
   const q=query.toLowerCase().trim();
-  const state=DD_STATE[id];
   const opts=state.opts.filter(o=>!q||o.toLowerCase().includes(q));
+  const labels=isGCC?GCC_DD_LABELS:{
+    'dd-rg':'All Regions','dd-co':'All Companies','dd-cn':'All Countries',
+    'dd-se':'All Sectors','dd-mo':'All Periods'
+  };
   listEl.innerHTML='';
-  // "All" option
   const allOpt=document.createElement('div');
   allOpt.className='dd-opt all'+(state.val===''?' sel':'');
-  const labels={'dd-rg':'All Regions','dd-co':'All Companies','dd-cn':'All Countries','dd-se':'All Sectors','dd-mo':'All Periods'};
   allOpt.textContent=labels[id]||'All';
-  allOpt.onclick=()=>{setDD(id,'');closeAllDD();go();};
+  allOpt.onclick=()=>{setDD(id,'');closeAllDD();isGCC?goGCC():go();};
   listEl.appendChild(allOpt);
-  if(!opts.length){
-    const em=document.createElement('div');em.className='dd-empty';em.textContent='No results';listEl.appendChild(em);return;
-  }
+  if(!opts.length){const em=document.createElement('div');em.className='dd-empty';em.textContent='No results';listEl.appendChild(em);return;}
   opts.forEach(o=>{
     const div=document.createElement('div');
     div.className='dd-opt'+(state.val===o?' sel':'');
     div.textContent=o;
-    div.onclick=()=>{setDD(id,o);closeAllDD();go();};
+    div.onclick=()=>{setDD(id,o);closeAllDD();isGCC?goGCC():go();};
     listEl.appendChild(div);
   });
 }
 function setDD(id,val){
-  DD_STATE[id].val=val;
+  const isGCC=id.startsWith('gcc-');
+  const state=isGCC?GCC_DD_STATE[id]:DD_STATE[id];
+  if(!state)return;
+  state.val=val;
   const valEl=document.getElementById(id+'-val');if(!valEl)return;
-  const labels={'dd-rg':'All Regions','dd-co':'All Companies','dd-cn':'All Countries','dd-se':'All Sectors','dd-mo':'All Periods'};
-  valEl.textContent=val||labels[id];
+  const labels={...GCC_DD_LABELS,'dd-rg':'All Regions','dd-co':'All Companies','dd-cn':'All Countries','dd-se':'All Sectors','dd-mo':'All Periods'};
+  valEl.textContent=val||labels[id]||'All';
   valEl.classList.toggle('sel',!!val);
 }
 
-/* ════════ FILTERS ════════ */
+/* Type toggle */
+function toggleType(t){
+  if(gcc_type_filter===t)gcc_type_filter='';
+  else gcc_type_filter=t;
+  document.getElementById('tpill-new').classList.toggle('on',gcc_type_filter==='New GCC');
+  document.getElementById('tpill-exp').classList.toggle('on',gcc_type_filter==='Expansion');
+  goGCC();
+}
+
+/* ════════ GCC FILTER & RENDER ════════ */
+function goGCC(){
+  const ci=GCC_DD_STATE['gcc-dd-ci'].val;
+  const se=GCC_DD_STATE['gcc-dd-se'].val;
+  const mo=GCC_DD_STATE['gcc-dd-mo'].val;
+  const q=(document.getElementById('gcc-sq')?.value||'').toLowerCase().trim();
+  const hasF=ci||se||mo||gcc_type_filter||q;
+  const bclr=document.getElementById('gcc-bclr');if(bclr)bclr.classList.toggle('on',!!hasF);
+
+  gcc_filt=gcc_all.filter(r=>{
+    if(ci&&r.City!==ci)return false;
+    if(se&&r.Sector!==se)return false;
+    if(mo&&r.Month_Year!==mo)return false;
+    if(gcc_type_filter&&r.Expansion_Type!==gcc_type_filter)return false;
+    if(q){
+      const hay=[r.Company,r.City,r.Sector,r.Focus_Area,r.Expansion_Type,r.Facility_Type,r.Source].join(' ').toLowerCase();
+      if(!hay.includes(q))return false;
+    }
+    return true;
+  });
+
+  const sorted=[...gcc_filt].sort((a,b)=>gccMSort(b.Month_Year)-gccMSort(a.Month_Year));
+  const totalJobs=gcc_filt.reduce((s,r)=>s+(parseInt(r.Jobs_Created)||0),0);
+
+  const ctag=document.getElementById('gcc-ctag');
+  if(ctag)ctag.textContent=`${gcc_filt.length} GCC${gcc_filt.length!==1?'s':''} · ${totalJobs?totalJobs.toLocaleString()+' jobs':''}`;
+
+  const scope=document.getElementById('gcc-rp-scope');
+  if(scope)scope.textContent=ci?`${ci.toUpperCase()}`:hasF?'FILTERED VIEW':'INDIA · ALL HUBS';
+
+  renderGCCHubs(gcc_filt.length?gcc_filt:gcc_all);
+  renderGCCCards(sorted);
+  renderGCCInsights(gcc_filt);
+}
+
+function clrGCC(){
+  Object.keys(GCC_DD_STATE).forEach(id=>setDD(id,''));
+  gcc_type_filter='';
+  document.getElementById('tpill-new').classList.remove('on');
+  document.getElementById('tpill-exp').classList.remove('on');
+  const sq=document.getElementById('gcc-sq');if(sq)sq.value='';
+  goGCC();
+}
+
+/* ════════ GCC HUB CARDS ════════ */
+function renderGCCHubs(data){
+  const strip=document.getElementById('gcc-hub-strip');if(!strip)return;
+  const cityData={};
+  data.forEach(r=>{
+    const city=(r.City||'').trim();if(!city)return;
+    if(!cityData[city])cityData[city]={signals:0,jobs:0};
+    cityData[city].signals++;
+    cityData[city].jobs+=parseInt(r.Jobs_Created)||0;
+  });
+  // Build display list: data cities + known hubs, deduplicated, up to 5
+  const activeCities=Object.keys(cityData).sort((a,b)=>cityData[b].jobs-cityData[a].jobs);
+  const displayCities=[...new Set([...activeCities,...GCC_KNOWN_CITIES])].slice(0,5);
+  const maxJobs=Math.max(...displayCities.map(c=>(cityData[c]||{jobs:0}).jobs),1);
+
+  strip.innerHTML=displayCities.map((city,i)=>{
+    const cd=cityData[city]||{signals:0,jobs:0};
+    const isTop=i===0&&cd.signals>0;
+    const barW=cd.jobs?Math.round(cd.jobs/maxJobs*100):0;
+    const isActive=GCC_DD_STATE['gcc-dd-ci'].val===city;
+    return `
+      <div class="gcc-hub${isTop?' top':''}${cd.signals===0?' monitoring':''}${isActive?' act':''}" onclick="setGCCCityFilter('${city}')">
+        <div class="gcc-hub-city">${esc(city)}</div>
+        <div class="gcc-hub-country">India</div>
+        <div class="gcc-hub-count">${cd.signals||'—'}</div>
+        <div class="gcc-hub-jobs">${cd.jobs?cd.jobs.toLocaleString()+' jobs announced':'Monitoring'}</div>
+        <div class="gcc-hub-barwrap"><div class="gcc-hub-fill" style="width:${barW}%"></div></div>
+      </div>`;
+  }).join('');
+}
+
+function setGCCCityFilter(city){
+  const current=GCC_DD_STATE['gcc-dd-ci'].val;
+  setDD('gcc-dd-ci',current===city?'':city);
+  goGCC();
+}
+
+/* ════════ GCC CARD GRID ════════ */
+function renderGCCCards(data){
+  const list=document.getElementById('gcc-card-list');if(!list)return;
+  if(!data.length){
+    list.innerHTML=`<div class="gcc-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>No GCC signals match your filters.<br>Try clearing the filters.</p></div>`;
+    return;
+  }
+  list.innerHTML=data.map((r,i)=>{
+    const jobs=parseInt(r.Jobs_Created)||0;
+    const initials=(r.Company||'').split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase()||'?';
+    const avStyle=gccAvatarStyle(r.Sector);
+    const isNew=r.Expansion_Type==='New GCC';
+    // Focus area badges
+    const focuses=(r.Focus_Area||'').split(/\s*[\+\/]\s*/).map(s=>s.trim()).filter(s=>s&&s!=='NA');
+    const badgesHtml=focuses.slice(0,3).map((f,bi)=>`<span class="gcc-badge ${gccBadgeClass(bi)}">${esc(f)}</span>`).join('')
+      +(focuses.length>3?`<span class="gcc-badge gcc-badge-more">+${focuses.length-3}</span>`:'');
+    const monthFmt=(r.Month_Year||'').replace(/_/,' ');
+    return `
+      <div class="gcc-card" style="animation-delay:${Math.min(i*.03,.4)}s" onclick="openGCCModal(${i})">
+        <div class="gcc-avatar" style="${avStyle}">${esc(initials)}</div>
+        <div class="gcc-co">
+          <div class="gcc-co-name">${esc(r.Company)}</div>
+          <div class="gcc-co-loc">📍 ${esc([r.City,r.Country].filter(Boolean).join(', '))}${monthFmt?` · ${esc(monthFmt)}`:''}
+          </div>
+          ${badgesHtml?`<div class="gcc-badges">${badgesHtml}</div>`:''}
+        </div>
+        <div class="gcc-right">
+          ${jobs?`<div class="gcc-jobs">${jobs.toLocaleString()}</div><div class="gcc-jobs-l">jobs</div>`:`<div class="gcc-jobs-l" style="font-size:11px;color:var(--text3)">Undisclosed</div>`}
+          <div class="gcc-type ${isNew?'gcc-type-new':'gcc-type-exp'}">${esc(r.Expansion_Type||'GCC')}</div>
+        </div>
+      </div>`;
+  }).join('');
+  // Store sorted data for modal access
+  window._gccData=data;
+}
+
+function openGCCModal(idx){
+  const r=(window._gccData||[])[idx];if(!r)return;
+  const jobs=parseInt(r.Jobs_Created)||0;
+  const monthFmt=(r.Month_Year||'').replace(/_/,' ');
+  const focuses=(r.Focus_Area||'').split(/\s*[\+\/]\s*/).map(s=>s.trim()).filter(s=>s&&s!=='NA');
+  const fields=[
+    ['Month / Year',monthFmt],
+    ['Country',r.Country],['City',r.City],
+    ['Expansion Type',r.Expansion_Type],
+    ['Facility Type',r.Facility_Type],
+    ['Sector',r.Sector],
+    ['Focus Areas',focuses.join(' · ')||'—'],
+    ['Jobs Created',jobs?jobs.toLocaleString():'Undisclosed'],
+    ['Source',r.Source||'—'],
+  ].filter(([,v])=>v&&v!=='—'&&v.trim()!=='');
+  document.getElementById('mh1').innerHTML=`
+    <div class="m-co">🏢 ${esc(r.Company)}</div>
+    <div style="font-size:12.5px;color:var(--text2);margin-top:4px">
+      ${esc([r.City,r.Country].filter(Boolean).join(', '))} · 
+      <span style="font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:3px;${r.Expansion_Type==='New GCC'?'background:var(--green-l);color:var(--green)':'background:var(--pro-l);color:var(--pro)'}">${esc(r.Expansion_Type||'GCC')}</span>
+    </div>`;
+  document.getElementById('mb1').innerHTML=
+    fields.map(([k,v])=>`<div class="m-row"><div class="mk">${k}</div><div class="mv">${k==='Source'&&v.startsWith('http')?`<a href="${esc(v)}" target="_blank" rel="noopener">View source ↗</a>`:esc(v)}</div></div>`).join('');
+  document.getElementById('ov1').style.display='flex';
+}
+
+/* ════════ GCC INSIGHTS ════════ */
+let _gc_city=null, _gc_sector=null, _gc_demand=null;
+
+function destroyGCCCharts(){
+  [_gc_city,_gc_sector,_gc_demand].forEach(c=>{if(c)c.destroy();});
+  _gc_city=_gc_sector=_gc_demand=null;
+}
+
+function renderGCCInsights(data){
+  const body=document.getElementById('gcc-rp-body');if(!body)return;
+  if(!data.length){
+    destroyGCCCharts();
+    body.innerHTML='<div style="padding:20px 14px;font-size:11px;color:var(--text3)">No signals in current view.</div>';
+    return;
+  }
+
+  const totalJobs=data.reduce((s,r)=>s+(parseInt(r.Jobs_Created)||0),0);
+  const avgJobs=data.length?Math.round(totalJobs/data.length):0;
+  const topByJobs=[...data].sort((a,b)=>(parseInt(b.Jobs_Created)||0)-(parseInt(a.Jobs_Created)||0))[0];
+
+  // Jobs by city
+  const cityJobs={};
+  data.forEach(r=>{
+    const c=r.City||'Unknown';
+    cityJobs[c]=(cityJobs[c]||0)+(parseInt(r.Jobs_Created)||0);
+  });
+  const cityTop=Object.entries(cityJobs).sort((a,b)=>b[1]-a[1]).slice(0,6);
+
+  // Sector split
+  const sectorCount={};
+  data.forEach(r=>{const s=r.Sector||'Other';sectorCount[s]=(sectorCount[s]||0)+1;});
+  const sectorTop=Object.entries(sectorCount).sort((a,b)=>b[1]-a[1]).slice(0,5);
+
+  // Jobs in demand — parse Focus_Area
+  const demandMap={};
+  data.forEach(r=>{
+    if(!r.Focus_Area||r.Focus_Area==='NA')return;
+    const jobs=parseInt(r.Jobs_Created)||0;
+    const areas=r.Focus_Area.split(/\s*[\+\/]\s*/).map(a=>a.trim()).filter(a=>a&&a!=='NA');
+    areas.forEach(area=>{demandMap[area]=(demandMap[area]||0)+jobs;});
+  });
+  const demandTop=Object.entries(demandMap).sort((a,b)=>b[1]-a[1]).slice(0,7);
+
+  // Build insight text
+  const topDemand=demandTop[0]?demandTop[0][0]:'';
+  const topCity=cityTop[0]?cityTop[0][0]:'';
+  const insightText=topDemand&&topCity
+    ?`<strong>${esc(topDemand)}</strong> is the most in-demand capability, with ${cityTop[0][1].toLocaleString()} jobs concentrated in ${esc(topCity)}.`
+    :'Add more GCC signals for deeper insights.';
+
+  destroyGCCCharts();
+
+  body.innerHTML=`
+    <!-- Insight box -->
+    <div class="gcc-insight-box">
+      <div class="gcc-insight-tag">📡 Key signal</div>
+      <div class="gcc-insight-text">${insightText}</div>
+    </div>
+
+    <!-- Jobs by city -->
+    <div class="gcc-chart-block">
+      <div class="gcc-chart-title"><span>📍</span> Jobs by city</div>
+      <div class="gcc-bar-wrap"><canvas id="chart-gcc-city"></canvas></div>
+    </div>
+
+    <!-- Sector donut -->
+    <div class="gcc-chart-block">
+      <div class="gcc-chart-title"><span>🏭</span> GCCs by sector</div>
+      <div class="gcc-donut-wrap"><canvas id="chart-gcc-sector"></canvas></div>
+      <div class="gcc-legend" id="gcc-legend-sector"></div>
+    </div>
+
+    <!-- Jobs in demand -->
+    <div class="gcc-chart-block">
+      <div class="gcc-chart-title"><span>💼</span> Skills in demand</div>
+      <div style="font-size:9px;color:var(--text3);margin:-6px 0 8px">Jobs attributed per focus area</div>
+      <div class="gcc-demand-wrap"><canvas id="chart-gcc-demand"></canvas></div>
+    </div>
+
+    <!-- Stats -->
+    <div class="gcc-stat-row">
+      <div class="gcc-stat">
+        <div class="gcc-stat-ico">👥</div>
+        <div><div class="gcc-stat-val">${totalJobs?totalJobs.toLocaleString():'—'}</div><div class="gcc-stat-desc">Total jobs announced</div></div>
+      </div>
+      <div class="gcc-stat">
+        <div class="gcc-stat-ico">📊</div>
+        <div><div class="gcc-stat-val">${avgJobs?avgJobs.toLocaleString():'—'}</div><div class="gcc-stat-desc">Avg jobs per GCC</div></div>
+      </div>
+      ${topByJobs?`<div class="gcc-stat">
+        <div class="gcc-stat-ico">🏆</div>
+        <div><div class="gcc-stat-val">${esc(topByJobs.Company)}</div><div class="gcc-stat-desc">Largest GCC · ${(parseInt(topByJobs.Jobs_Created)||0).toLocaleString()} jobs</div></div>
+      </div>`:''}
+    </div>`;
+
+  // Render charts after DOM is ready
+  requestAnimationFrame(()=>{
+    // Chart 1: Jobs by city (horizontal bar)
+    const c1=document.getElementById('chart-gcc-city');
+    if(c1&&window.Chart&&cityTop.length){
+      _gc_city=new Chart(c1,{
+        type:'bar',
+        data:{
+          labels:cityTop.map(([k])=>k),
+          datasets:[{
+            data:cityTop.map(([,v])=>v),
+            backgroundColor:cityTop.map(([k])=>GCC_CITY_COLORS[k]||CHART_COLORS[0]),
+            borderRadius:3,
+          }]
+        },
+        options:{
+          indexAxis:'y',
+          plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.raw.toLocaleString()} jobs`}}},
+          scales:{
+            x:{display:false,grid:{display:false}},
+            y:{grid:{display:false},ticks:{font:{size:10},color:'#8fa0bb'}}
+          },
+          animation:{duration:500},
+        }
+      });
+    }
+
+    // Chart 2: Sector donut
+    const c2=document.getElementById('chart-gcc-sector');
+    if(c2&&window.Chart&&sectorTop.length){
+      _gc_sector=new Chart(c2,{
+        type:'doughnut',
+        data:{
+          labels:sectorTop.map(([k])=>k),
+          datasets:[{data:sectorTop.map(([,v])=>v),backgroundColor:CHART_COLORS.slice(0,sectorTop.length),borderWidth:0,hoverOffset:3}]
+        },
+        options:{
+          cutout:'65%',
+          plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.raw} GCC${ctx.raw!==1?'s':''}`}}},
+          animation:{duration:500},
+        }
+      });
+      const legEl=document.getElementById('gcc-legend-sector');
+      if(legEl)legEl.innerHTML=sectorTop.map(([k,v],i)=>`
+        <div class="gcc-leg">
+          <div class="gcc-leg-dot" style="background:${CHART_COLORS[i]}"></div>
+          <div class="gcc-leg-name">${esc(k)}</div>
+          <div class="gcc-leg-val">${v}</div>
+        </div>`).join('');
+    }
+
+    // Chart 3: Skills/demand horizontal bar
+    const c3=document.getElementById('chart-gcc-demand');
+    if(c3&&window.Chart&&demandTop.length){
+      _gc_demand=new Chart(c3,{
+        type:'bar',
+        data:{
+          labels:demandTop.map(([k])=>k.length>16?k.slice(0,15)+'…':k),
+          datasets:[{
+            data:demandTop.map(([,v])=>v),
+            backgroundColor:demandTop.map((_,i)=>CHART_COLORS[i%CHART_COLORS.length]+'cc'),
+            borderRadius:3,
+          }]
+        },
+        options:{
+          indexAxis:'y',
+          plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.raw.toLocaleString()} jobs`}}},
+          scales:{
+            x:{display:false,grid:{display:false}},
+            y:{grid:{display:false},ticks:{font:{size:9},color:'#8fa0bb'}}
+          },
+          animation:{duration:600},
+        }
+      });
+    }
+  });
+}
+
+/* ════════ GCC EXPORT ════════ */
+function gccExport(){
+  if(!isPro()){openProGate();return;}
+  if(!gcc_filt.length){showAuthToast('No signals to export.');return;}
+  const fields=['Company','Month_Year','Country','City','Expansion_Type','Facility_Type','Investment_USD_Billion','Jobs_Created','Sector','Focus_Area','Source'];
+  const csv=[fields.join(','),...gcc_filt.map(r=>fields.map(k=>`"${(r[k]||'').replace(/"/g,'""')}"`).join(','))].join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download=`signal48_gcc_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+
+/* ════════ MAIN FILTERS + MAP ════════ */
+const DD_STATE={
+  'dd-rg':{val:'',opts:[]},'dd-co':{val:'',opts:[]},'dd-cn':{val:'',opts:[]},'dd-se':{val:'',opts:[]},'dd-mo':{val:'',opts:[]},
+};
 function popFilters(data){
-  // Region sorted in logical order
   const REGION_ORDER=['North America','Europe','East Asia','Southeast Asia','South Asia','Middle East & Africa','Latin America','Oceania','Central Asia & CIS','Other'];
   const regions=[...new Set(data.map(r=>r.Region).filter(Boolean))];
-  regions.sort((a,b)=>{const ia=REGION_ORDER.indexOf(a),ib=REGION_ORDER.indexOf(b);return (ia===-1?99:ia)-(ib===-1?99:ib);});
+  regions.sort((a,b)=>{const ia=REGION_ORDER.indexOf(a),ib=REGION_ORDER.indexOf(b);return(ia===-1?99:ia)-(ib===-1?99:ib);});
   DD_STATE['dd-rg'].opts=regions;
   DD_STATE['dd-co'].opts=[...new Set(data.map(r=>r.Company).filter(Boolean))].sort();
   DD_STATE['dd-cn'].opts=[...new Set(data.map(r=>r.Country).filter(Boolean))].sort();
   DD_STATE['dd-se'].opts=[...new Set(data.map(r=>r.Sector).filter(Boolean))].sort();
   const periods=[...new Set(data.map(r=>r.Month_Year).filter(Boolean))].sort((a,b)=>mSort(b)-mSort(a));
   DD_STATE['dd-mo'].opts=periods;
-  Object.keys(DD_STATE).forEach(id=>filterDD(id,''));
+  ['dd-rg','dd-co','dd-cn','dd-se','dd-mo'].forEach(id=>filterDD(id,''));
 }
 function clrF(){
   Object.keys(DD_STATE).forEach(id=>setDD(id,''));
   const sq=document.getElementById('sq');if(sq)sq.value='';
   go();
 }
-
-/* ════════ APPLY FILTERS ════════ */
 function go(){
-  const rg=DD_STATE['dd-rg'].val;
-  const co=DD_STATE['dd-co'].val;
-  const cn=DD_STATE['dd-cn'].val;
-  const se=DD_STATE['dd-se'].val;
-  const mo=DD_STATE['dd-mo'].val;
-  const q=(document.getElementById('sq').value||'').toLowerCase().trim();
+  const rg=DD_STATE['dd-rg'].val,co=DD_STATE['dd-co'].val,cn=DD_STATE['dd-cn'].val,
+        se=DD_STATE['dd-se'].val,mo=DD_STATE['dd-mo'].val;
+  const q=(document.getElementById('sq')?.value||'').toLowerCase().trim();
   const hasF=rg||co||cn||se||mo||q;
   const bclr=document.getElementById('bclr');if(bclr)bclr.classList.toggle('on',!!hasF);
 
@@ -1473,11 +1731,7 @@ function go(){
     if(cn&&r.Country!==cn)return false;
     if(se&&r.Sector!==se)return false;
     if(mo&&r.Month_Year!==mo)return false;
-    if(q){
-      const hay=[r.Company,r.Country,r.Region,r.Sector,r.Sub_Sector,r.Strategic_Theme,
-        r.Short_Summary,r.City_Or_Region,r.Expansion_Type,r.Facility_Type].join(' ').toLowerCase();
-      if(!hay.includes(q))return false;
-    }
+    if(q){const hay=[r.Company,r.Country,r.Region,r.Sector,r.Sub_Sector,r.Strategic_Theme,r.Short_Summary,r.City_Or_Region,r.Expansion_Type,r.Facility_Type].join(' ').toLowerCase();if(!hay.includes(q))return false;}
     return true;
   });
 
@@ -1486,278 +1740,169 @@ function go(){
   const cap=filtered.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
   const ctag=document.getElementById('ctag');if(ctag)ctag.textContent=`${filtered.length} signal${filtered.length!==1?'s':''}`;
   const sbsub=document.getElementById('sbsub');if(sbsub)sbsub.textContent=`${filtered.length} deal${filtered.length!==1?'s':''} · $${bigFmt(cap)} tracked`;
-
-  // Update right panel scope label
-  const scope=document.getElementById('ins-scope');
-  if(scope)scope.textContent=rg?`${rg.toUpperCase()} VIEW`:hasF?'FILTERED VIEW':'GLOBAL VIEW';
+  const scope=document.getElementById('ins-scope');if(scope)scope.textContent=rg?`${rg.toUpperCase()} VIEW`:hasF?'FILTERED VIEW':'GLOBAL VIEW';
 
   renderSidebar(filtered);renderMap(mapData);renderInsights(filtered,hasF);
   document.getElementById('loading').style.display='none';
   document.getElementById('leaflet-map').style.display='block';initMap();
-
-  // Zoom map to selected country or region
-  const zoomTarget=cn||rg||null;
-  zoomMap(zoomTarget);
+  zoomMap(DD_STATE['dd-cn'].val||DD_STATE['dd-rg'].val||null);
 }
 
-/* ════════ FORMAT INVESTMENT ════════ */
+/* ════════ LATEST DATA LOGIC ════════ */
+function getLatestData(data){
+  const periods=[...new Set(data.map(r=>r.Month_Year).filter(Boolean))];
+  if(!periods.length)return data;
+  periods.sort((a,b)=>mSort(b)-mSort(a));
+  const byCompany={};
+  data.forEach(r=>{if(!r.Company)return;const existing=byCompany[r.Company];if(!existing||mSort(r.Month_Year)>mSort(existing.Month_Year))byCompany[r.Company]=r;});
+  return Object.values(byCompany);
+}
+
+/* ════════ KPI BAR ════════ */
+function updateKPIs(data){
+  const cap=data.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
+  document.getElementById('hkd').textContent=data.length.toLocaleString();
+  document.getElementById('hkc').textContent='$'+bigFmt(cap);
+  document.getElementById('kpi-cap').textContent='$'+bigFmt(cap);
+  const now=new Date();
+  const months=['january','february','march','april','may','june','july','august','september','october','november','december'];
+  const curMonth=months[now.getMonth()],curYear=now.getFullYear();
+  const curMonthData=data.filter(r=>{if(!r.Month_Year)return false;const p=r.Month_Year.trim().toLowerCase().split(/\s+/);return p[0]===curMonth&&parseInt(p[1])===curYear;});
+  const periods=[...new Set(data.map(r=>r.Month_Year).filter(Boolean))].sort((a,b)=>mSort(b)-mSort(a));
+  const latestPeriod=periods[0]||'';
+  const latestData=curMonthData.length?curMonthData:data.filter(r=>r.Month_Year===latestPeriod);
+  const latestCap=latestData.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
+  document.getElementById('kpi-month').textContent=latestData.length;
+  document.getElementById('kpi-month-sub').textContent=`${curMonthData.length?'this month':latestPeriod||'latest period'} · $${bigFmt(latestCap)}`;
+  const secMap=data.reduce((m,r)=>{if(r.Sector)m[r.Sector]=(m[r.Sector]||0)+1;return m;},{});
+  const topSec=Object.entries(secMap).sort((a,b)=>b[1]-a[1])[0];
+  if(topSec){document.getElementById('kpi-sector').textContent=topSec[0];document.getElementById('kpi-sector-sub').textContent=`${topSec[1]} deals · ${Math.round(topSec[1]/data.length*100)}%`;}
+  const capMap=data.reduce((m,r)=>{if(r.Country)m[r.Country]=(m[r.Country]||0)+(parseFloat(r.Investment_Amount_USD_Billion)||0);return m;},{});
+  const topCap=Object.entries(capMap).sort((a,b)=>b[1]-a[1])[0];
+  if(topCap){document.getElementById('kpi-country').textContent=topCap[0];document.getElementById('kpi-country-sub').textContent='$'+bigFmt(topCap[1])+' inbound';}
+  const typeMap=data.reduce((m,r)=>{if(r.Expansion_Type)m[r.Expansion_Type]=(m[r.Expansion_Type]||0)+1;return m;},{});
+  const topType=Object.entries(typeMap).sort((a,b)=>b[1]-a[1])[0];
+  if(topType){document.getElementById('kpi-type').textContent=topType[0];document.getElementById('kpi-type-sub').textContent='most common expansion type';}
+  ['kpi-country-wrap','kpi-type-wrap'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    const lock=el.querySelector('.kpi-lock');if(lock)lock.style.display=isPro()?'none':'flex';
+    el.classList.toggle('pro-blur',!isPro());
+  });
+  const secWrap=document.getElementById('kpi-sector-wrap');
+  if(secWrap){secWrap.classList.remove('pro-blur');const l=secWrap.querySelector('.kpi-lock');if(l)l.style.display='none';}
+}
+
+/* ════════ COORDS ════════ */
+const COORDS={'USA':[38.9,-77.0],'United States':[38.9,-77.0],'Canada':[56.1,-106.3],'Mexico':[23.6,-102.5],'Brazil':[-14.2,-51.9],'Argentina':[-38.4,-63.6],'Colombia':[4.5,-74.3],'Chile':[-35.7,-71.5],'UK':[55.4,-3.4],'United Kingdom':[55.4,-3.4],'Ireland':[53.4,-8.2],'France':[46.2,2.2],'Germany':[51.2,10.4],'Netherlands':[52.1,5.3],'Spain':[40.5,-3.7],'Portugal':[39.4,-8.2],'Italy':[41.9,12.5],'Switzerland':[46.8,8.2],'Sweden':[60.1,18.6],'Norway':[60.5,8.5],'Denmark':[56.3,9.5],'Finland':[61.9,25.7],'Poland':[51.9,19.1],'Austria':[47.5,14.6],'Belgium':[50.5,4.5],'Czech Republic':[49.8,15.5],'Romania':[45.9,24.9],'Hungary':[47.2,19.5],'Greece':[39.1,21.8],'Russia':[61.5,105.3],'Ukraine':[48.4,31.2],'Turkey':[38.9,35.2],'Israel':[31.0,35.0],'UAE':[24.0,54.0],'Saudi Arabia':[24.7,46.7],'Qatar':[25.4,51.2],'Egypt':[26.8,30.8],'Nigeria':[9.1,8.7],'South Africa':[-30.6,22.9],'Kenya':[-0.0,37.9],'Morocco':[31.8,-7.1],'India':[20.6,78.9],'Pakistan':[30.4,69.3],'Bangladesh':[23.7,90.4],'China':[35.9,104.2],'Japan':[36.2,138.3],'South Korea':[35.9,127.8],'Taiwan':[23.7,121.0],'Hong Kong':[22.4,114.1],'Singapore':[1.4,103.8],'Vietnam':[14.1,108.3],'Thailand':[15.9,100.9],'Indonesia':[-0.8,113.9],'Malaysia':[4.2,108.0],'Philippines':[12.9,121.8],'Australia':[-25.3,133.8],'New Zealand':[-40.9,174.9],'EMEA':[30.0,20.0],'Europe':[54.5,15.3],'APAC':[10.0,120.0],'North America':[40.0,-95.0],'Global':[20.0,0.0],'Southeast Asia':[5.0,115.0],'East Asia':[35.0,115.0],'South Asia':[20.0,80.0],'Middle East':[25.0,45.0],'Latin America':[-15.0,-60.0]};
+const CITY_COORDS={'North Carolina':[35.8,-79.0],'Texas':[31.0,-100.0],'California':[36.8,-119.4],'New York':[40.7,-74.0],'Florida':[27.7,-81.7],'Georgia':[32.2,-83.4],'Ohio':[40.4,-82.7],'London':[51.5,-0.1],'Manchester':[53.5,-2.2],'Berlin':[52.5,13.4],'Munich':[48.1,11.6],'Paris':[48.9,2.3],'Amsterdam':[52.4,4.9],'Dubai':[25.2,55.3],'Abu Dhabi':[24.5,54.4],'Mumbai':[19.1,72.9],'Delhi':[28.7,77.1],'Bangalore':[12.9,77.6],'Hyderabad':[17.4,78.5],'Chennai':[13.1,80.3],'Pune':[18.5,73.9],'Beijing':[39.9,116.4],'Shanghai':[31.2,121.5],'Tokyo':[35.7,139.7],'Seoul':[37.6,127.0],'Singapore':[1.4,103.8],'Sydney':[-33.9,151.2],'Melbourne':[-37.8,145.0]};
+const FLAGS={'USA':'🇺🇸','United States':'🇺🇸','Canada':'🇨🇦','Mexico':'🇲🇽','Brazil':'🇧🇷','Argentina':'🇦🇷','UK':'🇬🇧','United Kingdom':'🇬🇧','France':'🇫🇷','Germany':'🇩🇪','Netherlands':'🇳🇱','Spain':'🇪🇸','Italy':'🇮🇹','Switzerland':'🇨🇭','Sweden':'🇸🇪','Norway':'🇳🇴','Denmark':'🇩🇰','Poland':'🇵🇱','Russia':'🇷🇺','Turkey':'🇹🇷','Israel':'🇮🇱','UAE':'🇦🇪','Saudi Arabia':'🇸🇦','Qatar':'🇶🇦','Egypt':'🇪🇬','Nigeria':'🇳🇬','South Africa':'🇿🇦','India':'🇮🇳','China':'🇨🇳','Japan':'🇯🇵','South Korea':'🇰🇷','Taiwan':'🇹🇼','Singapore':'🇸🇬','Vietnam':'🇻🇳','Thailand':'🇹🇭','Indonesia':'🇮🇩','Malaysia':'🇲🇾','Australia':'🇦🇺','New Zealand':'🇳🇿','Hong Kong':'🇭🇰'};
+
+/* ════════ SIDEBAR ════════ */
 function fmtI(r){
   const u=parseFloat(r.Investment_Amount_USD_Billion);
   if(!isNaN(u)&&u>0)return u>=1?{v:u%1===0?u.toFixed(0):u.toFixed(1),u:'B',raw:u}:{v:(u*1000).toFixed(0),u:'M',raw:u};
-  if(r.Investment_Amount_Original&&r.Investment_Amount_Original!=='0'){
-    const cl=r.Investment_Amount_Original.replace(/[^\d,.]/g,'').slice(0,10);
-    if(cl)return{v:cl,u:r.Investment_Currency||'',raw:0};
-  }
+  if(r.Investment_Amount_Original&&r.Investment_Amount_Original!=='0'){const cl=r.Investment_Amount_Original.replace(/[^\d,.]/g,'').slice(0,10);if(cl)return{v:cl,u:r.Investment_Currency||'',raw:0};}
   return null;
 }
-
-/* ════════ SIDEBAR ════════ */
 function renderSidebar(data){
   const list=document.getElementById('sblist');if(!list)return;
   list.innerHTML='';
-  if(!data.length){
-    list.innerHTML=`<div class="sb-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>No signals match<br>your filters.</p></div>`;
-    return;
-  }
+  if(!data.length){list.innerHTML=`<div class="sb-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>No signals match<br>your filters.</p></div>`;return;}
   const sorted=[...data].sort((a,b)=>(parseFloat(b.Investment_Amount_USD_Billion)||0)-(parseFloat(a.Investment_Amount_USD_Billion)||0));
   sorted.forEach((r,i)=>{
     const inv=fmtI(r),flag=FLAGS[r.Country]||'🌐';
     const loc=[r.City_Or_Region,r.Country].filter(Boolean).join(', ');
-    const d=document.createElement('div');
-    d.className='cor';d.style.animationDelay=`${Math.min(i*.02,.5)}s`;
-    d.innerHTML=`
-      <div class="cor-r1"><div class="cor-name">${esc(r.Company)}</div><div class="cor-flag">${flag}</div></div>
-      ${loc?`<div class="cor-loc">📍 ${esc(loc)}</div>`:''}
-      <div class="cor-r3">
-        <div class="cor-inv">${inv?`$${inv.v}${inv.u} USD`:'Undisclosed'}</div>
-        ${r.Sector?`<div class="cor-chip">${esc(r.Sector)}</div>`:''}
-      </div>`;
-    d.addEventListener('click',()=>openModal(r));
-    list.appendChild(d);
+    const d=document.createElement('div');d.className='cor';d.style.animationDelay=`${Math.min(i*.02,.5)}s`;
+    d.innerHTML=`<div class="cor-r1"><div class="cor-name">${esc(r.Company)}</div><div class="cor-flag">${flag}</div></div>${loc?`<div class="cor-loc">📍 ${esc(loc)}</div>`:''}<div class="cor-r3"><div class="cor-inv">${inv?`$${inv.v}${inv.u} USD`:'Undisclosed'}</div>${r.Sector?`<div class="cor-chip">${esc(r.Sector)}</div>`:''}</div>`;
+    d.addEventListener('click',()=>openModal(r));list.appendChild(d);
   });
 }
 
-/* ════════ MAP ════════ */
 /* ════════ LEAFLET MAP ════════ */
 let _map=null,_markers=[];
-
 function initMap(){
   if(_map)return;
-  const el=document.getElementById('leaflet-map');
-  if(!el||!window.L)return;
-  _map=L.map('leaflet-map',{
-    center:[25,15],zoom:2,minZoom:2,maxZoom:10,
-    zoomControl:true,attributionControl:true,
-  });
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
-    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    subdomains:'abcd',maxZoom:10,
-  }).addTo(_map);
+  const el=document.getElementById('leaflet-map');if(!el||!window.L)return;
+  _map=L.map('leaflet-map',{center:[25,15],zoom:2,minZoom:2,maxZoom:10,zoomControl:true,attributionControl:true});
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',subdomains:'abcd',maxZoom:10}).addTo(_map);
 }
-
 function getLatLng(r){
   const city=r.City_Or_Region||'';
-  if(city){
-    for(const[k,v]of Object.entries(CITY_COORDS)){
-      if(city.toLowerCase().includes(k.toLowerCase())||k.toLowerCase().includes(city.toLowerCase()))
-        return v;
-    }
-  }
+  if(city){for(const[k,v]of Object.entries(CITY_COORDS)){if(city.toLowerCase().includes(k.toLowerCase())||k.toLowerCase().includes(city.toLowerCase()))return v;}}
   return COORDS[r.Country]||null;
 }
-
 function renderMap(data){
   if(!_map){setTimeout(()=>renderMap(data),150);return;}
-  _markers.forEach(m=>m.remove());_markers=[];
-  window._s48idx={};
-  let idx=0;
+  _markers.forEach(m=>m.remove());_markers=[];window._s48idx={};
   if(!data.length)return;
-
+  let idx=0;
   const byLoc={};
-  data.forEach(r=>{
-    const ll=getLatLng(r);if(!ll)return;
-    const key=`${ll[0].toFixed(1)}_${ll[1].toFixed(1)}`;
-    if(!byLoc[key]){byLoc[key]={ll,rows:[]};}
-    byLoc[key].rows.push(r);
-  });
-
+  data.forEach(r=>{const ll=getLatLng(r);if(!ll)return;const key=`${ll[0].toFixed(1)}_${ll[1].toFixed(1)}`;if(!byLoc[key])byLoc[key]={ll,rows:[]};byLoc[key].rows.push(r);});
   Object.values(byLoc).forEach(({ll,rows})=>{
     const cap=rows.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
     const isM=rows.length>1,isMega=cap>=10;
     const col=isMega?'#b45309':isM?'#1847d6':'#e0460a';
     const sz=isMega?22:isM?17:12;
-    const i=idx++;
-    window._s48idx[i]={rows,country:rows[0].Country};
-
-    const icon=L.divIcon({
-      className:'',
-      html:`<div style="width:${sz}px;height:${sz}px;border-radius:50%;background:${col};border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;font-family:DM Mono,monospace;font-size:${sz>14?8:0}px;font-weight:600;color:#fff;cursor:pointer;transition:transform .1s" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">${rows.length>1?rows.length:''}</div>`,
-      iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],
-    });
-
+    const i=idx++;window._s48idx[i]={rows,country:rows[0].Country};
+    const icon=L.divIcon({className:'',html:`<div style="width:${sz}px;height:${sz}px;border-radius:50%;background:${col};border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;font-family:DM Mono,monospace;font-size:${sz>14?8:0}px;font-weight:600;color:#fff;cursor:pointer;transition:transform .1s" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">${rows.length>1?rows.length:''}</div>`,iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]});
     const marker=L.marker(ll,{icon,interactive:true});
-    // Direct click → open modal immediately, no popup middleman
-    marker.on('click',()=>{
-      const d=window._s48idx[i];
-      if(!d)return;
-      if(d.rows.length===1)openModal(d.rows[0]);
-      else openGroup(d.country,d.rows);
-    });
-    marker.addTo(_map);
-    _markers.push(marker);
+    marker.on('click',()=>{const d=window._s48idx[i];if(!d)return;if(d.rows.length===1)openModal(d.rows[0]);else openGroup(d.country,d.rows);});
+    marker.addTo(_map);_markers.push(marker);
   });
 }
-
-/* Region zoom bounds */
-const REGION_BOUNDS={
-  'North America':[[10,-170],[85,-50]],
-  'Europe':[[35,-12],[72,45]],
-  'Middle East & Africa':[[-36,-20],[42,62]],
-  'South Asia':[[5,60],[38,100]],
-  'Southeast Asia':[[-11,92],[28,142]],
-  'East Asia':[[18,98],[54,148]],
-  'Oceania':[[-50,110],[0,180]],
-  'Latin America':[[-58,-85],[15,-30]],
-  'Central Asia & CIS':[[35,25],[82,180]],
-};
+const REGION_BOUNDS={'North America':[[10,-170],[85,-50]],'Europe':[[35,-12],[72,45]],'Middle East & Africa':[[-36,-20],[42,62]],'South Asia':[[5,60],[38,100]],'Southeast Asia':[[-11,92],[28,142]],'East Asia':[[18,98],[54,148]],'Oceania':[[-50,110],[0,180]],'Latin America':[[-58,-85],[15,-30]],'Central Asia & CIS':[[35,25],[82,180]]};
 function zoomMap(target){
   if(!_map)return;
   if(!target){_map.flyTo([25,15],2,{duration:0.8});return;}
   const bounds=REGION_BOUNDS[target];
   if(bounds){_map.flyToBounds(bounds,{padding:[20,20],duration:0.8});return;}
-  const ll=COORDS[target];
-  if(ll){const z=target.length>20?3:5;_map.flyTo(ll,z,{duration:0.8});}
+  const ll=COORDS[target];if(ll){_map.flyTo(ll,target.length>20?3:5,{duration:0.8});}
 }
 
-/* ════════ INSIGHTS ════════ */
+/* ════════ INSIGHTS (main) ════════ */
 let _chartDonut=null,_chartBar=null;
-const CHART_COLORS=['#1847d6','#e0460a','#b45309','#047857','#7c3aed','#0891b2','#be185d','#15803d','#c2410c','#6d28d9'];
-
 function renderInsights(data,isFiltered){
-  if(!data.length){
-    document.getElementById('rp-daterange').style.display='none';
-    document.getElementById('rp-stat-row').innerHTML='<div style="padding:16px 14px;font-size:11px;color:var(--text3)">No signals in current view.</div>';
-    destroyCharts();return;
-  }
-
-  // ── Date range ──
+  if(!data.length){document.getElementById('rp-daterange').style.display='none';document.getElementById('rp-stat-row').innerHTML='<div style="padding:16px 14px;font-size:11px;color:var(--text3)">No signals in current view.</div>';destroyCharts();return;}
   const periods=data.map(r=>r.Month_Year).filter(Boolean);
   const sorted=[...periods].sort((a,b)=>mSort(a)-mSort(b));
   const drEl=document.getElementById('rp-daterange');
-  const drVal=document.getElementById('rp-dr-val');
-  const drSub=document.getElementById('rp-dr-sub');
   if(sorted.length){
     const earliest=sorted[0],latest=sorted[sorted.length-1];
     drEl.style.display='block';
-    drVal.textContent=earliest===latest?earliest:`${earliest} → ${latest}`;
-    // Current month count
-    const now=new Date();
-    const MONTHS=['january','february','march','april','may','june','july','august','september','october','november','december'];
-    const curM=MONTHS[now.getMonth()];const curY=now.getFullYear();
-    const curCount=data.filter(r=>{
-      const p=(r.Month_Year||'').toLowerCase().split(/\s+/);
-      return p[0]===curM&&parseInt(p[1])===curY;
-    }).length;
-    drSub.textContent=curCount?`${curCount} signal${curCount!==1?'s':''} added this month`:``;
+    document.getElementById('rp-dr-val').textContent=earliest===latest?earliest:`${earliest} → ${latest}`;
+    const now=new Date();const MONTHS=['january','february','march','april','may','june','july','august','september','october','november','december'];
+    const curCount=data.filter(r=>{const p=(r.Month_Year||'').toLowerCase().split(/\s+/);return p[0]===MONTHS[now.getMonth()]&&parseInt(p[1])===now.getFullYear();}).length;
+    document.getElementById('rp-dr-sub').textContent=curCount?`${curCount} signal${curCount!==1?'s':''} added this month`:'';
   }else{drEl.style.display='none';}
-
-  // ── Donut: investment by sector ──
-  const secCap=data.reduce((m,r)=>{
-    const s=r.Sector||'Other';const v=parseFloat(r.Investment_Amount_USD_Billion)||0;
-    m[s]=(m[s]||0)+v;return m;
-  },{});
+  const secCap=data.reduce((m,r)=>{const s=r.Sector||'Other';const v=parseFloat(r.Investment_Amount_USD_Billion)||0;m[s]=(m[s]||0)+v;return m;},{});
   const secTop=Object.entries(secCap).sort((a,b)=>b[1]-a[1]).slice(0,6);
   destroyCharts();
   const dCtx=document.getElementById('chart-donut');
   if(dCtx&&window.Chart){
-    _chartDonut=new Chart(dCtx,{
-      type:'doughnut',
-      data:{
-        labels:secTop.map(([k])=>k),
-        datasets:[{
-          data:secTop.map(([,v])=>v),
-          backgroundColor:CHART_COLORS.slice(0,secTop.length),
-          borderWidth:0,hoverOffset:3,
-        }]
-      },
-      options:{
-        cutout:'68%',
-        plugins:{legend:{display:false},tooltip:{
-          callbacks:{label:ctx=>`$${bigFmt(ctx.raw)}`}
-        }},
-        animation:{duration:600},
-      }
-    });
-    // Custom legend
-    const leg=document.getElementById('legend-donut');
-    leg.innerHTML=secTop.map(([k,v],i)=>`
-      <div class="rp-leg-item">
-        <div class="rp-leg-dot" style="background:${CHART_COLORS[i]}"></div>
-        <div class="rp-leg-name">${esc(k)}</div>
-        <div class="rp-leg-val">$${bigFmt(v)}</div>
-      </div>`).join('');
+    _chartDonut=new Chart(dCtx,{type:'doughnut',data:{labels:secTop.map(([k])=>k),datasets:[{data:secTop.map(([,v])=>v),backgroundColor:CHART_COLORS.slice(0,secTop.length),borderWidth:0,hoverOffset:3}]},options:{cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`$${bigFmt(ctx.raw)}`}}},animation:{duration:600}}});
+    document.getElementById('legend-donut').innerHTML=secTop.map(([k,v],i)=>`<div class="rp-leg-item"><div class="rp-leg-dot" style="background:${CHART_COLORS[i]}"></div><div class="rp-leg-name">${esc(k)}</div><div class="rp-leg-val">$${bigFmt(v)}</div></div>`).join('');
   }
-
-  // ── Bar: top cities/locations ──
-  // If country is selected → use City_Or_Region. Else → use Country
-  const cn=DD_STATE['dd-cn'].val;
-  const rg=DD_STATE['dd-rg'].val;
+  const cn=DD_STATE['dd-cn'].val,rg=DD_STATE['dd-rg'].val;
   const useCity=!!(cn||(rg&&data.length<100));
   const locField=useCity?'City_Or_Region':'Country';
   const titleEl=document.getElementById('rp-city-title');
   if(titleEl)titleEl.textContent=useCity?'Top cities / states':'Top countries by investment';
-
-  const locCap=data.reduce((m,r)=>{
-    const k=r[locField]||'Unknown';const v=parseFloat(r.Investment_Amount_USD_Billion)||0;
-    if(k&&k!=='Unknown')m[k]=(m[k]||0)+v;return m;
-  },{});
+  const locCap=data.reduce((m,r)=>{const k=r[locField]||'Unknown';const v=parseFloat(r.Investment_Amount_USD_Billion)||0;if(k&&k!=='Unknown')m[k]=(m[k]||0)+v;return m;},{});
   const locTop=Object.entries(locCap).sort((a,b)=>b[1]-a[1]).slice(0,6);
   const bCtx=document.getElementById('chart-bar');
   if(bCtx&&window.Chart&&locTop.length){
-    _chartBar=new Chart(bCtx,{
-      type:'bar',
-      data:{
-        labels:locTop.map(([k])=>k.length>14?k.slice(0,13)+'…':k),
-        datasets:[{
-          data:locTop.map(([,v])=>v),
-          backgroundColor:CHART_COLORS[0],
-          borderRadius:3,
-          hoverBackgroundColor:CHART_COLORS[1],
-        }]
-      },
-      options:{
-        indexAxis:'y',
-        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`$${bigFmt(ctx.raw)}`}}},
-        scales:{
-          x:{display:false,grid:{display:false}},
-          y:{grid:{display:false},ticks:{font:{size:10},color:'#8fa0bb'}}
-        },
-        animation:{duration:500},
-      }
-    });
+    _chartBar=new Chart(bCtx,{type:'bar',data:{labels:locTop.map(([k])=>k.length>14?k.slice(0,13)+'…':k),datasets:[{data:locTop.map(([,v])=>v),backgroundColor:CHART_COLORS[0],borderRadius:3,hoverBackgroundColor:CHART_COLORS[1]}]},options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`$${bigFmt(ctx.raw)}`}}},scales:{x:{display:false,grid:{display:false}},y:{grid:{display:false},ticks:{font:{size:10},color:'#8fa0bb'}}},animation:{duration:500}}});
   }
-
-  // ── Key stat row ──
-  const statRow=document.getElementById('rp-stat-row');
   const cap=data.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
   const jobs=data.reduce((s,r)=>{const n=parseInt((r.Jobs_Created||'').replace(/\D/g,''));return s+(isNaN(n)?0:n);},0);
   const topDeal=[...data].sort((a,b)=>(parseFloat(b.Investment_Amount_USD_Billion)||0)-(parseFloat(a.Investment_Amount_USD_Billion)||0))[0];
   const topInv=topDeal?fmtI(topDeal):null;
-  const stats=[
+  document.getElementById('rp-stat-row').innerHTML=[
     {i:'💰',v:`$${bigFmt(cap)}`,d:`${data.length} deals tracked`},
     topInv&&topDeal?{i:'🏆',v:topDeal.Company,d:`Biggest deal · $${topInv.v}${topInv.u}`}:null,
     jobs>0?{i:'👥',v:jobs>1000?`${(jobs/1000).toFixed(0)}K jobs`:`${jobs} jobs`,d:'Est. jobs created'}:null,
-  ].filter(Boolean);
-  statRow.innerHTML=stats.map(s=>`
-    <div class="rp-stat">
-      <div class="rp-stat-ico">${s.i}</div>
-      <div class="rp-stat-body">
-        <div class="rp-stat-val">${esc(s.v)}</div>
-        <div class="rp-stat-desc">${esc(s.d)}</div>
-      </div>
-    </div>`).join('');
+  ].filter(Boolean).map(s=>`<div class="rp-stat"><div class="rp-stat-ico">${s.i}</div><div class="rp-stat-body"><div class="rp-stat-val">${esc(s.v)}</div><div class="rp-stat-desc">${esc(s.d)}</div></div></div>`).join('');
 }
-
 function destroyCharts(){
   if(_chartDonut){_chartDonut.destroy();_chartDonut=null;}
   if(_chartBar){_chartBar.destroy();_chartBar=null;}
@@ -1766,91 +1911,51 @@ function destroyCharts(){
 
 /* ════════ MODALS ════════ */
 function cm(n){const el=document.getElementById('ov'+n);if(el)el.style.display='none';}
-
 function openModal(r){
   const inv=fmtI(r);
-  const fields=[
-    ['Month / Year',r.Month_Year],['Country',r.Country],['City / Region',r.City_Or_Region],
-    ['Sector',r.Sector],['Sub-Sector',r.Sub_Sector],['Expansion Type',r.Expansion_Type],
-    ['Facility Type',r.Facility_Type],['Investment (USD)',inv?`$${inv.v}${inv.u}`:'Undisclosed'],
-    ['Investment (Original)',r.Investment_Amount_Original&&r.Investment_Amount_Original!=='0'?`${r.Investment_Amount_Original} ${r.Investment_Currency||''}`.trim():'—'],
-    ['Jobs Created',r.Jobs_Created||'—'],['Timeline',r.Timeline||'—'],
-    ['Strategic Theme',r.Strategic_Theme||'—'],
-    ['Confidence',r.Confidence_Score?`${Math.round(parseFloat(r.Confidence_Score)*100)}%`:'—'],
-    ['Source',r.Source_URL||'—'],
-  ].filter(([,v])=>v&&v!=='—'&&v.trim()!=='');
-  document.getElementById('mh1').innerHTML=`
-    <div class="m-co">${FLAGS[r.Country]||''} ${esc(r.Company)}</div>
-    ${r.Short_Summary||r.Reason_For_Expansion?`<div style="font-size:12.5px;color:var(--text2);margin-top:4px;line-height:1.55">${esc(r.Short_Summary||r.Reason_For_Expansion)}</div>`:''}`;
-  document.getElementById('mb1').innerHTML=
-    fields.map(([k,v])=>`<div class="m-row"><div class="mk">${k}</div><div class="mv">${k==='Source'&&v.startsWith('http')?`<a href="${esc(v)}" target="_blank" rel="noopener">View source ↗</a>`:esc(v)}</div></div>`).join('');
+  const fields=[['Month / Year',r.Month_Year],['Country',r.Country],['City / Region',r.City_Or_Region],['Sector',r.Sector],['Sub-Sector',r.Sub_Sector],['Expansion Type',r.Expansion_Type],['Facility Type',r.Facility_Type],['Investment (USD)',inv?`$${inv.v}${inv.u}`:'Undisclosed'],['Investment (Original)',r.Investment_Amount_Original&&r.Investment_Amount_Original!=='0'?`${r.Investment_Amount_Original} ${r.Investment_Currency||''}`.trim():'—'],['Jobs Created',r.Jobs_Created||'—'],['Timeline',r.Timeline||'—'],['Strategic Theme',r.Strategic_Theme||'—'],['Confidence',r.Confidence_Score?`${Math.round(parseFloat(r.Confidence_Score)*100)}%`:'—'],['Source',r.Source_URL||'—']].filter(([,v])=>v&&v!=='—'&&v.trim()!=='');
+  document.getElementById('mh1').innerHTML=`<div class="m-co">${FLAGS[r.Country]||''} ${esc(r.Company)}</div>${r.Short_Summary||r.Reason_For_Expansion?`<div style="font-size:12.5px;color:var(--text2);margin-top:4px;line-height:1.55">${esc(r.Short_Summary||r.Reason_For_Expansion)}</div>`:''}`;
+  document.getElementById('mb1').innerHTML=fields.map(([k,v])=>`<div class="m-row"><div class="mk">${k}</div><div class="mv">${k==='Source'&&v.startsWith('http')?`<a href="${esc(v)}" target="_blank" rel="noopener">View source ↗</a>`:esc(v)}</div></div>`).join('');
   document.getElementById('ov1').style.display='flex';
 }
-
 function openGroup(country,rows){
   const sorted=[...rows].sort((a,b)=>(parseFloat(b.Investment_Amount_USD_Billion)||0)-(parseFloat(a.Investment_Amount_USD_Billion)||0));
   const cap=rows.reduce((s,r)=>s+(parseFloat(r.Investment_Amount_USD_Billion)||0),0);
   const useGrid=rows.length>10;
-  document.getElementById('mh1').innerHTML=`
-    <div class="m-co">${FLAGS[country]||'🌐'} ${esc(country)}</div>
-    <div style="font-size:12.5px;color:var(--text2);margin-top:3px">${rows.length} expansion signals · $${bigFmt(cap)} total</div>`;
-  document.getElementById('mb1').innerHTML=`
-    <div style="${useGrid?'display:grid;grid-template-columns:1fr 1fr;gap:0 8px':''}">
-      ${sorted.map(r=>{const inv=fmtI(r);return`
-        <div class="m-row" style="cursor:pointer;${useGrid?'padding:7px 5px;':''}align-items:center" onclick='openModal(${JSON.stringify(r).replace(/'/g,"&#39;")})'>
-          <div class="mk" style="width:auto;flex:1;font-family:var(--font);font-size:12px;font-weight:600;text-transform:none;letter-spacing:0;color:var(--text);min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
-            ${esc(r.Company)}<br>
-            <span style="font-size:10px;color:var(--text3);font-weight:400">${esc(r.Month_Year||'')}${r.Sector?' · '+esc(r.Sector):''}</span>
-          </div>
-          <div class="mv" style="flex-shrink:0;margin-left:6px">${inv?`<span class="mbadge" style="font-size:9px;padding:2px 6px">$${inv.v}${inv.u}</span>`:'—'}</div>
-        </div>`}).join('')}
-    </div>`;
+  document.getElementById('mh1').innerHTML=`<div class="m-co">${FLAGS[country]||'🌐'} ${esc(country)}</div><div style="font-size:12.5px;color:var(--text2);margin-top:3px">${rows.length} expansion signals · $${bigFmt(cap)} total</div>`;
+  document.getElementById('mb1').innerHTML=`<div style="${useGrid?'display:grid;grid-template-columns:1fr 1fr;gap:0 8px':''}">${sorted.map(r=>{const inv=fmtI(r);return`<div class="m-row" style="cursor:pointer;${useGrid?'padding:7px 5px;':''}align-items:center" onclick='openModal(${JSON.stringify(r).replace(/'/g,"&#39;")})'><div class="mk" style="width:auto;flex:1;font-family:var(--font);font-size:12px;font-weight:600;text-transform:none;letter-spacing:0;color:var(--text);min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.Company)}<br><span style="font-size:10px;color:var(--text3);font-weight:400">${esc(r.Month_Year||'')}${r.Sector?' · '+esc(r.Sector):''}</span></div><div class="mv" style="flex-shrink:0;margin-left:6px">${inv?`<span class="mbadge" style="font-size:9px;padding:2px 6px">$${inv.v}${inv.u}</span>`:'—'}</div></div>`;}).join('')}</div>`;
   document.getElementById('ov1').style.display='flex';
 }
 
-/* ════════ ALERT AGENT ════════ */
+/* ════════ ALERTS ════════ */
 function openAlerts(){
-  // Build from actual sheet data
   const SECTORS=[...new Set(all.map(r=>r.Sector).filter(Boolean))].sort();
   const COUNTRIES=[...new Set(all.map(r=>r.Country).filter(Boolean))].sort();
   const COMPANIES=[...new Set(all.map(r=>r.Company).filter(Boolean))].sort();
-
   document.getElementById('mh2').innerHTML='';document.getElementById('mb2').innerHTML=`
     <div class="agent-modal">
       <h3>⚡ Set up your alert agent</h3>
       <p>Select what you want to track. We'll email you a 48 Hours digest every Monday with new matching expansion signals.</p>
-
       <div class="ag-section">
-        <div class="ag-label">🏭 Industries — search &amp; select</div>
+        <div class="ag-label">🏭 Industries</div>
         <input id="ag-sec-inp" class="dd-sinp" style="width:100%;margin-bottom:6px" placeholder="Search industry…" oninput="agSearch('sec',this.value)">
         <div id="ag-sec-results" style="max-height:120px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;display:none;background:var(--bg)"></div>
         <div id="ag-sec-sel" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px"></div>
       </div>
-
       <div class="ag-section">
-        <div class="ag-label">🌍 Countries — search &amp; select</div>
+        <div class="ag-label">🌍 Countries</div>
         <input id="ag-cn-inp" class="dd-sinp" style="width:100%;margin-bottom:6px" placeholder="Search country…" oninput="agSearch('cn',this.value)">
         <div id="ag-cn-results" style="max-height:120px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;display:none;background:var(--bg)"></div>
         <div id="ag-cn-sel" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px"></div>
       </div>
-
-      <div class="ag-section">
-        <div class="ag-label">🏢 Company — search &amp; select (optional)</div>
-        <input id="ag-co-inp" class="dd-sinp" style="width:100%;margin-bottom:6px" placeholder="Search company…" oninput="agSearch('co',this.value)">
-        <div id="ag-co-results" style="max-height:120px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;display:none;background:var(--bg)"></div>
-        <div id="ag-co-sel" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px"></div>
-      </div>
-
       <div class="ag-email-row">
         <input class="ag-email" id="ag-email" type="email" placeholder="Your email address" value="${currentUser?esc(currentUser.email):''}">
         <button class="btn-agent" onclick="submitAgent()">Subscribe</button>
       </div>
       <div class="am-note" id="ag-msg">Free. No spam. Unsubscribe anytime.</div>
     </div>`;
-
-  // Store lists + selections for all 3 fields
-  window._agLists={sec:SECTORS, cn:COUNTRIES, co:COMPANIES};
-  window._agSel={sec:new Set(), cn:new Set(), co:new Set()};
+  window._agLists={sec:SECTORS,cn:COUNTRIES,co:COMPANIES};
+  window._agSel={sec:new Set(),cn:new Set(),co:new Set()};
   document.getElementById('ov2').style.display='flex';
 }
 function agSearch(field,q){
@@ -1865,32 +1970,17 @@ function agSelect(field,val){
   const sel=window._agSel[field];
   if(sel.has(val))sel.delete(val);else sel.add(val);
   agSearch(field,document.getElementById('ag-'+field+'-inp').value);
-  document.getElementById('ag-'+field+'-sel').innerHTML=
-    [...sel].map(c=>`<div class="ag-chip sel" onclick="agSelect('${field}','${c.replace(/\\/g,'\\\\').replace(/'/g,'\\\'')}');" style="font-size:11px">${esc(c)} ✕</div>`).join('');
+  document.getElementById('ag-'+field+'-sel').innerHTML=[...sel].map(c=>`<div class="ag-chip sel" onclick="agSelect('${field}','${c.replace(/\\/g,'\\\\').replace(/'/g,'\\\'')}')" style="font-size:11px">${esc(c)} ✕</div>`).join('');
 }
-function toggleChip(el){el.classList.toggle('sel');}
 function submitAgent(){
   const email=(document.getElementById('ag-email').value||'').trim();
   const msg=document.getElementById('ag-msg');
   if(!email.includes('@')){msg.textContent='Enter a valid email.';msg.style.color='var(--red)';return;}
   const sel=window._agSel||{sec:new Set(),cn:new Set(),co:new Set()};
-  const sectors=[...sel.sec];
-  const countries=[...sel.cn];
-  const companies=[...sel.co];
-  const rec={type:'alert_signup',email,sectors,countries,companies,ts:new Date().toISOString()};
+  const rec={type:'alert_signup',email,sectors:[...sel.sec],countries:[...sel.cn],companies:[...sel.co],ts:new Date().toISOString()};
   const subs=JSON.parse(localStorage.getItem('s48_agents')||'[]');subs.push(rec);localStorage.setItem('s48_agents',JSON.stringify(subs));
   saveToSheet(rec);
-  document.querySelector('.agent-modal').innerHTML=`
-    <div style="text-align:center;padding:20px 0">
-      <div style="font-size:36px;margin-bottom:12px">✅</div>
-      <div style="font-family:var(--serif);font-size:19px;font-weight:700;margin-bottom:8px">Agent activated</div>
-      <div style="font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:18px">
-        ${sectors.length?`Tracking: <strong>${sectors.slice(0,3).join(', ')}</strong><br>`:''}
-        ${countries.length?`In: <strong>${countries.slice(0,3).join(', ')}</strong><br>`:''}
-        48 Hours digest every Monday to <strong>${esc(email)}</strong>
-      </div>
-      <button onclick="cm(2)" style="background:var(--accent);color:#fff;padding:8px 24px;border-radius:8px;font-size:13px;font-weight:500;border:none;cursor:pointer">Done</button>
-    </div>`;
+  document.querySelector('.agent-modal').innerHTML=`<div style="text-align:center;padding:20px 0"><div style="font-size:36px;margin-bottom:12px">✅</div><div style="font-family:var(--serif);font-size:19px;font-weight:700;margin-bottom:8px">Agent activated</div><div style="font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:18px">48 Hours digest every Monday to <strong>${esc(email)}</strong></div><button onclick="cm(2)" style="background:var(--accent);color:#fff;padding:8px 24px;border-radius:8px;font-size:13px;font-weight:500;border:none;cursor:pointer">Done</button></div>`;
 }
 
 /* ════════ PRO GATE ════════ */
@@ -1901,7 +1991,7 @@ function openProGate(){
       <div class="pm-h">Signal48 Pro</div>
       <div class="pm-p">This feature is available on the Pro plan. Upgrade to unlock the full intelligence platform.</div>
       <div class="pm-features">
-        <div class="pmf">📥 Export filtered signals to CSV</div>
+        <div class="pmf">📥 Export filtered signals &amp; GCC data to CSV</div>
         <div class="pmf">📅 Period &amp; deal size filters</div>
         <div class="pmf">⚡ Agent-powered 48 Hours reports</div>
         <div class="pmf">📊 Key industry, destination &amp; type KPIs</div>
@@ -1918,13 +2008,11 @@ function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').
 document.addEventListener('keydown',e=>{if(e.key==='Escape')[1,2,3].forEach(n=>{const el=document.getElementById('ov'+n);if(el&&el.style.display!=='none')cm(n);});});
 
 /* ════════ BOOT ════════ */
-// Restore session
 const saved=localStorage.getItem(SESSION_KEY);
 if(saved){try{loginUser(JSON.parse(saved));}catch(e){}}
 buildFAQ();
 showTab('home');
 
-// Fetch config keys securely from Apps Script, then boot the app
 async function bootApp(){
   try{
     const r=await fetch(CONFIG.APPS_SCRIPT_URL+'?action=config');
@@ -1933,10 +2021,9 @@ async function bootApp(){
     CONFIG.SHEET_GID      = cfg.SHEET_GID       || '';
     CONFIG.GOOGLE_CLIENT_ID = cfg.GOOGLE_CLIENT_ID || '';
     CONFIG.STRIPE_LINK    = cfg.STRIPE_LINK     || '';
-  }catch(e){
-    console.warn('Could not fetch config from Apps Script. Loading sheet with fallback.');
-    // If Apps Script is down, still try to load — Sheet must be public
-  }
+    // GCC_GID optional — we use sheet name "GCC" as fallback
+    CONFIG.GCC_GID        = cfg.GCC_GID         || '';
+  }catch(e){console.warn('Config fetch failed, loading with fallback.');}
   loadData();
 }
 bootApp();
