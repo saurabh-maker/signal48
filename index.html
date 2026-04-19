@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -558,7 +560,7 @@ a{color:var(--accent)}
           <div class="ud-name" id="dd-name">User</div>
           <div class="ud-email" id="dd-email">user@email.com</div>
           <div class="ud-item" onclick="openAlerts()">⚡ Set up alerts <span class="ud-badge free">FREE</span></div>
-          <div class="ud-item" onclick="openProGate()">📥 Export CSV <span class="ud-badge">PRO</span></div>
+          <div class="ud-item" onclick="exportSignals()">📥 Export CSV <span class="ud-badge">PRO</span></div>
           <div class="ud-item danger" onclick="signOut()">Sign out</div>
         </div>
       </div>
@@ -637,7 +639,7 @@ a{color:var(--accent)}
   <div class="ctag" id="ctag">—</div>
   <div class="nav-r">
     <button class="btn-pf" onclick="openAlerts()">⚡ Set up alerts</button>
-    <button class="btn-pf" onclick="openProGate()">🔒 Export CSV</button>
+    <button class="btn-pf" id="main-export-btn" onclick="exportSignals()">🔒 Export CSV</button>
     <div class="sync" id="sync"><span class="sdot"></span><span id="stxt">LIVE</span></div>
     <button class="ibtn" title="Refresh" onclick="loadData()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
@@ -699,7 +701,7 @@ a{color:var(--accent)}
   <div class="ctag" id="gcc-ctag">—</div>
   <div class="nav-r">
     <button class="btn-pf" onclick="openAlerts()">⚡ Alerts</button>
-    <button class="btn-pf" onclick="gccExport()">🔒 Export CSV</button>
+    <button class="btn-pf" id="gcc-export-btn" onclick="gccExport()">🔒 Export CSV</button>
     <div class="sync" id="gcc-sync"><span class="sdot"></span><span id="gcc-stxt">LIVE</span></div>
     <button class="ibtn" title="Refresh" onclick="loadGCCData()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
@@ -894,9 +896,10 @@ a{color:var(--accent)}
 
 <script>
 /* ════════ STATE ════════ */
-let all=[], filt=[], currentUser=null;
+let all=[], filt=[];
 let gcc_all=[], gcc_filt=[], gcc_type_filter='';
-const SESSION_KEY='s48_session', USERS_KEY='s48_users';
+let currentUser=null;
+const SESSION_KEY='signal48_user_v2';
 const MORD={january:1,february:2,march:3,april:4,may:5,june:6,july:7,august:8,september:9,october:10,november:11,december:12};
 const GCC_MORD={jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
 
@@ -1143,40 +1146,113 @@ async function verifyOTPAndReset(){
     setTimeout(()=>openAuth('in'),400);
   }catch(e){msg.textContent='Network error. Try again.';msg.style.color='var(--red)';}
 }
+function normalizeUser(u){
+  return {
+    email:String((u&&u.email)||'').toLowerCase().trim(),
+    name:String((u&&u.name)||'').trim(),
+    avatar:String((u&&u.avatar)||((u&&u.name)?u.name.trim().charAt(0).toUpperCase():'U')),
+    provider:String((u&&u.provider)||'email'),
+    plan:String((u&&u.plan)||'free').toLowerCase(),
+    payment_status:String((u&&u.payment_status)||'free').toLowerCase(),
+    subscription_id:String((u&&u.subscription_id)||''),
+    customer_id:String((u&&u.customer_id)||''),
+    plan_id:String((u&&u.plan_id)||''),
+    last_payment_id:String((u&&u.last_payment_id)||''),
+    verified_at:String((u&&u.verified_at)||''),
+    activated_at:String((u&&u.activated_at)||''),
+    renewal_date:String((u&&u.renewal_date)||''),
+    current_start:String((u&&u.current_start)||''),
+    current_end:String((u&&u.current_end)||'')
+  };
+}
+function getSavedUser(){
+  const raw=localStorage.getItem(SESSION_KEY);
+  if(!raw)return null;
+  try{return normalizeUser(JSON.parse(raw));}catch(e){return null;}
+}
+function saveUserSession(u){
+  const user=normalizeUser(u);
+  localStorage.setItem(SESSION_KEY,JSON.stringify(user));
+  currentUser=user;
+  return user;
+}
 function loginUser(u){
-  currentUser=u;localStorage.setItem(SESSION_KEY,JSON.stringify(u));
+  const user=saveUserSession(u);
   document.getElementById('auth-area').style.display='none';
   document.getElementById('user-area').style.display='block';
-  document.getElementById('uavatar').textContent=u.avatar;
-  document.getElementById('uname').textContent=u.name.split(' ')[0];
-  document.getElementById('uplan').textContent=u.plan==='pro'?'PRO':'FREE';
-  document.getElementById('dd-name').textContent=u.name;
-  document.getElementById('dd-email').textContent=u.email;
-  document.getElementById('upgrade-btn').style.display=u.plan==='pro'?'none':'flex';
+  document.getElementById('uavatar').textContent=user.avatar||'U';
+  document.getElementById('uname').textContent=(user.name||'User').split(' ')[0];
+  document.getElementById('uplan').textContent=isPro()?'PRO':'FREE';
+  document.getElementById('dd-name').textContent=user.name||'User';
+  document.getElementById('dd-email').textContent=user.email||'';
+  refreshLockedUI();
 }
 function signOut(){
-  currentUser=null;localStorage.removeItem(SESSION_KEY);
+  currentUser=null;
+  localStorage.removeItem(SESSION_KEY);
   document.getElementById('auth-area').style.display='block';
   document.getElementById('user-area').style.display='none';
   document.getElementById('upgrade-btn').style.display='flex';
   document.getElementById('user-dropdown').classList.remove('open');
+  refreshLockedUI();
 }
 function toggleDropdown(){document.getElementById('user-dropdown').classList.toggle('open');}
 document.addEventListener('click',e=>{
   const menu=document.getElementById('user-menu');
   if(menu&&!menu.contains(e.target))document.getElementById('user-dropdown').classList.remove('open');
 });
-function showNote(id,msg,color){
-  const el=document.getElementById(id);if(!el)return;
-  el.textContent=msg;
-  el.style.color=color==='red'?'var(--red)':color==='orange'?'var(--gold)':'var(--green)';
+function isPro(){
+  if(!currentUser)return false;
+  return currentUser.plan==='pro' && ['active','authenticated'].includes(currentUser.payment_status);
 }
-function isPro(){return currentUser&&currentUser.plan==='pro';}
-
-/* ════════ APPS SCRIPT ════════ */
 async function saveToSheet(data){
   if(!CONFIG.APPS_SCRIPT_URL||CONFIG.APPS_SCRIPT_URL.includes('YOUR_SCRIPT'))return;
-  try{await fetch(CONFIG.APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});}catch(e){}
+  try{
+    await fetch(CONFIG.APPS_SCRIPT_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'save_record',record:data})
+    });
+  }catch(e){
+    console.error('saveToSheet failed',e);
+  }
+}
+async function loadRuntimeConfig(){
+  if(!CONFIG.APPS_SCRIPT_URL)return;
+  try{
+    const r=await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=config`);
+    const d=await r.json();
+    if(d&&d.SHEET_ID)CONFIG.SHEET_ID=d.SHEET_ID;
+    if(d&&d.SHEET_GID)CONFIG.SHEET_GID=d.SHEET_GID;
+    if(d&&d.GOOGLE_CLIENT_ID)CONFIG.GOOGLE_CLIENT_ID=d.GOOGLE_CLIENT_ID;
+    if(d&&d.RAZORPAY_KEY_ID)CONFIG.RAZORPAY_KEY_ID=d.RAZORPAY_KEY_ID;
+    if(d&&d.GCC_GID)CONFIG.GCC_GID=d.GCC_GID;
+  }catch(e){
+    console.warn('Config fetch failed, loading with fallback.');
+  }
+}
+async function syncUserStatus(silent=true){
+  if(!currentUser||!currentUser.email)return;
+  try{
+    const url=`${CONFIG.APPS_SCRIPT_URL}?action=get_user_status&email=${encodeURIComponent(currentUser.email)}&name=${encodeURIComponent(currentUser.name||'')}`;
+    const r=await fetch(url);
+    const d=await r.json();
+    if(d&&d.ok&&d.user){
+      const merged={...currentUser,...normalizeUser(d.user),avatar:currentUser.avatar||((d.user.name||'U').charAt(0).toUpperCase())};
+      loginUser(merged);
+      if(!silent)showAuthToast(isPro()?'Pro status synced.':'Account status synced.');
+    }
+  }catch(e){
+    console.error('syncUserStatus failed',e);
+    if(!silent)showAuthToast('Could not sync account status.');
+  }
+}
+function requireProForDateFilter(){
+  if(!isPro()){
+    openProGate();
+    return false;
+  }
+  return true;
 }
 
 /* ════════ MAIN DATA LOAD ════════ */
@@ -1703,6 +1779,52 @@ function gccExport(){
   a.click();
 }
 
+function exportSignals(){
+  if(!isPro()){openProGate();return;}
+  if(!filt.length){showAuthToast('No signals to export.');return;}
+  const fields=['Company','Month_Year','Country','City_Or_Region','Sector','Sub_Sector','Expansion_Type','Facility_Type','Investment_Amount_USD_Billion','Jobs_Created','Strategic_Theme','Source_URL'];
+  const csv=[fields.join(','),...filt.map(r=>fields.map(k=>`"${String(r[k]||'').replace(/"/g,'""')}"`).join(','))].join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download=`signal48_export_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+
+function refreshLockedUI(){
+  const pro=isPro();
+
+  const upgradeBtn=document.getElementById('upgrade-btn');
+  if(upgradeBtn)upgradeBtn.style.display=pro?'none':'flex';
+
+  const uplan=document.getElementById('uplan');
+  if(uplan)uplan.textContent=pro?'PRO':'FREE';
+
+  ['kpi-country-wrap','kpi-type-wrap'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const lock=el.querySelector('.kpi-lock');
+    if(lock)lock.style.display=pro?'none':'flex';
+    el.classList.toggle('pro-blur',!pro);
+  });
+
+  const mainExportBtn=document.getElementById('main-export-btn');
+  if(mainExportBtn)mainExportBtn.innerHTML=pro?'📥 Export CSV':'🔒 Export CSV';
+
+  const gccExportBtn=document.getElementById('gcc-export-btn');
+  if(gccExportBtn)gccExportBtn.innerHTML=pro?'📥 Export CSV':'🔒 Export CSV';
+
+  const ddMo=document.getElementById('dd-mo');
+  if(ddMo){
+    if(pro){
+      ddMo.innerHTML=`<div class="dd-trigger" onclick="toggleDD('dd-mo')"><span class="dd-val" id="dd-mo-val">${DD_STATE['dd-mo'].val||'All Periods'}</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="dd-panel"><div class="dd-search-row"><input class="dd-sinp" placeholder="Search periods…" oninput="filterDD('dd-mo',this.value)"></div><div class="dd-list" id="dd-mo-list"></div></div>`;
+      filterDD('dd-mo','');
+    }else{
+      DD_STATE['dd-mo'].val='';
+      ddMo.innerHTML=`<div class="dd-trigger" onclick="openProGate()" style="opacity:.7;cursor:pointer" title="Pro only"><span class="dd-val" id="dd-mo-val">Period 🔒</span><svg viewBox="0 0 10 6" width="9"><path d="M1 1l4 4 4-4" stroke="#8fa0bb" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div>`;
+    }
+  }
+}
+
 /* ════════ MAIN FILTERS + MAP ════════ */
 const DD_STATE={
   'dd-rg':{val:'',opts:[]},'dd-co':{val:'',opts:[]},'dd-cn':{val:'',opts:[]},'dd-se':{val:'',opts:[]},'dd-mo':{val:'',opts:[]},
@@ -1727,6 +1849,11 @@ function clrF(){
 function go(){
   const rg=DD_STATE['dd-rg'].val,co=DD_STATE['dd-co'].val,cn=DD_STATE['dd-cn'].val,
         se=DD_STATE['dd-se'].val,mo=DD_STATE['dd-mo'].val;
+  if(mo&&!isPro()){
+    setDD('dd-mo','');
+    openProGate();
+    return;
+  }
   const q=(document.getElementById('sq')?.value||'').toLowerCase().trim();
   const hasF=rg||co||cn||se||mo||q;
   const bclr=document.getElementById('bclr');if(bclr)bclr.classList.toggle('on',!!hasF);
@@ -1990,43 +2117,68 @@ function submitAgent(){
 }
 
 /* ════════ RAZORPAY CHECKOUT ════════ */
+async function verifyPaymentOnServer(resp){
+  const payload={
+    action:'verify_payment',
+    email:currentUser.email,
+    name:currentUser.name,
+    razorpay_payment_id:resp.razorpay_payment_id,
+    razorpay_subscription_id:resp.razorpay_subscription_id,
+    razorpay_signature:resp.razorpay_signature
+  };
+  const r=await fetch(CONFIG.APPS_SCRIPT_URL,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(payload)
+  });
+  return await r.json();
+}
 async function openRazorpay(){
   if(!currentUser){openAuth();return;}
   if(!CONFIG.RAZORPAY_KEY_ID){showAuthToast('Payment not configured yet.');return;}
-
   showAuthToast('Opening checkout…');
-
   try{
-    const r=await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=create_sub&email=${encodeURIComponent(currentUser.email)}`);
+    const r=await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=create_sub&email=${encodeURIComponent(currentUser.email)}&name=${encodeURIComponent(currentUser.name||'')}`);
     const d=await r.json();
-    if(d.error||!d.sub_id){showAuthToast('Checkout error — try again.');return;}
-
+    if(!d.ok||d.error||!d.sub_id){showAuthToast(d.error||'Checkout error — try again.');return;}
     const rzp=new Razorpay({
-      key:             CONFIG.RAZORPAY_KEY_ID,
-      subscription_id: d.sub_id,
-      name:            'Signal48',
-      description:     'Pro Plan · Monthly',
+      key:CONFIG.RAZORPAY_KEY_ID,
+      subscription_id:d.sub_id,
+      name:'Signal48',
+      description:'Pro Plan · Monthly',
       prefill:{email:currentUser.email,name:currentUser.name},
       theme:{color:'#1847d6'},
-      modal:{backdropclose:false},
-      handler:function(resp){
-        currentUser.plan='pro';
-        localStorage.setItem(SESSION_KEY,JSON.stringify(currentUser));
-        loginUser(currentUser);
-        cm(1);cm(2);
-        showAuthToast('🎉 Pro activated! All features unlocked.');
-        saveToSheet({
-          type:'subscriptions',
-          email:currentUser.email,
-          payment_id:resp.razorpay_payment_id,
-          sub_id:resp.razorpay_subscription_id,
-          plan:'pro',
-          ts:new Date().toISOString(),
-        });
-      },
+      modal:{backdropclose:false,ondismiss:function(){showAuthToast('Checkout closed.');}},
+      handler:async function(resp){
+        try{
+          showAuthToast('Verifying payment…');
+          const verify=await verifyPaymentOnServer(resp);
+          if(!verify.ok||!verify.verified||!verify.user){
+            showAuthToast(verify.error||'Payment verification failed.');
+            return;
+          }
+          const finalUser={...currentUser,...normalizeUser(verify.user),avatar:currentUser.avatar||((currentUser.name||'U').charAt(0).toUpperCase())};
+          loginUser(finalUser);
+          cm(1);cm(2);
+          showAuthToast('🎉 Pro activated! All features unlocked.');
+          await saveToSheet({
+            type:'audit_log',
+            event:'pro_activated',
+            email:finalUser.email,
+            sub_id:finalUser.subscription_id,
+            payment_status:finalUser.payment_status,
+            ts:new Date().toISOString()
+          });
+          go();
+        }catch(err){
+          console.error(err);
+          showAuthToast('Payment verification failed. Contact support if amount was charged.');
+        }
+      }
     });
     rzp.open();
   }catch(err){
+    console.error(err);
     showAuthToast('Network error — try again.');
   }
 }
@@ -2040,10 +2192,10 @@ function openProGate(){
       <div class="pm-p">This feature is available on the Pro plan. Upgrade to unlock the full intelligence platform.</div>
       <div class="pm-features">
         <div class="pmf">📥 Export filtered signals &amp; GCC data to CSV</div>
-        <div class="pmf">📅 Period &amp; deal size filters</div>
+        <div class="pmf">📅 Period &amp; date-based filter access</div>
         <div class="pmf">⚡ Agent-powered 48 Hours reports</div>
         <div class="pmf">📊 Key industry, destination &amp; type KPIs</div>
-        <div class="pmf">🎯 Priority email support</div>
+        <div class="pmf">🎯 Priority intelligence workflow</div>
       </div>
       <button class="btn-get-pro" onclick="cm(2);openRazorpay()">Subscribe · $20/month via Razorpay →</button>
       <div class="pm-free">UPI · Cards · NetBanking · Wallets. Cancel anytime. Free tier stays free forever.</div>
@@ -2056,25 +2208,20 @@ function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').
 document.addEventListener('keydown',e=>{if(e.key==='Escape')[1,2,3].forEach(n=>{const el=document.getElementById('ov'+n);if(el&&el.style.display!=='none')cm(n);});});
 
 /* ════════ BOOT ════════ */
-const saved=localStorage.getItem(SESSION_KEY);
-if(saved){try{loginUser(JSON.parse(saved));}catch(e){}}
 buildFAQ();
 showTab('home');
 
 async function bootApp(){
-  try{
-    const r=await fetch(CONFIG.APPS_SCRIPT_URL+'?action=config');
-    const cfg=await r.json();
-    CONFIG.SHEET_ID       = cfg.SHEET_ID        || '';
-    CONFIG.SHEET_GID      = cfg.SHEET_GID       || '';
-    CONFIG.GOOGLE_CLIENT_ID = cfg.GOOGLE_CLIENT_ID || '';
-    CONFIG.RAZORPAY_KEY_ID = cfg.RAZORPAY_KEY_ID || '';
-    // GCC_GID optional — we use sheet name "GCC" as fallback
-    CONFIG.GCC_GID        = cfg.GCC_GID         || '';
-  }catch(e){console.warn('Config fetch failed, loading with fallback.');}
+  await loadRuntimeConfig();
+  const saved=getSavedUser();
+  if(saved){
+    loginUser(saved);
+    await syncUserStatus(true);
+  }else{
+    refreshLockedUI();
+  }
   loadData();
 }
-bootApp();
-</script>
+bootApp();</script>
 </body>
 </html>
