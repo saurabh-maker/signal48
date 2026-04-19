@@ -1060,29 +1060,116 @@ function doEmailAuth(){
   const email=(document.getElementById('am-email').value||'').trim().toLowerCase();
   const pass=document.getElementById('am-pass').value||'';
   const nameEl=document.getElementById('am-name');
-  const name=(nameEl?nameEl.value.trim():'')||email.split('@')[0];
-  if(!email.includes('@')){showNote('am-msg','Enter a valid email address.','red');return;}
-  if(!pass||pass.length<6){showNote('am-msg','Password must be at least 6 characters.','red');return;}
-  showNote('am-msg','Checking…','');
-  if(amMode==='up'){
-    if(!name||name.length<2){showNote('am-msg','Please enter your full name.','red');return;}
-    checkEmailExists(email).then(existsInSheet=>{
-      const ul=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
-      if(existsInSheet||ul[email]){showNote('am-msg','Account already exists — use the Sign in tab.','red');return;}
-      ul[email]={name,pass,plan:'free',created:new Date().toISOString()};
-      localStorage.setItem(USERS_KEY,JSON.stringify(ul));
-      saveUserToSheet(email,name,'email','free');
-      loginUser({name,email,avatar:name[0].toUpperCase(),provider:'email',plan:'free'});
-      cm(3);showAuthToast(`✅ Account created — welcome, ${name.split(' ')[0]}!`);
-    });
-  }else{
-    const ul=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
-    if(!ul[email]){checkEmailExists(email).then(existsInSheet=>{if(!existsInSheet){showNote('am-msg','No account found — please Sign up first.','red');return;}showNote('am-msg','Account found on another device. Use Forgot password below.','orange');});return;}
-    if(ul[email].provider==='google'){showNote('am-msg','This email uses Google Sign-In — click the Google button above.','orange');return;}
-    if(ul[email].pass!==pass){showNote('am-msg','Incorrect password.','red');return;}
-    loginUser({name:ul[email].name,email,avatar:ul[email].name[0].toUpperCase(),provider:'email',plan:ul[email].plan||'free'});
-    cm(3);showAuthToast(`👋 Welcome back, ${ul[email].name.split(' ')[0]}!`);
+  const name=(nameEl?nameEl.value.trim():'');
+  const msg=document.getElementById('am-msg');
+
+  if(!email || !/^\S+@\S+\.\S+$/.test(email)){
+    msg.textContent='Enter a valid email address.';
+    msg.style.color='var(--red)';
+    return;
   }
+
+  if(!pass || pass.length<6){
+    msg.textContent='Password must be at least 6 characters.';
+    msg.style.color='var(--red)';
+    return;
+  }
+
+  const users=JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
+
+  if(amMode==='up'){
+    if(!name || name.length<2){
+      msg.textContent='Enter your full name.';
+      msg.style.color='var(--red)';
+      return;
+    }
+
+    checkEmailExists(email).then(existsInSheet=>{
+      if(existsInSheet || users[email]){
+        msg.textContent='Account already exists. Please sign in.';
+        msg.style.color='var(--gold)';
+        return;
+      }
+
+      const newUser={
+        email,
+        pass,
+        name,
+        avatar:(name||email).charAt(0).toUpperCase(),
+        plan:'free',
+        provider:'email',
+        payment_status:'free',
+        created_at:new Date().toISOString()
+      };
+
+      users[email]=newUser;
+      localStorage.setItem(USERS_KEY,JSON.stringify(users));
+
+      saveUserToSheet(email,name,'email','free');
+
+      msg.textContent='✅ Account created. Logging you in…';
+      msg.style.color='var(--green)';
+
+      const sessionUser={
+        email:newUser.email,
+        name:newUser.name,
+        avatar:newUser.avatar,
+        plan:'free',
+        payment_status:'free',
+        provider:'email'
+      };
+
+      loginUser(sessionUser);
+      cm(3);
+      showAuthToast(`✅ Welcome to Signal48, ${name.split(' ')[0]}!`);
+    }).catch(()=>{
+      msg.textContent='Could not create account. Try again.';
+      msg.style.color='var(--red)';
+    });
+    return;
+  }
+
+  const user=users[email];
+  if(!user){
+    checkEmailExists(email).then(existsInSheet=>{
+      if(!existsInSheet){
+        msg.textContent='No account found with this email.';
+        msg.style.color='var(--red)';
+        return;
+      }
+      msg.textContent='Account found on another device. Use Forgot password below.';
+      msg.style.color='var(--gold)';
+    }).catch(()=>{
+      msg.textContent='No account found with this email.';
+      msg.style.color='var(--red)';
+    });
+    return;
+  }
+
+  if(user.provider==='google'){
+    msg.textContent='This email uses Google Sign-In — click the Google button above.';
+    msg.style.color='var(--gold)';
+    return;
+  }
+
+  if(user.pass!==pass){
+    msg.textContent='Incorrect password.';
+    msg.style.color='var(--red)';
+    return;
+  }
+
+  const sessionUser={
+    email:user.email,
+    name:user.name,
+    avatar:user.avatar || (user.name||user.email).charAt(0).toUpperCase(),
+    plan:user.plan || 'free',
+    payment_status:user.payment_status || (user.plan==='pro' ? 'active' : 'free'),
+    provider:user.provider || 'email'
+  };
+
+  loginUser(sessionUser);
+  cm(3);
+  showAuthToast(`👋 Welcome back, ${user.name.split(' ')[0]}!`);
 }
 async function checkEmailExists(email){
   if(!CONFIG.APPS_SCRIPT_URL||CONFIG.APPS_SCRIPT_URL.includes('YOUR_SCRIPT'))return false;
