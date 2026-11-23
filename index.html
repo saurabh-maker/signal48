@@ -3,258 +3,198 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JobSetu - Government jobs you are eligible for</title>
-<meta name="description" content="Enter your age, education and category. See only the government jobs you can actually apply for.">
+<title>Signal48 — AI Sourcing-as-a-Service</title>
+<meta name="description" content="AI agents that source talent and build your hiring pipeline 24/7. $99 USD per role.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0f3d91;--blue:#1d62d6;--orange:#ff7a1a;--green:#25a244;--ink:#17213a;--mut:#6b7694;--line:#e3e8f2;--bg:#f6f8fc}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Devanagari",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
-.nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
-.nav div{max-width:1100px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-weight:800;font-size:22px;color:var(--navy)}.logo span{color:var(--orange)}
-.btn{display:inline-block;border:0;cursor:pointer;border-radius:9px;padding:10px 16px;font:700 14px inherit;font-family:inherit;text-decoration:none;color:#fff;background:var(--green)}
-.btn.o{background:var(--orange)}.btn.n{background:var(--navy)}
-.hero{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:36px 20px 70px}
-.hero div{max-width:1100px;margin:auto}
-.hero h1{font-size:clamp(24px,4vw,36px);line-height:1.2;max-width:680px}
-.hero p{margin-top:10px;opacity:.88;max-width:560px}
-.wrap{max-width:1100px;margin:auto;padding:0 20px}
-.filter{margin-top:-44px;background:#fff;border-radius:14px;box-shadow:0 8px 24px rgba(15,61,145,.18);padding:18px;display:grid;grid-template-columns:repeat(4,1fr) auto;gap:12px;align-items:end}
-.filter label{display:block;font-size:12px;font-weight:700;color:var(--mut);margin-bottom:5px}
-.filter input,.filter select,.signup input{width:100%;border:1px solid #cdd5e6;border-radius:8px;padding:10px 12px;font:15px inherit;font-family:inherit;background:#fafbff;color:var(--ink)}
-.layout{display:grid;grid-template-columns:1fr 300px;gap:22px;margin:24px auto 60px}
-.bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px}
-.bar h2{font-size:17px}
-.sort{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--mut)}
-.sort select{border:1px solid #cdd5e6;border-radius:8px;padding:6px 8px;font:13px inherit;font-family:inherit;background:#fff}
-.sort label.chk{display:flex;gap:5px;align-items:center;cursor:pointer}
-.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;display:flex;gap:14px}
-.ic{width:46px;height:46px;border-radius:10px;color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none;text-align:center}
-.ct{flex:1;min-width:0}
-.ct h3{font-size:16px;line-height:1.3}
-.org{font-size:13px;color:var(--mut);margin-top:2px}
-.meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:9px;font-size:13px}
-.meta i{font-style:normal;color:var(--mut)}
-.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
-.tag{font-size:12px;font-weight:700;border-radius:6px;padding:3px 8px}
-.ok{background:#e1f6e7;color:#157a33}.warn{background:#fff0d9;color:#8f4e00}.red{background:#ffe3e3;color:#b42323}.gray{background:#eceff5;color:#4a567a}
-.act{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;gap:10px;flex:none}
-.box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
-.box h3{font-size:15px;margin-bottom:8px}
-.box p{font-size:13px;color:#33405f;margin-bottom:10px}
-.wa{background:#e9f9ee;border-color:#bfe8cb}
-.signup input{margin-bottom:8px}
-.row{display:flex;justify-content:space-between;gap:8px;font-size:13px;padding:8px 0;border-bottom:1px solid #eef1f8}
-.row:last-child{border:0}.row b{color:#b42323;white-space:nowrap}
-.msg{font-size:13px;margin-top:8px;min-height:18px}
-.empty{background:#fff;border:1px dashed #cdd5e6;border-radius:12px;padding:30px;text-align:center;color:var(--mut)}
-.note{font-size:12px;color:var(--mut);margin-top:6px}
-footer{border-top:1px solid var(--line);padding:22px 20px;text-align:center;font-size:12px;color:var(--mut)}
-@media(max-width:860px){
- .filter{grid-template-columns:1fr 1fr}.filter .btn{grid-column:1/3}
- .layout{grid-template-columns:1fr}
- .card{flex-direction:column}.act{flex-direction:row;align-items:center;width:100%;justify-content:space-between}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Segoe UI,Helvetica,Arial,sans-serif;background:#0b0f1a;color:#e6e9f2;min-height:100vh}
+a{color:#a78bfa;text-decoration:none}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 64px;border-bottom:1px solid #1c2235}
+.logo{font-weight:800;font-size:22px;letter-spacing:-.5px;color:#e6e9f2}.logo span{color:#7c5cff}
+nav .links{display:flex;gap:28px;font-size:14px}
+nav .links a{color:#9aa3b8}nav .links a:hover{color:#e6e9f2}
+.btn{background:linear-gradient(90deg,#7c5cff,#22d3ee);color:#fff;border:none;padding:12px 22px;border-radius:10px;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;display:inline-block}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.hero{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;padding:64px 64px 72px;max-width:1440px;margin:0 auto}
+.pill{display:inline-block;font-size:12px;color:#22d3ee;border:1px solid #1e3a4a;background:#0e1b26;padding:6px 12px;border-radius:999px;margin-bottom:22px}
+h1{font-size:52px;line-height:1.08;letter-spacing:-1.5px;font-weight:800}
+h1 em{font-style:normal;background:linear-gradient(90deg,#a78bfa,#22d3ee);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:#9aa3b8;font-size:17px;line-height:1.6;margin:22px 0 34px;max-width:520px}
+.steps{display:flex;flex-direction:column;gap:16px}
+.step{display:flex;gap:14px;align-items:flex-start;background:#111628;border:1px solid #1c2235;border-radius:12px;padding:16px}
+.num{width:30px;height:30px;border-radius:8px;background:#1d1640;color:#a78bfa;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step b{display:block;font-size:15px;margin-bottom:3px}.step p{font-size:13px;color:#8891a7}
+.price{display:flex;align-items:center;gap:18px;margin-top:28px;background:linear-gradient(90deg,#1d1640,#0e1b26);border:1px solid #2d2a5a;border-radius:14px;padding:18px 22px}
+.price b{font-size:40px;letter-spacing:-1px}.price small{font-size:14px;color:#9aa3b8}
+.price p{font-size:13px;color:#aab2c7;line-height:1.5}
+.card{background:#111628;border:1px solid #232a42;border-radius:18px;padding:32px;box-shadow:0 30px 80px rgba(124,92,255,.15);align-self:start}
+.card h2{font-size:22px;margin-bottom:4px}.card .hint{font-size:13px;color:#8891a7;margin-bottom:22px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.full{margin-bottom:14px}
+label{font-size:12px;color:#aab2c7;display:block;margin-bottom:6px;font-weight:500}
+input,select,textarea{width:100%;background:#0b0f1a;border:1px solid #262e48;border-radius:9px;padding:11px 12px;font-size:14px;color:#e6e9f2;min-height:42px;font-family:inherit;outline:none}
+input::placeholder,textarea::placeholder{color:#5b6480}
+input:focus,select:focus,textarea:focus{border-color:#7c5cff;box-shadow:0 0 0 3px rgba(124,92,255,.18)}
+textarea{min-height:76px;line-height:1.5;resize:vertical}
+select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,#5b6480 50%),linear-gradient(135deg,#5b6480 50%,transparent 50%);background-position:calc(100% - 18px) 18px,calc(100% - 13px) 18px;background-size:5px 5px;background-repeat:no-repeat}
+input[type=date]{color-scheme:dark}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips input{display:none}
+.chips label{font-size:12px;padding:7px 12px;border-radius:999px;border:1px solid #262e48;color:#aab2c7;margin:0;cursor:pointer}
+.chips input:checked+label{background:#1d1640;border-color:#7c5cff;color:#c4b5fd}
+.submit{width:100%;margin-top:8px;padding:15px;font-size:15px}
+.secure{text-align:center;font-size:13px;color:#8891a7;margin-top:12px}
+.msg{display:none;margin-top:14px;padding:12px 14px;border-radius:10px;font-size:14px;text-align:center}
+.msg.ok{display:block;background:#0e2a22;border:1px solid #1f6b52;color:#6ee7b7}
+.msg.err{display:block;background:#2a0e14;border:1px solid #6b1f2e;color:#fda4af}
+@media (max-width:960px){
+ nav{padding:18px 20px}nav .links{display:none}
+ .hero{grid-template-columns:1fr;padding:36px 20px 48px;gap:36px}
+ h1{font-size:36px}
+ .row{grid-template-columns:1fr}
+ .card{padding:22px}
 }
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<header class="nav"><div><a class="logo" href="#" aria-label="JobSetu home">Job<span>Setu</span></a><a class="btn" href="#alerts">Get WhatsApp alerts</a></div></header>
 
-<section class="hero"><div>
- <h1>Only the government jobs you are actually eligible for.</h1>
- <p>Tell us your age, education and category. We check each official notification and show what you can apply for.</p>
-</div></section>
+<nav>
+ <a class="logo" href="#">Signal<span>48</span></a>
+ <div class="links">
+  <a href="#how">How it works</a>
+  <a href="#how">AI Agents</a>
+  <a href="#pricing">Pricing</a>
+  <a href="mailto:contact@signal48.com">Contact</a>
+ </div>
+ <a class="btn" href="#brief">Submit a Role</a>
+</nav>
 
-<main class="wrap">
- <form class="filter" id="f" aria-label="Your profile">
-  <div><label for="age">Age</label><input id="age" type="number" min="14" max="60" value="24" required></div>
-  <div><label for="edu">Education</label><select id="edu"></select></div>
-  <div><label for="cat">Category</label><select id="cat"></select></div>
-  <div><label for="st">State</label><select id="st"></select></div>
-  <button class="btn o" type="submit">Find my jobs</button>
- </form>
+<section class="hero">
+ <div>
+  <div class="pill">● AI Sourcing-as-a-Service</div>
+  <h1>AI agents that source talent and <em>build your pipeline</em> — 24/7.</h1>
+  <p class="sub">Tell us the role. Our AI agents search, screen and shortlist candidates continuously, delivering a qualified pipeline straight to you.</p>
+  <div class="steps" id="how">
+   <div class="step"><div class="num">1</div><div><b>Share your role</b><p>Fill in the brief — takes under 2 minutes.</p></div></div>
+   <div class="step"><div class="num">2</div><div><b>Agents start sourcing</b><p>AI agents scan profiles across talent markets around the clock.</p></div></div>
+   <div class="step"><div class="num">3</div><div><b>Receive your pipeline</b><p>Ranked, matched candidates delivered to your inbox.</p></div></div>
+  </div>
+  <div class="price" id="pricing">
+   <div><b>$99</b> <small>USD / role</small></div>
+   <p>Flat price per role. No placement fees,<br>no retainers. Questions? <a href="mailto:contact@signal48.com">contact@signal48.com</a></p>
+  </div>
+ </div>
 
- <div class="layout">
-  <section aria-live="polite">
-   <div class="bar">
-    <h2 id="count">Loading jobs...</h2>
-    <div class="sort">
-     <label class="chk"><input type="checkbox" id="all"> Show all jobs</label>
-     <select id="sort" aria-label="Sort jobs"><option value="date">Closing soon</option><option value="new">Newest</option><option value="posts">Most posts</option></select>
+ <div class="card" id="brief">
+  <h2>Submit a role brief</h2>
+  <p class="hint">Fill in the form and we’ll reach out to get started.</p>
+
+  <form id="roleForm" novalidate>
+   <div class="row">
+    <div><label for="name">Your name *</label><input id="name" name="name" placeholder="Jane Doe" required></div>
+    <div><label for="email">Work email *</label><input id="email" name="email" type="email" placeholder="jane@company.com" required></div>
+   </div>
+   <div class="row">
+    <div><label for="company">Company *</label><input id="company" name="company" placeholder="Acme Corp" required></div>
+    <div><label for="phone">Phone</label><input id="phone" name="phone" type="tel" placeholder="+1 (555) 123-4567"></div>
+   </div>
+   <div class="row">
+    <div><label for="roleTitle">Role title *</label><input id="roleTitle" name="roleTitle" placeholder="Senior Data Engineer" required></div>
+    <div><label for="locations">Location(s) *</label><input id="locations" name="locations" placeholder="Toronto / Austin / Remote" required></div>
+   </div>
+   <div class="row">
+    <div><label for="experience">Experience</label>
+     <select id="experience" name="experience">
+      <option value="">Select</option>
+      <option>0–2 years</option>
+      <option>2–5 years</option>
+      <option>5–8 years</option>
+      <option>8–12 years</option>
+      <option>12+ years</option>
+     </select>
+    </div>
+    <div><label for="openings">No. of openings</label><input id="openings" name="openings" type="number" min="1" placeholder="1"></div>
+   </div>
+   <div class="full">
+    <label>Work mode</label>
+    <div class="chips">
+     <input type="radio" name="workMode" id="wm1" value="On-site"><label for="wm1">On-site</label>
+     <input type="radio" name="workMode" id="wm2" value="Hybrid" checked><label for="wm2">Hybrid</label>
+     <input type="radio" name="workMode" id="wm3" value="Remote"><label for="wm3">Remote</label>
     </div>
    </div>
-   <div id="list"></div>
-  </section>
-
-  <aside>
-   <div class="box wa" id="alerts">
-    <h3>Never miss a deadline</h3>
-    <p>Get WhatsApp alerts only for jobs that match the profile you entered above. No spam.</p>
-    <form class="signup" id="s">
-     <input id="nm" placeholder="Your name" autocomplete="name" aria-label="Your name">
-     <input id="wa" type="tel" placeholder="WhatsApp number, e.g. +919876543210" autocomplete="tel" required aria-label="WhatsApp number">
-     <button class="btn" type="submit" style="width:100%">Send me matching jobs</button>
-    </form>
-    <div class="msg" id="smsg" role="status"></div>
+   <div class="full"><label for="skills">Must-have skills *</label><input id="skills" name="skills" placeholder="Snowflake, Python, Airflow, dbt" required></div>
+   <div class="row">
+    <div><label for="salary">Salary range (USD)</label><input id="salary" name="salary" placeholder="e.g. $140k – $170k"></div>
+    <div><label for="startDate">Target start date</label><input id="startDate" name="startDate" type="date"></div>
    </div>
-   <div class="box"><h3>Closing this week</h3><div id="soon"></div></div>
-   <p class="note">Always confirm details on the official notice before you apply. Age relaxation rules can differ for each exam.</p>
-  </aside>
+   <div class="full"><label for="notes">Job description / notes</label><textarea id="notes" name="notes" placeholder="Paste JD or describe the ideal candidate, target companies to source from…"></textarea></div>
+
+   <button class="btn submit" type="submit" id="submitBtn">🚀 Submit Role Brief</button>
+   <div class="msg" id="msg"></div>
+   <p class="secure">We’ll get back to you within 24 hours. Questions? <a href="mailto:contact@signal48.com">contact@signal48.com</a></p>
+  </form>
  </div>
-</main>
-<footer>JobSetu is an independent information site and is not a government website. Every job links to its official notice.</footer>
+</section>
 
 <script>
-// ===== SET THIS: your Google Apps Script Web App URL (ends with /exec). Leave empty to use sample data. =====
-const API_URL = "";
+// ▼▼ Paste your Google Apps Script Web App URL here (ends with /exec) ▼▼
+const SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
-const EDU = [["8th Pass",1],["10th Pass",2],["12th Pass",3],["Diploma / ITI",4],["Graduate",5],["Post Graduate",6]];
-const CATS = [["General",0],["EWS",0],["OBC",3],["SC",5],["ST",5],["PwD (General)",10],["Ex-Serviceman",3]];
-const STATES = ["All India","Andhra Pradesh","Assam","Bihar","Chhattisgarh","Delhi","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Odisha","Punjab","Rajasthan","Tamil Nadu","Telangana","Uttar Pradesh","Uttarakhand","West Bengal"];
-const COLORS = ["#0f3d91","#c0392b","#16794c","#6a3fb5","#b35a00","#0e7490"];
+const form = document.getElementById('roleForm');
+const btn  = document.getElementById('submitBtn');
+const msg  = document.getElementById('msg');
 
-const $ = id => document.getElementById(id);
-let JOBS = [];
-
-function fill(sel, items, def){
-  sel.innerHTML = items.map((x,i)=>{const v=Array.isArray(x)?i:x, t=Array.isArray(x)?x[0]:x;
-    return `<option value="${v}"${t===def?" selected":""}>${t}</option>`}).join("");
-}
-fill($("edu"),EDU,"Graduate"); fill($("cat"),CATS,"OBC"); fill($("st"),STATES,"All India");
-
-// ---------- sample data (used when API_URL is empty or fails) ----------
-function d(n){const x=new Date();x.setDate(x.getDate()+n);return x.toISOString().slice(0,10)}
-const SAMPLE = [
- {source:"SSC",title:"SSC CGL Combined Graduate Level Exam",organization:"Staff Selection Commission",vacancies:14582,education:"Graduate (any stream)",min_age:18,max_age:32,application_fee:"Rs 100",last_date:d(9),official_link:"https://ssc.gov.in",scraped_on:d(-1)},
- {source:"RRB",title:"RRB NTPC Graduate Level Posts",organization:"Railway Recruitment Board",vacancies:8113,education:"Graduate",min_age:18,max_age:33,application_fee:"Rs 500",last_date:d(21),official_link:"https://indianrailways.gov.in",scraped_on:d(-2)},
- {source:"IBPS",title:"IBPS Clerk Customer Service Associate",organization:"Institute of Banking Personnel Selection",vacancies:6128,education:"Graduate",min_age:20,max_age:28,application_fee:"Rs 850",last_date:d(34),official_link:"https://www.ibps.in",scraped_on:d(-3)},
- {source:"Bihar Police",title:"Bihar Police Sub Inspector",organization:"Bihar Police Subordinate Services Commission",vacancies:1799,education:"Graduate",min_age:20,max_age:37,application_fee:"Rs 700",last_date:d(17),official_link:"https://csbc.bihar.gov.in",scraped_on:d(-1)},
- {source:"RRB",title:"RRB Group D Level 1 Posts",organization:"Railway Recruitment Board",vacancies:32438,education:"10th Pass with ITI",min_age:18,max_age:33,application_fee:"Rs 500",last_date:d(5),official_link:"https://indianrailways.gov.in",scraped_on:d(-4)},
- {source:"SSC",title:"SSC MTS Multi Tasking Staff",organization:"Staff Selection Commission",vacancies:8326,education:"10th Pass",min_age:18,max_age:25,application_fee:"Rs 100",last_date:d(12),official_link:"https://ssc.gov.in",scraped_on:d(-2)}
-];
-
-// ---------- helpers ----------
-function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function safeUrl(u){return /^https?:\/\//i.test(u)?u:"#"}
-function reqLevel(t){
-  t=String(t||"").toLowerCase();
-  if(/post.?graduate|master|\bpg\b|m\.?sc|m\.?a\b|mba/.test(t))return 6;
-  if(/graduat|degree|bachelor|b\.?tech|b\.?e\b|b\.?sc|b\.?a\b|b\.?com|b\.?ed/.test(t))return 5;
-  if(/diploma|iti/.test(t)&&!/10th|12th/.test(t))return 4;
-  if(/12th|10\+2|intermediate|higher secondary/.test(t))return 3;
-  if(/10th|matric|secondary/.test(t))return 2;
-  if(/8th|middle/.test(t))return 1;
-  return 0; // unknown
-}
-function daysLeft(dt){
-  if(!dt)return null;
-  const t=new Date(dt+"T00:00:00"), n=new Date(); n.setHours(0,0,0,0);
-  return isNaN(t)?null:Math.round((t-n)/864e5);
-}
-function profile(){
-  return {age:+$("age").value, edu:EDU[$("edu").value][1], eduName:EDU[$("edu").value][0],
-          cat:CATS[$("cat").value][0], relax:CATS[$("cat").value][1], state:STATES[$("st").selectedIndex]};
-}
-function evaluate(j,p){
-  const min=+j.min_age||0, max=+j.max_age||0, req=reqLevel(j.education);
-  const r={flags:[],eligible:true,unsure:false};
-  if(max){
-    const top=max+p.relax;
-    if(p.age<min){r.eligible=false}
-    else if(p.age>top){r.eligible=false}
-    else if(p.age>max){r.flags.push(["ok","Age relaxation applies (+"+p.relax+" yrs)"])}
-    else if(top-p.age<=1){r.flags.push(["warn","Last age year"])}
-  } else r.unsure=true;
-  if(req){ if(p.edu<req) r.eligible=false } else r.unsure=true;
-  const txt=(j.title+" "+j.organization).toLowerCase();
-  const named=STATES.slice(1).filter(s=>txt.includes(s.toLowerCase()));
-  if(named.length){
-    if(p.state==="All India"||!named.includes(p.state)) r.eligible=false;
-    else r.flags.push(["ok","Your state"]);
-  }
-  return r;
+function showMsg(text, ok){
+  msg.className = 'msg ' + (ok ? 'ok' : 'err');
+  msg.textContent = text;
 }
 
-// ---------- render ----------
-function render(){
-  const p=profile(), showAll=$("all").checked;
-  let rows=JOBS.map(j=>({j,e:evaluate(j,p),dl:daysLeft(j.last_date)}))
-               .filter(x=>x.dl===null||x.dl>=0);
-  const matched=rows.filter(x=>x.e.eligible);
-  if(!showAll) rows=matched;
-  const s=$("sort").value;
-  rows.sort((a,b)=> s==="posts"?(+b.j.vacancies||0)-(+a.j.vacancies||0)
-                  : s==="new"?String(b.j.scraped_on).localeCompare(String(a.j.scraped_on))
-                  : (a.dl===null?9999:a.dl)-(b.dl===null?9999:b.dl));
-  $("count").textContent = matched.length+" job"+(matched.length===1?"":"s")+" match your profile";
-  $("list").innerHTML = rows.length? rows.map((x,i)=>card(x,i)).join("") :
-    `<div class="empty"><b>No matching jobs right now.</b><br>Try a different category or state, tick "Show all jobs", or get an alert when a new one fits.</div>`;
-  const soon=JOBS.map(j=>({j,dl:daysLeft(j.last_date)})).filter(x=>x.dl!==null&&x.dl>=0&&x.dl<=7).sort((a,b)=>a.dl-b.dl).slice(0,5);
-  $("soon").innerHTML = soon.length? soon.map(x=>`<div class="row"><span>${esc(x.j.title)}</span><b>${x.dl===0?"today":x.dl+" day"+(x.dl>1?"s":"")}</b></div>`).join("") : '<p style="margin:0">Nothing closes in the next 7 days.</p>';
-}
-function card(x,i){
-  const {j,e,dl}=x;
-  const dcls=dl===null?"gray":dl<=7?"red":dl<=21?"warn":"ok";
-  const dtxt=dl===null?"Check last date":dl===0?"Last day today":dl+" days left";
-  const status=!e.eligible?'<span class="tag gray">Not eligible for your profile</span>'
-    :e.unsure?'<span class="tag warn">Check the notice for details</span>'
-    :'<span class="tag ok">You are eligible</span>';
-  const flags=e.flags.map(f=>`<span class="tag ${f[0]}">${esc(f[1])}</span>`).join("");
-  const code=esc(String(j.source||"JOB").slice(0,5).toUpperCase());
-  return `<article class="card">
-   <div class="ic" style="background:${COLORS[i%COLORS.length]}">${code}</div>
-   <div class="ct"><h3>${esc(j.title)}</h3><div class="org">${esc(j.organization||j.source)}</div>
-    <div class="meta">
-     ${j.vacancies?`<span><i>Posts </i>${esc(Number(j.vacancies)?Number(j.vacancies).toLocaleString("en-IN"):j.vacancies)}</span>`:""}
-     ${j.min_age||j.max_age?`<span><i>Age </i>${esc(j.min_age||"?")}-${esc(j.max_age||"?")}</span>`:""}
-     ${j.education?`<span><i>Education </i>${esc(j.education)}</span>`:""}
-     ${j.application_fee?`<span><i>Fee </i>${esc(j.application_fee)}</span>`:""}
-    </div>
-    ${j.age_relaxation?`<div class="note">Relaxation per notice: ${esc(j.age_relaxation)}</div>`:""}
-    <div class="tags">${status}${flags}<span class="tag gray">Official notice linked</span></div></div>
-   <div class="act"><span class="tag ${dcls}">${dtxt}</span><a class="btn n" href="${esc(safeUrl(j.official_link))}" target="_blank" rel="noopener noreferrer">View official notice</a></div>
-  </article>`;
-}
-
-// ---------- data ----------
-async function load(){
-  if(API_URL){
-    try{
-      const r=await fetch(API_URL+(API_URL.includes("?")?"&":"?")+"action=jobs");
-      const data=await r.json();
-      JOBS=data.jobs||[];
-    }catch(err){
-      JOBS=SAMPLE; $("count").textContent="Could not reach the job feed. Showing sample jobs.";
-    }
-  } else JOBS=SAMPLE;
-  render();
-}
-
-// ---------- events ----------
-$("f").addEventListener("submit",e=>{e.preventDefault();render()});
-["all","sort"].forEach(id=>$(id).addEventListener("change",render));
-["edu","cat","st"].forEach(id=>$(id).addEventListener("change",render));
-
-$("s").addEventListener("submit",async e=>{
+form.addEventListener('submit', async function(e){
   e.preventDefault();
-  const m=$("smsg"), num=$("wa").value.replace(/\s/g,"");
-  if(!/^\+?\d{10,15}$/.test(num)){m.style.color="#b42323";m.textContent="Enter a valid number with country code, like +919876543210.";return}
-  if(!API_URL){m.style.color="#8f4e00";m.textContent="Alerts are not connected yet. Add your Web App URL in the code.";return}
-  const p=profile();
-  try{
-    // text/plain body avoids a CORS preflight, which Apps Script cannot answer
-    const r=await fetch(API_URL,{method:"POST",body:JSON.stringify({name:$("nm").value,whatsapp:num,age:p.age,education:p.eduName,category:p.cat.replace(" (General)",""),state:p.state})});
-    const j=await r.json();
-    m.style.color=j.ok?"#157a33":"#b42323";
-    m.textContent=j.ok?"Done. We will message you when a matching job opens.":(j.error||"Could not save. Try again.");
-    if(j.ok)$("s").reset();
-  }catch(err){m.style.color="#b42323";m.textContent="Could not save. Check your connection and try again."}
-});
+  msg.className = 'msg';
 
-load();
+  // Required-field check
+  const required = form.querySelectorAll('[required]');
+  for (const f of required){
+    if (!f.value.trim()){
+      f.focus();
+      showMsg('Please fill in all required fields (*).', false);
+      return;
+    }
+  }
+  const email = document.getElementById('email');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())){
+    email.focus();
+    showMsg('Please enter a valid work email.', false);
+    return;
+  }
+  if (SCRIPT_URL.indexOf('PASTE_') === 0){
+    showMsg('Form not connected yet: add your Apps Script URL in index.html.', false);
+    return;
+  }
+
+  const data = new URLSearchParams(new FormData(form));
+  data.append('pageUrl', window.location.href);
+
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+  try {
+    await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: data });
+    form.reset();
+    document.getElementById('wm2').checked = true;
+    showMsg('Thanks! Your role brief has been received. We’ll be in touch soon.', true);
+  } catch (err) {
+    showMsg('Something went wrong. Please try again or email contact@signal48.com.', false);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '🚀 Submit Role Brief';
+  }
+});
 </script>
 </body>
 </html>
